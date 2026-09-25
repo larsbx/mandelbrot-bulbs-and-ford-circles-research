@@ -123,8 +123,12 @@ class Bulb(NamedTuple):
     p: int
     q: int
     root: complex
-    cen: Cycle          # ρ = 0
-    ant: Cycle          # ρ = −1, continued from the centre along the root→centre ray
+    cen: Cycle          # ρ = 0 (critical point on the cycle: ρ vanishes to order d − 1 here)
+    ants: tuple         # the d − 1 boundary points with ρ = −1 (ρ is a (d−1)-fold branched cover of the disc)
+
+    @property
+    def ant(self) -> Cycle:
+        return self.ants[0]
 
     @property
     def lam0(self) -> complex:
@@ -136,24 +140,38 @@ class Bulb(NamedTuple):
         return 2 * abs(self.fam.dc_of(self.lam0)) / self.q ** 2
 
     @property
+    def G_ants(self) -> tuple:
+        return tuple(abs(a.c - self.root) / self.pred for a in self.ants)
+
+    @property
     def G_ant(self) -> float:
-        return abs(self.ant.c - self.root) / self.pred
+        return self.G_ants[0]
 
     @property
     def G_cen(self) -> float:
         return 2 * abs(self.cen.c - self.root) / self.pred
 
 
-def bulb(fam: Family, p: int, q: int) -> Bulb:
+def bulb(fam: Family, p: int, q: int, steps: int = 40) -> Bulb:
+    """Centre (ρ = 0) and all d − 1 antipodes (ρ = −1) of the satellite B_{p/q}.  Near the centre
+    ρ ≈ A(c − c_cen)^{d−1}; each branch is seeded at ρ = −ε and continued in the target ρ* ∈ [−ε, −1], so the
+    solution stays in the bulb (the root→centre ray need not pass an antipode in degree ≥ 3)."""
     lam0 = cmath.exp(2j * pi * p / q)
     n = q * fam.period
     root = fam.c_of(lam0)
     c_cen = center(fam, fam.c_of(lam0 * (1 + 1 / q ** 2)), n)
     cen = cycle_at(fam, c_cen, 0j, n)
-    d = c_cen - root
-    ray = (root + (1 + 1.2 * k / 24) * d for k in range(1, 25))
-    ant = solve_rho(fam, track(fam, cen, ray), -1)
-    return Bulb(fam, p, q, root, cen, ant)
+    k, eps = fam.d - 1, 1e-3
+    delta = 1e-3 * abs(c_cen - root)
+    A = cycle_at(fam, c_cen + delta, cen.z, n).rho / delta ** k
+    ants = ()
+    for j in range(k):
+        c0 = c_cen + ((-eps / A) ** (1 / k)) * cmath.exp(2j * pi * j / k)
+        cyc = solve_rho(fam, cycle_at(fam, c0, cen.z, n), -eps)
+        for target in np.linspace(-eps, -1, steps + 1)[1:]:
+            cyc = solve_rho(fam, cyc, target)
+        ants = ants + (cyc,)
+    return Bulb(fam, p, q, root, cen, ants)
 
 
 def rho_on_path(fam: Family, p: int, q: int, us: np.ndarray) -> np.ndarray:
