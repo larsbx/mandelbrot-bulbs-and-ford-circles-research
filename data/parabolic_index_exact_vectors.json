@@ -1,0 +1,38 @@
+{
+  "schema": "bulbford-parabolic-index-exact/v1",
+  "status": "exact-fixture",
+  "vectors": [
+    {
+      "p": 1,
+      "q": 1,
+      "re_num": 0,
+      "re_den": 1,
+      "im_num": 0,
+      "im_den": 1
+    },
+    {
+      "p": 1,
+      "q": 2,
+      "re_num": 1,
+      "re_den": 8,
+      "im_num": 0,
+      "im_den": 1
+    },
+    {
+      "p": 1,
+      "q": 4,
+      "re_num": 1447,
+      "re_den": 4624,
+      "im_num": -365,
+      "im_den": 4624
+    },
+    {
+      "p": 3,
+      "q": 4,
+      "re_num": 1447,
+      "re_den": 4624,
+      "im_num": 365,
+      "im_den": 4624
+    }
+  ]
+}
