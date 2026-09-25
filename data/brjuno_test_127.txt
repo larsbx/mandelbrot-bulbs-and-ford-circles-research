@@ -1,0 +1,3 @@
+q=127: corr(log|a|/q, B_fin(p/q)/q) = 0.9304;  corr with B_fin(x̃)/q = 0.6458;  corr with x*: -0.1800
+  fit log|a|/q = 0.2735 + 59.7027·B_fin(p/q)/q ; rms resid 0.1232 (sd of L 0.3363)
+  fit with both: 0.1862 + 53.1742·B(p/q)/q + 11.6545·B(x̃)/q ; rms resid 0.1124
