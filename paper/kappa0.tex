@@ -1,0 +1,372 @@
+\documentclass[11pt]{amsart}
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amssymb,mathtools,booktabs,graphicx,microtype}
+\usepackage[hidelinks]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{observation}[theorem]{Numerical result}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\PP}{\mathcal{P}_0}
+\newcommand{\Res}{\operatorname*{Res}}
+\newcommand{\resit}{\operatorname{r\acute{e}sit}}
+
+\begin{document}
+
+\title[A horn-map constant for Mandelbrot satellite bulbs]{A parabolic-renormalization constant\\ governing the shape of the $1/q$ bulbs of the Mandelbrot set}
+\author{Lars Bendixen}
+\date{September 2026}
+\subjclass[2020]{Primary 37F46; Secondary 37F25, 37F10}
+\keywords{Mandelbrot set, satellite components, holomorphic index, r\'esidu it\'eratif, parabolic implosion, horn map, near-parabolic renormalization}
+
+\begin{abstract}
+To first order, the satellite component of the Mandelbrot set attached to the main cardioid at internal angle $p/q$ is a round disc of diameter proportional to $q^{-2}$, the Ford-circle law. We study the first correction. Writing the multiplier of the bifurcating $q$-cycle as a power series in the rescaled parameter $u=q^2\varepsilon$, $\lambda=e^{2\pi i p/q}e^{\varepsilon}$, we prove that its quadratic coefficient is $\kappa(p/q)=(\iota_{p/q}-\tfrac12)/q$, where $\iota_{p/q}$ is the holomorphic index of the parabolic fixed point of $f^q$, $f(z)=e^{2\pi ip/q}z+z^2$, and that $\kappa(p/q)+\tfrac12$ is itself the index of the $q$-fold rotation quotient of $f^q$. An exact normal-form recursion evaluates $\kappa$ in $O(q^2)$ operations without loss of precision. For $p=1$ we find
+\[
+\kappa_0:=\lim_{q\to\infty}\kappa(1/q)=0.023825887402200569000\ldots-0.052304659114003666317\ldots\,i,
+\]
+with $\kappa(1/q)=\kappa_0-\tfrac{i}{2\pi q}+O(q^{-2})$, and we identify $\kappa_0$, to 21 digits, with $\iota(\PP)-\tfrac12$, where $\PP$ is the parabolic renormalization (upper horn map) of $z+z^2$. From the horn map we compute $\kappa_0$ to 32 digits. The same horn map, multiplied by the Inou--Shishikura phase $e^{-2\pi i/\alpha}$, predicts the bounded-$p$ limits of $\kappa$ and of the bulb size itself; in degree three the horn map of the cubic cusp germ plays the same role. No integer relation with standard constants is found.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $\lambda\in\D$ parametrize the main cardioid of the Mandelbrot set $M$ by the multiplier of the attracting fixed point, $c(\lambda)=\lambda/2-\lambda^2/4$; equivalently we work with the family
+\[
+f_\lambda(z)=\lambda z+z^2 ,
+\]
+which is affinely conjugate to $z^2+c(\lambda)$. At each root of unity $\lambda_0=e^{2\pi i p/q}$, $\gcd(p,q)=1$, a satellite hyperbolic component $W_{p/q}$ of period $q$ is attached to the cardioid~\cite{DH}. Its size is of order $q^{-2}$~\cite{GM}; more precisely, to first order in $1/q$ the component is a round disc whose diameter is $2|c'(\lambda_0)|q^{-2}$ in the parameter plane. The diameters $q^{-2}$ and the tangency pattern of the $W_{p/q}$ are those of the Ford circles~\cite{Ford}, and this is the leading-order content of the familiar analogy between the Mandelbrot set and the Farey tessellation.
+
+This paper is about the \emph{first correction} to that law, and about one constant that it produces. Put $\lambda=\lambda_0e^{\varepsilon}$ and let $\rho_{p/q}(\varepsilon)$ be the multiplier of the $q$-cycle of $f_\lambda$ that bifurcates from the fixed point $0$. In the bulb-scale variable $u=q^2\varepsilon$,
+\begin{equation}\label{eq:R}
+R_{p/q}(u):=\rho_{p/q}(u/q^2)=\sum_{k\ge0} r_k(p/q)\,u^k .
+\end{equation}
+The component $W_{p/q}$ is, up to the conformal change $u\mapsto c(\lambda_0e^{u/q^2})$, the set $\{|R_{p/q}(u)|<1\}$. We show that $r_0=1$ and $r_1=-1$ for every $p/q$; hence to first order $W_{p/q}$ is the disc $|u-1|<1$, which is the Ford law. The first coefficient that sees the arithmetic of $p/q$ is
+\[
+\kappa(p/q):=r_2(p/q).
+\]
+
+\subsection*{Results}
+\begin{enumerate}
+\item \emph{Index formula} (Theorem~\ref{thm:index}). $\kappa(p/q)=(\iota_{p/q}-\tfrac12)/q$, where $\iota_{p/q}=\Res_{z=0}\,dz/(z-f_{\lambda_0}^q(z))$ is the holomorphic index of the parabolic fixed point. In particular $\kappa(p/q)$ lies in the cyclotomic field $\Q(\zeta_q)$ and $p\mapsto\kappa(p/q)$ is a Galois orbit.
+\item \emph{Normal form} (Theorem~\ref{thm:nf} and Corollary~\ref{cor:quotient}). If $N(z)=\lambda_0z(1+b_1z^q+b_2z^{2q})$ is the resonant normal form of $f_{\lambda_0}$, then $q\,\iota_{p/q}=(q^2-1)/2+b_2/b_1^2$. Moreover $\kappa(p/q)=\iota(\Phi_{p/q})-\tfrac12$, where $\Phi_{p/q}(W)=N^q(W^{1/q})^q$ is the rotation quotient of $f^q$. The recursion for $b_1,b_2$ gives $\kappa$ exactly in $O(q^2)$ operations and is free of cancellation.
+\item \emph{The constant} (Numerical result~\ref{obs:limit}). The limit $\kappa_0=\lim_{q\to\infty}\kappa(1/q)$ exists numerically, with $\kappa(1/q)=\kappa_0-\tfrac{i}{2\pi q}+O(q^{-2})$; the bulbs determine $\kappa_0$ to 21 digits.
+\item \emph{Identification} (Theorem~\ref{thm:horn-index} and Numerical result~\ref{obs:identity}). Let $E(Z)=Z+\sum_{n\ge1}a_ne^{2\pi i nZ}$ be the upper horn map of $z+z^2$ and $\PP(W)=W\exp(2\pi i\sum a_nW^n)$ the corresponding parabolic germ. Then $\iota(\PP)-\tfrac12=a_2/(2\pi i a_1^2)$, and this number equals $\kappa_0$ to 21 digits. From the horn map,
+\begin{align*}
+\operatorname{Re}\kappa_0&=\phantom{-}0.023825887402200569000729189645402\ldots,\\
+\operatorname{Im}\kappa_0&=-0.052304659114003666316522486207571\ldots .
+\end{align*}
+\item \emph{Renormalization} (Section~\ref{sec:renorm}). The identification is one instance of a broader picture in which the rotation quotient $\Phi_{p/q}$ is a near-parabolic renormalization of $f_{p/q}$. This picture predicts, with no free parameters, the limits of $\kappa(p/q)$ and of the bulb size along every sequence of bounded $p$, and the analogous constants for $z^3+c$. The predicted values of $\kappa$ agree with the bulb data to $10^{-8}$ in degree two and $5\cdot10^{-6}$ in degree three, and the predicted bulb sizes to $9\cdot10^{-7}$.
+\end{enumerate}
+
+Items (1) and (2) are theorems. Items (3)--(5) are numerical results, obtained with rigorous or cross-validated arithmetic and stated with their error estimates. We do not prove the identity $\kappa_0=\iota(\PP)-\frac12$; Section~\ref{sec:renorm} explains why we expect a proof along the lines of the Inou--Shishikura theory of near-parabolic renormalization~\cite{IS}.
+
+\subsection*{Why this constant matters}
+The number $\kappa_0$ controls the shape of the $1/q$-bulbs, which accumulate at the cusp $c=\tfrac14$ of $M$; for instance the diameter proxy of Definition~\ref{def:G} satisfies
+\[
+d(1/q)=2\pi\,G_0\,q^{-3}\bigl(1+O(q^{-1})\bigr),\qquad G_0=1.0264153852\ldots,
+\]
+and $G_0$ is determined by the same horn map (Table~\ref{tab:G}). More broadly, $\kappa(p/q)$ is the first correction to the Ford-circle description of $M$. Numerically, its dependence on $p/q$ is governed, after a transient, by the arithmetic of the modular inverse $p^{-1}\bmod q$, and it is singular at every rational~\cite{repo}. The renormalization picture explains that dependence, and $\kappa_0$ is its simplest instance.
+
+\section{Setting and the index formula}\label{sec:index}
+
+Fix $p/q$ in lowest terms, $\lambda_0=e^{2\pi ip/q}$, and write $f=f_{\lambda_0}$. Since $f$ has a single critical point, the parabolic fixed point $0$ has exactly one cycle of $q$ attracting petals, so
+\begin{equation}\label{eq:fq}
+f^q(z)=z+a\,z^{q+1}+O(z^{q+2}),\qquad a=a(p/q)\neq0 .
+\end{equation}
+The holomorphic index~\cite[\S12]{Milnor} of $0$ as a fixed point of $f^q$ is
+\[
+\iota_{p/q}:=\frac1{2\pi i}\oint\frac{dz}{z-f^q(z)}=\Res_{z=0}\frac{dz}{z-f^q(z)},
+\]
+and its r\'esidu it\'eratif~\cite{Ecalle,BE} is $\resit=\frac{q+1}{2}-\iota_{p/q}$.
+
+\begin{theorem}[Index formula]\label{thm:index}
+The multiplier $\rho_{p/q}(\varepsilon)$ of the $q$-cycle of $f_{\lambda_0e^\varepsilon}$ bifurcating from $0$ is holomorphic near $\varepsilon=0$, and
+\[
+\rho_{p/q}(\varepsilon)=1-q^2\varepsilon+q^3\Bigl(\iota_{p/q}-\frac12\Bigr)\varepsilon^2+O(\varepsilon^3).
+\]
+Equivalently, in \eqref{eq:R}, $r_0=1$, $r_1=-1$ and $\kappa(p/q)=(\iota_{p/q}-\frac12)/q$.
+\end{theorem}
+
+\begin{proof}
+Choose a disc $D$ around $0$ on whose boundary $z\ne f^q(z)$ and which contains no other fixed point of $f^q$. By \eqref{eq:fq} and Rouch\'e's theorem, for $|\varepsilon|$ small $f_\lambda^q$, $\lambda=\lambda_0e^\varepsilon$, has exactly $q+1$ fixed points in $D$, counted with multiplicity. One of them is $0$, with multiplier $\mu=\lambda^q=e^{q\varepsilon}\neq1$, so it is simple. For each proper divisor $d$ of $q$ the map $f^d$ has multiplier $\lambda_0^d\ne1$ at $0$, so $f_\lambda^d$ has no fixed point in $D$ other than $0$. The remaining $q$ points therefore have exact period $q$ and form a single cycle; call its multiplier $\rho(\varepsilon)$. The cycle, as an unordered set, depends holomorphically on $\lambda$, hence so does $\rho$, a symmetric function of the cycle points. The function $\rho$ is not identically $1$, since the cycle is attracting on the satellite, so for $\varepsilon\ne0$ small all $q+1$ fixed points are simple. Summing their indices $1/(1-m)$ gives
+\begin{equation}\label{eq:sum}
+\frac1{1-e^{q\varepsilon}}+\frac q{1-\rho(\varepsilon)}=\frac1{2\pi i}\oint_{\partial D}\frac{dz}{z-f_\lambda^q(z)}\xrightarrow[\varepsilon\to0]{}\iota_{p/q},
+\end{equation}
+because the integrand converges uniformly on $\partial D$. The first term equals $-1/(q\varepsilon)+\frac12+O(\varepsilon)$ and is unbounded. Hence $\rho(0)=1$, and writing $1-\rho=A\varepsilon^m(1+O(\varepsilon))$ with $A\ne0$, boundedness of the sum forces $m=1$ and $A=q^2$. With $\rho=1-q^2\varepsilon+C\varepsilon^2+O(\varepsilon^3)$ we get $q/(1-\rho)=1/(q\varepsilon)+C/q^3+O(\varepsilon)$, and \eqref{eq:sum} yields $\frac12+C/q^3=\iota_{p/q}$.
+\end{proof}
+
+\begin{remark}\label{rem:general}
+The proof uses only that the parabolic point has multiplicity $q+1$. It therefore applies verbatim to the satellites of any hyperbolic component of $z^d+c$, whose parabolic points have a single cycle of petals. We checked this numerically for the period-two disc of $M$ and for $z^3+c$: the identity $r_2=(\iota-\frac12)/q$ holds to $10^{-7}$ at $p/q=2/7$ and $3/11$.
+\end{remark}
+
+\begin{remark}[Exact values]
+Since $f^q$ has coefficients in $\Z[\lambda_0]$, the index is a rational function of $\lambda_0$ with rational coefficients, so $\iota_{p/q}\in\Q(\zeta_q)$ and $\iota_{p'/q}=\sigma(\iota_{p/q})$ for the automorphism $\sigma:\zeta_q\mapsto\zeta_q^{p'\bar p}$, $p\bar p\equiv1\pmod q$. For example $\iota_{1/2}=\frac18$, $\iota_{1/3}=\frac{100-8\sqrt3\,i}{441}$ and $\iota_{1/4}=\frac{1447-365\,i}{4624}$, so $\kappa(1/2)=-\frac3{16}$ and $\kappa(1/3)=\frac{-241-16\sqrt3\,i}{2646}$.
+\end{remark}
+
+\begin{definition}\label{def:G}
+Let $c_{\rm root}=c(\lambda_0)$, and let $c_{\rm ant}\in\partial W_{p/q}$ be the unique boundary point at which the $q$-cycle has multiplier $-1$. It is unique because the multiplier map $W_{p/q}\to\D$ is a conformal isomorphism in degree two. Set
+\[
+d(p/q)=|c_{\rm ant}-c_{\rm root}|,\qquad G(p/q)=\frac{d(p/q)}{2|c'(\lambda_0)|\,q^{-2}} .
+\]
+Since $c(\lambda_0e^{u/q^2})-c(\lambda_0)=c'(\lambda_0)\lambda_0u/q^2+O(q^{-4})$, we have $G(p/q)=\tfrac12|u_a|+O(q^{-2})$, where $R_{p/q}(u_a)=-1$. To first order $u_a=2$ and $G=1$; the deviation of $G$ from $1$ is governed at leading order by $\kappa$.
+\end{definition}
+
+\section{Normal forms and the rotation quotient}\label{sec:nf}
+
+\begin{theorem}[Normal form]\label{thm:nf}
+There is a unique formal conjugacy $H(z)=z+\sum_{k\ge2}H_kz^k$ with $H_{q+1}=H_{2q+1}=0$ such that $f\circ H=H\circ N$ up to order $2q+1$, where
+\[
+N(z)=\lambda_0z\bigl(1+b_1z^q+b_2z^{2q}\bigr).
+\]
+Put $\beta_i=\lambda_0b_i$ and let $(H^2)_k$ denote the coefficient of $z^k$ in $H(z)^2$. The coefficients are determined by the recursion
+\begin{equation}\label{eq:rec}
+H_k(\lambda_0-\lambda_0^k)=[k>q+1]\,(k-q)\lambda_0^{k-q-1}\beta_1H_{k-q}-(H^2)_k\quad(2\le k\le 2q,\ k\ne q+1),
+\end{equation}
+together with $\beta_1=(H^2)_{q+1}$ and $\beta_2=(H^2)_{2q+1}$. Moreover
+\[
+a(p/q)=q\,b_1,\qquad q\,\iota_{p/q}=\frac{q^2-1}{2}+\frac{b_2}{b_1^2},\qquad
+\kappa(p/q)=\frac12-\frac1{2q}-\frac1{2q^2}+\frac{b_2}{(qb_1)^2}.
+\]
+\end{theorem}
+
+\begin{proof}
+Comparing coefficients of $z^k$ in $\lambda_0H+H^2=\sum_mH_m N^m$ gives \eqref{eq:rec}. We use that $[N^m]_k$ is nonzero only for $k\in\{m,\,m+q,\,m+2q\}$, with values $\lambda_0^m$ and $m\lambda_0^{m-1}\beta_1$ in the first two cases. The factor $\lambda_0-\lambda_0^k$ vanishes exactly when $k\equiv1\pmod q$. At $k=q+1$ and $k=2q+1$ the equation fixes $\beta_1$, $\beta_2$ and leaves $H_{q+1}$, $H_{2q+1}$ free; we set them to zero. For the second part, write $N^j(z)=\lambda_0^jz(1+A_jz^q+B_jz^{2q}+\dots)$. Using $\lambda_0^q=1$ and $(N^j)^q=z^q(1+qA_jz^q+\dots)$,
+\[
+A_{j+1}=A_j+b_1,\qquad B_{j+1}=B_j+(q+1)b_1A_j+b_2,
+\]
+so $A_q=qb_1$ and $B_q=\frac{(q+1)q(q-1)}2b_1^2+qb_2$. The coefficient $a$ and the index are invariant under formal conjugacy tangent to the identity; for $z+Az^{q+1}+Bz^{2q+1}$ the index is $B/A^2$. This gives the formulas for $a$ and $\iota$, and the formula for $\kappa$ follows from Theorem~\ref{thm:index}.
+\end{proof}
+
+\begin{corollary}[$\kappa$ is an index]\label{cor:quotient}
+Since $N$ commutes with $z\mapsto\lambda_0z$, the rotation quotient $\Phi_{p/q}(W):=N^q(W^{1/q})^q=W+q^2b_1W^2+\dots$ is a well-defined germ, and
+\[
+\kappa(p/q)=\iota(\Phi_{p/q})-\tfrac12=\tfrac12-\resit(\Phi_{p/q}).
+\]
+\end{corollary}
+
+\begin{proof}
+From $N^q(z)=z(1+A_qz^q+B_qz^{2q}+\dots)$ we get $\Phi(W)=W(1+A_qW+B_qW^2)^q+\dots$. Hence $\Phi=W+AW^2+BW^3+\dots$ with $A=qA_q=q^2b_1$ and $B=qB_q+\binom q2A_q^2$. Then $\iota(\Phi)=B/A^2=1-\frac1{2q}-\frac1{2q^2}+\frac{b_2}{(qb_1)^2}$, which is $\kappa+\frac12$ by Theorem~\ref{thm:nf}.
+\end{proof}
+
+\begin{remark}[Computation]
+The recursion \eqref{eq:rec} costs $O(q^2)$ arithmetic operations, and it does not suffer cancellation. At $q=128$ and $q=301$ the computed $\kappa$ is unchanged in more than twenty digits when the working precision is raised from 60 to over 300 digits. Composing $f$ symbolically $q$ times instead costs $O(q^3)$ and loses about $q$ decimal digits to cancellation at $p=1$, where $|a(1/q)|\approx e^{2.3q}$. We used the latter, in ball arithmetic~\cite{Arb}, only as a certified cross-check (Appendix~\ref{app:num}).
+\end{remark}
+
+\section{The limit $\kappa_0$}\label{sec:limit}
+
+\begin{table}[t]
+\centering\small
+\input{tables/kappa_1q.tex}
+\caption{$\kappa(1/q)$ from the normal-form recursion at 50 digits (first sixteen shown). The corrected error decays like $q^{-2}$. The fit uses the thirteen values $128\le q\le 8192$ with eleven terms in $1/q$ (residual $3.9\cdot10^{-26}$); the last row is the horn-map value of Section~\ref{sec:horn}.}\label{tab:kappa1q}
+\end{table}
+
+\begin{observation}\label{obs:limit}
+Table~\ref{tab:kappa1q} lists $\kappa(1/q)$ for $q$ up to $8192$; Figure~\ref{fig:conv} shows the convergence. Least-squares fits of $\kappa(1/q)=\sum_{j\le J}c_jq^{-j}$ over $q\ge q_{\min}$ give the same $c_0$ to eighteen digits for every $(q_{\min},J)$ with residual below $10^{-20}$. The two best-resolved fits, $(q_{\min},J)=(128,10)$ with residual $3.9\cdot10^{-26}$ and $(256,8)$ with residual $1.5\cdot10^{-23}$, agree with each other to $7\cdot10^{-22}$:
+\[
+c_0=0.02382588740220056900073-0.05230465911400366631652\,i .
+\]
+The first-order coefficient is
+\[
+c_1=-\frac{i}{2\pi}\quad\text{to within }4\cdot10^{-20},
+\]
+and $c_2=0.402776138694+2.902726170410\,i$. The ratios $|c_{j+1}/c_j|$ stay near $7$, consistent with an expansion convergent for $q\gtrsim7$.
+\end{observation}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.78\textwidth]{figures/convergence.pdf}
+\caption{Convergence of $\kappa(1/q)$ to $\kappa_0$ (degree two) and of $\kappa_3(1/q)$ to $\kappa_0^{(3)}$ (degree three, Section~\ref{sec:degree3}). The raw error decays like $q^{-1}$; after the universal correction $-i/(2\pi q)$ it decays like $q^{-2}$. Grey lines are slope guides.}\label{fig:conv}
+\end{figure}
+
+\section{The horn map of $z+z^2$}\label{sec:horn}
+
+We recall the objects of parabolic implosion~\cite{Lavaurs,Sh,IS,LY} in the concrete form we compute with. In the coordinate $w=-1/z$ the map $f_0(z)=z+z^2$ becomes
+\[
+F(w)=\frac{w^2}{w-1}=w+1+\frac1{w-1}.
+\]
+
+\begin{lemma}[Formal Fatou coordinate]\label{lem:fatou}
+There is a unique formal series $\Phi(w)=w-\log w+\sum_{k\ge1}c_kw^{-k}$ with $\Phi\circ F=\Phi+1$. Its coefficients are rational:
+\[c_1,c_2,\ldots=\tfrac12,\tfrac13,\tfrac{13}{36},\tfrac{113}{240},\tfrac{1187}{1800},\tfrac{877}{945},\ldots\] With $u=1/w$ they satisfy the triangular system
+\[
+\sum_{k\ge1}c_k\bigl[(u-u^2)^k-u^k\bigr]=-\sum_{m\ge2}\Bigl(1-\frac1m\Bigr)u^m .
+\]
+\end{lemma}
+
+\begin{proof}
+With $u=1/w$ we have $1/F=u-u^2$, $F-w-1=u/(1-u)$ and $\log F-\log w=-\log(1-u)$. Substituting gives the displayed identity. The coefficient of $u^m$ contains $c_{m-1}$ with factor $-(m-1)$ and otherwise only $c_k$ with $k<m-1$. The coefficient of $\log w$ is fixed by the order-$u$ term, and equals the r\'esidu it\'eratif $1$ of $f_0$.
+\end{proof}
+
+Let $\Phi_{\rm att}(w)=\lim_n\bigl(\Phi(F^n(w))-n\bigr)$ on the attracting petal, using the principal logarithm. Let $\Psi_{\rm rep}(Z)=\lim_nF^n\bigl(\Phi^{-1}(Z-n)\bigr)$ be the repelling Fatou parametrization, using the branch $\arg w\in(0,2\pi)$ on the left. The upper horn map $E=\Phi_{\rm att}\circ\Psi_{\rm rep}$ commutes with $Z\mapsto Z+1$ and, for $\operatorname{Im}Z$ large, has an expansion
+\[
+E(Z)=Z+a_0+\sum_{n\ge1}a_ne^{2\pi inZ}.
+\]
+Replacing $\Phi_{\rm att}$ or $\Psi_{\rm rep}$ by a translate changes $a_0$, and conjugates $E$ by $Z\mapsto Z+c$, which sends $a_n\mapsto a_ne^{2\pi inc}$. In $W=e^{2\pi iZ}$ the horn map is the germ $W\mapsto e^{2\pi ia_0}\PP(W)$, where
+\[
+\PP(W):=W\exp\Bigl(2\pi i\sum_{n\ge1}a_nW^n\Bigr)
+\]
+is the parabolic renormalization of $f_0$ normalized to multiplier one~\cite{LY,IS}.
+
+\begin{theorem}\label{thm:horn-index}
+$\displaystyle\iota(\PP)=\frac12+\frac{a_2}{2\pi i\,a_1^2}$. This quantity does not depend on the normalizations of the Fatou coordinates.
+\end{theorem}
+
+\begin{proof}
+$\PP(W)=W+AW^2+BW^3+\dots$ with $A=2\pi ia_1$ and $B=2\pi ia_2+\frac12(2\pi ia_1)^2$, and $\iota=B/A^2$. Under $a_n\mapsto a_ne^{2\pi inc}$ the ratio $a_2/a_1^2$ is unchanged; $a_0$ does not enter.
+\end{proof}
+
+\begin{observation}\label{obs:identity}
+Computing $E$ on the line $\operatorname{Im}Z=\frac14$ at 60 and at 80 digits (Appendix~\ref{app:num}) gives $a_0=0$ to working precision ($|a_0|\approx10^{-58}$ at 60 digits) and
+\begin{align*}
+\operatorname{Re}a_1&=-0.05895043056440687000807026251551,\\
+\operatorname{Im}a_1&=\phantom{-}0.010009865898273724511535250164253,\\
+\operatorname{Re}a_2&=\phantom{-}0.0012858196663089284889517464706577,\\
+\operatorname{Im}a_2&=\phantom{-}0.00011738770718282661923962731179377,
+\end{align*}
+with $|a_n|$ decreasing by a factor of about $55$ per step. Hence
+\begin{align*}
+\operatorname{Re}\bigl(\iota(\PP)-\tfrac12\bigr)&=\phantom{-}0.023825887402200569000729189645402,\\
+\operatorname{Im}\bigl(\iota(\PP)-\tfrac12\bigr)&=-0.052304659114003666316522486207571.
+\end{align*}
+The two precision settings agree in all 32 digits shown. This coincides with $c_0$ of Numerical result~\ref{obs:limit}: the best fit differs by $1.9\cdot10^{-24}$, the second best by $7.1\cdot10^{-22}$. We therefore claim agreement to at least 21 digits. Already in double precision the agreement is $2.5\cdot10^{-11}$ at every height $\operatorname{Im}Z\in[\frac14,\frac12]$.
+\end{observation}
+
+\begin{conjecture}\label{conj:main}
+The limit $\kappa_0=\lim_{q\to\infty}\kappa(1/q)$ exists and equals $\iota(\PP)-\frac12=\frac{a_2}{2\pi ia_1^2}$. Moreover
+\[
+\kappa(1/q)=\kappa_0-\frac{i}{2\pi q}+O(q^{-2}).
+\]
+\end{conjecture}
+
+\section{Renormalization interpretation and further evidence}\label{sec:renorm}
+
+\subsection{Heuristic}
+For $\alpha$ near $0$, the near-parabolic renormalization $\mathcal R$ of Inou and Shishikura~\cite{IS} assigns to $f_\alpha(z)=e^{2\pi i\alpha}z+z^2$ a germ $\mathcal Rf_\alpha$ at $0$ with multiplier $e^{-2\pi i/\alpha}$. By parabolic implosion~\cite{Lavaurs,Sh}, as $\alpha\to0$ with $-1/\alpha\to\sigma\bmod\Z$, the germ $\mathcal Rf_\alpha$ tends to $e^{2\pi i\sigma}$ times the horn germ. For $\alpha=1/q$ the phase is $0$, and $\mathcal Rf_{1/q}$ is a parabolic germ with multiplier one. The rotation quotient $\Phi_{1/q}$ of Corollary~\ref{cor:quotient} is also a parabolic germ with multiplier one, obtained from $f^q$ by passing to the quotient by the $q$-fold rotation. If $\Phi_{1/q}$ and $\mathcal Rf_{1/q}$ are conformally conjugate, Corollary~\ref{cor:quotient} and continuity of $\mathcal R$ give Conjecture~\ref{conj:main}. The same reasoning leads to two further predictions, which we test next.
+
+\subsection{Bounded $p$}
+Fix $p\ge2$ and $r$ with $\gcd(p,r)=1$, and let $q=pN+r\to\infty$. Then $-1/\alpha=-q/p\equiv-r/p\pmod1$, so $\mathcal Rf_{p/q}\to\mu\PP$ with $\mu=e^{-2\pi ir/p}$. This germ has multiplier a primitive $p$-th root of unity. Applying Corollary~\ref{cor:quotient} to it predicts
+\begin{equation}\label{eq:boundedp}
+\lim_{N\to\infty}\kappa\Bigl(\frac p{pN+r}\Bigr)=\frac{\iota\bigl((\mu\PP)^p\bigr)-\frac12}{p},\qquad\mu=e^{-2\pi ir/p}.
+\end{equation}
+Table~\ref{tab:boundedp} compares \eqref{eq:boundedp} with bulb data for all nine classes with $p\le5$. The bulb values are normal-form values of $\kappa(p/q)$ for $N\le1024$, extrapolated in $1/q$. All nine agree to between $6\cdot10^{-9}$ and $2.6\cdot10^{-8}$, within the extrapolation uncertainty of about $10^{-7}$. The opposite phase convention, $\mu=e^{+2\pi ir/p}$, exchanges the classes $r$ and $p-r$ and fails. The first-order coefficients satisfy $c_1(p)\cdot2\pi p/(-i)=1.0008,\,1.0011,\,1.0014,\,1.0016$ for $p=2,\dots,5$, suggesting $c_1(p)=-i/(2\pi p)$ in general.
+
+\begin{table}[t]
+\centering\footnotesize
+\input{tables/bounded_p_kappa.tex}
+\caption{Bounded-$p$ limits of $\kappa$ (degree two): the horn-map prediction \eqref{eq:boundedp} against the bulb values extrapolated from $q=pN+r$, $64\le N\le1024$.}\label{tab:boundedp}
+\end{table}
+
+\subsection{The unfolding and the bulb size}
+With $\lambda=\lambda_0e^{u/q^2}$ one has $\alpha=\frac pq+\frac u{2\pi iq^2}$, so $e^{-2\pi i/\alpha}=\mu\,e^{u/p^2}+O(q^{-1})$. The picture therefore predicts that $R_{p/q}(u)$ converges to the multiplier $\rho_{p,r}(u)$ of the $p$-cycle of
+\[
+M_u(W)=\mu\,e^{u/p^2}\,\PP(W)
+\]
+that bifurcates from $W=0$.
+
+For $p=1$ the Taylor coefficients of $\rho_{1,1}$ at $u=0$ agree with those of $R_{1/1025}$ through order eight, up to the finite-$q$ shift. For instance $r_3=-3.78\cdot10^{-4}-9.80\cdot10^{-4}i$ against $-3.62\cdot10^{-4}-9.72\cdot10^{-4}i$, and $r_8=3.14\cdot10^{-9}-4.56\cdot10^{-9}i$ against $3.13\cdot10^{-9}-4.50\cdot10^{-9}i$. Here $r_3$ depends on the unfolding and not only on the germ, so this checks that $u$ enters as the Lavaurs phase. Solving $\rho_{p,r}(u_a)=-1$ gives a prediction for $\lim G$. Table~\ref{tab:G} compares it with the bulb sizes for all ten classes with $p\le5$; the agreement is at most $9\cdot10^{-7}$.
+
+\begin{table}[t]
+\centering\small
+\input{tables/bounded_p_G.tex}
+\caption{Bulb size $G$ (Definition~\ref{def:G}) along $q=pN+r$, extrapolated from $N=512,1024,2048$, against the prediction from $M_u=\mu e^{u/p^2}\PP$. The first row gives $G_0=\lim G(1/q)$.}\label{tab:G}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.52\textwidth]{figures/kappa_cloud.pdf}
+\caption{All $\kappa(p/q)$ for $q=2003$ (values for $p>q/2$ from the symmetry $\kappa(1-p/q)=\overline{\kappa(p/q)}$), the horn-map limits \eqref{eq:boundedp} for $p\le5$, and $\kappa_0,\overline{\kappa_0}$. The $p=1$ bulbs are the extreme points of the arithmetic cloud.}\label{fig:cloud}
+\end{figure}
+
+\section{Degree three: a second universality class}\label{sec:degree3}
+
+For $z^3+c$ the main component is parametrized by the multiplier $\lambda$ of the fixed point $z=(\lambda/3)^{1/2}$, with $c=z-z^3$. Its cusp at $\lambda=1$, where $z_*=1/\sqrt3$ and $c_*=2/(3\sqrt3)$, has the parabolic germ $w\mapsto w+\sqrt3\,w^2+w^3$. In $v=\sqrt3\,w$ this is
+\[
+g(v)=v+v^2+\tfrac13v^3,
+\]
+whose r\'esidu it\'eratif is $1-\frac13=\frac23$. Lemma~\ref{lem:fatou} generalizes with $F(w)=-1/g(-1/w)$ and $\Phi(w)=w-\frac23\log w+\sum c_kw^{-k}$, where $c_1,c_2,\ldots=\frac29,\frac5{54},\frac{14}{243},\frac{89}{2430},\ldots$. The horn map gives, at 50 and at 70 digits,
+\[
+\kappa_0^{(3)}:=\frac{a_2}{2\pi ia_1^2},\qquad
+\begin{aligned}
+\operatorname{Re}\kappa_0^{(3)}&=\phantom{-}0.143599278095291569488064104088,\\
+\operatorname{Im}\kappa_0^{(3)}&=-0.030311647898502537611943110858.
+\end{aligned}
+\]
+Table~\ref{tab:deg3} shows that $\kappa_3(1/q)+\frac i{2\pi q}$ converges to this value like $q^{-2}$. So the correction $-i/(2\pi q)$ is the same in degree three, while the constant is not. The bounded-$p$ predictions hold in degree three as well: $\kappa$ agrees to within $5\cdot10^{-6}$ for $(p,r)=(1,1),(2,1),(3,1),(3,2)$ at $q\approx512p$.
+
+One subtlety concerns the bulb size. At the centre of a degree-$d$ satellite the critical point lies on the cycle, so the multiplier $\prod d\,z_j^{d-1}$ vanishes to order $d-1$. The multiplier map of the component is thus a $(d-1)$-fold branched cover of $\D$~\cite{MilnorHC}, and in degree three there are two points with multiplier $-1$. Both are predicted: at $p=3$, $r=1$ the horn map gives $G=1.196074$ and $1.227092$, against extrapolated bulb values $1.196075$ and $1.227091$.
+
+\begin{table}[t]
+\centering\small
+\input{tables/degree3.tex}
+\caption{Degree three: $\kappa_3(1/q)$ from Cauchy integrals on $|u|=1$ (Appendix~\ref{app:num}) against the horn map of the cubic cusp germ.}\label{tab:deg3}
+\end{table}
+
+\section{Arithmetic nature}\label{sec:pslq}
+
+We searched with PSLQ~\cite{PSLQ}, at 30 digits and coefficient bound $1000$, for integer relations between each of $\operatorname{Re}\kappa_0$, $\operatorname{Im}\kappa_0$, $|\kappa_0|^2$, $\arg\kappa_0/\pi$, $\operatorname{Re}(2\pi i\kappa_0)$, $\operatorname{Im}(2\pi i\kappa_0)$, $|a_1|$ and $\arg a_1/\pi$, and every subset of at most three of $\{1,\pi,\pi^2,1/\pi,\log2,\zeta(3),G,\gamma\}$, where $G$ is Catalan's constant. No relation was found. This is consistent with the general expectation that invariants of parabolic germs, such as Écalle--Voronin moduli~\cite{Ecalle,Voronin}, are transcendental numbers without closed form. We regard $\kappa_0$ as a new constant of this kind, attached to the quadratic family and to the Mandelbrot set.
+
+\section{Discussion}
+
+The first-order theory of satellite bulbs is the Ford-circle picture, with radii $q^{-2}$ and Farey tangencies. The first correction, $\kappa(p/q)$, is the holomorphic index of a parabolic germ (Theorem~\ref{thm:index}) and equals the index of the rotation quotient minus $\frac12$ (Corollary~\ref{cor:quotient}). Numerically, it is controlled by near-parabolic renormalization. The constant $\kappa_0$ is the value at the fixed point of the simplest instance, $\alpha=1/q\to0$. Bounded $p$ corresponds to one renormalization step with phase $e^{-2\pi i r/p}$. General $p/q$ should correspond to iterating renormalization along the continued fraction of $p/q$. Hyperbolicity of $\mathcal R$ would then explain why $\kappa(p/q)$ depends mainly on the last partial quotients, that is on $p^{-1}\bmod q$~\cite{repo}.
+
+\subsection*{Open problems}
+\begin{enumerate}
+\item Prove Conjecture~\ref{conj:main}, for instance by establishing a conformal conjugacy between $\Phi_{1/q}$ and $\mathcal Rf_{1/q}$ together with continuity of $\mathcal R$ at integer $1/\alpha$.
+\item Derive the universal first-order term $-i/(2\pi pq)$, observed for $p\le5$ and in two families.
+\item Compute the generic limit function $\kappa(p/q)$, $p\to\infty$, by iterated renormalization, including its values at quadratic irrationals as periodic points of $\mathcal R$.
+\item Decide whether $\kappa_0$ can be expressed through Écalle--Voronin invariants of $z+z^2$ in closed form.
+\end{enumerate}
+
+\appendix
+\section{Numerical methods and error control}\label{app:num}
+
+\subsection*{A.1 Normal form}
+Recursion \eqref{eq:rec} was run in \texttt{mpmath}~\cite{mpmath} at 50 working digits for $64\le q\le8192$ ($p=1$) and $q\le5124$ (bounded $p$). It agrees with the series-composition index to $10^{-12}$ in double-precision checks at seven values of $p/q$ with $q\le59$, and with certified ball-arithmetic values (Arb~\cite{Arb}, radius $\le1.7\cdot10^{-17}$ at $q=384,448,512,896$) to $4.9\cdot10^{-18}$. Doubling the working precision changes nothing in the digits reported.
+
+\subsection*{A.2 Extrapolation}
+Limits in $q$ come from least-squares fits in powers of $1/q$ at 40--60 digits. Each is reported only when it is stable, to the stated precision, under changes of the fit order and of the smallest $q$ used.
+
+\subsection*{A.3 Horn maps}
+The Fatou series were truncated at $K=40$ terms and evaluated at $|w|\ge800$. At that radius the truncation error is below $10^{-60}$, since $|c_k|$ grows roughly like $k!/(2\pi)^k$. We used $n=1000$--$1800$ repelling iterations and computed the Fourier coefficients from $64$--$80$ samples on $\operatorname{Im}Z=\frac14$, with aliasing below $10^{-58}$. Two independent settings agree to all digits reported. The coefficients $a_n$ extracted at height $h$ carry noise amplified by $e^{2\pi nh}$, so for the unfolding computations we used $n\le20$ coefficients computed at 60 digits.
+
+\subsection*{A.4 Multiplier data}
+The coefficients $r_k$ were also computed by Cauchy integrals of $R_{p/q}$ over a circle, continuing the $q$-cycle numerically. For $z^2+c$ the radius $|u|=2.5$ is admissible. For $z^3+c$ the function $R_{p/q}$ has a singularity inside $|u|<2.5$, and the radius must be at most $1.5$. The condition $r_1=-1$ from Theorem~\ref{thm:index} is a reliable diagnostic: it fails as $r_1=-1.032$ on the larger circle.
+
+\subsection*{A.5 Reproducibility}
+All code, data and tests are in the accompanying repository~\cite{repo}. The package \texttt{bulbford} contains \texttt{normal\_form}, \texttt{horn}, \texttt{germ}, \texttt{renorm} and \texttt{dynamics}. The tables and figures of this paper are generated by \texttt{paper/tables.py} and \texttt{paper/figures.py}. The test suite checks Theorems~\ref{thm:index} and~\ref{thm:nf}, the horn-map value of $\kappa_0$ to 25 digits, and the bounded-$p$ and degree-three predictions.
+
+\subsection*{Acknowledgments}
+The computations and the drafting of this paper were carried out with the assistance of an AI system (Claude, Anthropic).
+
+\begin{thebibliography}{99}
+\bibitem{BE} X.~Buff and A.~Epstein, \emph{A parabolic Pommerenke--Levin--Yoccoz inequality}, Fund. Math. \textbf{172} (2002), 249--289.
+\bibitem{DH} A.~Douady and J.~H.~Hubbard, \emph{\'Etude dynamique des polyn\^omes complexes}, Parties I et II, Publications Math\'ematiques d'Orsay 84-02 and 85-04, 1984--1985.
+\bibitem{Ecalle} J.~\'Ecalle, \emph{Les fonctions r\'esurgentes}, Tomes I--III, Publications Math\'ematiques d'Orsay, 1981--1985.
+\bibitem{PSLQ} H.~R.~P.~Ferguson, D.~H.~Bailey and S.~Arno, \emph{Analysis of PSLQ, an integer relation finding algorithm}, Math. Comp. \textbf{68} (1999), 351--369.
+\bibitem{Ford} L.~R.~Ford, \emph{Fractions}, Amer. Math. Monthly \textbf{45} (1938), 586--601.
+\bibitem{GM} J.~Guckenheimer and R.~McGehee, \emph{A proof of the Mandelbrot $N^2$ conjecture}, Report No.~15, Institut Mittag-Leffler, 1984.
+\bibitem{IS} H.~Inou and M.~Shishikura, \emph{The renormalization for parabolic fixed points and their perturbation}, preprint, 2006.
+\bibitem{Arb} F.~Johansson, \emph{Arb: efficient arbitrary-precision midpoint-radius interval arithmetic}, IEEE Trans. Comput. \textbf{66} (2017), 1281--1292.
+\bibitem{LY} O.~E.~Lanford III and M.~Yampolsky, \emph{Fixed Point of the Parabolic Renormalization Operator}, SpringerBriefs in Mathematics, Springer, 2014.
+\bibitem{Lavaurs} P.~Lavaurs, \emph{Syst\`emes dynamiques holomorphes: explosion de points p\'eriodiques paraboliques}, Th\`ese, Universit\'e Paris-Sud, Orsay, 1989.
+\bibitem{Milnor} J.~Milnor, \emph{Dynamics in One Complex Variable}, 3rd ed., Annals of Mathematics Studies 160, Princeton University Press, 2006.
+\bibitem{MilnorHC} J.~Milnor, \emph{Hyperbolic components} (with an appendix by A.~Poirier), in: Conformal Dynamics and Hyperbolic Geometry, Contemp. Math. \textbf{573}, Amer. Math. Soc., 2012.
+\bibitem{mpmath} The mpmath development team, \emph{mpmath: a Python library for arbitrary-precision floating-point arithmetic}, \url{https://mpmath.org}.
+\bibitem{repo} \emph{mandelbrot-bulbs-and-ford-circles-research}, code and data repository accompanying this paper (research register \texttt{RESEARCH\_bulb-ford-correction.md}).
+\bibitem{Sh} M.~Shishikura, \emph{Bifurcation of parabolic fixed points}, in: The Mandelbrot Set, Theme and Variations (Tan Lei, ed.), London Math. Soc. Lecture Note Ser. 274, Cambridge Univ. Press, 2000, 325--363.
+\bibitem{Voronin} S.~M.~Voronin, \emph{Analytic classification of germs of conformal mappings $(\C,0)\to(\C,0)$ with identity linear part}, Funct. Anal. Appl. \textbf{15} (1981), 1--13.
+\end{thebibliography}
+
+\end{document}

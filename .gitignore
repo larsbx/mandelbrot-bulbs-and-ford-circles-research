@@ -1,3 +1,6 @@
 __pycache__/
 .pytest_cache/
 *.pyc
+paper/*.aux
+paper/*.log
+paper/*.out
