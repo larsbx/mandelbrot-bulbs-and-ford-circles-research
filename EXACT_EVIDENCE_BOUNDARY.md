@@ -58,3 +58,23 @@ The q=1,2,4 vectors live in Q(i).  General p/q requires an exact cyclotomic
 coefficient representation.  Until that shared representation is implemented
 and independently replayed, general-q values from `bulbford/index.py` remain
 rigorous ball computations rather than canonical exact coefficient objects.
+
+
+## Shared rational-dynamics contract
+
+The arithmetic of the internal fraction is now cross-checked against
+`larsbx/finite-math-kernels` R1 through
+`data/rational_dynamics_r1_vectors.json`. The consumer replay covers
+reduction-compatible fractions, doubling modulo one, modular inverse, the
+centered inverse representative, canonical continued fractions, convergent
+denominators, and the specimen identity
+
+```text
+3/7 = [0;2,3],
+signed inverse numerator = -2,
+previous convergent denominator = 2.
+```
+
+This does not move the interpretation of `x*` or any bulb claim into the
+shared kernel. The kernel owns only the finite rational arithmetic; this
+repository owns the use of that arithmetic in its research register.
