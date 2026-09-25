@@ -22,3 +22,11 @@ def test_P2_second_order_coefficient(p, q):
     assert abs(t.coeffs[0] - 1) < 1e-9
     assert abs(t.coeffs[1] + 1) < 1e-9
     assert abs(t.coeffs[2] - kappa(p, q)) < 1e-8
+
+
+def test_series_reconstructs_diameter_to_second_order():
+    """|u_a|/2 from the Taylor data at u=0 equals G_ant up to O(q⁻²) (nonlinearity of c_of)."""
+    from bulbford.dynamics import MAIN2, bulb
+    for p, q in [(1, 23), (7, 23), (10, 23)]:
+        t = taylor(p, q, r=2.5, N=128)
+        assert abs(abs(t.solve(-1, 2.0)) / 2 - bulb(MAIN2, p, q).G_ant) < 5 / q ** 2

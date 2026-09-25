@@ -32,3 +32,8 @@ def taylor(p: int, q: int, fam: Family = MAIN2, r: float = 2.5, N: int = 256) ->
     vals = rho_on_path(fam, p, q, us)
     coeffs = np.fft.fft(vals) / N / r ** np.arange(N)
     return TaylorData(p, q, r, coeffs)
+
+
+def kappa_fft(p: int, q: int, fam: Family = MAIN2, r: float = 2.5, N: int = 64) -> TaylorData:
+    """Cheap Taylor data (N=64 suffices: |r_k| decays like q^{-k})."""
+    return taylor(p, q, fam, r=r, N=N)
