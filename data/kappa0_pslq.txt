@@ -1,0 +1,13 @@
+PSLQ, 30 digits, max coefficient 1000, basis {1, π, π², 1/π, log 2, ζ(3), Catalan, γ} in subsets of ≤ 3:
+relations found: 0
+Traceback (most recent call last):
+  File "<stdin>", line 19, in <module>
+  File "<stdin>", line 19, in <dictcomp>
+  File "/usr/local/lib/python3.11/dist-packages/mpmath/identification.py", line 777, in identify
+    constants = [(eval(p, namespace), p) for p in constants]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/mpmath/identification.py", line 777, in <listcomp>
+    constants = [(eval(p, namespace), p) for p in constants]
+                  ^^^^^^^^^^^^^^^^^^
+  File "<string>", line 1, in <module>
+NameError: name 'π' is not defined
