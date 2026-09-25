@@ -38,3 +38,27 @@ def test_germ_normal_form_matches_quadratic_P4():
             lam = mp.expjpi(mp.mpf(2 * p) / q)
             g = [mp.mpc(0), lam, mp.mpc(1)]
             assert abs(normal_form_index(g, q) - normal_form(p, q, dps=40).iota) < mp.mpf(10) ** -30
+
+
+@pytest.mark.parametrize("p,q,B", [(1, 7, 4), (3, 23, 8), (26, 59, 16), (5, 211, 7), (1, 257, None)])
+def test_ball_normal_form_encloses_mpmath(p, q, B):
+    """Certified κ (Arb balls, blocked convolution) contains the 80-digit mpmath value, for several block sizes."""
+    from bulbford.normal_form_ball import normal_form_ball
+    nb = normal_form_ball(p, q, B=B)
+    with mp.workdps(80):
+        km = (normal_form(p, q, dps=80).iota - mp.mpf(1) / 2) / q
+        mid = mp.mpc(nb.kappa.real.mid().str(75, radius=False), nb.kappa.imag.mid().str(75, radius=False))
+        assert float(nb.kappa.rad()) < 1e-40
+        assert abs(mid - km) <= 2 * mp.mpf(float(nb.kappa.rad())) + mp.mpf(10) ** -70
+
+
+def test_ball_normal_form_leading_coefficient():
+    """a = q·b₁ from the ball normal form equals [z^{q+1}] f^q (series route)."""
+    from bulbford.normal_form_ball import normal_form_ball
+    old, oc = ctx.dps, ctx.cap
+    ctx.dps, ctx.cap = 2 * 23 + 40, 2 * 23 + 2
+    try:
+        a = complex(_series_fq(10, 23, 2 * 23 + 2).coeffs()[23 + 1])
+    finally:
+        ctx.dps, ctx.cap = old, oc
+    assert abs(complex(normal_form_ball(10, 23).a) / a - 1) < 1e-12

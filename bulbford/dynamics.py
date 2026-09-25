@@ -11,6 +11,12 @@ from typing import Callable, Iterable, NamedTuple
 import cmath
 import numpy as np
 
+try:                                   # compiled kernel when numba is present; identical code runs as Python otherwise
+    from numba import njit
+except ImportError:                    # pragma: no cover
+    def njit(*args, **kwargs):
+        return args[0] if args and callable(args[0]) else (lambda f: f)
+
 
 @dataclass(frozen=True)
 class Family:
@@ -38,14 +44,22 @@ class Orbit(NamedTuple):
     z_zc: complex
 
 
-def orbit(fam: Family, c: complex, z: complex, n: int) -> Orbit:
-    d = fam.d
-    o = Orbit(z, 1 + 0j, 0j, 0j, 0j)
+@njit(cache=True)
+def _orbit_kernel(d, c, z, n):
+    """f^n(z), f(z) = z^d + c, with ∂z, ∂c, ∂zz, ∂zc — the hot loop of every cycle computation (compiled by numba)."""
+    z_z, z_c, z_zz, z_zc = 1 + 0j, 0j, 0j, 0j
     for _ in range(n):
-        w, w1 = d * o.z ** (d - 1), d * (d - 1) * o.z ** (d - 2) if d > 2 else d * (d - 1)
-        o = Orbit(o.z ** d + c, w * o.z_z, w * o.z_c + 1,
-                  w1 * o.z_z ** 2 + w * o.z_zz, w1 * o.z_z * o.z_c + w * o.z_zc)
-    return o
+        zd2 = 1 + 0j                                  # z^{d−2}
+        for _ in range(d - 2):
+            zd2 *= z
+        w, w1 = d * zd2 * z, d * (d - 1) * zd2       # f'(z), f''(z)
+        z, z_z, z_c, z_zz, z_zc = (zd2 * z * z + c, w * z_z, w * z_c + 1,
+                                   w1 * z_z * z_z + w * z_zz, w1 * z_z * z_c + w * z_zc)
+    return z, z_z, z_c, z_zz, z_zc
+
+
+def orbit(fam: Family, c: complex, z: complex, n: int) -> Orbit:
+    return Orbit(*_orbit_kernel(fam.d, complex(c), complex(z), int(n)))
 
 
 def newton(step: Callable[[complex], complex], x0: complex, tol: float = 1e-15, maxit: int = 80) -> complex:
