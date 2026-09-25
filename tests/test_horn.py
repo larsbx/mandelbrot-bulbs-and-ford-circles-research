@@ -26,3 +26,23 @@ def test_V37_bulb_side_approaches_horn_value():
         nf = normal_form(1, q, dps=40)
         k = (nf.iota - mp.mpf(1) / 2) / q + 1j / (2 * mp.pi * q)
         assert abs(k - K0) < 3.0 / q ** 2
+
+
+def test_numeric_germ_fatou_series_matches_exact():
+    """The numeric (mpmath) Fatou series equals the exact one for the same germ."""
+    from bulbford.horn import fatou_series, CUBIC
+    b_exact, c_exact = fatou_series(CUBIC, 12)
+    with mp.workdps(40):
+        b_num, c_num = fatou_series(tuple(mp.mpc(x.numerator) / x.denominator for x in CUBIC), 12)
+        assert abs(b_num - mp.mpf(b_exact.numerator) / b_exact.denominator) < 1e-35
+        assert all(abs(cn - mp.mpf(ce.numerator) / ce.denominator) < 1e-30 for cn, ce in zip(c_num, c_exact))
+
+
+def test_normalized_P0_has_g3_equal_kappa0_plus_half():
+    """ι(𝒫₀) = g₃ of the normalized germ v + v² + g₃v³ + …, and ι(𝒫₀) − ½ = κ₀ (V38)."""
+    from bulbford.horn import horn_coeffs
+    from bulbford.germ import horn_germ
+    a, _ = horn_coeffs(4, dps=32, N=32, R=300, n=400)
+    with mp.workdps(32):
+        T = horn_germ(a, 4, 1)
+        assert abs(T[3] / T[2] ** 2 - (K0 + mp.mpf(1) / 2)) < mp.mpf(10) ** -25

@@ -28,3 +28,13 @@ def test_normal_form_is_precision_stable():
     k = lambda dps: (lambda nf: (nf.iota - mp.mpf(1) / 2) / 211)(normal_form(5, 211, dps=dps))
     with mp.workdps(120):
         assert abs(k(50) - k(120)) < mp.mpf(10) ** -30
+
+
+def test_germ_normal_form_matches_quadratic_P4():
+    """normal_form_index on the germ λ₀z + z² reproduces P4's ι for f_{λ₀}."""
+    from bulbford.germ import normal_form_index
+    with mp.workdps(40):
+        for p, q in [(1, 3), (3, 7), (4, 13)]:
+            lam = mp.expjpi(mp.mpf(2 * p) / q)
+            g = [mp.mpc(0), lam, mp.mpc(1)]
+            assert abs(normal_form_index(g, q) - normal_form(p, q, dps=40).iota) < mp.mpf(10) ** -30

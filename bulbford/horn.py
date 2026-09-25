@@ -38,32 +38,45 @@ def _slog1p(x, L):
     return out
 
 
+def _fatou_series(germ, K, one):
+    """Core of fatou_series, generic in the scalar type (`one` = 1 of that type: Fraction or mpmath)."""
+    zero = one * 0
+    L = K + 2
+    g = [zero, one] + list(germ) + [zero] * L
+    U = [-g[j] * (-1) ** j for j in range(L + 1)]            # U(u) = 1/F = −g(−u)
+    V = U[1:] + [zero]                                         # V = U/u = 1 − u + …
+    beta = one - g[3]
+    mul = lambda a, b: [sum((a[i] * b[k - i] for i in range(k + 1)), zero) for k in range(L + 1)]
+    invV = [one / V[0]] + [zero] * L
+    for k in range(1, L + 1):
+        invV[k] = -sum((V[j] * invV[k - j] for j in range(1, k + 1)), zero) / V[0]
+    lhs = [zero] * (L + 1)
+    for k in range(L):                                         # (1/U − 1/u − 1) = (1/V − 1)/u − 1
+        lhs[k] = invV[k + 1]
+    lhs[0] -= one
+    x = [a - (one if k == 0 else zero) for k, a in enumerate(V)]
+    logV, pw = [zero] * (L + 1), [one] + [zero] * L
+    for j in range(1, L + 1):
+        pw = mul(pw, x)
+        logV = [o + one * (-1) ** (j + 1) / j * t for o, t in zip(logV, pw)]
+    lhs = [a + beta * b for a, b in zip(lhs, logV)]
+    assert abs(lhs[0]) < 1e-20 and abs(lhs[1]) < 1e-20, "β must cancel the order-u term"
+    c = [zero] * (K + 1)
+    Upow, powers = [one] + [zero] * L, []
+    for k in range(1, K + 1):
+        Upow = mul(Upow, U); powers.append(Upow)
+    for m in range(2, K + 2):
+        s_ = lhs[m] + sum((c[k] * (powers[k - 1][m] - (one if m == k else zero)) for k in range(1, m - 1)), zero)
+        c[m - 1] = s_ / (m - 1)                                # coefficient of c_{m−1} at u^m is −(m−1)
+    return beta, c
+
+
 @lru_cache(maxsize=None)
 def fatou_series(germ: tuple = QUADRATIC, K: int = 30):
-    """(β, [c_0 = 0, c_1, …, c_K]) with Φ(w) = w − β log w + Σ c_k w^{−k} solving Φ∘F = Φ + 1."""
-    L = K + 2
-    g = [Fr(0), Fr(1)] + list(germ) + [Fr(0)] * L
-    U = [-g[j] * (-1) ** j for j in range(L + 1)]            # U(u) = 1/F = −g(−u)
-    V = U[1:] + [Fr(0)]                                        # V = U/u = 1 − u + …
-    beta = 1 - g[3]
-    invV = _sinv(V, L)
-    base = [a - (1 if k == 0 else 0) for k, a in enumerate(invV)]             # 1/V − 1 = u·(…)
-    lhs = [Fr(0)] * (L + 1)
-    for k in range(L):                                         # (1/U − 1/u) = (1/V − 1)/u
-        lhs[k] = base[k + 1]
-    lhs[0] -= 1                                                # − 1
-    logV = _slog1p([a - (1 if k == 0 else 0) for k, a in enumerate(V)], L)
-    lhs = [x + beta * y for x, y in zip(lhs, logV)]
-    assert lhs[0] == 0 and lhs[1] == 0, "β must cancel the order-u term"
-    c = [Fr(0)] * (K + 1)
-    Upow = [Fr(1)] + [Fr(0)] * L
-    powers = []
-    for k in range(1, K + 1):
-        Upow = _smul(Upow, U, L); powers.append(Upow)
-    for m in range(2, K + 2):
-        s = lhs[m] + sum((c[k] * (powers[k - 1][m] - (1 if m == k else 0)) for k in range(1, m - 1)), Fr(0))
-        c[m - 1] = s / (m - 1)                                 # coefficient of c_{m−1} at u^m is −(m−1)
-    return beta, c
+    """(β, [c_0 = 0, c_1, …, c_K]) with Φ(w) = w − β log w + Σ c_k w^{−k} solving Φ∘F = Φ + 1.
+    `germ` = (g₂ = 1, g₃, …) as Fractions (exact) or mpmath numbers (then evaluated at the current precision)."""
+    exact = all(isinstance(x, Fr) for x in germ)
+    return _fatou_series(germ, K, Fr(1) if exact else mp.mpc(1))
 
 
 def fatou_coeffs(K: int, germ: tuple = QUADRATIC) -> list:
@@ -71,12 +84,14 @@ def fatou_coeffs(K: int, germ: tuple = QUADRATIC) -> list:
 
 
 def horn_coeffs(M, h=0.25, N=64, R=400, n=500, dps=40, K=30, germ: tuple = QUADRATIC):
-    """Upper horn-map Fourier coefficients a_0..a_M (mpmath) and the aliasing level |ĉ_{N/2}|."""
+    """Upper horn-map Fourier coefficients a_0..a_M (mpmath) and the aliasing level |ĉ_{N/2}|.  For a numeric
+    germ (series), `F` evaluates the truncated series: valid while orbits stay inside its disc of convergence."""
     beta_f, cf = fatou_series(germ, K)
     with mp.workdps(dps):
-        beta = mp.mpf(beta_f.numerator) / beta_f.denominator
-        cm = [mp.mpf(x.numerator) / x.denominator for x in cf]
-        gm = [mp.mpf(x.numerator) / x.denominator for x in germ]
+        num = lambda x: mp.mpf(x.numerator) / x.denominator if isinstance(x, Fr) else mp.mpmathify(x)
+        beta = num(beta_f)
+        cm = [num(x) for x in cf]
+        gm = [num(x) for x in germ]
         g = lambda v: v + mp.fsum(gm[j] * v ** (j + 2) for j in range(len(gm)))
         Fm = lambda w: -1 / g(-1 / w)
         def ph(w, rep):

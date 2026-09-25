@@ -41,3 +41,36 @@ def iterate_index(G, k):
     for m in range(1, k + 1):
         inv[m] = -mp.fsum(P[j] * inv[m - j] for j in range(1, m + 1)) / P[0]
     return inv[k], max((abs(x) for x in D[2:k + 1]), default=mp.mpf(0))
+
+
+def normal_form_index(g, p):
+    """ι(G^p) for a germ G(z) = Σ_{j≥1} g_j z^j (g[0] = 0) whose multiplier μ = g[1] is a primitive p-th root of
+    unity, via the equivariant normal form G∘H = H∘N, N = μz(1 + b₁z^p + b₂z^{2p}) (P4 for general germs):
+      H_k(μ − μ^k) = [m = k−p ≥ 1]·m μ^m b₁ H_m + [m = k−2p ≥ 1]·μ^m(m b₂ + C(m,2) b₁²) H_m − Σ_{j≥2} g_j [H^j]_k,
+    b₁ from k = p+1, b₂ from k = 2p+1 (H_{p+1} = H_{2p+1} = 0);  ι(N^p) = (p²−1)/(2p) + b₂/(p b₁²).
+    Cost O(p³) scalar operations (powers of H kept in a table), versus O(p⁴) for composing series p times."""
+    L = 2 * p + 1
+    mu = g[1]
+    gj = lambda j: g[j] if j < len(g) else 0
+    H = [mp.mpc(0)] * (L + 1); H[1] = mp.mpc(1)
+    P = [[mp.mpc(0)] * (L + 1) for _ in range(L + 1)]     # P[j][m] = [H^j]_m
+    P[1][1] = mp.mpc(1)
+    b1 = b2 = mp.mpc(0)
+    for k in range(2, L + 1):
+        for j in range(2, k + 1):
+            P[j][k] = mp.fsum(H[i] * P[j - 1][k - i] for i in range(1, k - j + 2))
+        S = mp.fsum(gj(j) * P[j][k] for j in range(2, k + 1))
+        if k == p + 1:
+            b1 = S / mu; continue                          # H_{p+1} = 0
+        if k == 2 * p + 1:
+            b2 = S / mu; continue                          # H_{2p+1} = 0 (m = p+1 term vanishes)
+        rhs = -S
+        m = k - p
+        if m >= 1:
+            rhs += m * mu ** m * b1 * H[m]
+        m = k - 2 * p
+        if m >= 1:
+            rhs += mu ** m * (m * b2 + mp.binomial(m, 2) * b1 ** 2) * H[m]
+        H[k] = rhs / (mu - mu ** k)
+        P[1][k] = H[k]
+    return mp.mpf(p * p - 1) / (2 * p) + b2 / (p * b1 ** 2)
