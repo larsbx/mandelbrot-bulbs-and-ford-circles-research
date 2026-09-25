@@ -9,8 +9,8 @@ def coeffs(p, q):
     try:
         ctx.dps = max(30, int(1.5 * q)); ctx.cap = 2 * q + 2
         s = _series_fq(p, q, 2 * q + 2).coeffs()
-        a, b = complex(s[q + 1]), complex(s[2 * q + 1]) if len(s) > 2 * q + 1 else 0j
-        return a, b
+        loga = lambda z: (float(z.abs().log().real), float(z.arg()))          # (log|z|, arg z) without overflow
+        return loga(s[q + 1]), (loga(s[2 * q + 1]) if len(s) > 2 * q + 1 else (float('-inf'), 0.0))
     finally:
         ctx.dps, ctx.cap = old, oc
 
@@ -18,11 +18,10 @@ for q in map(int, sys.argv[1:] or ["59"]):
     rows = []
     for p in coprime_numerators(q):
         if p > q // 2: continue
-        a, b = coeffs(p, q); pb = modinv(p, q); xt = (pb if pb <= q / 2 else pb - q) / q
-        rows.append(dict(p=p, q=q, xt=xt, a=[a.real, a.imag], b=[b.real, b.imag]))
+        (la, aa), (lb, ab) = coeffs(p, q); pb = modinv(p, q); xt = (pb if pb <= q / 2 else pb - q) / q
+        rows.append(dict(p=p, q=q, xt=xt, loga=la, arga=aa, logb=lb, argb=ab))
     rows.sort(key=lambda r: abs(r["xt"]))
     json.dump(rows, open(f"data/leading_coeff_q{q}.json", "w"))
     print(f"q={q}:   x̃      p    log|a|/q   arg(a)/2π    log|b|/q    |b/a²|/q   arg(b/a²)/2π")
     for r in rows:
-        a, b = complex(*r["a"]), complex(*r["b"])
-        print(f"  {r['xt']:+.4f} {r['p']:>4}  {cmath.log(abs(a)).real/q:+.4f}   {cmath.phase(a)/(2*cmath.pi):+.4f}     {cmath.log(abs(b)).real/q:+.4f}    {abs(b/a**2)/q:8.4f}   {cmath.phase(b/a**2)/(2*cmath.pi):+.4f}")
+        print(f"  {r['xt']:+.4f} {r['p']:>4}  {r['loga']/q:+.4f}   {r['arga']/(2*cmath.pi):+.4f}     {r['logb']/q:+.4f}    {cmath.exp(r['logb']-2*r['loga'])/q:8.4g}   {((r['argb']-2*r['arga'])/(2*cmath.pi)+0.5)%1-0.5:+.4f}")

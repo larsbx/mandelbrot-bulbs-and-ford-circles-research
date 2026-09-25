@@ -13,7 +13,7 @@ def brjuno_fin(x: Fraction) -> float:
 
 q = int(sys.argv[1]) if len(sys.argv) > 1 else 59
 rows = json.load(open(f"data/leading_coeff_q{q}.json"))
-L = np.array([math.log(abs(complex(*r["a"]))) / q for r in rows]); p = np.array([r["p"] for r in rows])
+L = np.array([r["loga"] / q for r in rows]); p = np.array([r["p"] for r in rows])
 xt = np.array([abs(r["xt"]) for r in rows])
 Bt = np.array([brjuno_fin(Fraction(int(pp), q)) for pp in p]); Bx = np.array([brjuno_fin(Fraction(int(round(x * q)), q)) for x in xt])
 print(f"q={q}: corr(log|a|/q, B_fin(p/q)/q) = {np.corrcoef(L, Bt/q)[0,1]:.4f};  corr with B_fin(x̃)/q = {np.corrcoef(L, Bx/q)[0,1]:.4f};  corr with x*: {np.corrcoef(L, xt)[0,1]:.4f}")
