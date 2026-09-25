@@ -59,8 +59,8 @@ if __name__ == "__main__":
             print(f"h={h} {'upper' if end > 0 else 'lower'}: a0={co[0]:.10f}  a1={a1:.8f}  a2={a2:.8f}  ι−½ = {B / A**2 - 0.5:.10f}  |a3·e^-6πh|={abs(co[3 if end > 0 else -3]):.1e}", flush=True)
 
 
-def kappa0_mp(h=0.25, N=48, R=400, n=500, dps=40, K=K):
-    """a₂/(2πi a₁²) of the upper horn map in mpmath (same algorithm, arbitrary precision)."""
+def horn_coeffs(M, h=0.25, N=64, R=400, n=500, dps=40, K=30):
+    """Upper horn-map Fourier coefficients a_0..a_M of E(Z) = Z + a₀ + Σ a_n e^{2πinZ} (mpmath), plus aliasing |ĉ_{N/2}|."""
     import mpmath as mp
     with mp.workdps(dps):
         cm = [mp.mpf(x.numerator) / x.denominator for x in fatou_coeffs(K)]
@@ -79,7 +79,15 @@ def kappa0_mp(h=0.25, N=48, R=400, n=500, dps=40, K=K):
             while abs(w) < R or w.real < abs(w) / 2:
                 w = Fm(w); m += 1
             return ph(w, False) - m
-        D = [E(mp.mpf(j) / N + 1j * mp.mpf(h)) - (mp.mpf(j) / N + 1j * mp.mpf(h)) for j in range(N)]
+        Zs = [mp.mpf(j) / N + 1j * mp.mpf(h) for j in range(N)]
+        D = [E(Z) - Z for Z in Zs]
         coef = lambda k: mp.fsum(D[j] * mp.expjpi(-2 * mp.mpf(k) * j / N) for j in range(N)) / N
-        a1, a2 = coef(1) * mp.exp(2 * mp.pi * h), coef(2) * mp.exp(4 * mp.pi * h)
-        return a1, a2, a2 / (2j * mp.pi * a1 ** 2), abs(coef(N // 2))
+        return [coef(k) * mp.exp(2 * mp.pi * k * h) for k in range(M + 1)], abs(coef(N // 2))
+
+
+def kappa0_mp(h=0.25, N=48, R=400, n=500, dps=40, K=K):
+    """(a₁, a₂, κ₀ = a₂/(2πi a₁²), aliasing) for the upper horn map."""
+    import mpmath as mp
+    a, al = horn_coeffs(2, h=h, N=N, R=R, n=n, dps=dps, K=K)
+    with mp.workdps(dps):
+        return a[1], a[2], a[2] / (2j * mp.pi * a[1] ** 2), al
