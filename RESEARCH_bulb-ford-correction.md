@@ -195,12 +195,14 @@ Precision caveats: doubles for `R_q`; the FFT route is accurate to `~1e-12` in `
 4. **Proof program for C23 (i), (ii), (v) and V40:** Inou–Shishikura continuity of near-parabolic renormalization at `1/α ∈ ℤ` (and at `1/α ∈ ℤ + r/p`), conjugacy of `Φ_{p/q}` (P5) with the rotation quotient of `R(f_{p/q})`, and the Lavaurs-phase form of the unfolding. P2, P4, P5, P6 are already elementary.
 5. Earlier items, lower priority now: Ramanujan inversion of the even parts (E-g), C21/C22, C2′ numerics, C8, C11.
 
-## 8. Instruments (`bulbford/`, tests in `tests/`, 44 passing)
+## 8. Instruments (`bulbford/`, tests in `tests/`, 53 passing)
 
 - `cf.py` — `modinv`, `xstar`, `cf`, `from_cf`, `convergent_denominators`.
 - `dynamics.py` — `Family` records (`MAIN2`, `DISK2`, `MAIN3`), `orbit` with second derivatives, `Cycle` tracking with analytic `dρ/dc` and a period-collapse guard, `bulb(fam, p, q)` → `G_ant`, `G_cen`; `rho_on_path`.
 - `index.py` — `index(p, q)`: `ι_{p/q}` as an `acb` ball (python-flint), auto precision; `kappa(p, q)`.
-- `normal_form.py` — `normal_form(p, q, dps)`: homological recursion (P4), `.a`, `.iota`; `O(q²)`, cancellation-free (V37). The instrument of choice for large `q`.
+- `normal_form.py` — `normal_form(p, q, dps)`: homological recursion (P4) in mpmath, `.a`, `.iota`; `O(q²)`, cancellation-free (V37).
+- `normal_form_ball.py` — `normal_form_ball(p, q)`: the same recursion in Arb ball arithmetic with a blocked online convolution (completed blocks folded in by truncated series products in C) and adaptive precision until the certified radius of `κ` is `< 1e-40`. **Certified** and 60–110× faster than the mpmath version (`q = 4096`: 1.95 s vs 215 s; `q = 8192`: 14.1 s vs 894 s). Radii are rigorous but pessimistic (worst-case accumulation through the long sums, e.g. 45 of 77 digits lost at `5/211`, 256 bits); the precision doubling absorbs this. The instrument of choice for large `q`.
+- `dynamics.py::_orbit_kernel` — the cycle-iteration hot loop, compiled with numba (falls back to the same code in Python): 59× on complete bulb computations (`taylor(7/1009)`: 4.87 s → 0.082 s), bit-identical in degree 2.
 - `horn.py` — exact Fatou series of any polynomial cusp germ `v + v² + g₃v³ + …` (`QUADRATIC`, `CUBIC`), attracting/repelling Fatou coordinates, upper horn-map coefficients `horn_coeffs(M, …, germ)`, `kappa0_mp` (V38, V41); `python3 -m bulbford.horn` prints both horn maps.
 - `germ.py` — truncated series (`mul`, `compose`, `exp_series`), `horn_germ(a, L, μ)`, `iterate_index(G, k)`.
 - `renorm.py` — `bounded_p_limit(p, r, germ)`: the C23 (ii) prediction `(ι((μ𝒫₀)^p) − ½)/p`, `μ = e^{−2πir/p}`; `unfolding`, `rho_path`, `G_limits(p, r, germ)`: the renormalized family `μe^{u/p²}𝒫₀`, its multiplier function and all `d − 1` antipodal bulb sizes (V40, V41).
