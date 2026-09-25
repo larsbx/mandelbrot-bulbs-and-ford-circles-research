@@ -6,6 +6,7 @@ Research branch `bulb-ford-correction`: the size of the satellite bulbs of the M
 - **Register:** [`RESEARCH_bulb-ford-correction.md`](RESEARCH_bulb-ford-correction.md) — PROVEN / VALIDATED / CONJECTURED / FALSIFIED, with the theorem
   `ρ = 1 − q²ε + q³(ι_{p/q} − ½)ε² + O(ε³)` (P2) tying the second-order bulb shape to the holomorphic index of the parabolic point.
 - **Code:** `bulbford/` (dynamics, parabolic index in ball arithmetic, Taylor data of the multiplier), `tests/` (pytest), `scripts/` (sweeps), `data/` (JSON results), `legacy/` (the original instruments, unmodified).
+- **Evidence boundary:** [`EXACT_EVIDENCE_BOUNDARY.md`](EXACT_EVIDENCE_BOUNDARY.md) separates exact low-q coefficient fixtures from ball/FFT/continuation evidence. The canonical low-q corpus is `data/parabolic_index_exact_vectors.json`.
 
 ```
 pip install numpy python-flint sympy pytest
