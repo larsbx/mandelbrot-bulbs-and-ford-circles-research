@@ -1,0 +1,6 @@
+q=2003 chunk 1/4: 251 rows, 1886s
+q=2003 chunk 0/4: 250 rows, 1888s
+q=2003 chunk 3/4: 250 rows, 1890s
+q=2003 chunk 2/4: 250 rows, 1892s
+q=2003: merged 1001 rows
+DONE
