@@ -30,3 +30,13 @@ def test_series_reconstructs_diameter_to_second_order():
     for p, q in [(1, 23), (7, 23), (10, 23)]:
         t = taylor(p, q, r=2.5, N=128)
         assert abs(abs(t.solve(-1, 2.0)) / 2 - bulb(MAIN2, p, q).G_ant) < 5 / q ** 2
+
+
+@pytest.mark.parametrize("fam_name,p,q", [("main2", 2, 7), ("disk2", 2, 7), ("disk2", 3, 11), ("main3", 2, 7), ("main3", 3, 11)])
+def test_P2_other_families(fam_name, p, q):
+    """P2 is family-generic: [u²]R_q = (ι − ½)/q with ι the index of the parabolic cycle point."""
+    from bulbford.dynamics import FAMILIES
+    from bulbford.index import index_at
+    fam = FAMILIES[fam_name]
+    t = taylor(p, q, fam, r=1.0, N=64)
+    assert abs(t.coeffs[2] - (index_at(fam, p, q) - 0.5) / q) < 1e-7
