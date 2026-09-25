@@ -26,11 +26,12 @@ def write(name, body):
 
 # Table 1: κ(1/q) from the normal form
 rows = {int(l.split("\t")[0]): mp.mpc(*l.split("\t")[1:3]) for l in open("data/p1_nf.tsv") if l.strip()}
+rows.update({int(l.split("\t")[0]): mp.mpc(*l.split("\t")[1:3]) for l in open("data/p1_ball.tsv") if l.strip()})   # certified (Arb), q ≤ 32768
 lines = [r"\begin{tabular}{@{}rll@{}}", r"\toprule", r"$q$ & $\kappa(1/q)$ & $|\kappa(1/q)+\tfrac{i}{2\pi q}-\kappa_0|$ \\", r"\midrule"]
-for q in (64, 128, 256, 512, 1024, 2048, 4096, 8192):
+for q in (64, 256, 1024, 4096, 8192, 16384, 32768):
     k = rows[q]; e = abs(k + 1j / (2 * mp.pi * q) - K0)
     lines.append(f"{q} & ${cplx(k, 16)}$ & {sci_tex(e)} \\\\")
-fit = power_fit([(q, k) for q, k in rows.items() if q >= 128], 10)   # residual 4e-26 (Numerical result 4.1)
+fit = power_fit([(q, k) for q, k in rows.items() if q >= 256], 10)   # 13 points, residual 3.6e-29 (Numerical result 4.1)
 lines += [r"\midrule", f"fit, $q\\to\\infty$ & ${cplx(fit[0], 16)}$ & \\\\",
           f"horn map, Thm.~\\ref{{thm:horn-index}} & ${cplx(K0, 16)}$ & \\\\", r"\bottomrule", r"\end{tabular}"]
 write("kappa_1q", "\n".join(lines) + "\n")

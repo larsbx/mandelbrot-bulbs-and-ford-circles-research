@@ -35,7 +35,7 @@ To first order, the satellite component of the Mandelbrot set attached to the ma
 \[
 \kappa_0:=\lim_{q\to\infty}\kappa(1/q)=0.023825887402200569000\ldots-0.052304659114003666317\ldots\,i,
 \]
-with $\kappa(1/q)=\kappa_0-\tfrac{i}{2\pi q}+O(q^{-2})$, and we identify $\kappa_0$, to 21 digits, with $\iota(\PP)-\tfrac12$, where $\PP$ is the parabolic renormalization (upper horn map) of $z+z^2$. From the horn map we compute $\kappa_0$ to 32 digits. The same horn map, multiplied by the Inou--Shishikura phase $e^{-2\pi i/\alpha}$, predicts the bounded-$p$ limits of $\kappa$ and of the bulb size itself; in degree three the horn map of the cubic cusp germ plays the same role. No integer relation with standard constants is found.
+with $\kappa(1/q)=\kappa_0-\tfrac{i}{2\pi q}+O(q^{-2})$, and we identify $\kappa_0$, to 27 digits, with $\iota(\PP)-\tfrac12$, where $\PP$ is the parabolic renormalization (upper horn map) of $z+z^2$. From the horn map we compute $\kappa_0$ to 32 digits. The same horn map, multiplied by the Inou--Shishikura phase $e^{-2\pi i/\alpha}$, predicts the bounded-$p$ limits of $\kappa$ and of the bulb size itself; in degree three the horn map of the cubic cusp germ plays the same role. No integer relation with standard constants is found.
 \end{abstract}
 
 \maketitle
@@ -61,8 +61,8 @@ The component $W_{p/q}$ is, up to the conformal change $u\mapsto c(\lambda_0e^{u
 \begin{enumerate}
 \item \emph{Index formula} (Theorem~\ref{thm:index}). $\kappa(p/q)=(\iota_{p/q}-\tfrac12)/q$, where $\iota_{p/q}=\Res_{z=0}\,dz/(z-f_{\lambda_0}^q(z))$ is the holomorphic index of the parabolic fixed point. In particular $\kappa(p/q)$ lies in the cyclotomic field $\Q(\zeta_q)$ and $p\mapsto\kappa(p/q)$ is a Galois orbit.
 \item \emph{Normal form} (Theorem~\ref{thm:nf} and Corollary~\ref{cor:quotient}). If $N(z)=\lambda_0z(1+b_1z^q+b_2z^{2q})$ is the resonant normal form of $f_{\lambda_0}$, then $q\,\iota_{p/q}=(q^2-1)/2+b_2/b_1^2$. Moreover $\kappa(p/q)=\iota(\Phi_{p/q})-\tfrac12$, where $\Phi_{p/q}(W)=N^q(W^{1/q})^q$ is the rotation quotient of $f^q$. The recursion for $b_1,b_2$ gives $\kappa$ exactly in $O(q^2)$ operations and is free of cancellation.
-\item \emph{The constant} (Numerical result~\ref{obs:limit}). The limit $\kappa_0=\lim_{q\to\infty}\kappa(1/q)$ exists numerically, with $\kappa(1/q)=\kappa_0-\tfrac{i}{2\pi q}+O(q^{-2})$; the bulbs determine $\kappa_0$ to 21 digits.
-\item \emph{Identification} (Theorem~\ref{thm:horn-index} and Numerical result~\ref{obs:identity}). Let $E(Z)=Z+\sum_{n\ge1}a_ne^{2\pi i nZ}$ be the upper horn map of $z+z^2$ and $\PP(W)=W\exp(2\pi i\sum a_nW^n)$ the corresponding parabolic germ. Then $\iota(\PP)-\tfrac12=a_2/(2\pi i a_1^2)$, and this number equals $\kappa_0$ to 21 digits. From the horn map,
+\item \emph{The constant} (Numerical result~\ref{obs:limit}). The limit $\kappa_0=\lim_{q\to\infty}\kappa(1/q)$ exists numerically, with $\kappa(1/q)=\kappa_0-\tfrac{i}{2\pi q}+O(q^{-2})$; the bulbs determine $\kappa_0$ to 27 digits.
+\item \emph{Identification} (Theorem~\ref{thm:horn-index} and Numerical result~\ref{obs:identity}). Let $E(Z)=Z+\sum_{n\ge1}a_ne^{2\pi i nZ}$ be the upper horn map of $z+z^2$ and $\PP(W)=W\exp(2\pi i\sum a_nW^n)$ the corresponding parabolic germ. Then $\iota(\PP)-\tfrac12=a_2/(2\pi i a_1^2)$, and this number equals $\kappa_0$ to 27 digits. From the horn map,
 \begin{align*}
 \operatorname{Re}\kappa_0&=\phantom{-}0.023825887402200569000729189645402\ldots,\\
 \operatorname{Im}\kappa_0&=-0.052304659114003666316522486207571\ldots .
@@ -169,17 +169,17 @@ The recursion \eqref{eq:rec} costs $O(q^2)$ arithmetic operations, and it does n
 \begin{table}[t]
 \centering\small
 \input{tables/kappa_1q.tex}
-\caption{$\kappa(1/q)$ from the normal-form recursion at 50 digits (first sixteen shown). The corrected error decays like $q^{-2}$. The fit uses the thirteen values $128\le q\le 8192$ with eleven terms in $1/q$ (residual $3.9\cdot10^{-26}$); the last row is the horn-map value of Section~\ref{sec:horn}.}\label{tab:kappa1q}
+\caption{$\kappa(1/q)$ from the normal-form recursion (first sixteen digits shown). The corrected error decays like $q^{-2}$. Values for $q\ge1024$ are certified (Arb, radius $\le5.4\cdot10^{-44}$). The fit uses the thirteen values $256\le q\le 32768$ with eleven terms in $1/q$ (residual $3.6\cdot10^{-29}$); the last row is the horn-map value of Section~\ref{sec:horn}.}\label{tab:kappa1q}
 \end{table}
 
 \begin{observation}\label{obs:limit}
-Table~\ref{tab:kappa1q} lists $\kappa(1/q)$ for $q$ up to $8192$; Figure~\ref{fig:conv} shows the convergence. Least-squares fits of $\kappa(1/q)=\sum_{j\le J}c_jq^{-j}$ over $q\ge q_{\min}$ give the same $c_0$ to eighteen digits for every $(q_{\min},J)$ with residual below $10^{-20}$. The two best-resolved fits, $(q_{\min},J)=(128,10)$ with residual $3.9\cdot10^{-26}$ and $(256,8)$ with residual $1.5\cdot10^{-23}$, agree with each other to $7\cdot10^{-22}$:
+Table~\ref{tab:kappa1q} lists $\kappa(1/q)$ for $q$ up to $32768$; for $q\ge1024$ the values are certified in ball arithmetic (Appendix~\ref{app:num}). Figure~\ref{fig:conv} shows the convergence. Least-squares fits of $\kappa(1/q)=\sum_{j\le J}c_jq^{-j}$ over $q\ge q_{\min}$ are stable under changes of $(q_{\min},J)$. The best overdetermined fit, $(q_{\min},J)=(256,10)$ on thirteen values with residual $3.6\cdot10^{-29}$, gives
 \[
-c_0=0.02382588740220056900073-0.05230465911400366631652\,i .
+c_0=0.023825887402200569000729189645\ldots-0.052304659114003666316522486208\ldots\,i
 \]
-The first-order coefficient is
+(28 digits shown), and the first-order coefficient
 \[
-c_1=-\frac{i}{2\pi}\quad\text{to within }4\cdot10^{-20},
+c_1=-\frac{i}{2\pi}\quad\text{to within }2\cdot10^{-23},
 \]
 and $c_2=0.402776138694+2.902726170410\,i$. The ratios $|c_{j+1}/c_j|$ stay near $7$, consistent with an expansion convergent for $q\gtrsim7$.
 \end{observation}
@@ -240,7 +240,7 @@ with $|a_n|$ decreasing by a factor of about $55$ per step. Hence
 \operatorname{Re}\bigl(\iota(\PP)-\tfrac12\bigr)&=\phantom{-}0.023825887402200569000729189645402,\\
 \operatorname{Im}\bigl(\iota(\PP)-\tfrac12\bigr)&=-0.052304659114003666316522486207571.
 \end{align*}
-The two precision settings agree in all 32 digits shown. This coincides with $c_0$ of Numerical result~\ref{obs:limit}: the best fit differs by $1.9\cdot10^{-24}$, the second best by $7.1\cdot10^{-22}$. We therefore claim agreement to at least 21 digits. Already in double precision the agreement is $2.5\cdot10^{-11}$ at every height $\operatorname{Im}Z\in[\frac14,\frac12]$.
+The two precision settings agree in all 32 digits shown. This coincides with $c_0$ of Numerical result~\ref{obs:limit} to $3.1\cdot10^{-28}$; other stable fits differ from it by at most $5\cdot10^{-25}$. We therefore claim agreement to at least 24 digits, and 27 on the best fit. Already in double precision the agreement is $2.5\cdot10^{-11}$ at every height $\operatorname{Im}Z\in[\frac14,\frac12]$.
 \end{observation}
 
 \begin{conjecture}\label{conj:main}
@@ -333,7 +333,7 @@ The first-order theory of satellite bulbs is the Ford-circle picture, with radii
 \section{Numerical methods and error control}\label{app:num}
 
 \subsection*{A.1 Normal form}
-Recursion \eqref{eq:rec} was run in \texttt{mpmath}~\cite{mpmath} at 50 working digits for $64\le q\le8192$ ($p=1$) and $q\le5124$ (bounded $p$). It agrees with the series-composition index to $10^{-12}$ in double-precision checks at seven values of $p/q$ with $q\le59$, and with certified ball-arithmetic values (Arb~\cite{Arb}, radius $\le1.7\cdot10^{-17}$ at $q=384,448,512,896$) to $4.9\cdot10^{-18}$. Doubling the working precision changes nothing in the digits reported.
+Recursion \eqref{eq:rec} was run in \texttt{mpmath}~\cite{mpmath} at 50 working digits for $64\le q\le8192$ ($p=1$) and $q\le5124$ (bounded $p$). It was also implemented in Arb ball arithmetic~\cite{Arb}, which certifies every value. There the online convolution $(H^2)_k$ is evaluated in blocks: completed blocks are folded in by truncated series products, and the remainder is summed directly. The working precision is doubled until the certified radius of $\kappa$ is below $10^{-40}$. Ball radii are pessimistic, since they cannot see cancellation, but they remain small: for $p=1$ they are $1.6\cdot10^{-50}$ at $q=1024$ and below $2\cdot10^{-111}$ at $q=32768$. The two implementations agree to the 40 digits stored. The ball version is 60--110 times faster; $q=32768$ takes about two minutes.
 
 \subsection*{A.2 Extrapolation}
 Limits in $q$ come from least-squares fits in powers of $1/q$ at 40--60 digits. Each is reported only when it is stable, to the stated precision, under changes of the fit order and of the smallest $q$ used.
@@ -345,7 +345,7 @@ The Fatou series were truncated at $K=40$ terms and evaluated at $|w|\ge800$. At
 The coefficients $r_k$ were also computed by Cauchy integrals of $R_{p/q}$ over a circle, continuing the $q$-cycle numerically. For $z^2+c$ the radius $|u|=2.5$ is admissible. For $z^3+c$ the function $R_{p/q}$ has a singularity inside $|u|<2.5$, and the radius must be at most $1.5$. The condition $r_1=-1$ from Theorem~\ref{thm:index} is a reliable diagnostic: it fails as $r_1=-1.032$ on the larger circle.
 
 \subsection*{A.5 Reproducibility}
-All code, data and tests are in the accompanying repository~\cite{repo}. The package \texttt{bulbford} contains \texttt{normal\_form}, \texttt{horn}, \texttt{germ}, \texttt{renorm} and \texttt{dynamics}. The tables and figures of this paper are generated by \texttt{paper/tables.py} and \texttt{paper/figures.py}. The test suite checks Theorems~\ref{thm:index} and~\ref{thm:nf}, the horn-map value of $\kappa_0$ to 25 digits, and the bounded-$p$ and degree-three predictions.
+All code, data and tests are in the accompanying repository~\cite{repo}. The package \texttt{bulbford} contains \texttt{normal\_form} and \texttt{normal\_form\_ball}, \texttt{horn}, \texttt{germ}, \texttt{renorm} and \texttt{dynamics}; the cycle iteration in \texttt{dynamics} is compiled with Numba. The tables and figures of this paper are generated by \texttt{paper/tables.py} and \texttt{paper/figures.py}. The test suite checks Theorems~\ref{thm:index} and~\ref{thm:nf}, the horn-map value of $\kappa_0$ to 25 digits, and the bounded-$p$ and degree-three predictions.
 
 \subsection*{Acknowledgments}
 The computations and the drafting of this paper were carried out with the assistance of an AI system (Claude, Anthropic).

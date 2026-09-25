@@ -26,9 +26,9 @@ def style(ax):
 
 
 # Figure 1: convergence of κ(1/q) to κ₀ (degree 2) and κ₃(1/q) to κ₀⁽³⁾ (degree 3)
-rows = [l.split("\t") for l in open("data/p1_nf.tsv") if l.strip()]
-q = np.array([int(r[0]) for r in rows])
-k = [mp.mpc(r[1], r[2]) for r in rows]
+merged = {int(r[0]): mp.mpc(r[1], r[2]) for r in (l.split("\t") for l in open("data/p1_nf.tsv") if l.strip())}
+merged.update({int(r[0]): mp.mpc(r[1], r[2]) for r in (l.split("\t") for l in open("data/p1_ball.tsv") if l.strip())})
+q = np.array(sorted(merged)); k = [merged[qq] for qq in q]
 raw = np.array([float(abs(x - K0)) for x in k])
 cor = np.array([float(abs(x + 1j / (2 * mp.pi * qq) - K0)) for x, qq in zip(k, q)])
 q3 = np.array([128, 256, 512, 1024])
@@ -38,13 +38,13 @@ ax.loglog(q, raw, "-o", color=BLUE, lw=2, ms=4.5, mec="white", mew=1.0, label=r"
 ax.loglog(q, cor, "-s", color=ORANGE, lw=2, ms=4.5, mec="white", mew=1.0, label=r"$|\kappa(1/q)+\frac{i}{2\pi q}-\kappa_0|$")
 ax.loglog(q3, e3, "-^", color=AQUA, lw=2, ms=5, mec="white", mew=1.0, label=r"degree 3: $|\kappa_3(1/q)+\frac{i}{2\pi q}-\kappa_0^{(3)}|$")
 for x0, y0, sl, lab in ((64, raw[0] * 1.9, -1, r"$\propto q^{-1}$"), (64, cor[0] * 0.28, -2, r"$\propto q^{-2}$")):
-    xs = np.array([x0, 8192]); ax.loglog(xs, y0 * (xs / x0) ** sl, color=MUTED, lw=0.6)
+    xs = np.array([x0, 32768]); ax.loglog(xs, y0 * (xs / x0) ** sl, color=MUTED, lw=0.6)
     xl = 900 if sl == -1 else 3000
     ax.text(xl, y0 * (xl / x0) ** sl * (1.6 if sl == -1 else 0.45), lab, color=MUTED, fontsize=8)
 ax.text(q[-1] * 1.12, raw[-1], "raw", color=INK, va="center", fontsize=8)
 ax.text(q[-1] * 1.12, cor[-1], "corrected", color=INK, va="center", fontsize=8)
 ax.text(q3[-1] * 1.12, e3[-1], "degree 3", color=INK, va="center", fontsize=8)
-ax.set_xlim(50, 3.2e4); ax.set_xlabel(r"$q$"); ax.set_ylabel("error")
+ax.set_xlim(50, 1.3e5); ax.set_xlabel(r"$q$"); ax.set_ylabel("error")
 ax.legend(loc="lower left", fontsize=7.5)
 fig.tight_layout(); fig.savefig("paper/figures/convergence.pdf")
 if os.environ.get("PNG_DIR"): fig.savefig(os.path.join(os.environ["PNG_DIR"], "convergence.png"), dpi=150)
