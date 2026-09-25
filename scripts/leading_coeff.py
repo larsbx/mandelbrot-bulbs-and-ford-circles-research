@@ -9,7 +9,7 @@ def coeffs(p, q):
     try:
         ctx.dps = max(30, int(1.5 * q)); ctx.cap = 2 * q + 2
         s = _series_fq(p, q, 2 * q + 2).coeffs()
-        loga = lambda z: (float(z.abs().log().real), float(z.arg()))          # (log|z|, arg z) without overflow
+        loga = lambda z: (float(abs(z).log()), float(z.arg()))          # (log|z|, arg z) without overflow
         return loga(s[q + 1]), (loga(s[2 * q + 1]) if len(s) > 2 * q + 1 else (float('-inf'), 0.0))
     finally:
         ctx.dps, ctx.cap = old, oc
