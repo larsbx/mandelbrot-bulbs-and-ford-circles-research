@@ -46,9 +46,9 @@ Let $\lambda\in\D$ parametrize the main cardioid of the Mandelbrot set $M$ by th
 \[
 f_\lambda(z)=\lambda z+z^2 ,
 \]
-which is affinely conjugate to $z^2+c(\lambda)$. At each root of unity $\lambda_0=e^{2\pi i p/q}$, $\gcd(p,q)=1$, a satellite hyperbolic component $W_{p/q}$ of period $q$ is attached to the cardioid~\cite{DH}. Its size is of order $q^{-2}$~\cite{GM}; more precisely, to first order in $1/q$ the component is a round disc whose diameter is $2|c'(\lambda_0)|q^{-2}$ in the parameter plane. The diameters $q^{-2}$ and the tangency pattern of the $W_{p/q}$ are those of the Ford circles~\cite{Ford}, and this is the leading-order content of the familiar analogy between the Mandelbrot set and the Farey tessellation.
+which is affinely conjugate to $z^2+c(\lambda)$. At each root of unity $\lambda_0=e^{2\pi i p/q}$, $\gcd(p,q)=1$, a satellite hyperbolic component $W_{p/q}$ of period $q$ is attached to the cardioid~\cite{DH}. Its size is of order $q^{-2}$~\cite{GM}; more precisely, to first order in $1/q$ the component is a round disc whose diameter is $2|c'(\lambda_0)|q^{-2}=2\sin(\pi p/q)\,q^{-2}$ in the parameter plane, an estimate derived analytically by Fowler and McGuinness~\cite{FM}. The diameters $q^{-2}$ and the tangency pattern of the $W_{p/q}$ are those of the Ford circles~\cite{Ford}, and this is the leading-order content of the familiar analogy between the Mandelbrot set and the Farey tessellation.
 
-This paper is about the \emph{first correction} to that law, and about one constant that it produces. Put $\lambda=\lambda_0e^{\varepsilon}$ and let $\rho_{p/q}(\varepsilon)$ be the multiplier of the $q$-cycle of $f_\lambda$ that bifurcates from the fixed point $0$. In the bulb-scale variable $u=q^2\varepsilon$,
+This paper is about the \emph{first correction} to that law, which to our knowledge has not been studied before, and about one constant that it produces. Put $\lambda=\lambda_0e^{\varepsilon}$ and let $\rho_{p/q}(\varepsilon)$ be the multiplier of the $q$-cycle of $f_\lambda$ that bifurcates from the fixed point $0$. In the bulb-scale variable $u=q^2\varepsilon$,
 \begin{equation}\label{eq:R}
 R_{p/q}(u):=\rho_{p/q}(u/q^2)=\sum_{k\ge0} r_k(p/q)\,u^k .
 \end{equation}
@@ -305,7 +305,7 @@ whose r\'esidu it\'eratif is $1-\frac13=\frac23$. Lemma~\ref{lem:fatou} generali
 \]
 Table~\ref{tab:deg3} shows that $\kappa_3(1/q)+\frac i{2\pi q}$ converges to this value like $q^{-2}$. So the correction $-i/(2\pi q)$ is the same in degree three, while the constant is not. The bounded-$p$ predictions hold in degree three as well: $\kappa$ agrees to within $5\cdot10^{-6}$ for $(p,r)=(1,1),(2,1),(3,1),(3,2)$ at $q\approx512p$.
 
-One subtlety concerns the bulb size. At the centre of a degree-$d$ satellite the critical point lies on the cycle, so the multiplier $\prod d\,z_j^{d-1}$ vanishes to order $d-1$. The multiplier map of the component is thus a $(d-1)$-fold branched cover of $\D$~\cite{MilnorHC}, and in degree three there are two points with multiplier $-1$. Both are predicted: at $p=3$, $r=1$ the horn map gives $G=1.196074$ and $1.227092$, against extrapolated bulb values $1.196075$ and $1.227091$.
+One subtlety concerns the bulb size. At the centre of a degree-$d$ satellite the critical point lies on the cycle, so the multiplier $\prod d\,z_j^{d-1}$ vanishes to order $d-1$. The multiplier map $W\to\D$ is proper, since the cycle becomes indifferent at $\partial W$, and each bounded hyperbolic component is a cell with a unique centre~\cite{MilnorHC}. So the multiplier map is a branched cover of degree $d-1$, and in degree three there are two points with multiplier $-1$. Both are predicted: at $p=3$, $r=1$ the horn map gives $G=1.196074$ and $1.227092$, against extrapolated bulb values $1.196075$ and $1.227091$.
 
 \begin{table}[t]
 \centering\small
@@ -355,14 +355,15 @@ The computations and the drafting of this paper were carried out with the assist
 \bibitem{DH} A.~Douady and J.~H.~Hubbard, \emph{\'Etude dynamique des polyn\^omes complexes}, Parties I et II, Publications Math\'ematiques d'Orsay 84-02 and 85-04, 1984--1985.
 \bibitem{Ecalle} J.~\'Ecalle, \emph{Les fonctions r\'esurgentes}, Tomes I--III, Publications Math\'ematiques d'Orsay, 1981--1985.
 \bibitem{PSLQ} H.~R.~P.~Ferguson, D.~H.~Bailey and S.~Arno, \emph{Analysis of PSLQ, an integer relation finding algorithm}, Math. Comp. \textbf{68} (1999), 351--369.
+\bibitem{FM} A.~C.~Fowler and M.~J.~McGuinness, \emph{The size of Mandelbrot bulbs}, Chaos Solitons Fractals X \textbf{3} (2019), 100019.
 \bibitem{Ford} L.~R.~Ford, \emph{Fractions}, Amer. Math. Monthly \textbf{45} (1938), 586--601.
 \bibitem{GM} J.~Guckenheimer and R.~McGehee, \emph{A proof of the Mandelbrot $N^2$ conjecture}, Report No.~15, Institut Mittag-Leffler, 1984.
-\bibitem{IS} H.~Inou and M.~Shishikura, \emph{The renormalization for parabolic fixed points and their perturbation}, preprint, 2006.
+\bibitem{IS} H.~Inou and M.~Shishikura, \emph{The renormalization for parabolic fixed points and their perturbation}, submitted; see \url{https://www.math.kyoto-u.ac.jp/~mitsu/pararenorm/}.
 \bibitem{Arb} F.~Johansson, \emph{Arb: efficient arbitrary-precision midpoint-radius interval arithmetic}, IEEE Trans. Comput. \textbf{66} (2017), 1281--1292.
 \bibitem{LY} O.~E.~Lanford III and M.~Yampolsky, \emph{Fixed Point of the Parabolic Renormalization Operator}, SpringerBriefs in Mathematics, Springer, 2014.
 \bibitem{Lavaurs} P.~Lavaurs, \emph{Syst\`emes dynamiques holomorphes: explosion de points p\'eriodiques paraboliques}, Th\`ese, Universit\'e Paris-Sud, Orsay, 1989.
 \bibitem{Milnor} J.~Milnor, \emph{Dynamics in One Complex Variable}, 3rd ed., Annals of Mathematics Studies 160, Princeton University Press, 2006.
-\bibitem{MilnorHC} J.~Milnor, \emph{Hyperbolic components} (with an appendix by A.~Poirier), in: Conformal Dynamics and Hyperbolic Geometry, Contemp. Math. \textbf{573}, Amer. Math. Soc., 2012.
+\bibitem{MilnorHC} J.~Milnor, \emph{Hyperbolic components} (with an appendix by A.~Poirier), in: Conformal Dynamics and Hyperbolic Geometry, Contemp. Math. \textbf{573}, Amer. Math. Soc., 2012, 183--232.
 \bibitem{mpmath} The mpmath development team, \emph{mpmath: a Python library for arbitrary-precision floating-point arithmetic}, \url{https://mpmath.org}.
 \bibitem{repo} \emph{mandelbrot-bulbs-and-ford-circles-research}, code and data repository accompanying this paper (research register \texttt{RESEARCH\_bulb-ford-correction.md}).
 \bibitem{Sh} M.~Shishikura, \emph{Bifurcation of parabolic fixed points}, in: The Mandelbrot Set, Theme and Variations (Tan Lei, ed.), London Math. Soc. Lecture Note Ser. 274, Cambridge Univ. Press, 2000, 325--363.
