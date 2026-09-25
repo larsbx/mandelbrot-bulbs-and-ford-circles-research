@@ -1,0 +1,1 @@
+# mandelbrot-bulbs-and-ford-circles-research
