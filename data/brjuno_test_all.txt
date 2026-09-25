@@ -1,0 +1,18 @@
+q=59: corr(log|a|/q, B_fin(p/q)/q) = 0.9324;  corr with B_fin(x̃)/q = 0.7447;  corr with x*: -0.2519
+  fit log|a|/q = 0.3430 + 24.6649·B_fin(p/q)/q ; rms resid 0.0961 (sd of L 0.2660)
+  fit with both: 0.2463 + 20.2275·B(p/q)/q + 7.1557·B(x̃)/q ; rms resid 0.0778
+Traceback (most recent call last):
+  File "/home/user/mandelbrot-bulbs-and-ford-circles-research/scripts/brjuno_test.py", line 25, in <module>
+    print(f"    p={r['p']:>3} x*={abs(r['xt']):.4f}  log|a|/q={l:.4f}  B(p/q)={b:.3f}  B(x̃)={bx:.3f}")
+BrokenPipeError: [Errno 32] Broken pipe
+q=127: corr(log|a|/q, B_fin(p/q)/q) = 0.9304;  corr with B_fin(x̃)/q = 0.6458;  corr with x*: -0.1800
+  fit log|a|/q = 0.2735 + 59.7027·B_fin(p/q)/q ; rms resid 0.1232 (sd of L 0.3363)
+  fit with both: 0.1862 + 53.1742·B(p/q)/q + 11.6545·B(x̃)/q ; rms resid 0.1124
+Traceback (most recent call last):
+  File "/home/user/mandelbrot-bulbs-and-ford-circles-research/scripts/brjuno_test.py", line 25, in <module>
+    print(f"    p={r['p']:>3} x*={abs(r['xt']):.4f}  log|a|/q={l:.4f}  B(p/q)={b:.3f}  B(x̃)={bx:.3f}")
+BrokenPipeError: [Errno 32] Broken pipe
+q=251: corr(log|a|/q, B_fin(p/q)/q) = 0.9322;  corr with B_fin(x̃)/q = 0.5467;  corr with x*: -0.1319
+  fit log|a|/q = 0.2208 + 126.6959·B_fin(p/q)/q ; rms resid 0.1383 (sd of L 0.3821)
+  fit with both: 0.1213 + 117.1731·B(p/q)/q + 20.8896·B(x̃)/q ; rms resid 0.1280
+DONE
