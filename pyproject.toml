@@ -1,0 +1,9 @@
+[project]
+name = "bulbford"
+version = "0.1.0"
+description = "Satellite-bulb geometry of unicritical families vs Ford circles"
+requires-python = ">=3.11"
+dependencies = ["numpy", "python-flint", "sympy", "pytest"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
