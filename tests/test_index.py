@@ -1,3 +1,7 @@
+import json
+from fractions import Fraction as F
+from pathlib import Path
+
 import numpy as np
 import pytest
 from bulbford.index import index, index_complex, kappa
@@ -7,6 +11,18 @@ from bulbford.taylor import taylor
 def test_index_q1_q2_exact():
     assert abs(index_complex(1, 1) - 0.0) < 1e-20          # z+z²: no z³ term
     assert abs(index_complex(1, 2) - 0.125) < 1e-20        # z−2z³+z⁴ → 1/8
+
+
+def test_pinned_exact_low_q_vectors_agree_with_ball_oracle():
+    path = Path(__file__).resolve().parents[1] / "data" / "parabolic_index_exact_vectors.json"
+    payload = json.loads(path.read_text())
+    assert payload["schema"] == "bulbford-parabolic-index-exact/v1"
+    for row in payload["vectors"]:
+        expected = complex(
+            float(F(row["re_num"], row["re_den"])),
+            float(F(row["im_num"], row["im_den"])),
+        )
+        assert abs(index_complex(row["p"], row["q"]) - expected) < 1e-12
 
 
 def test_index_symmetry():
