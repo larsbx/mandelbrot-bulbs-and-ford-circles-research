@@ -33,7 +33,7 @@ for q in (64, 256, 1024, 4096, 8192, 16384, 32768):
     lines.append(f"{q} & ${cplx(k, 16)}$ & {sci_tex(e)} \\\\")
 fit = power_fit([(q, k) for q, k in rows.items() if q >= 256], 10)   # 13 points, residual 3.6e-29 (Numerical result 4.1)
 lines += [r"\midrule", f"fit, $q\\to\\infty$ & ${cplx(fit[0], 16)}$ & \\\\",
-          f"horn map, Thm.~\\ref{{thm:horn-index}} & ${cplx(K0, 16)}$ & \\\\", r"\bottomrule", r"\end{tabular}"]
+          f"horn map, Num.~res.~\\ref{{obs:identity}} & ${cplx(K0, 16)}$ & \\\\", r"\bottomrule", r"\end{tabular}"]
 write("kappa_1q", "\n".join(lines) + "\n")
 
 # Table 2: bounded-p limits of κ
@@ -59,7 +59,7 @@ lines += [r"\bottomrule", r"\end{tabular}"]
 write("bounded_p_G", "\n".join(lines) + "\n")
 
 # Table 4: degree 3
-lines = [r"\begin{tabular}{@{}rll@{}}", r"\toprule", r"$q$ & $\kappa_3(1/q)$ & $|\kappa_3(1/q)+\tfrac{i}{2\pi q}-\kappa_0^{(3)}|$ \\", r"\midrule"]
+lines = [r"\begin{tabular}{@{}rll@{}}", r"\toprule", r"$q$ & $\kappa^{(3)}(1/q)$ & $|\kappa^{(3)}(1/q)+\tfrac{i}{2\pi q}-\kappa_0^{(3)}|$ \\", r"\midrule"]
 for q in (128, 256, 512, 1024):
     t = taylor(1, q, MAIN3, r=1.0, N=64); k = mp.mpc(t.coeffs[2])
     assert abs(t.coeffs[1] + 1) < 1e-8
@@ -101,7 +101,7 @@ G0 = G_limit(1, 1)
 rows = [(r"$\kappa_0$", r"$z+z^2$", cplx(K0, 16), r"$3\cdot10^{-28}$", r"\S\ref{sec:horn}"),
         (r"$\kappa_0^{(3)}$", r"$v+v^2+\frac13v^3$", cplx(K3, 16), r"$1.3\cdot10^{-6}$ ($q=1024$)", r"\S\ref{sec:degree3}"),
         (r"$\kappa_{1/2}$", r"$-z+z^2$", cplx(khalf, 16), r"$3\cdot10^{-10}$", r"\S\ref{sec:component}"),
-        (r"$\kappa_*$", r"$G_*=\mathcal P(\bar G_*)$", cplx(kstar, 11), r"levels $\le3$", r"\S\ref{sec:hierarchy}"),
+        (r"$\kappa_*$", r"$\mathcal G_*=\mathcal P(\bar{\mathcal G}_*)$", cplx(kstar, 11), r"levels $\le3$", r"\S\ref{sec:hierarchy}"),
         (r"$G_0$", r"$e^{u}\mathcal P_0$", f"{G0:.8f}", r"$4\cdot10^{-8}$", r"\S\ref{sec:unfolding}")]
 lines = [r"\begin{tabular}{@{}lllll@{}}", r"\toprule", r"constant & germ & value & bulbs & \\", r"\midrule"]
 lines += [f"{a} & {b} & ${c}$ & {d} & {e} \\\\" for a, b, c, d, e in rows]

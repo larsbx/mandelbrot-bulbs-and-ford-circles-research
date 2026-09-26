@@ -36,7 +36,7 @@ e3 = np.array([8.5e-5, 2.1e-5, 5.3e-6, 1.3e-6])      # data/main3_p1.txt (|κ₃
 fig, ax = plt.subplots(figsize=(4.8, 3.2)); style(ax)
 ax.loglog(q, raw, "-o", color=BLUE, lw=2, ms=4.5, mec="white", mew=1.0, label=r"$|\kappa(1/q)-\kappa_0|$")
 ax.loglog(q, cor, "-s", color=ORANGE, lw=2, ms=4.5, mec="white", mew=1.0, label=r"$|\kappa(1/q)+\frac{i}{2\pi q}-\kappa_0|$")
-ax.loglog(q3, e3, "-^", color=AQUA, lw=2, ms=5, mec="white", mew=1.0, label=r"degree 3: $|\kappa_3(1/q)+\frac{i}{2\pi q}-\kappa_0^{(3)}|$")
+ax.loglog(q3, e3, "-^", color=AQUA, lw=2, ms=5, mec="white", mew=1.0, label=r"degree 3: $|\kappa^{(3)}(1/q)+\frac{i}{2\pi q}-\kappa_0^{(3)}|$")
 for x0, y0, sl, lab in ((64, raw[0] * 1.9, -1, r"$\propto q^{-1}$"), (64, cor[0] * 0.28, -2, r"$\propto q^{-2}$")):
     xs = np.array([x0, 32768]); ax.loglog(xs, y0 * (xs / x0) ** sl, color=MUTED, lw=0.6)
     xl = 900 if sl == -1 else 3000
@@ -103,8 +103,8 @@ save(fig, "kinematic")
 # Figure 4: the two hierarchies (conjugated: bulbs; holomorphic: Lanford–Yampolsky)
 seq = lambda f: [mp.mpc(*l.split("\t")[1:3]) for l in open(f) if l.strip()]
 fig, ax = plt.subplots(figsize=(4.8, 3.0)); style(ax)
-for f, col, mk, lab in (("data/levels_h100.tsv", BLUE, "o", r"$G\mapsto\mathcal{P}(\bar G)$ (bulbs)"),
-                        ("data/levels_holo100.tsv", ORANGE, "s", r"$G\mapsto\mathcal{P}(G)$")):
+for f, col, mk, lab in (("data/levels_h100.tsv", BLUE, "o", r"$\mathcal{G}\mapsto\mathcal{P}(\bar{\mathcal{G}})$ (bulbs)"),
+                        ("data/levels_holo100.tsv", ORANGE, "s", r"$\mathcal{G}\mapsto\mathcal{P}(\mathcal{G})$")):
     x = seq(f); dk = [float(abs(b - a)) for a, b in zip(x, x[1:])]; ks = np.arange(2, len(x) + 1)
     ax.semilogy(ks, dk, "-", marker=mk, color=col, lw=2, ms=5, mec="white", mew=1.0, label=lab)
     ax.text(ks[-1] + 0.15, dk[-1], f"ratio {dk[-1] / dk[-2]:.4f}", color=INK, fontsize=7.5, va="center")
