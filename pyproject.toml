@@ -7,3 +7,4 @@ dependencies = ["numpy", "python-flint", "sympy", "pytest", "numba", "gmpy2"]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
+testpaths = ["tests"]
