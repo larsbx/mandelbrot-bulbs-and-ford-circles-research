@@ -309,6 +309,10 @@ The differences $\Delta_k=\kappa_k-\kappa_{k-1}$ decrease geometrically, $|\Delt
 with the fits through levels $6$ and $7$ differing by less than $2\cdot10^{-12}$. Thus $\kappa_*+\frac12$ is the cubic coefficient of the normalized fixed point $G_*=\mathcal P(\bar G_*)$.
 \end{observation}
 
+\begin{remark}\label{rem:LY}
+Without the conjugation, $G\mapsto\mathcal P(G)$ is the parabolic renormalization operator of Inou--Shishikura, whose fixed point $f_*$ was computed by Lanford and Yampolsky~\cite{LY}: $f_*(z)\approx z+z^2+(0.514-0.0346\,i)z^3$, with leading eigenvalue $\approx-0.017+0.040\,i$ of $D\mathcal P$ at $f_*$. Running our code without conjugation reproduces both: the cubic coefficients converge to $0.5142768-0.0346276\,i$ (extrapolated, $\pm10^{-7}$), with ratio of successive differences $\to-0.01764+0.04038\,i$. The bulbs, however, select the fixed point $G_*\ne f_*$ of the conjugated operator, whose cubic coefficient is $\kappa_*+\frac12=0.5119292-0.0374555\,i$.
+\end{remark}
+
 \begin{conjecture}\label{conj:hierarchy}
 For every $k\ge1$,
 \[
@@ -397,7 +401,7 @@ The computations and the drafting of this paper were carried out with the assist
 \bibitem{GM} J.~Guckenheimer and R.~McGehee, \emph{A proof of the Mandelbrot $N^2$ conjecture}, Report No.~15, Institut Mittag-Leffler, 1984.
 \bibitem{IS} H.~Inou and M.~Shishikura, \emph{The renormalization for parabolic fixed points and their perturbation}, submitted; see \url{https://www.math.kyoto-u.ac.jp/~mitsu/pararenorm/}.
 \bibitem{Arb} F.~Johansson, \emph{Arb: efficient arbitrary-precision midpoint-radius interval arithmetic}, IEEE Trans. Comput. \textbf{66} (2017), 1281--1292.
-\bibitem{LY} O.~E.~Lanford III and M.~Yampolsky, \emph{Fixed Point of the Parabolic Renormalization Operator}, SpringerBriefs in Mathematics, Springer, 2014.
+\bibitem{LY} O.~E.~Lanford III and M.~Yampolsky, \emph{Fixed Point of the Parabolic Renormalization Operator}, SpringerBriefs in Mathematics, Springer, 2014; arXiv:1108.2801.
 \bibitem{Lavaurs} P.~Lavaurs, \emph{Syst\`emes dynamiques holomorphes: explosion de points p\'eriodiques paraboliques}, Th\`ese, Universit\'e Paris-Sud, Orsay, 1989.
 \bibitem{Milnor} J.~Milnor, \emph{Dynamics in One Complex Variable}, 3rd ed., Annals of Mathematics Studies 160, Princeton University Press, 2006.
 \bibitem{MilnorHC} J.~Milnor, \emph{Hyperbolic components} (with an appendix by A.~Poirier), in: Conformal Dynamics and Hyperbolic Geometry, Contemp. Math. \textbf{573}, Amer. Math. Soc., 2012, 183--232.

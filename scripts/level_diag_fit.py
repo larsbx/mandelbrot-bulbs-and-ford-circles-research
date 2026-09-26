@@ -1,4 +1,4 @@
-"""Extrapolate data/level_diag.tsv in 1/N and compare with the hierarchy (V44, paper Conjecture 6.2):
+"""Extrapolate data/level_diag.tsv in 1/N and compare with the hierarchy (V44, paper Conjecture 6.3):
 [0; N, N] → conj κ₂ (control, known from V42), [0; N, N, N] → κ₃.  Prints fits for several J and N-windows."""
 import mpmath as mp
 from bulbford.extrapolate import power_fit
