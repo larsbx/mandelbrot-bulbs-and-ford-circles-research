@@ -128,12 +128,17 @@ def _start(Z, n, q, s, th0, Phi, dPhi, tol):
     return z
 
 
+N_ESC = 600                                                   # depth whose radius fixes the escape scale
+
+
 def _land(z, n, q, g, th0, r_n):
     """Index j of the attracting petal reached after 2n steps of g (None if the orbit escapes); r_n = |s_{−q}/n|^{1/q}
-    is the radius at depth n, which sets the scale of the germ."""
+    is the radius at depth n.  The escape radius 1000·r_{N_ESC} is absolute (independent of n): near the escape band
+    the orbits make excursions of fixed size, which a radius shrinking with n would reject (V55)."""
+    r_esc = 1000 * r_n * (mp.mpf(n) / N_ESC) ** (mp.mpf(1) / q)
     for _ in range(2 * n):
         z = g(z)
-        if abs(z) > 1000 * r_n:
+        if abs(z) > r_esc:
             return None, z
     if abs(z) > 4 * r_n:
         return None, z

@@ -1,7 +1,7 @@
 """V50: one-sided limits of κ at rationals.  For p/q = [0; a₁, …, a_n] and a tail t, the cardioid satellites
 [0; a₁, …, a_n, N, t] accumulate at the root of W_{p/q} from above (n even) or below (n odd) as N → ∞.  Prediction: the
-bounded-p limit (6) of the upper (above) or lower (below) parabolic renormalization of e^{2πip/q}z + z², with p, r read
-off the tail (t = ∅: p = r = 1).  Bulbs: normal form in midpoint arithmetic (128 bits), fits of degree 3 and 4 in 1/q.
+bounded-p limit (6) of the upper (above) or lower (below) parabolic renormalization of e^{2πip/q}z + z², with p_t, r_t
+read off the tail ([0; t] = r_t/p_t; t = ∅: r_t = 0, the horn index itself) and phase μ_t above, μ̄_t below (V55).  Bulbs: normal form in midpoint arithmetic (128 bits), fits of degree 3 and 4 in 1/q.
 Writes data/rational_limits.txt."""
 from math import gcd
 import mpmath as mp
@@ -14,7 +14,8 @@ from bulbford.horn_rational import root, horn_index_pq
 mp.mp.dps = 30
 NS = (128, 256, 512, 1024, 2048)
 CASES = [((3,), ()), ((2, 1), ()), ((4,), ()), ((3, 1), ()), ((2, 1, 1), ()), ((2, 2), ()), ((2, 3), ()), ((2, 2, 1), ()),
-         ((2, 1), (2,)), ((3,), (2,)), ((2, 1), (3,))]
+         ((2, 1), (2,)), ((3,), (2,)), ((2, 1), (3,)),
+         ((2,), (3,)), ((3,), (3,)), ((1,), (3,)), ((3,), (1, 2))]                # V55: lower sides, p_t ≥ 3
 
 
 def kappa(p, q):

@@ -13,6 +13,7 @@ mp.mp.dps = 40
 K0 = mp.mpc("0.023825887402200569000729189645402", "-0.052304659114003666316522486207571")
 K3 = mp.mpc("0.143599278095291569488064104088", "-0.0303116478985025376119431108575")
 cplx = lambda z, n: f"{mp.nstr(mp.re(z), n, min_fixed=-9, max_fixed=9, strip_zeros=False)} {'-' if mp.im(z) < 0 else '+'} {mp.nstr(abs(mp.im(z)), n, min_fixed=-9, max_fixed=9, strip_zeros=False)}\\,i"
+cfix = lambda z, d: f"{float(mp.re(z)):.{d}f} {'-' if mp.im(z) < 0 else '+'} {abs(float(mp.im(z))):.{d}f}\\,i"   # fixed decimals
 
 
 def sci_tex(x):
@@ -81,7 +82,7 @@ print("kappa_* =", mp.nstr(kstar, 13), " eigenvalues of the fitted contraction:"
 
 # Table (tab:diskroot): the period-2 disc near its root against the cardioid near its ½-root (C23 (iv), V48)
 z = lambda s: mp.mpc(complex(s.strip("()").replace(" ", "")))
-lines = [r"\begin{tabular}{@{}lllc@{}}", r"\toprule", r"& disc $[0;N,t]$ & cardioid $[0;1,1,N-1,t]$ & $|\Delta|$ \\", r"\midrule"]
+lines = [r"\begin{tabular}{@{}lllc@{}}", r"\toprule", r"& disc $[0;N,\tau]$ & cardioid $[0;1,1,N-1,\tau]$ & $|\Delta|$ \\", r"\midrule"]
 for l in open("data/disk_root.txt"):
     if "J = 3" not in l:
         continue
@@ -89,7 +90,7 @@ for l in open("data/disk_root.txt"):
     qty, tail = head.split(" tail ")
     disk_s, card_s = (part.split(" ", 1)[1] for part in vals.split("  ")[:2])
     fmt = (lambda s: f"${cplx(z(s), 10)}$") if qty == "kappa" else (lambda s: f"${mp.nstr(mp.mpf(s), 10)}$")
-    label = ("$\\kappa$" if qty == "kappa" else "$G$") + ", $t=" + (tail.strip("(,)").replace(",", "") or "\\varnothing") + "$"
+    label = ("$\\kappa$" if qty == "kappa" else "$G$") + ", $\\tau=" + (tail.strip("(,)").replace(",", "") or "\\varnothing") + "$"
     lines.append(f"{label} & {fmt(disk_s)} & {fmt(card_s)} & {sci_tex(float(vals.split('|Δ| ')[1]))} \\\\")
 lines += [r"\bottomrule", r"\end{tabular}"]
 write("diskroot", "\n".join(lines) + "\n")
@@ -100,7 +101,7 @@ khalf = mp.mpc(re_, sign + im_)
 G0 = G_limit(1, 1)
 rows = [(r"$\kappa_0$", r"$z+z^2$", cplx(K0, 16), r"$3\cdot10^{-28}$", r"\S\ref{sec:horn}"),
         (r"$\kappa_0^{(3)}$", r"$v+v^2+\frac13v^3$", cplx(K3, 16), r"$1.3\cdot10^{-6}$ ($q=1024$)", r"\S\ref{sec:degree3}"),
-        (r"$\kappa_{1/2}$", r"$-z+z^2$", cplx(khalf, 16), r"$3\cdot10^{-10}$", r"\S\ref{sec:component}"),
+        (r"$\kappa^+_{1/2}$", r"$-z+z^2$", cplx(khalf, 16), r"$3\cdot10^{-10}$", r"\S\ref{sec:component}"),
         (r"$\kappa_*$", r"$\mathcal G_*=\mathcal P(\bar{\mathcal G}_*)$", cplx(kstar, 11), r"levels $\le3$", r"\S\ref{sec:hierarchy}"),
         (r"$G_0$", r"$e^{u}\mathcal P_0$", f"{G0:.8f}", r"$4\cdot10^{-8}$", r"\S\ref{sec:unfolding}")]
 lines = [r"\begin{tabular}{@{}lllll@{}}", r"\toprule", r"constant & germ & value & bulbs & \\", r"\midrule"]
@@ -109,17 +110,17 @@ lines += [r"\bottomrule", r"\end{tabular}"]
 write("constants", "\n".join(lines) + "\n")
 
 # Table (tab:rational): one-sided limits at the roots of satellites (V50)
-lines = [r"\begin{tabular}{@{}lllllc@{}}", r"\toprule", r"$p/q$ & side & $t$ & horn map of $e^{2\pi ip/q}z+z^2$ & bulbs, extrapolated & $|\Delta|$ \\", r"\midrule"]
+lines = [r"\begin{tabular}{@{}lllllc@{}}", r"\toprule", r"$p/q$ & side & $\tau$ & horn map of $e^{2\pi ip/q}z+z^2$ & bulbs, extrapolated & $|\Delta|$ \\", r"\midrule"]
 for l in open("data/rational_limits.txt"):
     pq, side, tail, pred, bulb, dlt, _ = l.rstrip("\n").split("\t")
-    t = r"$\varnothing$" if tail == "-" else f"${tail}$"
-    lines.append(f"${pq}$ & {side} & {t} & ${cplx(z(pred), 11)}$ & ${cplx(z(bulb), 11)}$ & {sci_tex(float(dlt))} \\\\")
+    t = r"$\varnothing$" if tail == "-" else f"$({tail})$" if "," in tail else f"${tail}$"
+    lines.append(f"${pq}$ & {side} & {t} & ${cfix(z(pred), 12)}$ & ${cfix(z(bulb), 12)}$ & {sci_tex(float(dlt))} \\\\")
 lines += [r"\bottomrule", r"\end{tabular}"]
 write("rational", "\n".join(lines) + "\n")
 
 # Table (tab:period3): satellites of the period-3 component W_{1/3} against the germs at its root (V51)
 names = {"kappa 1/q": (r"$\kappa$, $1/q$", "upper"), "kappa (q-1)/q": (r"$\kappa$, $(q-1)/q$", "lower"),
-         "kappa 2/(2N+1)": (r"$\kappa$, $2/(2N+1)$", "upper, $t=2$"), "G 1/q": (r"$G$, $1/q$", "upper"),
+         "kappa 2/(2N+1)": (r"$\kappa$, $2/(2N+1)$", "upper, $\\tau=2$"), "G 1/q": (r"$G$, $1/q$", "upper"),
          "G (q-1)/q": (r"$G$, $(q-1)/q$", "lower")}
 lines = [r"\begin{tabular}{@{}lllll@{}}", r"\toprule", r"satellites of $W_{1/3}$ & germ & prediction & bulbs, extrapolated & $|\Delta|$ \\", r"\midrule"]
 for l in open("data/period3_root.txt"):

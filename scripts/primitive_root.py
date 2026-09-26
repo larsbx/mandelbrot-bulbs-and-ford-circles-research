@@ -50,25 +50,27 @@ def kappa_primitive(q, dps=60):
         return (normal_form_index(g, q) - mp.mpf(1) / 2) / q
 
 
-def cusp_constant(dps=50):
+def cusp_constant(dps=50, h=0.25):
     with mp.workdps(dps):
         c = mp.mpf(-7) / 4
         z = mp.findroot(lambda z: iterate_series(c, z, 1)[1] - 1, mp.mpf("-0.03"))
         S = iterate_series(c, z, 8)
         germ = tuple(mp.mpc(S[k] / S[2] ** (k - 1)) for k in range(2, 9))
-        a, _ = horn_coeffs(2, h=0.25, dps=dps, germ=germ)
+        a, _ = horn_coeffs(2, h=h, dps=dps, germ=germ)
         return germ, a[2] / (2j * mp.pi * a[1] ** 2)
 
 
 if __name__ == "__main__":
     mp.mp.dps = 40
     germ, K = cusp_constant()
+    K2 = cusp_constant(h=0.35)[1]
     with open("data/primitive_root.txt", "w") as out:
         def emit(s):
             out.write(s + "\n"); out.flush(); print(s, flush=True)
-        emit(f"cusp germ at c = -7/4: g3 = {mp.nstr(mp.re(germ[1]), 15)} (= -2/49?), horn kappa = {mp.nstr(K, 16)}")
+        emit(f"cusp germ at c = -7/4: g3 = {mp.nstr(mp.re(germ[1]), 15)} (= -2/49?), horn kappa = {mp.nstr(K, 16)} (h = 0.25), "
+             f"{mp.nstr(K2, 16)} (h = 0.35), difference {mp.nstr(abs(K - K2), 2)}")
         rows = []
-        for q in map(int, sys.argv[1:] or (32, 48, 64, 96, 128, 192)):
+        for q in map(int, sys.argv[1:] or (32, 48, 64, 96, 128, 192, 256, 384, 512)):
             t = time.time()
             k = kappa_primitive(q)
             rows.append((q, k))

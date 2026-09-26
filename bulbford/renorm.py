@@ -17,25 +17,32 @@ def _coeffs(M: int, dps: int, germ: tuple = QUADRATIC):
     return horn_coeffs(M, h=0.25, N=64, dps=dps, germ=germ)[0]
 
 
+def _mu(p: int, r: int, germ: tuple, dps: int = 30):
+    """μ_t = e^{−2πir/p} for an upper germ; μ̄_t for a lower root germ, since κ(1 − x) = conj κ(x) exchanges the sides,
+    fixes the tail and conjugates the germ (𝒫⁻_{p/q} = conj 𝒫⁺_{(q−p)/q}) (V55)."""
+    with mp.workdps(dps):
+        return mp.expjpi((2 if germ[0] == "root" and not germ[3] else -2) * mp.mpf(r) / p)
+
+
 def bounded_p_limit(p: int, r: int, dps: int = 40, M: int = 14, germ: tuple = QUADRATIC):
     """Predicted lim κ(p/(pN + r)) as N → ∞."""
     with mp.workdps(dps):
-        G = horn_germ(_coeffs(M, dps, germ), 2 * p + 1, mp.expjpi(-2 * mp.mpf(r) / p))
+        G = horn_germ(_coeffs(M, dps, germ), 2 * p + 1, _mu(p, r, germ, dps))
         return (iterate_index(G, p)[0] - mp.mpf(1) / 2) / p
 
 
 def unfolding(p: int, r: int, M: int = 20, dps: int = 60, germ: tuple = QUADRATIC):
-    """C23 unfolding M_u(W) = μ e^{u/p²} 𝒫₀(W), μ = e^{−2πir/p} (numpy, double precision).
+    """C23 unfolding M_u(W) = μ e^{u/p²} 𝒫₀(W), μ = e^{−2πir/p} (μ̄ for a lower root germ; numpy, double precision).
     Returns (cycle, seed): cycle(u, W) → (W', ρ) refines a point of the p-cycle bifurcating from 0 and returns its
     multiplier; seed(u) is its leading-order position W^p = −u/(p·A_p), A_p = [W^{p+1}]((μ𝒫₀)^p)."""
     import numpy as np
     a = np.array([complex(x) for x in _coeffs(M, dps, germ)])   # dps 60: a_n noise·|W|^n < 1e-16 for |W| ≲ 10, n ≤ 20
     n = np.arange(1, M + 1)
-    mu = np.exp(-2j * np.pi * r / p)
+    mu = complex(_mu(p, r, germ))
     P = lambda W: W * np.exp(2j * np.pi * np.sum(a[1:] * W ** n))
     dP = lambda W: np.exp(2j * np.pi * np.sum(a[1:] * W ** n)) * (1 + 2j * np.pi * np.sum(n * a[1:] * W ** n))
     with mp.workdps(30):
-        G = horn_germ(_coeffs(M, dps, germ), p + 1, mp.expjpi(-2 * mp.mpf(r) / p))
+        G = horn_germ(_coeffs(M, dps, germ), p + 1, _mu(p, r, germ))
         Gp = [mp.mpc(0), mp.mpc(1)] + [mp.mpc(0)] * p
         for _ in range(p):
             Gp = compose(G, Gp, p + 1)

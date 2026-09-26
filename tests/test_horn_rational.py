@@ -37,3 +37,23 @@ def test_polynomial_germ_spec_matches_quadratic():
         assert abs(horn_index_pq(1, 3, dps=20, poly=spec) - horn_index_pq(1, 3, dps=20)) < 1e-15
         c = -1 + mp.expjpi(mp.mpf(2) / 3) / 4
         assert abs(_poly_coeffs(1, 3, two_cycle_germ(c))[0] - 4 * (c + 1)) < 1e-30
+
+
+def test_lower_tail_uses_conjugate_phase():
+    """V55 (referee A1): along [0;2,N,3] → ½⁻ the tail phase is μ̄_t, not μ_t.  1 − [0;2,N,3] = [0;1,1,N,3] → ½⁺, so
+    the lower prediction is the conjugate of the upper one; the bulbs give κ([0;2,256,3]) = 0.0534760 + 0.0026281i
+    (q = 1541, O(1/q) away from the limit), the rule with μ_t would give 0.0537821 + 0.0209937i."""
+    from bulbford.renorm import bounded_p_limit
+    from bulbford.horn_rational import root
+    lo, up = (complex(bounded_p_limit(3, 1, dps=60, M=20, germ=root(1, 2, u))) for u in (False, True))
+    assert abs(lo - up.conjugate()) < 1e-12
+    assert abs(lo - (0.0533070 + 0.0026060j)) < 1e-7
+
+
+def test_deep_lower_cusp_germ_is_conjugate_of_cusp():
+    """V55: at n = 3000 the lower map of z + z² (as the root 1/1) needs an escape radius independent of the depth; it
+    then gives the conjugate of the cusp prediction for the tail 3 (1 − [0;1,N,3] = [0;N+1,3])."""
+    from bulbford.renorm import bounded_p_limit
+    from bulbford.horn_rational import root
+    lo = complex(bounded_p_limit(3, 1, dps=60, M=20, germ=root(1, 1, False)))
+    assert abs(lo - complex(bounded_p_limit(3, 1, dps=60, M=20)).conjugate()) < 1e-15
