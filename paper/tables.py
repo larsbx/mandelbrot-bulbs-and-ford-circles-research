@@ -128,3 +128,13 @@ for l in open("data/period3_root.txt"):
     lines.append(f"{names[lab][0]} & {names[lab][1]} & {fmt(pred)} & {fmt(bulb)} & {sci_tex(float(dlt))} \\\\")
 lines += [r"\bottomrule", r"\end{tabular}"]
 write("period3", "\n".join(lines) + "\n")
+
+# Table (tab:deeproot): the disc's 1/3-root, a three-petal root of the first return map f² (V53)
+lines = [r"\begin{tabular}{@{}lllll@{}}", r"\toprule", r"satellites & germ & prediction & bulbs, extrapolated & $|\Delta|$ \\", r"\midrule"]
+labels = {"disc [0;2,1,N]": r"$W_{1/2}$, $[0;2,1,N]$", "disc [0;3,N]": r"$W_{1/2}$, $[0;3,N]$",
+          "period-6 1/q": r"period $6$, $1/q$", "period-6 (q-1)/q": r"period $6$, $(q-1)/q$"}
+for l in open("data/deep_root.txt"):
+    lab, germ_side, pred, bulb, dlt, _ = l.rstrip("\n").split("\t")
+    lines.append(f"{labels[lab]} & {germ_side} & ${cplx(z(pred), 10)}$ & ${cplx(z(bulb), 10)}$ & {sci_tex(float(dlt))} \\\\")
+lines += [r"\bottomrule", r"\end{tabular}"]
+write("deeproot", "\n".join(lines) + "\n")

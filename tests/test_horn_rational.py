@@ -27,3 +27,13 @@ def test_one_sided_limits_at_one_third(upper, bulbs):
     """V50: the upper/lower horn index of e^{2πi/3}z + z² equals the limit of κ along [0;2,1,N] (from above) /
     [0;3,N] (from below), N → ∞ (bulb fits of degree 4, N ≤ 2048); the two sides are not conjugate."""
     assert abs(complex(horn_index_pq(1, 3, upper=upper, dps=30)) - bulbs) < 1e-9
+
+
+def test_polynomial_germ_spec_matches_quadratic():
+    """poly_germ([λ₀, 1]) is the same germ as the default e^{2πi/3}z + z²; two_cycle_germ has multiplier 4(c+1)."""
+    from bulbford.horn_rational import poly_germ, two_cycle_germ, _poly_coeffs
+    with mp.workdps(40):
+        spec = poly_germ([mp.expjpi(mp.mpf(2) / 3), mp.mpc(1)])
+        assert abs(horn_index_pq(1, 3, dps=20, poly=spec) - horn_index_pq(1, 3, dps=20)) < 1e-15
+        c = -1 + mp.expjpi(mp.mpf(2) / 3) / 4
+        assert abs(_poly_coeffs(1, 3, two_cycle_germ(c))[0] - 4 * (c + 1)) < 1e-30
