@@ -18,6 +18,7 @@
 \newcommand{\D}{\mathbb{D}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
 \newcommand{\PP}{\mathcal{P}_0}
 \newcommand{\Res}{\operatorname*{Res}}
 \newcommand{\resit}{\operatorname{r\acute{e}sit}}
@@ -67,7 +68,7 @@ The component $W_{p/q}$ is, up to the conformal change $u\mapsto c(\lambda_0e^{u
 \operatorname{Re}\kappa_0&=\phantom{-}0.023825887402200569000729189645402\ldots,\\
 \operatorname{Im}\kappa_0&=-0.052304659114003666316522486207571\ldots .
 \end{align*}
-\item \emph{Renormalization} (Section~\ref{sec:renorm}). The identification is one instance of a broader picture in which the rotation quotient $\Phi_{p/q}$ is a near-parabolic renormalization of $f_{p/q}$. This picture predicts, with no free parameters, the limits of $\kappa(p/q)$ and of the bulb size along every sequence of bounded $p$, and the analogous constants for $z^3+c$. The predicted values of $\kappa$ agree with the bulb data to $10^{-8}$ in degree two and $5\cdot10^{-6}$ in degree three, and the predicted bulb sizes to $9\cdot10^{-7}$.
+\item \emph{Renormalization} (Section~\ref{sec:renorm}). The identification is one instance of a broader picture in which the rotation quotient $\Phi_{p/q}$ is a near-parabolic renormalization of $f_{p/q}$. This picture predicts, with no free parameters, the limits of $\kappa(p/q)$ and of the bulb size along every sequence of bounded $p$, and the analogous constants for $z^3+c$. The predicted values of $\kappa$ agree with the bulb data to $10^{-8}$ in degree two and $5\cdot10^{-6}$ in degree three, and the predicted bulb sizes to $9\cdot10^{-7}$. Iterating the construction along continued fractions with large partial quotients gives a hierarchy $\kappa_0=\kappa_1,\kappa_2,\ldots$ that contracts by a factor $0.042$ per level towards a second constant $\kappa_*=0.011929183413-0.037455493752\,i$; the second level is confirmed on bulbs to $10^{-8}$.
 \end{enumerate}
 
 Items (1) and (2) are theorems. Items (3)--(5) are numerical results, obtained with rigorous or cross-validated arithmetic and stated with their error estimates. We do not prove the identity $\kappa_0=\iota(\PP)-\frac12$; Section~\ref{sec:renorm} explains why we expect a proof along the lines of the Inou--Shishikura theory of near-parabolic renormalization~\cite{IS}.
@@ -283,6 +284,41 @@ For $p=1$ the Taylor coefficients of $\rho_{1,1}$ at $u=0$ agree with those of $
 \caption{Bulb size $G$ (Definition~\ref{def:G}) along $q=pN+r$, extrapolated from $N=512,1024,2048$, against the prediction from $M_u=\mu e^{u/p^2}\PP$. The first row gives $G_0=\lim G(1/q)$.}\label{tab:G}
 \end{table}
 
+\subsection{The hierarchy}\label{sec:hierarchy}
+For $\alpha=[0;a_1,a_2,\ldots]$ the renormalization $\mathcal Rf_\alpha$ has multiplier $e^{-2\pi i/\alpha}$. Conjugating by $z\mapsto\bar z$ turns its rotation number into $1/\alpha\bmod1=[0;a_2,a_3,\ldots]$, so that $\mathcal R$ acts on continued fractions as the Gauss map~\cite{IS}. When the first $k$ partial quotients tend to infinity, the picture therefore predicts that each renormalization is close to $\PP$ applied to the complex conjugate of the previous one. Write $\bar G(W)=\overline{G(\bar W)}$, normalize germs to the form $v+v^2+O(v^3)$, and set
+\[
+G_1=\PP,\qquad G_{k+1}=\mathcal P(\bar G_k),\qquad \kappa_k=\iota(G_k)-\tfrac12 ,
+\]
+where $\mathcal P$ denotes the upper-horn-map construction of Section~\ref{sec:horn} applied to an arbitrary parabolic germ, so that $\kappa_k=a_2/(2\pi ia_1^2)$ for the horn map of $\bar G_{k-1}$.
+
+The case $k=2$ can be tested against bulbs. By \eqref{eq:boundedp} with $r=1$, the limit of $\kappa\bigl([0;N,p]\bigr)$ as $N\to\infty$ is an index of $(e^{-2\pi i/p}\PP)^p$. We compute this index for $p\le256$ with the normal form of Theorem~\ref{thm:nf} generalized to arbitrary germs (an $O(p^3)$ recursion) and extrapolate in $1/p$. The result, $0.0112359330+0.0377814233\,i$, equals $\overline{\kappa_2}$ to $1.2\cdot10^{-8}$. The conjugate appears because $p^{-1}\bmod q\to0^-$ along this sequence, against $0^+$ for $p=1$. Without the conjugation in the definition of $G_2$ one obtains $0.014770-0.033911\,i$, which is excluded by the data.
+
+For $k\ge3$ the germs $G_k$ are given by convergent series with small radius (about $2.6$ in the normalized coordinate $v$ at $k=2$), and the horn maps must be sampled at heights where the orbits stay well inside the disc. Table~\ref{tab:levels} lists $\kappa_1,\ldots,\kappa_7$ for two independent settings of height, Fourier truncation and precision. They agree to $2\cdot10^{-14}$ or better at every level.
+
+\begin{table}[t]
+\centering\footnotesize
+\input{tables/levels.tex}
+\caption{The hierarchy $\kappa_k=\iota(G_k)-\frac12$, $G_{k+1}=\mathcal P(\bar G_k)$, computed at heights $h=1$ ($16$ Fourier modes, $90$ digits) and $h=\frac54$ ($14$ modes, $100$ digits). Level $1$ is $\kappa_0$ and is common to both. The last row is the real-linear extrapolation described in Numerical result~\ref{obs:kstar}.}\label{tab:levels}
+\end{table}
+
+\begin{observation}\label{obs:kstar}
+The differences $\Delta_k=\kappa_k-\kappa_{k-1}$ decrease geometrically, $|\Delta_{k+1}/\Delta_k|\to0.0419$, with ratios $\Delta_{k+1}/\Delta_k\approx-0.01546\mp0.03894\,i$ alternating in sign of the imaginary part. This is the signature of an antilinear contraction $\Delta\mapsto\nu\bar\Delta$, the linearization of $G\mapsto\mathcal P(\bar G)$ being antilinear. Fitting $\Delta_{k+1}=M\Delta_k$ with $M$ real-linear on $\C\cong\R^2$ gives eigenvalues $\pm0.041899$ and the limit
+\[
+\kappa_*:=\lim_{k\to\infty}\kappa_k=0.011929183413-0.037455493752\,i,
+\]
+with the fits through levels $6$ and $7$ differing by less than $2\cdot10^{-12}$. Thus $\kappa_*+\frac12$ is the cubic coefficient of the normalized fixed point $G_*=\mathcal P(\bar G_*)$.
+\end{observation}
+
+\begin{conjecture}\label{conj:hierarchy}
+For every $k\ge1$,
+\[
+\lim_{N_k\to\infty}\cdots\lim_{N_1\to\infty}\kappa\bigl([0;N_1,\ldots,N_k]\bigr)=\begin{cases}\kappa_k,&k\text{ odd},\\ \overline{\kappa_k},&k\text{ even}.\end{cases}
+\]
+In particular $\kappa_*$ and $\overline{\kappa_*}$ are the values of the first correction when all partial quotients of $p/q$ are large.
+\end{conjecture}
+
+The cases $k=1,2$ are Numerical results~\ref{obs:identity} and the paragraph above. For $k\ge3$ a direct test would need bulbs of period $q\gtrsim N^3$ with $N$ large enough for the $O(1/N)$ corrections to be small; with the $O(q^2)$ normal form this is within reach for $N\approx20$, but the extrapolations become delicate, and we leave it open.
+
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.52\textwidth]{figures/kappa_cloud.pdf}
@@ -319,13 +355,14 @@ We searched with PSLQ~\cite{PSLQ}, at 30 digits and coefficient bound $1000$, fo
 
 \section{Discussion}
 
-The first-order theory of satellite bulbs is the Ford-circle picture, with radii $q^{-2}$ and Farey tangencies. The first correction, $\kappa(p/q)$, is the holomorphic index of a parabolic germ (Theorem~\ref{thm:index}) and equals the index of the rotation quotient minus $\frac12$ (Corollary~\ref{cor:quotient}). Numerically, it is controlled by near-parabolic renormalization. The constant $\kappa_0$ is the value at the fixed point of the simplest instance, $\alpha=1/q\to0$. Bounded $p$ corresponds to one renormalization step with phase $e^{-2\pi i r/p}$. General $p/q$ should correspond to iterating renormalization along the continued fraction of $p/q$. Hyperbolicity of $\mathcal R$ would then explain why $\kappa(p/q)$ depends mainly on the last partial quotients, that is on $p^{-1}\bmod q$~\cite{repo}.
+The first-order theory of satellite bulbs is the Ford-circle picture, with radii $q^{-2}$ and Farey tangencies. The first correction, $\kappa(p/q)$, is the holomorphic index of a parabolic germ (Theorem~\ref{thm:index}) and equals the index of the rotation quotient minus $\frac12$ (Corollary~\ref{cor:quotient}). Numerically, it is controlled by near-parabolic renormalization. The constant $\kappa_0$ is the value at the fixed point of the simplest instance, $\alpha=1/q\to0$. Bounded $p$ corresponds to one renormalization step with phase $e^{-2\pi i r/p}$. General $p/q$ should correspond to iterating renormalization along the continued fraction of $p/q$; Section~\ref{sec:hierarchy} carries this out when all partial quotients are large, where the iteration contracts by a factor $0.042$ per step. Hyperbolicity of $\mathcal R$ would then explain why $\kappa(p/q)$ depends mainly on the last partial quotients, that is on $p^{-1}\bmod q$~\cite{repo}.
 
 \subsection*{Open problems}
 \begin{enumerate}
 \item Prove Conjecture~\ref{conj:main}, for instance by establishing a conformal conjugacy between $\Phi_{1/q}$ and $\mathcal Rf_{1/q}$ together with continuity of $\mathcal R$ at integer $1/\alpha$.
 \item Derive the universal first-order term $-i/(2\pi pq)$, observed for $p\le5$ and in two families.
-\item Compute the generic limit function $\kappa(p/q)$, $p\to\infty$, by iterated renormalization, including its values at quadratic irrationals as periodic points of $\mathcal R$.
+\item Test Conjecture~\ref{conj:hierarchy} on bulbs at level $k\ge3$, and identify the fixed point $G_*$ of $G\mapsto\mathcal P(\bar G)$ and its spectrum.
+\item Compute the generic limit function $\kappa(p/q)$, $p\to\infty$, by iterated renormalization with bounded partial quotients, including its values at quadratic irrationals as periodic points of $\mathcal R$.
 \item Decide whether $\kappa_0$ can be expressed through Écalle--Voronin invariants of $z+z^2$ in closed form.
 \end{enumerate}
 

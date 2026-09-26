@@ -3,7 +3,7 @@ PYTHONPATH=. python3 paper/tables.py).  Every number in a table is computed here
 from collections import defaultdict
 from math import gcd, pi
 import mpmath as mp
-from bulbford.extrapolate import power_fit
+from bulbford.extrapolate import power_fit, linear_limit
 from bulbford.renorm import bounded_p_limit, G_limits
 from bulbford.horn import CUBIC
 from bulbford.dynamics import MAIN3
@@ -66,3 +66,15 @@ for q in (128, 256, 512, 1024):
     lines.append(f"{q} & ${cplx(k, 10)}$ & {sci_tex(abs(k + 1j / (2 * mp.pi * q) - K3))} \\\\")
 lines += [r"\midrule", f"horn map of $v+v^2+\\tfrac13v^3$ & ${cplx(K3, 10)}$ & \\\\", r"\bottomrule", r"\end{tabular}"]
 write("degree3", "\n".join(lines) + "\n")
+
+# Table 4 (tab:levels): the renormalization hierarchy κ_k = ι((𝒫∘conj)^{k−1} 𝒫₀) − ½, two independent sampling settings
+lv = {h: [mp.mpc(*l.split("\t")[1:3]) for l in open(f"data/levels_{h}.tsv") if l.strip()] for h in ("h100", "h125")}
+x = lv["h100"]
+lines = [r"\begin{tabular}{@{}cllc@{}}", r"\toprule", r"$k$ & $\kappa_k$ ($h=1$) & $|\kappa_k-\kappa_{k-1}|$ & $|\kappa_k^{(h=1)}-\kappa_k^{(h=5/4)}|$ \\", r"\midrule"]
+for k, (a, b) in enumerate(zip(lv["h100"], lv["h125"]), 1):
+    dk = sci_tex(abs(a - x[k - 2])) if k > 1 else ""
+    lines.append(f"{k} & ${cplx(a, 12)}$ & {dk} & {sci_tex(abs(a - b)) if k > 1 else '---'} \\\\")
+kstar, ev = linear_limit(x)
+lines += [r"\midrule", f"$\\infty$ & ${cplx(kstar, 11)}$ & & \\\\", r"\bottomrule", r"\end{tabular}"]
+write("levels", "\n".join(lines) + "\n")
+print("kappa_* =", mp.nstr(kstar, 13), " eigenvalues of the fitted contraction:", [mp.nstr(e, 6) for e in ev])
