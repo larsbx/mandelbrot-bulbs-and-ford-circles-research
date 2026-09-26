@@ -1,0 +1,81 @@
+version = 1
+template = "estate-repository-v1"
+
+[repository]
+id = "larsbx/mandelbrot-bulbs-and-ford-circles-research"
+kind = "research"
+lifecycle = "active"
+default_branch = "main"
+layout_status = "transitional"
+
+[principles]
+ordering = ["authority", "domain", "language"]
+empty_silos = "forbidden"
+cross_language_disagreement = "fail_closed"
+generated_surfaces = "derived_only"
+vendor_code = "non_local"
+experimental_code = "non_authoritative"
+
+[[plane]]
+id = "policy"
+target = "policy"
+authority = "governance"
+required = true
+current = ["estate.toml", "EXACT_EVIDENCE_BOUNDARY.md"]
+
+[[plane]]
+id = "kernel"
+target = "kernel"
+authority = "canonical_executable"
+required = true
+current = ["bulbford"]
+
+[[plane]]
+id = "proof"
+target = "proof"
+authority = "claim_state"
+required = true
+current = ["RESEARCH_bulb-ford-correction.md"]
+
+[[plane]]
+id = "reference"
+target = "reference"
+authority = "non_authoritative_reference"
+required = true
+current = ["legacy"]
+
+[[plane]]
+id = "experiments"
+target = "experiments"
+authority = "non_authoritative_experiment"
+required = true
+current = ["scripts", "data"]
+
+[[plane]]
+id = "conformance"
+target = "conformance"
+authority = "evidence"
+required = true
+current = ["tests", "data/parabolic_index_exact_vectors.json", "data/rational_dynamics_r1_vectors.json"]
+
+[[language]]
+name = "Python"
+authority = "canonical"
+roles = ["kernel"]
+acceptance_authority = true
+
+[migration]
+mode = "boundary_first"
+mass_move = false
+next = [
+  "separate exact conformance vectors from sweep outputs under data",
+  "move sweep scripts into experiments",
+]
+
+[governance]
+repository = "larsbx/estate-governance"
+revision = "bd0a9491488f54f28b4a3b9076051349092383bb"
+
+[governance.sha256]
+"docs/architecture/estate-repository-template-v1.md" = "b5eab7543c877484a159b47cbe36aa6255c51bd6ec5863dbb9fe13d9a2c06f6b"
+"tools/audit_estate_layout.py" = "f462c397dee8a596a2a7a8c40fd5ded2989652322186c568b712366294251003"
