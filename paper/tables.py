@@ -78,3 +78,18 @@ kstar, ev = linear_limit(x)
 lines += [r"\midrule", f"$\\infty$ & ${cplx(kstar, 11)}$ & & \\\\", r"\bottomrule", r"\end{tabular}"]
 write("levels", "\n".join(lines) + "\n")
 print("kappa_* =", mp.nstr(kstar, 13), " eigenvalues of the fitted contraction:", [mp.nstr(e, 6) for e in ev])
+
+# Table (tab:diskroot): the period-2 disc near its root against the cardioid near its ½-root (C23 (iv), V48)
+z = lambda s: mp.mpc(complex(s.strip("()").replace(" ", "")))
+lines = [r"\begin{tabular}{@{}lllc@{}}", r"\toprule", r"& disc $[0;N,t]$ & cardioid $[0;1,1,N-1,t]$ & $|\Delta|$ \\", r"\midrule"]
+for l in open("data/disk_root.txt"):
+    if "J = 3" not in l:
+        continue
+    head, _, vals = l.split(": ")
+    qty, tail = head.split(" tail ")
+    disk_s, card_s = (part.split(" ", 1)[1] for part in vals.split("  ")[:2])
+    fmt = (lambda s: f"${cplx(z(s), 10)}$") if qty == "kappa" else (lambda s: f"${mp.nstr(mp.mpf(s), 10)}$")
+    label = ("$\\kappa$" if qty == "kappa" else "$G$") + ", $t=" + (tail.strip("(,)").replace(",", "") or "\\varnothing") + "$"
+    lines.append(f"{label} & {fmt(disk_s)} & {fmt(card_s)} & {sci_tex(float(vals.split('|Δ| ')[1]))} \\\\")
+lines += [r"\bottomrule", r"\end{tabular}"]
+write("diskroot", "\n".join(lines) + "\n")

@@ -355,6 +355,19 @@ The case $k=1$ is Numerical result~\ref{obs:identity}, and $k=2$ is the iterated
 \caption{All $\kappa(p/q)$ for $q=2003$ (values for $p>q/2$ from the symmetry $\kappa(1-p/q)=\overline{\kappa(p/q)}$), the horn-map limits \eqref{eq:boundedp} for $p\le5$, and $\kappa_0,\overline{\kappa_0}$. The $p=1$ bulbs are the extreme points of the arithmetic cloud.}\label{fig:cloud}
 \end{figure}
 
+\subsection{Component dependence}\label{sec:component}
+The satellites of any hyperbolic component of the quadratic family have the same expansion \eqref{eq:R}, with $\lambda$ the multiplier of the attracting cycle of that component. For the period-two disc $W_{1/2}$, $c=-1+\lambda/4$, the values of $\kappa$ at generic $p/q$ are close to those of the cardioid at the same $p/q$~\cite{repo}, but the bounded-$p$ limits differ: for instance
+\[
+\lim_{q\to\infty}\kappa_{W_{1/2}}(1/q)=0.01840526-0.04290372\,i\ne\kappa_0 .
+\]
+The renormalization picture attributes the bounded-$p$ limits to the parabolic germ at the root of the component, here $c=-\tfrac34$. This point is also the root of the cardioid's $\frac12$-satellite, which the cardioid approaches along $[0;1,1,m,\ldots]$ with $m\to\infty$. The picture therefore predicts that the satellite $[0;N,t]$ of $W_{1/2}$ and the cardioid satellite $[0;1,1,N-1,t]$ have the same limit as $N\to\infty$, for every fixed tail $t$. Table~\ref{tab:diskroot} confirms this for three tails, and for the bulb size, to about $10^{-9}$. Here the disc values come from Cauchy integrals in the multiplier of the $2$-cycle, and the cardioid values from the normal form. When the first partial quotient stays bounded the correspondence fails: at $N=256$ the two sides differ by between $3\cdot10^{-5}$ and $1.5\cdot10^{-3}$ for the prefixes $(2,9,4)$, $(3,5)$, $(1,4)$, $(5,1,2)$, $(7)$. In that regime the disc is instead close to the cardioid at the same $p/q$. Thus only the first renormalization, and hence the germ at the root, distinguishes components, as expected from Section~\ref{sec:renorm}. The first-order coefficient of the disc, $\kappa_{W_{1/2}}(1/q)=0.01840526-0.04290372\,i+(-0.17743-0.19381\,i)/q+O(q^{-2})$, is not the kinematic $-i/(2\pi q)$ of Proposition~\ref{prop:kinematic}: the multiplier of the $2$-cycle is not the Inou--Shishikura rotation at the degenerate parabolic point $c=-\frac34$.
+
+\begin{table}[t]
+\centering\footnotesize
+\input{tables/diskroot.tex}
+\caption{The period-two disc near its root against the cardioid near its $\frac12$-root. The disc column uses $[0;N,t]$ in the multiplier of the $2$-cycle, the cardioid column $[0;1,1,N-1,t]$; both are extrapolated from $N=128,\dots,2048$ with three terms in $1/q$.}\label{tab:diskroot}
+\end{table}
+
 \section{Degree three: a second universality class}\label{sec:degree3}
 
 For $z^3+c$ the main component is parametrized by the multiplier $\lambda$ of the fixed point $z=(\lambda/3)^{1/2}$, with $c=z-z^3$. Its cusp at $\lambda=1$, where $z_*=1/\sqrt3$ and $c_*=2/(3\sqrt3)$, has the parabolic germ $w\mapsto w+\sqrt3\,w^2+w^3$. In $v=\sqrt3\,w$ this is
@@ -393,6 +406,7 @@ The first-order theory of satellite bulbs is the Ford-circle picture, with radii
 \item Prove that the renormalized germ has no $O(1/q)$ correction beyond the phase of Proposition~\ref{prop:kinematic} (Numerical result~\ref{obs:kinematic}); by \eqref{eq:kinematic} this gives the universal term $-i/(2\pi pq)$.
 \item Prove Conjecture~\ref{conj:hierarchy} (verified numerically for $k\le3$), and identify the fixed point $G_*$ of $G\mapsto\mathcal P(\bar G)$ and its spectrum.
 \item Compute the generic limit function $\kappa(p/q)$, $p\to\infty$, by iterated renormalization with bounded partial quotients, including its values at quadratic irrationals as periodic points of $\mathcal R$.
+\item Identify the root constant $0.01840526-0.04290372\,i$ of Section~\ref{sec:component} as the index of the parabolic renormalization of the multiplier $-1$ germ $-z+z^2$, and derive its first-order coefficient.
 \item Decide whether $\kappa_0$ can be expressed through Écalle--Voronin invariants of $z+z^2$ in closed form.
 \end{enumerate}
 
