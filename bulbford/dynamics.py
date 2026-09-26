@@ -35,6 +35,45 @@ MAIN3 = Family("main3", 3, 1,
 FAMILIES = {f.name: f for f in (MAIN2, DISK2, MAIN3)}
 
 
+def component(name: str, n: int, c_centre: complex, d: int = 2, max_step: float = 0.02) -> Family:
+    """The hyperbolic component of period n with centre c_centre, parametrised by the multiplier λ of its attracting
+    cycle: (c, z) solves f_c^n(z) = z, (f_c^n)'(z) = λ by Newton, continued from (c_centre, 0) at λ = 0 in steps of at
+    most max_step from the nearest point solved so far (kept in a small cache).  c'(λ) by implicit differentiation."""
+    solved = {0j: (complex(c_centre), 0j)}
+
+    def refine(lam, c, z):
+        for _ in range(60):
+            o = _orbit_kernel(d, c, z, n)
+            a, b, e, g = o[1] - 1, o[2], o[3], o[4]            # ∂(f^n − z)/∂(z, c), ∂(f^n)'/∂(z, c)
+            f1, f2 = o[0] - z, o[1] - lam
+            det = a * g - b * e
+            dz, dc = (f1 * g - b * f2) / det, (a * f2 - e * f1) / det
+            z, c = z - dz, c - dc
+            if abs(dc) + abs(dz) < 1e-15 * (1 + abs(c)):
+                break
+        return c, z
+
+    def solve(lam):
+        lam = complex(lam)
+        lam_s = min(solved, key=lambda l: abs(l - lam))
+        c, z = solved[lam_s]
+        k = max(1, int(abs(lam - lam_s) / max_step) + 1)
+        for t in range(1, k + 1):
+            c, z = refine(lam_s + (lam - lam_s) * t / k, c, z)
+        if len(solved) > 256:
+            solved.clear(); solved[0j] = (complex(c_centre), 0j)
+        solved[lam] = (c, z)
+        return c, z
+
+    def dc_of(lam):
+        c, z = solve(lam)
+        o = _orbit_kernel(d, c, z, n)
+        a, b, e, g = o[1] - 1, o[2], o[3], o[4]
+        return a / (a * g - b * e)
+
+    return Family(name, d, n, lambda lam: solve(lam)[0], dc_of)
+
+
 class Orbit(NamedTuple):
     """f_c^n(z) and its partials: z_z = ∂/∂z, z_c = ∂/∂c, z_zz, z_zc."""
     z: complex

@@ -43,3 +43,24 @@ def test_reproduces_legacy_q59_values():
     """V5 sample: (x*, G_ant) = (0.0169, 1.0262), (0.4237, 1.1471)."""
     assert abs(bulb(MAIN2, 59 - 1 and 1, 59).G_ant - 1.0262) < 2e-4   # p=1: x* = 1/59
     assert abs(bulb(MAIN2, 26, 59).G_ant - 1.1471) < 2e-4             # p=26: x* = 25/59
+
+
+def test_component_family_reproduces_explicit_parametrizations():
+    """component(): c(λ) by Newton on (f_c^n(z) = z, (f^n)'(z) = λ) with continuation from the centre, reproduces the
+    cardioid c = λ/2 − λ²/4 and the period-2 disc c = λ/4 − 1, and their derivatives."""
+    import cmath
+    from bulbford.dynamics import component, MAIN2, DISK2
+    for fam, ref in ((component("main2*", 1, 0j), MAIN2), (component("disk2*", 2, -1 + 0j), DISK2)):
+        for lam in (0.3 + 0.2j, cmath.exp(2j * cmath.pi / 7) * 0.999, cmath.exp(-2j * cmath.pi * 3 / 11) * 0.99):
+            assert abs(fam.c_of(lam) - ref.c_of(lam)) < 1e-12
+            assert abs(fam.dc_of(lam) - ref.dc_of(lam)) < 1e-9
+
+
+def test_rabbit_component_satellite_multiplier():
+    """For the period-3 component W_{1/3} (centre ≈ −0.1226 + 0.7449i), the 3q-cycle of its p/q satellite has
+    multiplier r₁ = −1 in u (Theorem 2.1 / Remark 2.2 for other components)."""
+    from bulbford.dynamics import component
+    from bulbford.taylor import taylor
+    W3 = component("W1/3", 3, -0.1225611668766536 + 0.7448617666197442j)
+    c = taylor(1, 7, W3, r=1.0, N=64).coeffs
+    assert abs(c[0] - 1) < 1e-9 and abs(c[1] + 1) < 1e-9

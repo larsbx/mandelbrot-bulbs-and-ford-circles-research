@@ -116,3 +116,15 @@ for l in open("data/rational_limits.txt"):
     lines.append(f"${pq}$ & {side} & {t} & ${cplx(z(pred), 11)}$ & ${cplx(z(bulb), 11)}$ & {sci_tex(float(dlt))} \\\\")
 lines += [r"\bottomrule", r"\end{tabular}"]
 write("rational", "\n".join(lines) + "\n")
+
+# Table (tab:period3): satellites of the period-3 component W_{1/3} against the germs at its root (V51)
+names = {"kappa 1/q": (r"$\kappa$, $1/q$", "upper"), "kappa (q-1)/q": (r"$\kappa$, $(q-1)/q$", "lower"),
+         "kappa 2/(2N+1)": (r"$\kappa$, $2/(2N+1)$", "upper, $t=2$"), "G 1/q": (r"$G$, $1/q$", "upper"),
+         "G (q-1)/q": (r"$G$, $(q-1)/q$", "lower")}
+lines = [r"\begin{tabular}{@{}lllll@{}}", r"\toprule", r"satellites of $W_{1/3}$ & germ & prediction & bulbs, extrapolated & $|\Delta|$ \\", r"\midrule"]
+for l in open("data/period3_root.txt"):
+    lab, pred, bulb, dlt, _ = l.rstrip("\n").split("\t")
+    fmt = (lambda s: f"${cplx(z(s), 10)}$") if lab.startswith("kappa") else (lambda s: f"${mp.nstr(mp.re(z(s) if '(' in s else mp.mpf(s)), 10)}$")
+    lines.append(f"{names[lab][0]} & {names[lab][1]} & {fmt(pred)} & {fmt(bulb)} & {sci_tex(float(dlt))} \\\\")
+lines += [r"\bottomrule", r"\end{tabular}"]
+write("period3", "\n".join(lines) + "\n")

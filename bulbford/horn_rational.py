@@ -174,7 +174,8 @@ def root(p: int, q: int, upper: bool = True) -> tuple:
 def root_germ_coeffs(p: int, q: int, upper: bool, M: int, dps: int) -> list:
     """[0, a_1, …, a_M] of the root germ in the form W·exp(2πi Σ a_n W^n) = W + W² + …: the lower map, written in
     W = e^{−2πiZ}, has a_n = −b_n; then Z is translated so that a₁ = 1/(2πi) (a_n ↦ a_n (2πi a₁)^{−n})."""
-    a, _ = horn_coeffs_pq(p, q, M, upper=upper, dps=dps + 4 * M)
+    a, _ = horn_coeffs_pq(p, q, M, upper=upper, dh=1.0, n=3000, K=45, dps=dps + 4 * M)   # high modes: sample close
+    # to the band and deep (the error of the truncated Fatou series is amplified by e^{2πn·dh} in the n-th mode)
     with mp.workdps(dps + 4 * M):
         a = [x if upper else -x for x in a]
         sc = 2j * mp.pi * a[1]
