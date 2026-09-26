@@ -8,8 +8,12 @@ depends on H_1 … H_{k−1}.  Blocked (semi-relaxed) evaluation with block size
   * For F ≤ k < F + B (and F ≥ B) the missing ordered pairs have one index in [F, k); the other is then < B, so
     S_k = C[k] + 2 Σ_{i=F}^{k−1} H_i H_{k−i}  — O(B) scalar operations.  The first block (F = 0) is summed directly.
 
-All arithmetic is in balls, so the returned radii are rigorous error bounds."""
+All arithmetic is in balls, so the returned radii are rigorous error bounds — but for generic p (large H_k, strong
+cancellation in the resonant sums) the radii compound through the recursion until b₁'s ball contains 0.  Then use
+`certified=False`: the same engine with radii dropped after each H_k (plain multiprecision floating point), run at
+two precisions; the returned κ radius is their difference (empirical, not rigorous)."""
 from __future__ import annotations
+from contextlib import contextmanager
 from typing import NamedTuple
 from flint import acb, acb_series, arb, ctx
 
@@ -30,11 +34,19 @@ def _root_power(p: int, q: int, k: int) -> acb:
     return (acb(0, 2) * arb.pi() * ((p * k) % q) / q).exp()
 
 
-def _normal_form_ball(p: int, q: int, prec: int, B: int) -> BallNormalForm:
-    L = 2 * q + 1
-    old_prec, old_cap = ctx.prec, ctx.cap
+@contextmanager
+def _context(prec: int, cap: int):
+    old = ctx.prec, ctx.cap
     try:
-        ctx.prec, ctx.cap = prec, L + 1
+        ctx.prec, ctx.cap = prec, cap
+        yield
+    finally:
+        ctx.prec, ctx.cap = old
+
+
+def _normal_form_ball(p: int, q: int, prec: int, B: int, mid_only: bool = False) -> BallNormalForm:
+    L = 2 * q + 1
+    with _context(prec, L + 1):
         lam = _root_power(p, q, 1)
         H = [acb(0)] * (L + 1)
         H[1] = acb(1)
@@ -67,19 +79,26 @@ def _normal_form_ball(p: int, q: int, prec: int, B: int) -> BallNormalForm:
                 m = k - q
                 rhs += m * _root_power(p, q, m - 1) * beta1 * H[m]
             H[k] = rhs / (lam - _root_power(p, q, k))
+            if mid_only:
+                H[k] = H[k].mid()
         b1, b2 = beta1 / lam, beta2 / lam
         iota = acb(q * q - 1) / (2 * q) + b2 / (q * b1 ** 2)
         return BallNormalForm(p, q, b1, b2, q * b1, iota, (iota - acb(1) / 2) / q)
-    finally:
-        ctx.prec, ctx.cap = old_prec, old_cap
 
 
-def normal_form_ball(p: int, q: int, prec: int = 256, B: int | None = None,
-                     target_rad: float | None = 1e-40, max_prec: int = 1 << 15) -> BallNormalForm:
+def normal_form_ball(p: int, q: int, prec: int = 256, B: int | None = None, target_rad: float | None = 1e-40,
+                     max_prec: int = 1 << 15, certified: bool = True) -> BallNormalForm:
     """Certified normal form.  Radii are rigorous but pessimistic (worst-case accumulation through the long
     convolutions); if the radius of κ exceeds `target_rad`, the working precision is doubled and the computation
-    repeated (up to `max_prec` bits).  `target_rad=None` returns the first result."""
+    repeated (up to `max_prec` bits).  `target_rad=None` returns the first result.
+    `certified=False`: midpoint arithmetic at `prec` and `prec + 64` bits; κ carries |κ(prec) − κ(prec+64)| as radius."""
     B = B or max(32, int(2 * (2 * q + 1) ** 0.5))
+    if not certified:
+        lo, hi = (_normal_form_ball(p, q, pr, B, mid_only=True) for pr in (prec, prec + 64))
+        with _context(prec + 64, 1):
+            err = (hi.kappa - lo.kappa).mid().abs_upper()
+            kappa = acb(arb(hi.kappa.real.mid(), err), arb(hi.kappa.imag.mid(), err))
+        return hi._replace(kappa=kappa)
     while True:
         nf = _normal_form_ball(p, q, prec, B)
         if target_rad is None or float(nf.kappa.rad()) <= target_rad or prec >= max_prec:

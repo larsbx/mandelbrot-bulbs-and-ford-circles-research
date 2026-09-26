@@ -1,18 +1,19 @@
-"""Diagonal test of the hierarchy on bulbs (Conjecture hierarchy / V44): certified κ(p/q) for p/q = [0; N, …, N]
+"""Diagonal test of the hierarchy on bulbs (paper Conjecture 6.3, V44): κ(p/q) for p/q = [0; N, …, N]
 (k equal partial quotients), to be extrapolated in 1/N.  k = 2 is the control (limit κ̄₂ known, V42).
-Writes data/level_diag.tsv: k, N, p, q, Re κ, Im κ, radius."""
+Uncertified normal form (Arb radii blow up for generic p): midpoints at 128 and 192 bits, the difference is the
+reported error.  Writes data/level_diag.tsv: k, N, p, q, Re κ, Im κ, error."""
 from multiprocessing import Pool
 import mpmath as mp
 from bulbford.cf import from_cf
 from bulbford.normal_form_ball import normal_form_ball
 
-JOBS = [(2, N) for N in range(16, 129, 8)] + [(3, N) for N in range(6, 33, 2)]
+JOBS = [(2, N) for N in range(16, 161, 8)] + [(3, N) for N in range(6, 41, 2)]
 
 
 def run(job):
     k, N = job
     p, q = from_cf((0,) + (N,) * k)
-    kap = normal_form_ball(p, q, target_rad=1e-20).kappa
+    kap = normal_form_ball(p, q, prec=128, certified=False).kappa
     return k, N, p, q, kap.real.mid().str(25, radius=False), kap.imag.mid().str(25, radius=False), float(kap.rad())
 
 

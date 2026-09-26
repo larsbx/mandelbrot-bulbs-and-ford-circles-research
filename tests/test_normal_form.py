@@ -62,3 +62,16 @@ def test_ball_normal_form_leading_coefficient():
     finally:
         ctx.dps, ctx.cap = old, oc
     assert abs(complex(normal_form_ball(10, 23).a) / a - 1) < 1e-12
+
+
+@pytest.mark.parametrize("p,q", [(65, 528), (26, 59)])
+def test_uncertified_normal_form_matches_mpmath(p, q):
+    """Midpoint-only mode (radii dropped, for generic p where Arb radii blow up): κ agrees with mpmath, and the
+    reported error (difference of two precisions) is honest."""
+    from bulbford.normal_form_ball import normal_form_ball
+    nb = normal_form_ball(p, q, prec=192, certified=False)
+    with mp.workdps(80):
+        km = (normal_form(p, q, dps=80).iota - mp.mpf(1) / 2) / q
+        mid = mp.mpc(nb.kappa.real.mid().str(75, radius=False), nb.kappa.imag.mid().str(75, radius=False))
+        assert abs(mid - km) < mp.mpf(10) ** -30
+        assert abs(mid - km) <= 10 * mp.mpf(float(nb.kappa.rad())) + mp.mpf(10) ** -50
