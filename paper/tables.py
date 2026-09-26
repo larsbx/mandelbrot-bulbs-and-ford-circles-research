@@ -4,7 +4,7 @@ from collections import defaultdict
 from math import gcd, pi
 import mpmath as mp
 from bulbford.extrapolate import power_fit, linear_limit
-from bulbford.renorm import bounded_p_limit, G_limits
+from bulbford.renorm import bounded_p_limit, G_limits, G_limit
 from bulbford.horn import CUBIC
 from bulbford.dynamics import MAIN3
 from bulbford.taylor import taylor
@@ -93,3 +93,17 @@ for l in open("data/disk_root.txt"):
     lines.append(f"{label} & {fmt(disk_s)} & {fmt(card_s)} & {sci_tex(float(vals.split('|Δ| ')[1]))} \\\\")
 lines += [r"\bottomrule", r"\end{tabular}"]
 write("diskroot", "\n".join(lines) + "\n")
+
+# Table (tab:constants): the constants of the paper, each from its horn map / hierarchy, with its bulb check
+re_, sign, im_ = open("data/half_root.txt").readline().split("= (")[1].split("j)")[0].split()
+khalf = mp.mpc(re_, sign + im_)
+G0 = G_limit(1, 1)
+rows = [(r"$\kappa_0$", r"$z+z^2$", cplx(K0, 16), r"$3\cdot10^{-28}$", r"\S\ref{sec:horn}"),
+        (r"$\kappa_0^{(3)}$", r"$v+v^2+\frac13v^3$", cplx(K3, 16), r"$1.3\cdot10^{-6}$ ($q=1024$)", r"\S\ref{sec:degree3}"),
+        (r"$\kappa_{1/2}$", r"$-z+z^2$", cplx(khalf, 16), r"$3\cdot10^{-10}$", r"\S\ref{sec:component}"),
+        (r"$\kappa_*$", r"$G_*=\mathcal P(\bar G_*)$", cplx(kstar, 11), r"levels $\le3$", r"\S\ref{sec:hierarchy}"),
+        (r"$G_0$", r"$e^{u}\mathcal P_0$", f"{G0:.8f}", r"$4\cdot10^{-8}$", r"\S\ref{sec:unfolding}")]
+lines = [r"\begin{tabular}{@{}lllll@{}}", r"\toprule", r"constant & germ & value & bulbs & \\", r"\midrule"]
+lines += [f"{a} & {b} & ${c}$ & {d} & {e} \\\\" for a, b, c, d, e in rows]
+lines += [r"\bottomrule", r"\end{tabular}"]
+write("constants", "\n".join(lines) + "\n")

@@ -69,4 +69,46 @@ ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.14), fontsize=7.5, markers
 fig.tight_layout(); fig.savefig("paper/figures/kappa_cloud.pdf")
 if os.environ.get("PNG_DIR"): fig.savefig(os.path.join(os.environ["PNG_DIR"], "kappa_cloud.png"), dpi=150)
 plt.close(fig)
+
+
+def save(fig, name):
+    fig.tight_layout(); fig.savefig(f"paper/figures/{name}.pdf")
+    if os.environ.get("PNG_DIR"): fig.savefig(os.path.join(os.environ["PNG_DIR"], f"{name}.png"), dpi=150)
+    plt.close(fig)
+
+
+# Figure 3: the first-order correction is kinematic (data/kinematic.txt, degree 2, p = 1)
+block, rows = None, []
+for l in open("data/kinematic.txt"):
+    if l.startswith("degree"):
+        block = l.split(":")[0]
+    elif block == "degree 2, p = 1, r = 1":
+        head, tail = l.split("[")
+        rows.append((int(head.split("=")[1].split(":")[0]), [float(x) for x in head.split(":")[1].split()],
+                     [float(x) for x in tail.split("]")[0].split()]))
+qk = np.array([r[0] for r in rows]); moeb = np.array([r[1] for r in rows]); plain = np.array([r[2] for r in rows])
+fig, ax = plt.subplots(figsize=(4.8, 3.2)); style(ax)
+for j, (col, mk, k) in enumerate(((BLUE, "o", 2), (ORANGE, "s", 3))):
+    ax.loglog(qk, plain[:, j], "--", marker=mk, color=col, lw=1.4, ms=4.5, mfc="white", mew=1.2,
+              label=rf"$|r_{k}-\rho_{k}|$")
+    ax.loglog(qk, moeb[:, j], "-", marker=mk, color=col, lw=2, ms=4.5, mec="white", mew=1.0,
+              label=rf"$|r_{k}-[u^{k}]\rho(\tilde u)|$")
+for y0, sl, lab in ((plain[0, 0] * 2.2, -1, r"$\propto q^{-1}$"), (moeb[0, 1] * 0.3, -2, r"$\propto q^{-2}$")):
+    xs = np.array([qk[0], qk[-1]]); ax.loglog(xs, y0 * (xs / qk[0]) ** sl, color=MUTED, lw=0.6)
+    ax.text(qk[-1] * 1.1, y0 * (qk[-1] / qk[0]) ** sl, lab, color=MUTED, fontsize=8, va="center")
+ax.set_xlim(50, 2400); ax.set_xlabel(r"$q$"); ax.set_ylabel(r"residual ($p=1$)")
+ax.legend(loc="lower left", fontsize=7.5, ncol=2)
+save(fig, "kinematic")
+
+# Figure 4: the two hierarchies (conjugated: bulbs; holomorphic: Lanford–Yampolsky)
+seq = lambda f: [mp.mpc(*l.split("\t")[1:3]) for l in open(f) if l.strip()]
+fig, ax = plt.subplots(figsize=(4.8, 3.0)); style(ax)
+for f, col, mk, lab in (("data/levels_h100.tsv", BLUE, "o", r"$G\mapsto\mathcal{P}(\bar G)$ (bulbs)"),
+                        ("data/levels_holo100.tsv", ORANGE, "s", r"$G\mapsto\mathcal{P}(G)$")):
+    x = seq(f); dk = [float(abs(b - a)) for a, b in zip(x, x[1:])]; ks = np.arange(2, len(x) + 1)
+    ax.semilogy(ks, dk, "-", marker=mk, color=col, lw=2, ms=5, mec="white", mew=1.0, label=lab)
+    ax.text(ks[-1] + 0.15, dk[-1], f"ratio {dk[-1] / dk[-2]:.4f}", color=INK, fontsize=7.5, va="center")
+ax.set_xlim(1.7, 8.6); ax.set_xlabel(r"level $k$"); ax.set_ylabel(r"$|\kappa_k-\kappa_{k-1}|$")
+ax.legend(loc="upper right", fontsize=7.5)
+save(fig, "hierarchy")
 print("ok")
