@@ -6,11 +6,14 @@ from __future__ import annotations
 from functools import lru_cache
 import mpmath as mp
 from .horn import horn_coeffs, QUADRATIC
+from .horn_half import HALF, horn_coeffs_half_normalized
 from .germ import horn_germ, iterate_index, compose
 
 
 @lru_cache(maxsize=None)
 def _coeffs(M: int, dps: int, germ: tuple = QUADRATIC):
+    if germ == HALF:                                 # the ½-root germ −z + z² (V49), not a cusp germ
+        return horn_coeffs_half_normalized(M, dps)
     return horn_coeffs(M, h=0.25, N=64, dps=dps, germ=germ)[0]
 
 
