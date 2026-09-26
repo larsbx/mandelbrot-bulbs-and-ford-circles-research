@@ -22,7 +22,7 @@ The satellite bulbs of every hyperbolic component of the quadratic family obey
 - `r_k(p/q) := [u^k] R_q(u)`; `r₀ = 1`, `r₁ = −1` (P0), `r₂ = κ` (P2).
 - Ford circle `C(p/q)`: tangent to ℝ at `p/q`, radius `1/(2q²)`; `C(p/q) ⟂ C(r/s)` tangent iff `|ps−qr| = 1`.
 
-Theorem tags: **[GM84]** Guckenheimer–McGehee `diam B_{p/q} = O(q⁻²)`; **[DH]** Douady–Hubbard multiplier map; **[BS94]** Bullett–Sentenac; **[Yoc95]** Yoccoz; **[MMY]** Marmi–Moussa–Yoccoz; **[Weil]** Kloosterman; **[FL]** Franel–Landau; **[Mil]** Milnor, *Dynamics in One Complex Variable*, §12 (holomorphic index, `ι = b/a²` for `z + az² + bz³`, index sum `Σ 1/(1−ρ) = 0` over finite fixed points of a polynomial); **[BE02]** Buff–Epstein, parabolic Pommerenke–Levin–Yoccoz inequality (bounds `Re resit` for quadratic parabolic points — *statement to be re-checked before use*).
+Theorem tags: **[GM84]** Guckenheimer–McGehee `diam B_{p/q} = O(q⁻²)`; **[DH]** Douady–Hubbard multiplier map; **[BS94]** Bullett–Sentenac; **[Yoc95]** Yoccoz; **[MMY]** Marmi–Moussa–Yoccoz; **[Weil]** Kloosterman; **[FL]** Franel–Landau; **[Mil]** Milnor, *Dynamics in One Complex Variable*, §12 (holomorphic index, `ι = b/a²` for `z + az² + bz³`, index sum `Σ 1/(1−ρ) = 0` over finite fixed points of a polynomial); **[Gol92]** Goldberg, rotation sets of `θ ↦ 2θ`; **[Mil00]** Milnor, *Periodic orbits, external rays and the Mandelbrot set*; **[BE02]** Buff–Epstein, parabolic Pommerenke–Levin–Yoccoz inequality (bounds `Re resit` for quadratic parabolic points — *statement to be re-checked before use*).
 
 ---
 
@@ -35,6 +35,10 @@ Theorem tags: **[GM84]** Guckenheimer–McGehee `diam B_{p/q} = O(q⁻²)`; **[D
   *Proof.* `ρ(λ)` is analytic at `λ₀` (symmetric function of the `q` cycle points, which are the roots of a dynatomic factor inside a fixed disc; residue-theorem continuity). The `q+1` fixed points of `F = f^q` merging at `z₀` — the `H`-cycle point (multiplier `μ = λ^q = e^{qε}`) and the `q` satellite points (multiplier `ρ`) — have total index converging to the index of the merged parabolic point [Mil, 12.9]: `1/(1−μ) + q/(1−ρ) → ι`. With `ρ = 1 − q²ε + Cε² + O(ε³)`: `1/(1−μ) = −1/(qε) + ½ + O(ε)`, `q/(1−ρ) = 1/(qε) + C/q³ + O(ε)`, hence `½ + C/q³ = ι`. ∎
   Checks: `q=1`: `ρ = 2 − e^ε = 1 − ε − ε²/2`, `ι(z+z²) = 0` ✓. `q=2`: `ρ = 1 − 4ε − 3ε²`, `ι(z − 2z³ + z⁴) = 1/8` ✓. Numerically for all `p`, `q ≤ 251` (V12).
   *Remarks.* (i) The `ε`-derivatives of the normal-form coefficients cancel at second order (checked by direct normal-form expansion: `ρ = 1 − q²ε + q²(b₂/b₁² − ½)ε² + …` for `f ~ λw(1 + b₁w^q + b₂w^{2q})`, and `b₂/b₁² = qι − (q−1)/2`). (ii) `ι_{p/q} ∈ ℚ(ζ_q)` and `ι_{p'/q} = σ(ι_{p/q})` for the Galois automorphism `ζ ↦ ζ^{p'p̄}` (the residue is a rational function of `λ₀` with rational coefficients). (iii) Third and higher orders depend on the unfolding, not on the germ alone.
+
+- **P3 (certified satellite centres, finite).** For every `p/q` with `2 ≤ q ≤ 16`, `gcd(p,q) = 1` (79 cases), a dyadic box `β_{p/q}` of half-width `2⁻⁶⁴` satisfies the joint witness of the finite-Mandelbrot certificate calculus for type `(0,q)`: `K_{Q_q}(β) ⊂ int β` (a unique, simple root of the Gleason polynomial in `β`) and `0 ∉ Q_j(β) − Q_i(β)` for every forbidden pair (exact critical period `q`), on the same box; the boxes of one `q` are pairwise disjoint. Checked in rational interval arithmetic, replayed from stored endpoints (`data/center_certificates.json`, `tests/test_certify.py`). *Imports for reading `β_{p/q}` as the centre of `B_{p/q}`*: [DH], and the continuation seed (`SatelliteLabel`, VALIDATED only).
+- **P4 (wake combinatorics, finite).** For `q ≤ 16`: the doubling cycle with mechanical word `b_k = [kp mod q ≥ q−p]` acts as the rotation by `p/q`; its shortest arc `(θ₋, θ₊)` has width `1/(2^q − 1)`; `(q−p)/q` gives the mirror arc; the arcs of `F_n` (`n ≤ 12`) are disjoint and ordered like the fractions, and for Farey neighbours (`n ≤ 10`) the mediant's arc lies in their gap (`tests/test_wake.py`). *Imports for reading the arc as the `p/q`-wake*: [Gol92] (uniqueness of the rotation cycle), [DH]/[Mil00] (landing at the root). This is the "combinatorics: identical" row of §6 made executable.
+- **P5 (exact `ι`, `q ≤ 8`).** The `finite-math-kernels` cyclotomic reference (`[w^q] 1/P` for `ζ_q^p w + w²`, exact in `ℚ(ζ_q)`, every unit `p`) equals `scripts/exact_index.py` coordinate-by-coordinate, lies in the Arb ball of `index.py`, and reproduces the pinned `ℚ(i)` fixtures (`tests/test_cyclotomic_replay.py`); `ι_{p/q} = σ_p(ι_{1/q})` holds exactly (kernel C2 tests). This makes remark (ii) of P2 a checked identity for `q ≤ 8`.
 
 ---
 
@@ -105,7 +109,7 @@ Precision caveats: doubles for `R_q`; the FFT route is accurate to `~1e-12` in `
 
 | level | Ford circles | bulbs |
 |---|---|---|
-| combinatorics | Farey adjacency, mediants | identical |
+| combinatorics | Farey adjacency, mediants | identical (P4: exact wake arcs, Farey order, mediant in the gap) |
 | leading order | radius `1/(2q²)`, exact | `2|c_H'|q⁻²`, asymptotic [GM84] |
 | first correction | none (PSL(2,ℤ)-exact) | `ρ = 1 − q²ε + q³(ι−½)ε²`, `ι ∈ ℚ(ζ_q)` a Galois orbit; `κ̂(p̄/q)` singular on ℚ with weights decaying in `q'` |
 | symmetry | PSL(2,ℤ) on horoballs | Galois `ζ_q ↦ ζ_q^{p'p̄}` on `ι`; `p ↦ p̄` as the dominant variable, `p ↔ p̄` the two resonance ends |
@@ -119,12 +123,15 @@ Precision caveats: doubles for `R_q`; the FFT route is accurate to `~1e-12` in `
 3. **Fatou-coordinate computation of `κ₀`** (C20), cheap via the standard `z + z²` Fatou coordinate series.
 4. **`z³+c`**: repeat V15–V19 (`MAIN3` is already wired: `G(MAIN3, p, q)`, `taylor(p, q, MAIN3)`).
 5. C2′ numerics, then C8, C11 as before.
+6. **Certified antipodes.** Extend P3 to `c_ant` (`ρ = −1`) by a two-variable Krawczyk witness for `(f_c^q(z) − z, (f_c^q)'(z) + 1)` on a box in `(z, c)`: with [DH] this turns `G_ant` for small `q` into a certified enclosure. Then the exact root `c_root = λ₀/2 − λ₀²/4 ∈ ℚ(ζ_q)` via a certified `ζ_q` box (Krawczyk on `Φ_q`, no trigonometry).
 
-## 8. Instruments (`bulbford/`, tests in `tests/`, 17 passing)
+## 8. Instruments (`bulbford/`, tests in `tests/`, 250 passing)
 
 - `cf.py` — `modinv`, `xstar`, `cf`, `from_cf`, `convergent_denominators`.
 - `dynamics.py` — `Family` records (`MAIN2`, `DISK2`, `MAIN3`), `orbit` with second derivatives, `Cycle` tracking with analytic `dρ/dc` and a period-collapse guard, `bulb(fam, p, q)` → `G_ant`, `G_cen`; `rho_on_path`.
 - `index.py` — `index(p, q)`: `ι_{p/q}` as an `acb` ball (python-flint), auto precision; `kappa(p, q)`.
+- `certify.py` — rational dyadic interval boxes, `Q_n`/`Q_n'` jets on boxes, collision sets `I/F_{ℓ,k}(H)`, Krawczyk, joint certificate with verdict `ACCEPTED`/`INCONCLUSIVE`, record replay; `scripts/certify_centers.py` (`--check`).
+- `wake.py` — rotation cycles of doubling, characteristic arcs, Farey fractions.
 - `taylor.py` — `taylor(p, q, fam, r, N)`: `r_k`, `solve(target, u0)`; `kappa_fft` (N=64) for `q > 300`.
 - `scripts/` — `exact_index.py` (ℚ(ζ_q)), `taylor_sweep.py`, `index_sweep.py`, `kappa_sweep.py` (dense, `q=1009`), `sequences.py`, `prefix_test.py`, `a1_scan*.py`, `limit_grid.py`, `analyze.py`, `analyze_dense.py`. Data in `data/` (JSON). Legacy instruments in `legacy/`.
 - Run: `PYTHONPATH=. pytest -q`; `PYTHONPATH=. python3 scripts/analyze.py 59 127 251`.
