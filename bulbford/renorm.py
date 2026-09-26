@@ -65,6 +65,25 @@ def rho_path(p: int, r: int, us, germ: tuple = QUADRATIC):
     return np.array(out), W
 
 
+def unfolding_taylor(p: int, r: int, radius: float = 1.5, N: int = 128, germ: tuple = QUADRATIC):
+    """Taylor coefficients ρ_0…ρ_{N−1} of the multiplier ρ_{p,r}(u) of M_u = μe^{u/p²}𝒫 (Cauchy/FFT on |u| = radius,
+    reached by continuation along [radius/N, radius]; the analogue of taylor.taylor for the renormalized family)."""
+    import numpy as np
+    circle = radius * np.exp(2j * np.pi * np.arange(N) / N)
+    v, _ = rho_path(p, r, np.concatenate([np.linspace(radius / N, radius, N), circle]), germ=germ)
+    return np.fft.fft(v[N:]) / N / radius ** np.arange(N)
+
+
+def lavaurs_compose(rho, p: int, q: int):
+    """[u^k] ρ(ũ), ũ = u/(1 + u/(2πipq)): with λ = λ₀e^{u/q²}, α = p/q + u/(2πiq²), the Inou–Shishikura multiplier
+    e^{−2πi/α} equals μ e^{ũ/p²} exactly, so R_{p/q}(u) = ρ_{p,r}(ũ(u)) up to the O(q⁻²) change of the germ.
+    Uses ũ^m = Σ_j C(−m, j) u^{m+j} c^{−j}, c = 2πipq."""
+    from math import comb
+    c = 2j * mp.pi * p * q
+    binom_neg = lambda m, j: (-1) ** j * comb(m + j - 1, j) if m else int(j == 0)
+    return [sum(complex(rho[m] * binom_neg(m, k - m) / c ** (k - m)) for m in range(k + 1)) for k in range(len(rho))]
+
+
 def G_limits(p: int, r: int, germ: tuple = QUADRATIC, steps: int = 400) -> tuple:
     """C23 predictions |u_a|/2 at every antipode: in the conformal coordinate s = ρ^{1/(d−1)} follow the segment
     from the root to each s with s^{d−1} = −1, continuing u by Newton on ρ(u) = s(t)^{d−1} (d − 1 = 2 for a germ

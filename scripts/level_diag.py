@@ -1,4 +1,4 @@
-"""Diagonal test of the hierarchy on bulbs (paper Conjecture 6.3, V44): κ(p/q) for p/q = [0; N, …, N]
+"""Diagonal test of the hierarchy on bulbs (paper conj:hierarchy, V44): κ(p/q) for p/q = [0; N, …, N]
 (k equal partial quotients), to be extrapolated in 1/N.  k = 2 is the control (limit κ̄₂ known, V42).
 Uncertified normal form (Arb radii blow up for generic p): midpoints at 128 and 192 bits, the difference is the
 reported error.  Writes data/level_diag.tsv: k, N, p, q, Re κ, Im κ, error."""

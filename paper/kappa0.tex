@@ -256,7 +256,7 @@ The limit $\kappa_0=\lim_{q\to\infty}\kappa(1/q)$ exists and equals $\iota(\PP)-
 \subsection{Heuristic}
 For $\alpha$ near $0$, the near-parabolic renormalization $\mathcal R$ of Inou and Shishikura~\cite{IS} assigns to $f_\alpha(z)=e^{2\pi i\alpha}z+z^2$ a germ $\mathcal Rf_\alpha$ at $0$ with multiplier $e^{-2\pi i/\alpha}$. By parabolic implosion~\cite{Lavaurs,Sh}, as $\alpha\to0$ with $-1/\alpha\to\sigma\bmod\Z$, the germ $\mathcal Rf_\alpha$ tends to $e^{2\pi i\sigma}$ times the horn germ. For $\alpha=1/q$ the phase is $0$, and $\mathcal Rf_{1/q}$ is a parabolic germ with multiplier one. The rotation quotient $\Phi_{1/q}$ of Corollary~\ref{cor:quotient} is also a parabolic germ with multiplier one, obtained from $f^q$ by passing to the quotient by the $q$-fold rotation. If $\Phi_{1/q}$ and $\mathcal Rf_{1/q}$ are conformally conjugate, Corollary~\ref{cor:quotient} and continuity of $\mathcal R$ give Conjecture~\ref{conj:main}. The same reasoning leads to two further predictions, which we test next.
 
-\subsection{Bounded $p$}
+\subsection{Bounded $p$}\label{sec:boundedp}
 Fix $p\ge2$ and $r$ with $\gcd(p,r)=1$, and let $q=pN+r\to\infty$. Then $-1/\alpha=-q/p\equiv-r/p\pmod1$, so $\mathcal Rf_{p/q}\to\mu\PP$ with $\mu=e^{-2\pi ir/p}$. This germ has multiplier a primitive $p$-th root of unity. Applying Corollary~\ref{cor:quotient} to it predicts
 \begin{equation}\label{eq:boundedp}
 \lim_{N\to\infty}\kappa\Bigl(\frac p{pN+r}\Bigr)=\frac{\iota\bigl((\mu\PP)^p\bigr)-\frac12}{p},\qquad\mu=e^{-2\pi ir/p}.
@@ -269,20 +269,46 @@ Table~\ref{tab:boundedp} compares \eqref{eq:boundedp} with bulb data for all nin
 \caption{Bounded-$p$ limits of $\kappa$ (degree two): the horn-map prediction \eqref{eq:boundedp} against the bulb values extrapolated from $q=pN+r$, $64\le N\le1024$.}\label{tab:boundedp}
 \end{table}
 
-\subsection{The unfolding and the bulb size}
+\subsection{The unfolding and the bulb size}\label{sec:unfolding}
 With $\lambda=\lambda_0e^{u/q^2}$ one has $\alpha=\frac pq+\frac u{2\pi iq^2}$, so $e^{-2\pi i/\alpha}=\mu\,e^{u/p^2}+O(q^{-1})$. The picture therefore predicts that $R_{p/q}(u)$ converges to the multiplier $\rho_{p,r}(u)$ of the $p$-cycle of
 \[
 M_u(W)=\mu\,e^{u/p^2}\,\PP(W)
 \]
 that bifurcates from $W=0$.
 
-For $p=1$ the Taylor coefficients of $\rho_{1,1}$ at $u=0$ agree with those of $R_{1/1025}$ through order eight, up to the finite-$q$ shift. For instance $r_3=-3.78\cdot10^{-4}-9.80\cdot10^{-4}i$ against $-3.62\cdot10^{-4}-9.72\cdot10^{-4}i$, and $r_8=3.14\cdot10^{-9}-4.56\cdot10^{-9}i$ against $3.13\cdot10^{-9}-4.50\cdot10^{-9}i$. Here $r_3$ depends on the unfolding and not only on the germ, so this checks that $u$ enters as the Lavaurs phase. Solving $\rho_{p,r}(u_a)=-1$ gives a prediction for $\lim G$. Table~\ref{tab:G} compares it with the bulb sizes for all ten classes with $p\le5$; the agreement is at most $9\cdot10^{-7}$.
+For $p=1$ the Taylor coefficients of $\rho_{1,1}$ at $u=0$ agree with those of $R_{1/1025}$ through order eight, up to the finite-$q$ shift. For instance $r_3=-3.78\cdot10^{-4}-9.80\cdot10^{-4}i$ against $-3.62\cdot10^{-4}-9.72\cdot10^{-4}i$, and $r_8=3.14\cdot10^{-9}-4.56\cdot10^{-9}i$ against $3.13\cdot10^{-9}-4.50\cdot10^{-9}i$. Here $r_3$ depends on the unfolding and not only on the germ, so this checks that $u$ enters as the Lavaurs phase. The finite-$q$ shifts themselves are explained in Section~\ref{sec:kinematic}. Solving $\rho_{p,r}(u_a)=-1$ gives a prediction for $\lim G$. Table~\ref{tab:G} compares it with the bulb sizes for all ten classes with $p\le5$; the agreement is at most $9\cdot10^{-7}$.
 
 \begin{table}[t]
 \centering\small
 \input{tables/bounded_p_G.tex}
 \caption{Bulb size $G$ (Definition~\ref{def:G}) along $q=pN+r$, extrapolated from $N=512,1024,2048$, against the prediction from $M_u=\mu e^{u/p^2}\PP$. The first row gives $G_0=\lim G(1/q)$.}\label{tab:G}
 \end{table}
+
+\subsection{The first-order correction is kinematic}\label{sec:kinematic}
+The unfolding above uses only the leading term $e^{-2\pi i/\alpha}\approx\mu e^{u/p^2}$. Exactly, the exponent is a M\"obius function of $u$.
+
+\begin{proposition}\label{prop:kinematic}
+Let $\lambda=e^{2\pi i\alpha}=\lambda_0e^{u/q^2}$ with $\lambda_0=e^{2\pi ip/q}$. Then $e^{-2\pi i/\alpha}=\mu\,e^{\tilde u/p^2}$ with $\mu=e^{-2\pi iq/p}$ and
+\[
+\tilde u=\frac{u}{1+u/(2\pi i\,pq)}=u+\frac{i\,u^2}{2\pi pq}+O\Bigl(\frac{u^3}{q^2}\Bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+$\alpha=(2\pi ipq+u)/(2\pi iq^2)$, so $-1/\alpha+q/p=qu/\bigl(p(2\pi ipq+u)\bigr)$, and $2\pi i p^2$ times this is $\tilde u$.
+\end{proof}
+
+If the renormalized germ depends on $\alpha$ only through this multiplier, up to $O(q^{-2})$, then $R_{p/q}(u)=\rho_{p,r}(\tilde u(u))+O(q^{-2})$ coefficientwise. Comparing the $u^2$ and $u^3$ coefficients, with $\rho_{p,r}(u)=1-u+\kappa_{p,r}u^2+\rho_3u^3+\dots$, gives
+\begin{equation}\label{eq:kinematic}
+\kappa(p/q)=\kappa_{p,r}-\frac{i}{2\pi pq}+O(q^{-2}),\qquad r_3(p/q)=\rho_3+\frac{i\,\kappa_{p,r}}{\pi pq}+O(q^{-2}).
+\end{equation}
+The first identity is the observed coefficient $c_1(p)=-i/(2\pi p)$ of Conjecture~\ref{conj:main} and Section~\ref{sec:boundedp}. It involves no property of the germ, which explains why it is the same in degree three.
+
+\begin{observation}\label{obs:kinematic}
+Let $r_k(p/q)$ be the Taylor coefficients of the bulb (Cauchy integrals on $|u|=1.5$, double precision) and $\rho_k$ those of the renormalized family $M_u$ (Cauchy integrals on the same circle). For $2\le k\le8$, $(p,r)\in\{(1,1),(2,1),(3,1),(3,2)\}$ and $q=pN+r$ with $N=64,128,\dots,1024$, the residuals $|r_k(p/q)-[u^k]\rho_{p,r}(\tilde u)|$ decrease by a factor between $3.77$ and $4.28$ per doubling of $N$, in all $41$ cases where the residual exceeds $10^{-8}$; below that level the round-off of the Cauchy integrals takes over. Without the substitution $u\mapsto\tilde u$ the factor lies between $1.1$ and $2.0$. In degree three, with the cubic horn germ, Cauchy integrals on $|u|=1$ and $p=1$, the factor lies between $3.75$ and $4.06$ ($26$ cases).
+\end{observation}
+
+So through first order in $1/q$ the whole function $R_{p/q}$, not only $\kappa$, is the renormalized family composed with the exact Inou--Shishikura phase: the germ itself has no $O(1/q)$ correction. For $p=1$, $q=1025$, \eqref{eq:kinematic} predicts $r_3-\rho_3=1.62\cdot10^{-5}+0.74\cdot10^{-5}i$, while the values in Section~\ref{sec:unfolding} give $1.6\cdot10^{-5}+0.8\cdot10^{-5}i$.
 
 \subsection{The hierarchy}\label{sec:hierarchy}
 For $\alpha=[0;a_1,a_2,\ldots]$ the renormalization $\mathcal Rf_\alpha$ has multiplier $e^{-2\pi i/\alpha}$. Conjugating by $z\mapsto\bar z$ turns its rotation number into $1/\alpha\bmod1=[0;a_2,a_3,\ldots]$, so that $\mathcal R$ acts on continued fractions as the Gauss map~\cite{IS}. When the first $k$ partial quotients tend to infinity, the picture therefore predicts that each renormalization is close to $\PP$ applied to the complex conjugate of the previous one. Write $\bar G(W)=\overline{G(\bar W)}$, normalize germs to the form $v+v^2+O(v^3)$, and set
@@ -364,7 +390,7 @@ The first-order theory of satellite bulbs is the Ford-circle picture, with radii
 \subsection*{Open problems}
 \begin{enumerate}
 \item Prove Conjecture~\ref{conj:main}, for instance by establishing a conformal conjugacy between $\Phi_{1/q}$ and $\mathcal Rf_{1/q}$ together with continuity of $\mathcal R$ at integer $1/\alpha$.
-\item Derive the universal first-order term $-i/(2\pi pq)$, observed for $p\le5$ and in two families.
+\item Prove that the renormalized germ has no $O(1/q)$ correction beyond the phase of Proposition~\ref{prop:kinematic} (Numerical result~\ref{obs:kinematic}); by \eqref{eq:kinematic} this gives the universal term $-i/(2\pi pq)$.
 \item Prove Conjecture~\ref{conj:hierarchy} (verified numerically for $k\le3$), and identify the fixed point $G_*$ of $G\mapsto\mathcal P(\bar G)$ and its spectrum.
 \item Compute the generic limit function $\kappa(p/q)$, $p\to\infty$, by iterated renormalization with bounded partial quotients, including its values at quadratic irrationals as periodic points of $\mathcal R$.
 \item Decide whether $\kappa_0$ can be expressed through Écalle--Voronin invariants of $z+z^2$ in closed form.
