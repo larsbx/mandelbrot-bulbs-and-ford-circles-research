@@ -68,7 +68,7 @@ The component $W_{p/q}$ is, up to the conformal change $u\mapsto c(\lambda_0e^{u
 \operatorname{Re}\kappa_0&=\phantom{-}0.023825887402200569000729189645402\ldots,\\
 \operatorname{Im}\kappa_0&=-0.052304659114003666316522486207571\ldots .
 \end{align*}
-\item \emph{Renormalization} (Section~\ref{sec:renorm}). The identification is one instance of a broader picture in which the rotation quotient $\Phi_{p/q}$ is a near-parabolic renormalization of $f_{p/q}$. This picture predicts, with no free parameters, the limits of $\kappa(p/q)$ and of the bulb size along every sequence of bounded $p$, and the analogous constants for $z^3+c$. The predicted values of $\kappa$ agree with the bulb data to $10^{-8}$ in degree two and $5\cdot10^{-6}$ in degree three, and the predicted bulb sizes to $9\cdot10^{-7}$. Iterating the construction along continued fractions with large partial quotients gives a hierarchy $\kappa_0=\kappa_1,\kappa_2,\ldots$ that contracts by a factor $0.042$ per level towards a second constant $\kappa_*=0.011929183413-0.037455493752\,i$; the second level is confirmed on bulbs to $10^{-8}$.
+\item \emph{Renormalization} (Section~\ref{sec:renorm}). The identification is one instance of a broader picture in which the rotation quotient $\Phi_{p/q}$ is a near-parabolic renormalization of $f_{p/q}$. This picture predicts, with no free parameters, the limits of $\kappa(p/q)$ and of the bulb size along every sequence of bounded $p$, and the analogous constants for $z^3+c$. The predicted values of $\kappa$ agree with the bulb data to $10^{-8}$ in degree two and $5\cdot10^{-6}$ in degree three, and the predicted bulb sizes to $9\cdot10^{-7}$. Iterating the construction along continued fractions with large partial quotients gives a hierarchy $\kappa_0=\kappa_1,\kappa_2,\ldots$ that contracts by a factor $0.042$ per level towards a second constant $\kappa_*=0.011929183413-0.037455493752\,i$; the second and third levels are confirmed on bulbs, to $3\cdot10^{-10}$ and $1.2\cdot10^{-6}$.
 \end{enumerate}
 
 Items (1) and (2) are theorems. Items (3)--(5) are numerical results, obtained with rigorous or cross-validated arithmetic and stated with their error estimates. We do not prove the identity $\kappa_0=\iota(\PP)-\frac12$; Section~\ref{sec:renorm} explains why we expect a proof along the lines of the Inou--Shishikura theory of near-parabolic renormalization~\cite{IS}.
@@ -318,10 +318,10 @@ For every $k\ge1$,
 \[
 \lim_{N_k\to\infty}\cdots\lim_{N_1\to\infty}\kappa\bigl([0;N_1,\ldots,N_k]\bigr)=\begin{cases}\kappa_k,&k\text{ odd},\\ \overline{\kappa_k},&k\text{ even}.\end{cases}
 \]
-In particular $\kappa_*$ and $\overline{\kappa_*}$ are the values of the first correction when all partial quotients of $p/q$ are large.
+In particular $\kappa_*$ and $\overline{\kappa_*}$ are the limits of the first correction as the number of large partial quotients of $p/q$ grows, taken along odd and even $k$ respectively.
 \end{conjecture}
 
-The cases $k=1,2$ are Numerical results~\ref{obs:identity} and the paragraph above. For $k\ge3$ a direct test would need bulbs of period $q\gtrsim N^3$ with $N$ large enough for the $O(1/N)$ corrections to be small; with the $O(q^2)$ normal form this is within reach for $N\approx20$, but the extrapolations become delicate, and we leave it open.
+The case $k=1$ is Numerical result~\ref{obs:identity}, and $k=2$ is the iterated limit discussed above. We also tested the diagonal sequences $[0;N,\ldots,N]$, computing $\kappa$ with the normal form in midpoint arithmetic at $128$ and $192$ bits (the two agree to $4\cdot10^{-35}$) and fitting polynomials in $1/N$. For $k=2$ and $16\le N\le160$ ($q\le25601$) the limit agrees with $\overline{\kappa_2}$ to $3\cdot10^{-10}$, so the diagonal and the iterated limit coincide. For $k=3$ and $6\le N\le40$ ($q\le64080$) the limit is $0.0119509937-0.0374804294\,i$. This agrees with $\kappa_3$ to $1.2\cdot10^{-6}$, and every fit with $N\ge10$ and $5$ or $6$ terms lies within $1.4\cdot10^{-5}$ of $\kappa_3$, whereas $|\kappa_3-\kappa_2|=7.8\cdot10^{-4}$ and $|\kappa_3-\overline{\kappa_3}|=7.5\cdot10^{-2}$. Thus the conjecture, including its parity rule, holds numerically for $k\le3$. Level $4$ ($|\kappa_4-\kappa_3|=3.3\cdot10^{-5}$) would require periods $q\approx N^4$ with $N\gtrsim30$.
 
 \begin{figure}[t]
 \centering
@@ -365,7 +365,7 @@ The first-order theory of satellite bulbs is the Ford-circle picture, with radii
 \begin{enumerate}
 \item Prove Conjecture~\ref{conj:main}, for instance by establishing a conformal conjugacy between $\Phi_{1/q}$ and $\mathcal Rf_{1/q}$ together with continuity of $\mathcal R$ at integer $1/\alpha$.
 \item Derive the universal first-order term $-i/(2\pi pq)$, observed for $p\le5$ and in two families.
-\item Test Conjecture~\ref{conj:hierarchy} on bulbs at level $k\ge3$, and identify the fixed point $G_*$ of $G\mapsto\mathcal P(\bar G)$ and its spectrum.
+\item Prove Conjecture~\ref{conj:hierarchy} (verified numerically for $k\le3$), and identify the fixed point $G_*$ of $G\mapsto\mathcal P(\bar G)$ and its spectrum.
 \item Compute the generic limit function $\kappa(p/q)$, $p\to\infty$, by iterated renormalization with bounded partial quotients, including its values at quadratic irrationals as periodic points of $\mathcal R$.
 \item Decide whether $\kappa_0$ can be expressed through Écalle--Voronin invariants of $z+z^2$ in closed form.
 \end{enumerate}
