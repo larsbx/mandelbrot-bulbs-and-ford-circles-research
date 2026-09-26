@@ -6,14 +6,14 @@ from __future__ import annotations
 from functools import lru_cache
 import mpmath as mp
 from .horn import horn_coeffs, QUADRATIC
-from .horn_half import HALF, horn_coeffs_half_normalized
+from .horn_rational import root_germ_coeffs
 from .germ import horn_germ, iterate_index, compose
 
 
 @lru_cache(maxsize=None)
 def _coeffs(M: int, dps: int, germ: tuple = QUADRATIC):
-    if germ == HALF:                                 # the ½-root germ −z + z² (V49), not a cusp germ
-        return horn_coeffs_half_normalized(M, dps)
+    if germ[0] == "root":                            # a p/q-root germ e^{2πip/q}z + z² (V49, V50), not a cusp germ
+        return root_germ_coeffs(*germ[1:], M, dps)
     return horn_coeffs(M, h=0.25, N=64, dps=dps, germ=germ)[0]
 
 
@@ -92,7 +92,7 @@ def G_limits(p: int, r: int, germ: tuple = QUADRATIC, steps: int = 400) -> tuple
     from the root to each s with s^{d−1} = −1, continuing u by Newton on ρ(u) = s(t)^{d−1} (d − 1 = 2 for a germ
     with a cubic term: the centre is a double zero of ρ; d − 1 = 1 for z + z²); k = len(germ)."""
     import numpy as np
-    k = len(germ)                                    # = deg g − 1 = order of the critical point = branching of ρ
+    k = 1 if germ[0] == "root" else len(germ)      # = deg g − 1 = order of the critical point = branching of ρ
     cycle, seed = unfolding(p, r, germ=germ)
     out = []
     for end in (np.exp(1j * np.pi * (2 * j + 1) / k) for j in range(k)):     # s with s^k = −1

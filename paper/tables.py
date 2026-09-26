@@ -107,3 +107,12 @@ lines = [r"\begin{tabular}{@{}lllll@{}}", r"\toprule", r"constant & germ & value
 lines += [f"{a} & {b} & ${c}$ & {d} & {e} \\\\" for a, b, c, d, e in rows]
 lines += [r"\bottomrule", r"\end{tabular}"]
 write("constants", "\n".join(lines) + "\n")
+
+# Table (tab:rational): one-sided limits at the roots of satellites (V50)
+lines = [r"\begin{tabular}{@{}lllllc@{}}", r"\toprule", r"$p/q$ & side & $t$ & horn map of $e^{2\pi ip/q}z+z^2$ & bulbs, extrapolated & $|\Delta|$ \\", r"\midrule"]
+for l in open("data/rational_limits.txt"):
+    pq, side, tail, pred, bulb, dlt, _ = l.rstrip("\n").split("\t")
+    t = r"$\varnothing$" if tail == "-" else f"${tail}$"
+    lines.append(f"${pq}$ & {side} & {t} & ${cplx(z(pred), 11)}$ & ${cplx(z(bulb), 11)}$ & {sci_tex(float(dlt))} \\\\")
+lines += [r"\bottomrule", r"\end{tabular}"]
+write("rational", "\n".join(lines) + "\n")
