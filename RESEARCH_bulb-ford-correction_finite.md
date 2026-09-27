@@ -84,11 +84,11 @@ As in the original §1, with these changes.
 
   | `q` | `Δ` | `q²Δ` |
   |---|---|---|
-  | 59 | `5.7e-4` | 1.98 |
-  | 127 | `1.3e-4` | 2.10 |
+  | 59 | `5.7e-4` | 1.99 |
+  | 127 | `1.3e-4` | 2.06 |
   | 251 | `5.5e-5` | 3.47 |
 
-  The `q²Δ` column is not constant, so these rows do not support the reading `O(q⁻²)` of the original. Only the table is claimed. The tail satisfies `|r_k| < 1e-16` at `k = 16`.
+  The `q²Δ` column is not constant, so these rows do not support the reading `O(q⁻²)` of the original. Only the table is claimed. The `q²Δ` column is computed from the unrounded `Δ` (an earlier `1.98, 2.10` came from the rounded one). The `G_ant` side is form C (P10 at `q = 59, 127`, every `p ≤ q/2`); `|u_a|/2` is still an FFT value, so `Δ` stays form T. The tail satisfies `|r_k| < 1e-16` at `k = 16`.
 - **V15 (`κ` and `G` on four `q`), form T.** Over all `p` and `q ∈ {59, 127, 251, 1009}`: `Re κ ∈ [0.015, 0.064]`, `|Im κ| ≤ 0.055`, `|r₃| ≤ 2.3e-3`, `|r₄| ≤ 1e-4`. `κ(−x̃) = conj κ(x̃)` holds exactly by conjugation (form E). Newton on the cubic `1 − u + κu² + r₃u³ = −1` from `u = 2` reproduces `G` to `≤ 3e-3` on the same sets.
 - **V16 (bounded `p`), form T.** Values at the largest computed `N`, and the last doubling step (`data/sequences.json`):
 
@@ -188,7 +188,7 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 
 1. **The flank cycle.** P6 is evaluated for `q ≤ 20` (V22), its Farey prediction is falsified (F6), and the flank term is compared with `κ` and `G` (V23). V22(b) is proven as P7, and the second-rank terms are the second ring except at the two smallest `x*` (V24). V24(a) is P8, and the small-`x*` intruders are the widest arcs next to the characteristic arc (P9, V25). The crossings are located and `R` increases after them to `q = 64` (V26). Next: a closed form for the growth of the intruder and ring-2 terms in `q` (form T).
 2. **Steps and cusps.** Tabulate `J(p'/q')` and the cusp depths at `q = 2003` for `q' ≤ 7`, next to the `q = 1009` table (form T).
-3. ~~**Certified antipodes.**~~ Done as P10 (`q ≤ 16`, form C). Next: a certified replacement for `SatelliteLabel`, and boxes at `q = 59` beside the V14 table.
+3. ~~**Certified antipodes.**~~ Done as P10 (`q ≤ 16`, and `q = 59, 127` beside V14; form C). Next: a certified replacement for `SatelliteLabel`, and a certified `|u_a|/2`.
 4. **`z³ + c`.** Repeat V15–V19 as tables (`MAIN3` is wired).
 
 ---
@@ -202,7 +202,7 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 | none | P6 | projective index sum, exact at `ε = 0` |
 | P10 | P10 | certified antipodes and `G_ant` brackets; unchanged (form C) |
 | V12, V13, V15, V19, V21 | same ids | remainders and arrows removed; values unchanged |
-| V14 | V14 | table only; the `O(q⁻²)` reading is withdrawn (`q²Δ` = 1.98, 2.10, 3.47) |
+| V14 | V14 | table only; the `O(q⁻²)` reading is withdrawn (`q²Δ` = 1.99, 2.06, 3.47); `G_ant` column certified (P10) |
 | V16, V17, V20 | V16, V16b, V17, V20 | limits become values at the largest `N` (T) or fit intercepts (S) |
 | V18 | V18 | regressions on stated bins |
 | F4 | F4 | "no single continuous `Ĝ`" becomes a Lipschitz lower bound `6.8·10⁴` from exact pairs |
