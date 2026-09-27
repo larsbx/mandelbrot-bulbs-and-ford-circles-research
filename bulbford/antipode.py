@@ -1,0 +1,271 @@
+"""Certified antipodes, roots of unity, and enclosures of G_ant.
+
+Three finite certificates, all in the rational dyadic boxes of `certify.py`:
+
+1. **ζ_q.**  Krawczyk boxes for all q roots of X^q − 1, pairwise disjoint, hence
+   one per root.  ζ_q := e^{2πi/q} is selected by an order check, not an angle:
+   it is the root in the open upper half plane with the largest real part.
+   λ₀ = ζ_q^p is then an interval power, c_root = λ₀/2 − λ₀²/4 an interval
+   polynomial.
+
+2. **Antipode (type ρ = −1).**  For the system in (z, c)
+
+       F₁ = f_c^q(z) − z,   F₂ = (f_c^q)'(z) + 1,
+
+   a two-variable Krawczyk inclusion K(X) ⊂ int X gives a unique solution in
+   X = Z × C; the same-box exclusions 0 ∉ f_c^j(Z) − f_c^i(Z) for the forbidden
+   pairs of type (0, q) give z exact period q.  So some c ∈ C has a q-cycle of
+   multiplier exactly −1.
+
+3. **G.**  With c'(λ) = (1 − λ)/2 on the main cardioid,
+   G_ant = q²|c_ant − c_root| / |1 − λ₀|.  The enclosure is computed for the
+   quadrance G² = q⁴ Qd(c_ant − c_root) / Qd(1 − λ₀) (rank-2, no square root);
+   G is bracketed from it by rational square-root bounds.
+
+Imports needed to read (2)–(3) as bulb geometry: [DH] (the multiplier map of
+B_{p/q} is a conformal isomorphism onto 𝔻, so ∂B_{p/q} has exactly one point
+with ρ = −1) and `SatelliteLabel` (the certified cycle is the one of B_{p/q};
+VALIDATED by continuation only).
+"""
+from __future__ import annotations
+
+import cmath
+from dataclasses import dataclass
+from fractions import Fraction
+from functools import lru_cache, reduce
+from math import isqrt, pi
+
+from .certify import (
+    ONE,
+    PREC,
+    ZERO,
+    Box,
+    I,
+    TAGS,
+    Verdict,
+    _approx_inverse,
+    _complex_dyadic,
+    _down,
+    box_from_numerators,
+    box_numerators,
+    forbidden_pairs,
+    krawczyk,
+    newton_refine,
+)
+
+TWO = Box.point(2)
+
+
+# --- boxes: powers, quadrance, division, square-root bounds ------------------------------------
+
+
+def power(b: Box, n: int, prec: int = PREC) -> Box:
+    return reduce(lambda acc, _: (acc * b).rounded(prec), range(n), ONE)
+
+
+def quadrance(b: Box) -> I:
+    """Qd(x, y) = x² + y² on a box, with the square of an interval taken tightly."""
+    sq = lambda i: I(Fraction(0) if i.contains_zero() else min(i.lo**2, i.hi**2), max(i.lo**2, i.hi**2))
+    return sq(b.re) + sq(b.im)
+
+
+def divide_positive(a: I, b: I) -> I:
+    if b.lo <= 0:
+        raise ValueError("divisor interval must be positive")
+    v = (a.lo / b.lo, a.lo / b.hi, a.hi / b.lo, a.hi / b.hi)
+    return I(min(v), max(v))
+
+
+def sqrt_bounds(i: I, prec: int = PREC) -> I:
+    """[√lo, √hi] enlarged to dyadics of `prec` bits by integer square roots."""
+    if i.lo < 0:
+        raise ValueError("square root of a negative interval")
+    scale = 4**prec
+    lo = isqrt(int(i.lo * scale))
+    hi_sq = -(-i.hi.numerator * scale // i.hi.denominator)
+    hi = isqrt(hi_sq) + (isqrt(hi_sq) ** 2 != hi_sq)
+    return I(Fraction(lo, 2**prec), Fraction(hi, 2**prec))
+
+
+# --- 1: roots of unity -------------------------------------------------------------------------
+
+
+def _unity(q: int):
+    def r(x: Box, prec: int = PREC) -> tuple[Box, Box]:
+        return power(x, q, prec) - ONE, (Box.point(q) * power(x, q - 1, prec)).rounded(prec)
+
+    return r
+
+
+def _disjoint(a: Box, b: Box) -> bool:
+    return a.re.hi < b.re.lo or b.re.hi < a.re.lo or a.im.hi < b.im.lo or b.im.hi < a.im.lo
+
+
+def unity_boxes(q: int, radius_bits: int = 100, prec: int = PREC) -> tuple[Box, ...]:
+    """Krawczyk-certified, pairwise disjoint boxes for the q roots of X^q − 1 (seeds untrusted)."""
+    boxes = []
+    for k in range(q):
+        re, im = newton_refine(_unity(q), *_complex_dyadic(cmath.exp(2j * pi * k / q), prec), 4, prec)
+        beta = Box.around(re, im, Fraction(1, 2**radius_bits))
+        if not krawczyk(_unity(q), beta, prec).strictly_inside(beta):
+            raise ValueError(f"root-of-unity box {k}/{q} not certified")
+        boxes.append(beta)
+    if not all(_disjoint(a, b) for i, a in enumerate(boxes) for b in boxes[i + 1 :]):
+        raise ValueError("root-of-unity boxes overlap")
+    return tuple(boxes)
+
+
+@lru_cache(maxsize=None)
+def zeta_box(q: int, radius_bits: int = 100, prec: int = PREC) -> Box:
+    """ζ_q: the upper-half-plane root with the largest real part, chosen by exact box comparisons."""
+    if q <= 2:
+        return Box.point(1 if q == 1 else -1)
+    upper = [b for b in unity_boxes(q, radius_bits, prec) if b.im.lo > 0]
+    best = [b for b in upper if all(b is o or o.re.hi < b.re.lo for o in upper)]
+    if len(best) != 1:
+        raise ValueError("ζ_q not separated by the order check")
+    return best[0]
+
+
+def lambda_box(p: int, q: int, prec: int = PREC) -> Box:
+    return power(zeta_box(q, prec=prec), p, prec)
+
+
+def root_box(lam: Box, prec: int = PREC) -> Box:
+    """c_root = λ/2 − λ²/4."""
+    return (Box.point(Fraction(1, 2)) * lam - Box.point(Fraction(1, 4)) * lam * lam).rounded(prec)
+
+
+# --- 2: antipode --------------------------------------------------------------------------------
+
+
+def jet(z: Box, c: Box, n: int, prec: int = PREC) -> tuple[Box, Box, Box, Box, Box]:
+    """(f^n, ∂_z f^n, ∂_c f^n, ∂_zz f^n, ∂_zc f^n) at (z, c)."""
+
+    def step(s, _):
+        w, a, b, zz, zc = s
+        r = lambda x: x.rounded(prec)
+        return (r(w * w + c), r(TWO * w * a), r(TWO * w * b + ONE), r(TWO * (a * a + w * zz)), r(TWO * (a * b + w * zc)))
+
+    return reduce(step, range(n), (z, ONE, ZERO, ZERO, ZERO))
+
+
+Vec = tuple[Box, Box]
+Mat = tuple[tuple[Box, Box], tuple[Box, Box]]
+
+
+def system(q: int):
+    """(F, J) for F = (f^q(z) − z, (f^q)'(z) + 1) in the unknowns (z, c)."""
+
+    def f(x: Vec, prec: int = PREC) -> tuple[Vec, Mat]:
+        w, a, b, zz, zc = jet(x[0], x[1], q, prec)
+        return (w - x[0], a + ONE), ((a - ONE, b), (zz, zc))
+
+    return f
+
+
+def _matvec(m: Mat, v: Vec) -> Vec:
+    return tuple(m[i][0] * v[0] + m[i][1] * v[1] for i in range(2))
+
+
+def _matmul(m: Mat, n: Mat) -> Mat:
+    return tuple(tuple(m[i][0] * n[0][j] + m[i][1] * n[1][j] for j in range(2)) for i in range(2))
+
+
+def _dyadic_point(b: Box, prec: int) -> Box:
+    re, im = b.mid
+    return Box.point(_down(re, prec), _down(im, prec))
+
+
+def _inverse_point(m: Mat, prec: int) -> Mat:
+    """Dyadic point matrix near the inverse of mid(m); affects acceptance only, never soundness."""
+    mid = lambda b: Box.point(*b.mid)
+    (a, b), (c, d) = ((mid(m[0][0]), mid(m[0][1])), (mid(m[1][0]), mid(m[1][1])))
+    inv_det = _approx_inverse(a * d - b * c, prec)
+    neg = Box.point(-1)
+    return tuple(tuple(_dyadic_point(inv_det * e, prec) for e in row) for row in ((d, neg * b), (neg * c, a)))
+
+
+def krawczyk2(f, x: Vec, prec: int = PREC) -> Vec:
+    """K(X) = m − A F(m) + (I − A J(X))(X − m)."""
+    m = tuple(Box.point(*b.mid) for b in x)
+    value, jac_m = f(m, prec)
+    _, jac_x = f(x, prec)
+    a = _inverse_point(jac_m, prec)
+    aj = _matmul(a, jac_x)
+    ident_minus = tuple(tuple((ONE if i == j else ZERO) - aj[i][j] for j in range(2)) for i in range(2))
+    av = _matvec(a, value)
+    corr = _matvec(ident_minus, tuple(x[i] - m[i] for i in range(2)))
+    return tuple((m[i] - av[i] + corr[i]).rounded(prec) for i in range(2))
+
+
+def failed_cycle_exclusions(z: Box, c: Box, q: int, prec: int = PREC) -> tuple[tuple[int, int], ...]:
+    """Forbidden pairs of type (0, q) on the orbit of Z under f_C (empty ⇔ exact period q)."""
+    orbit = reduce(lambda acc, _: acc + ((acc[-1] * acc[-1] + c).rounded(prec),), range(q), (z,))
+    return tuple(sorted(p for p in forbidden_pairs(0, q, q) if not (orbit[p[1]] - orbit[p[0]]).excludes_zero()))
+
+
+@dataclass(frozen=True, slots=True)
+class AntipodeCertificate:
+    p: int
+    q: int
+    z: Box
+    c: Box
+    krawczyk_inclusion: bool
+    failed_exclusions: tuple[tuple[int, int], ...]
+    prec: int
+
+    @property
+    def verdict(self) -> Verdict:
+        both = self.krawczyk_inclusion and not self.failed_exclusions
+        return Verdict.ACCEPTED if both else Verdict.INCONCLUSIVE
+
+    def g_squared(self) -> I:
+        """q⁴ Qd(C − c_root) / Qd(1 − λ₀), enclosing G_ant² for every point of C."""
+        lam = lambda_box(self.p, self.q, self.prec)
+        num = quadrance(self.c - root_box(lam, self.prec)) * I.point(self.q**4)
+        return divide_positive(num, quadrance(ONE - lam))
+
+    def g(self) -> I:
+        return sqrt_bounds(self.g_squared(), self.prec)
+
+    def as_record(self) -> dict:
+        g = self.g()
+        return {
+            "p": self.p,
+            "q": self.q,
+            "prec": self.prec,
+            "z_box_numerators": box_numerators(self.z, self.prec),
+            "c_box_numerators": box_numerators(self.c, self.prec),
+            "krawczyk_inclusion": self.krawczyk_inclusion,
+            "failed_exclusions": [list(x) for x in self.failed_exclusions],
+            "verdict": self.verdict.value,
+            "G_ant_bounds": [str(g.lo), str(g.hi)],
+            "tags": sorted(TAGS),
+        }
+
+
+def check_antipode(p: int, q: int, z: Box, c: Box, prec: int = PREC) -> AntipodeCertificate:
+    inside = all(k.strictly_inside(b) for k, b in zip(krawczyk2(system(q), (z, c), prec), (z, c)))
+    return AntipodeCertificate(p, q, z, c, inside, failed_cycle_exclusions(z, c, q, prec), prec)
+
+
+def certify_antipode(p: int, q: int, seed_z: complex, seed_c: complex, radius_bits: int = 64, prec: int = PREC, newton_steps: int = 4) -> AntipodeCertificate:
+    """Polish (z, c) by untrusted dyadic Newton steps, then check on a box of half-width 2^-radius_bits."""
+    f = system(q)
+
+    def step(x: Vec, _) -> Vec:
+        value, jac = f(x, prec)
+        d = _matvec(_inverse_point(jac, prec), value)
+        return tuple(_dyadic_point(x[i] - d[i], prec) for i in range(2))
+
+    x0 = tuple(Box.point(*_complex_dyadic(s, prec)) for s in (seed_z, seed_c))
+    mz, mc = (b.mid for b in reduce(step, range(newton_steps), x0))
+    r = Fraction(1, 2**radius_bits)
+    return check_antipode(p, q, Box.around(*mz, r), Box.around(*mc, r), prec)
+
+
+def replay(row: dict) -> AntipodeCertificate:
+    """Re-check a stored record from its boxes alone; stored verdict and bounds are not trusted."""
+    prec = row["prec"]
+    return check_antipode(row["p"], row["q"], box_from_numerators(row["z_box_numerators"], prec), box_from_numerators(row["c_box_numerators"], prec), prec)

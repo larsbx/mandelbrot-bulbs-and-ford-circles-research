@@ -100,6 +100,36 @@ What the box does **not** carry: that the certified centre is the centre of
 `B_{p/q}`.  That label rides on `[DH]` plus the continuation seed
 (`SatelliteLabel`, VALIDATED), recorded as named tags in every record.
 
+## Certified antipodes and G_ant enclosures
+
+`bulbford/antipode.py` extends the joint box to the `ρ = −1` point. On a box
+`Z × C` a two-variable Krawczyk inclusion for
+
+```text
+F(z, c) = (f_c^q(z) − z, (f_c^q)'(z) + 1)
+```
+
+gives one solution, and the type-`(0,q)` exclusions on the orbit of `Z`
+give it exact period `q`. `ζ_q` is certified without an angle: all roots of
+`X^q − 1` get disjoint Krawczyk boxes, and `ζ_q` is the upper-half-plane box
+whose real part is strictly largest. With `λ₀ = ζ_q^p` and
+`c_root = λ₀/2 − λ₀²/4` as interval expressions, the enclosure is taken for
+the quadrance
+
+```text
+G_ant² = q⁴ Qd(c_ant − c_root) / Qd(1 − λ₀)
+```
+
+and `G_ant` is bracketed by rational square-root bounds.
+`data/antipode_certificates.json` holds 79 accepted records (`q <= 16`),
+each replayed from its endpoints; the stored bounds are recomputed, not
+trusted.
+
+This is a certified enclosure of a finite algebraic quantity. Reading it as
+the size proxy of `B_{p/q}` still needs `[DH]` and `SatelliteLabel`; it
+says nothing about `q → ∞`, and so leaves every limit and conjecture in the
+register at its current grade.
+
 ## Wake combinatorics
 
 `bulbford/wake.py` builds, in exact `Q/Z` arithmetic, the doubling cycle of

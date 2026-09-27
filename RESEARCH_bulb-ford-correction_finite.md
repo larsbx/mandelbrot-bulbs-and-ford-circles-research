@@ -66,6 +66,7 @@ As in the original §1, with these changes.
 - **P9 (arc-width lemma), form E.** In the setting of P7, the arc from `α_{w+j}` to `α_{w+j+1}` (indices mod `q`; for `w + j ≡ q − 1` this is the arc through angle `0`) has width `2^{e_j}/M` with `e_j = (j·p̄) mod q`. So Goldberg's `q` arc widths `2^0/M, …, 2^{q−1}/M` are placed around the characteristic arc by `x̃ = p̄/q`. In particular, the two arcs flanking the characteristic arc have widths `2^{p̄}/M` (`j = 1`) and `2^{q−p̄}/M` (`j = −1`). One of them is among the two widest (`e ≥ q − 2`, width at least `2^{q−2}/M`) if and only if `x* ≤ 2/q`.
   *Proof.* For `0 ≤ r ≤ q − 2`, P7 (iii) gives `α_{r+1} − α_r = 2^{q−2−k₁}` with `k₁ ≡ (q − p − 1 − r)·p̄` and `0 ≤ k₁ ≤ q − 2`. With `r = w + j = p − 1 + j`, `k₁ ≡ −2 − j·p̄`, so `q − 2 − k₁ ≡ j·p̄ (mod q)` and `0 ≤ q − 2 − k₁ ≤ q − 2`. Hence the exponent of each of these `q − 1` arcs is `e_j`, and `e_j ≠ q − 1` for them. Since `j ↦ j·p̄` is injective, their exponents are exactly `0, …, q − 2`. Their widths sum to `2^{q−1} − 1`, so the remaining arc, through `0`, has width `M − (2^{q−1} − 1) = 2^{q−1}`, the exponent `q − 1 = e_j` for its `j ≡ −p`. For the flanking arcs, `e_1 = p̄` and `e_{−1} = q − p̄` with `1 ≤ p̄ ≤ q − 1`. The larger is at least `q − 2` iff `p̄ ≤ 2` or `p̄ ≥ q − 2`, iff `x* = min(p̄, q − p̄)/q ≤ 2/q`. ∎
   *Checked in integers* (`tests/test_arc_widths.py`): every arc width and the flanking-arc equivalence for all fractions with `q ≤ 60`.
+- **P10 (certified antipodes), form C.** For every `p/q`, `2 ≤ q ≤ 16` (79 cases), a box `Z × C` of half-width `2⁻⁶⁴` carries a two-variable Krawczyk inclusion for `(f_c^q(z) − z, (f_c^q)'(z) + 1)` and the type-`(0, q)` exclusions on the orbit of `Z`: exactly one `(z, c)` in the box, `z` of exact period `q` with multiplier `−1`. `ζ_q` is a Krawczyk box selected by an exact order check (no angle), `λ₀ = ζ_q^p` and `c_root = λ₀/2 − λ₀²/4` are interval expressions, and `G_ant² ∈ q⁴ Qd(C − c_root)/Qd(1 − λ₀)` is bracketed with width below `10⁻¹⁶` (`data/antipode_certificates.json`, replayed by `tests/test_antipode.py`). Reading `C` as the antipode of `B_{p/q}` uses [DH] and `SatelliteLabel` (§5 referents; the label is also checked as a table: at all 79 certified centres the critical orbit is cyclically ordered about `α` with step `p`, form T).
 
 ---
 
@@ -187,7 +188,7 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 
 1. **The flank cycle.** P6 is evaluated for `q ≤ 20` (V22), its Farey prediction is falsified (F6), and the flank term is compared with `κ` and `G` (V23). V22(b) is proven as P7, and the second-rank terms are the second ring except at the two smallest `x*` (V24). V24(a) is P8, and the small-`x*` intruders are the widest arcs next to the characteristic arc (P9, V25). The crossings are located and `R` increases after them to `q = 64` (V26). Next: a closed form for the growth of the intruder and ring-2 terms in `q` (form T).
 2. **Steps and cusps.** Tabulate `J(p'/q')` and the cusp depths at `q = 2003` for `q' ≤ 7`, next to the `q = 1009` table (form T).
-3. **Certified antipodes.** A two-variable Krawczyk witness for `(f_c^q(z) − z, (f_c^q)'(z) + 1)`, turning `G_ant` for `q ≤ 16` into form C.
+3. ~~**Certified antipodes.**~~ Done as P10 (`q ≤ 16`, form C). Next: a certified replacement for `SatelliteLabel`, and boxes at `q = 59` beside the V14 table.
 4. **`z³ + c`.** Repeat V15–V19 as tables (`MAIN3` is wired).
 
 ---
@@ -199,6 +200,7 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 | P0, P2 | P0 + P2 | one Laurent identity; "total index converges" becomes `[ε⁰]I = ι` |
 | P1, P3, P4, P5 | P1, P3, P4, P5 | already finite; unchanged |
 | none | P6 | projective index sum, exact at `ε = 0` |
+| P10 | P10 | certified antipodes and `G_ant` brackets; unchanged (form C) |
 | V12, V13, V15, V19, V21 | same ids | remainders and arrows removed; values unchanged |
 | V14 | V14 | table only; the `O(q⁻²)` reading is withdrawn (`q²Δ` = 1.98, 2.10, 3.47) |
 | V16, V17, V20 | V16, V16b, V17, V20 | limits become values at the largest `N` (T) or fit intercepts (S) |

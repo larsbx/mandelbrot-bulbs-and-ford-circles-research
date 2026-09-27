@@ -4,7 +4,7 @@
  "family": "z^2 + c, satellites of the main cardioid",
  "tags": {
   "DH-multiplier": "[DH] the multiplier map of a hyperbolic component is a conformal isomorphism onto 𝔻; its unique zero is the component's centre",
-  "SatelliteLabel": "the period-q centre reached by continuation from λ₀(1 + q⁻²) lies in B_{p/q} (VALIDATED numerically; not a finite fact of this module)"
+  "SatelliteLabel": "the period-q centre found by Newton from c_of(λ₀(1 + q⁻²)), and the ρ = −1 point continued from it, belong to B_{p/q} (VALIDATED numerically; not a finite fact of this module)"
  },
  "certificates": [
   {

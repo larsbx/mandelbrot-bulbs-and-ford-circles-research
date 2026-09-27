@@ -169,6 +169,8 @@ def _approx_inverse(d: Box, prec: int) -> Box:
     """A dyadic point near 1/d; its accuracy affects only whether K ⊂ int β, never soundness."""
     x, y = d.mid
     n = x * x + y * y
+    if n == 0:
+        return ZERO  # K(β) = β then, so the inclusion fails: INCONCLUSIVE, not an exception
     return Box.point(_down(x / n, prec), _down(-y / n, prec))
 
 
@@ -205,8 +207,8 @@ class Verdict(str, Enum):
 TAGS = {
     "DH-multiplier": "[DH] the multiplier map of a hyperbolic component is a conformal isomorphism onto 𝔻;"
     " its unique zero is the component's centre",
-    "SatelliteLabel": "the period-q centre reached by continuation from λ₀(1 + q⁻²) lies in B_{p/q}"
-    " (VALIDATED numerically; not a finite fact of this module)",
+    "SatelliteLabel": "the period-q centre found by Newton from c_of(λ₀(1 + q⁻²)), and the ρ = −1 point"
+    " continued from it, belong to B_{p/q} (VALIDATED numerically; not a finite fact of this module)",
 }
 
 
@@ -246,16 +248,14 @@ class CenterCertificate:
         return self.certificate.verdict
 
     def as_record(self) -> dict:
-        b, c = self.certificate.box, self.certificate
-        scale = 2**c.prec
-        ends = (b.re.lo, b.re.hi, b.im.lo, b.im.hi)
+        c = self.certificate
         return {
             "p": self.p,
             "q": self.q,
             "type": [c.ell, c.period],
             "horizon": c.horizon,
             "prec": c.prec,
-            "box_numerators": [str(int(e * scale)) for e in ends],  # re_lo, re_hi, im_lo, im_hi over 2^prec
+            "box_numerators": box_numerators(c.box, c.prec),
             "krawczyk_inclusion": c.krawczyk_inclusion,
             "failed_exclusions": [list(x) for x in c.failed_exclusions],
             "verdict": c.verdict.value,
@@ -263,9 +263,21 @@ class CenterCertificate:
         }
 
 
-def box_from_record(row: dict) -> Box:
-    re_lo, re_hi, im_lo, im_hi = (Fraction(int(n), 2 ** row["prec"]) for n in row["box_numerators"])
+def box_numerators(box: Box, prec: int) -> list[str]:
+    """(re_lo, re_hi, im_lo, im_hi) as integer numerators over 2^prec; refuses a non-dyadic endpoint."""
+    ends = [e * 2**prec for e in (box.re.lo, box.re.hi, box.im.lo, box.im.hi)]
+    if any(e.denominator != 1 for e in ends):
+        raise ValueError("endpoint is not dyadic at this precision")
+    return [str(e.numerator) for e in ends]
+
+
+def box_from_numerators(nums: list[str], prec: int) -> Box:
+    re_lo, re_hi, im_lo, im_hi = (Fraction(int(n), 2**prec) for n in nums)
     return Box(I(re_lo, re_hi), I(im_lo, im_hi))
+
+
+def box_from_record(row: dict) -> Box:
+    return box_from_numerators(row["box_numerators"], row["prec"])
 
 
 def certify_center(p: int, q: int, seed: complex, radius_bits: int = 64, prec: int = PREC, newton_steps: int = 4) -> CenterCertificate:

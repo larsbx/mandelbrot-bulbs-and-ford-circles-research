@@ -77,8 +77,8 @@ def test_one_certified_centre_per_satellite_and_boxes_disjoint():
 def test_stored_records_are_current():
     import runpy
 
-    script = runpy.run_path(str(Path(__file__).resolve().parents[1] / "scripts" / "certify_centers.py"))
-    assert DATA.read_text() == script["render"]()
+    script = runpy.run_path(str(Path(__file__).resolve().parents[1] / "scripts" / "certify_bulbs.py"))
+    assert DATA.read_text() == script["OUTPUTS"][DATA]()
 
 
 # --- fail closed --------------------------------------------------------------------------------
@@ -120,3 +120,27 @@ def test_malformed_type_is_refused():
         certify_type(Box.point(0), 1, 2, horizon=2)
     with pytest.raises(ValueError):
         I(F(1), F(0))
+
+
+def test_zero_derivative_seed_is_inconclusive_not_an_exception():
+    """R = Q_2 = C² + C has R'(−1/2) = 0: the approximate inverse is 0, K(β) = β, no inclusion."""
+    beta = Box.around(F(-1, 2), F(0), F(1, 2**20))
+    assert certify_type(beta, 0, 2).verdict is Verdict.INCONCLUSIVE
+
+
+def test_satellite_label_table_rotation_about_alpha():
+    """SatelliteLabel cross-check (floating point, form T): at each certified centre the critical orbit
+    is cyclically ordered about the repelling fixed point α with step p, i.e. rotation number p/q."""
+    import cmath
+
+    for row in RECORDS:
+        p, q = row["p"], row["q"]
+        re, im = box_from_record(row).mid
+        c = complex(float(re), float(im))
+        alpha = next(a for a in ((1 + s * cmath.sqrt(1 - 4 * c)) / 2 for s in (-1, 1)) if abs(2 * a) > 1)
+        orbit = [0j]
+        for _ in range(q - 1):
+            orbit.append(orbit[-1] ** 2 + c)
+        order = sorted(range(q), key=lambda k: cmath.phase(orbit[k] - alpha) % (2 * cmath.pi))
+        pos = {k: i for i, k in enumerate(order)}
+        assert {(pos[(k + 1) % q] - pos[k]) % q for k in range(q)} == {p}, (p, q)
