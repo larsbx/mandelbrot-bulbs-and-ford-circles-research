@@ -92,7 +92,7 @@ def test_the_two_crossings_of_v26():
 
 
 @pytest.mark.parametrize("p,q", [(1, 5), (2, 7), (3, 8), (1, 13), (6, 13), (1, 40), (5, 64)])
-def test_p10_the_beta_term_in_closed_form(p, q):
+def test_p11_the_beta_term_in_closed_form(p, q):
     """β = 1 − λ₀/2 has multiplier 2 − λ₀, so its term is −1/(1 − (2 − λ₀)^q)."""
     lam = np.exp(2j * np.pi * p / q)
     assert abs(cycle_through(p, q, 0).contribution - (-1 / (1 - (2 - lam) ** q))) < 1e-9
