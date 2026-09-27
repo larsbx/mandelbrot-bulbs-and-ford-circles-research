@@ -78,3 +78,10 @@ def test_the_flank_plateau_is_a_lavaurs_multiplier():
         assert abs(abs(1 - slopes[0]) - mp.mpf("51.1881731")) < 1e-6
         gaps.append(abs(slopes[0] - complex(np.prod(2 * z))))
     assert 3.5 < gaps[0] / gaps[1] < 4.5
+
+
+def test_psi_out_needs_no_iterates_deep_in_the_petal():
+    Z = mp.mpc(-2000, 0)
+    a, b = psi_out(Z)[0], psi_out(Z + 1)[0]
+    assert abs(b - a - a * a) < 1e-30
+    assert abs(_expansion(a, outgoing=True)[0] - Z) < 1e-30

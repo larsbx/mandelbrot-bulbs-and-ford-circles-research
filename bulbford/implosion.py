@@ -83,7 +83,7 @@ def psi_out(Z):
     """(Ψ_out(Z), Ψ_out'(Z)): g^m of the repelling-petal inverse at Z − m."""
     with mp.workdps(DPS):
         Z = mp.mpc(Z)
-        m = int(mp.ceil(Z.real + 1 / RADIUS + 2 * abs(Z.imag)))
+        m = max(0, int(mp.ceil(Z.real + 1 / RADIUS + 2 * abs(Z.imag))))
         target, w = Z - m, -1 / (Z - m)
         for _ in range(100):
             value, slope = _expansion(w, outgoing=True)
