@@ -125,6 +125,14 @@ and `G_ant` is bracketed by rational square-root bounds.
 each replayed from its endpoints; the stored bounds are recomputed, not
 trusted.
 
+`data/antipode_certificates_v14.json` extends this to every `p <= q/2` at
+the V14 denominators `q = 59, 127, 251`. Along an orbit of length `q`,
+rectangular arithmetic widens an enclosure by `|Re 2z_i| + |Im 2z_i|` per
+step, not by `|2z_i|`, so the generator sizes each box from that growth
+(estimated from the untrusted float orbit; it only chooses the box) and
+stops any enclosure that passes `2^40` as INCONCLUSIVE. Only the `G_ant`
+column of V14 becomes certified: `|u_a|/2` is still an FFT value.
+
 This is a certified enclosure of a finite algebraic quantity. Reading it as
 the size proxy of `B_{p/q}` still needs `[DH]` and `SatelliteLabel`; it
 says nothing about `q → ∞`, and so leaves every limit and conjecture in the

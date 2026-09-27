@@ -21,7 +21,7 @@ DATA = Path(__file__).resolve().parents[1] / "data"
 Q_MAX = 16
 CALCULUS = "finite-mandelbrot-research docs/finite-certificate-calculus.md"
 PAIRS = tuple((p, q) for q in range(2, Q_MAX + 1) for p in coprime_numerators(q))
-V14_QS = (59, 127)
+V14_QS = (59, 127, 251)
 V14_PAIRS = tuple((p, q) for q in V14_QS for p in coprime_numerators(q) if 2 * p < q)
 
 
@@ -30,9 +30,10 @@ def centre_record(p: int, q: int) -> dict:
     return certify.certify_center(p, q, seed).as_record()
 
 
-#: (half-width bits, precision bits, Newton steps), tried in order. Long orbits widen interval images
-#: faster than K contracts, so large q may need a smaller box; the first ACCEPTED rung is stored.
-LADDER = ((64, 160, 4), (96, 256, 6))
+#: (half-width bits, precision bits, Newton steps), tried in order; None sizes the box from the orbit's
+#: expansion (bulbford.antipode.expansion_bits). Long orbits widen interval images faster than K
+#: contracts, so large q needs a smaller box; the first ACCEPTED rung is stored.
+LADDER = ((64, 160, 4), (None, None, 6))
 
 
 def antipode_record(p: int, q: int) -> dict:

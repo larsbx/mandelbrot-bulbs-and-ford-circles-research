@@ -69,3 +69,19 @@ def test_v14_column_from_certified_g_ant():
             max(abs(F(tay[r["p"]]["G_ant_series"]) - e) for e in bracket(r)) for r in RECORDS if r["q"] == q
         )
         assert round(float(delta) * q * q, 2) == expected[q]
+
+
+def test_an_exploding_enclosure_is_inconclusive_not_slow():
+    """A box far too wide for a long orbit trips the 2^40 guard: INCONCLUSIVE, with the BLOWN marker."""
+    import time
+
+    from bulbford.antipode import BLOWN, check_antipode
+    from bulbford.certify import I, box_from_numerators
+
+    row = next(r for r in RECORDS if r["q"] == max(QS))
+    grow = lambda b: type(b)(I(b.re.lo - F(1, 2**12), b.re.hi + F(1, 2**12)), I(b.im.lo - F(1, 2**12), b.im.hi + F(1, 2**12)))
+    z, c = (grow(box_from_numerators(row[k], row["prec"])) for k in ("z_box_numerators", "c_box_numerators"))
+    t0 = time.perf_counter()
+    cert = check_antipode(row["p"], row["q"], z, c, row["prec"])
+    assert cert.verdict is Verdict.INCONCLUSIVE and cert.failed_exclusions == BLOWN
+    assert time.perf_counter() - t0 < 30
