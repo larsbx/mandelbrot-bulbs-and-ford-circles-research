@@ -68,6 +68,7 @@ As in the original §1, with these changes.
   *Checked in integers* (`tests/test_arc_widths.py`): every arc width and the flanking-arc equivalence for all fractions with `q ≤ 60`.
 - **P10 (certified antipodes), form C.** For every `p/q`, `2 ≤ q ≤ 16` (79 cases), a box `Z × C` of half-width `2⁻⁶⁴` carries a two-variable Krawczyk inclusion for `(f_c^q(z) − z, (f_c^q)'(z) + 1)` and the type-`(0, q)` exclusions on the orbit of `Z`: exactly one `(z, c)` in the box, `z` of exact period `q` with multiplier `−1`. `ζ_q` is a Krawczyk box selected by an exact order check (no angle), `λ₀ = ζ_q^p` and `c_root = λ₀/2 − λ₀²/4` are interval expressions, and `G_ant² ∈ q⁴ Qd(C − c_root)/Qd(1 − λ₀)` is bracketed with width below `10⁻¹⁶` (`data/antipode_certificates.json`, replayed by `tests/test_antipode.py`). Reading `C` as the antipode of `B_{p/q}` uses [DH] and `SatelliteLabel` (§5 referents; the label is also checked as a table: at all 79 certified centres the critical orbit is cyclically ordered about `α` with step `p`, form T).
 
+- **P11 (the β term in closed form), form E.** At the root of `B_{p/q}`, the fixed points of `z² + c` are `λ₀/2` (the parabolic point `z₀`) and `β = 1 − λ₀/2`: they sum to `1` and multiply to `c = λ₀/2 − λ₀²/4`. Their multipliers are `2z`, that is, `λ₀` and `2 − λ₀`. So `β`, the landing point of the ray of angle `0` [DH], contributes the exact term `T_β = −1/(1 − (2 − λ₀)^q)` to the P6 sum, with `|2 − λ₀|² = 5 − 4 cos(2πp/q) = 1 + 8 sin²(πp/q)`. ∎ *Checked* against the orbit computation of angle `0` (`tests/test_cycles.py`, 7 fractions up to `q = 64`, to `1e-9`).
 ---
 
 ## 3. VALIDATED (finite tables; doubles unless stated; Newton to `1e-14` relative)
@@ -134,6 +135,16 @@ As in the original §1, with these changes.
 - **V24 (the second ring, `q ≤ 20`), forms E + T (`scripts/second_ring.py`, `data/second_ring.json`).** Ring `k` around the characteristic arc is the pair `α_{w−k} + 1/M`, `α_{w+1+k} − 1/M`; ring 1 is the flank cycle (P7). (a) *Exact:* the two ring-2 angles lie on **distinct** doubling orbits, each of period `q`, for every `p` and every `q ≥ 5` (proven as P8). (b) *Numerical:* for `p ≤ q/2`, `5 ≤ q ≤ 20` (61 fractions), ranks 2 and 3 of the P6 sum are exactly these two cycles in 44. The 17 exceptions are exactly `p = 1` (`q ≥ 8`) and `p̄ = q − 2` (`q ≥ 13`), the two smallest values `x* = 1/q, 2/q`. There, a cycle through a neighbour of the arc itself intrudes at rank 2 or 3: `θ₊ + 1/M` for `p̄ = q − 2`, and `α_{w−1} − 1/M` or `θ₋ − 1/M` for `p = 1`. The ring-2 cycles then sit at ranks 2–5.
 - **V25 (the small-`x*` intruders are the widest arcs), form T (`scripts/second_ring.py`, `data/second_ring.json`).** For `p ≤ q/2` and `5 ≤ q ≤ 20`, all 23 cycles at rank 2 or 3 that are not ring-2 cycles pass through an endpoint of one of the two widest arcs (widths `2^{q−1}/M`, `2^{q−2}/M`). The V24 exceptions all have `x* ≤ 2/q`, that is, a flanking arc is among the two widest (P9). The members of that family that are not exceptions are exactly those below the thresholds of V24(b): `p = 1` with `q ≤ 7`, and `p = (q−1)/2` with `q ≤ 11`. **Reading:** V24's "small-`x*` effect" is a geometric fact about rays. `x*` is the exponent, over `q`, of the narrower arc next to the characteristic arc. When `x* ≤ 2/q`, the other flanking arc is a quarter or half of the circle, and a cycle through that arc's endpoint competes with ring 2. What is still numerical is only the crossing, at `q = 8` for `p = 1` and `q = 13` for `p = (q−1)/2`.
 - **V26 (the crossings), form T (`scripts/crossings.py`, `data/crossings.json`).** For the two families of V25, `R(q) = max |intruder term| / min |ring-2 term|` is computed from single orbits (`cycle_through`, verified by the ray relation and `|F(z) − z|`) for `q ≤ 64`. Here the intruders are the cycles through widest-arc endpoints other than rings 1 and 2. `R > 1` agrees exactly with the V24 exceptions for `q ≤ 20`. **`p = 1`:** `R(7) = 0.943`, `R(8) = 1.010`. `R` increases at every step for `q = 6 … 64`, reaching `4.239`. **`p = (q−1)/2`:** `R(11) = 0.932`, `R(13) = 1.012`. `R` increases at every step for `q = 9 … 63`, reaching `2.437`. Both crossings are narrow, about `1%`. All terms grow with `q`, and the leading intruder grows fastest: for `p = 1` it goes `0.0801 … 1.1831` over `q = 8 … 64`, against `0.0794 … 0.2791` for the smaller ring-2 term and `0.2310 … 1.2585` for the flank.
+- **V27 (term growth), forms T + S (`scripts/multiplier_growth.py`, `data/multiplier_growth.json`).** A period-`q` cycle contributes `q/|1 − F'|` in size, so its growth in `q` is read from `|1 − F'|`. Single verified orbits give `|1 − F'|` for `q = 8, 16, …, 256` (`p = 1`) and `q = 9, 17, …, 249` (`p = (q−1)/2`). The fit `a + b/q + c/q²` on the nodes `q ≥ 64` gives these intercepts `a` (form S):
+
+  | cycle | `p = 1` | `p = (q−1)/2` |
+  |---|---|---|
+  | flank | `51.18` | `56.21` |
+  | ring 2, lower / upper | `175.78` / `233.42` | `260.50` / `228.54` |
+  | widest-arc intruder (`α_{w−1} − 1/M` for `p = 1`; `θ₊ + 1/M` for `(q−1)/2`) | `80.62` | `84.00` |
+  | `β`, as `q·\|1 − F'_β\|` (P11) | `39.499` | not bounded: `\|2 − λ₀\|` is near `3` |
+
+  The largest residual is `6.2e-03` for `p = 1` and `2.3e-02` for `p = (q−1)/2`. Every named cycle except `β` has a multiplier that settles, so its term grows linearly in `q`. For `p = 1` the leading intruder is `α_{w−1} − 1/M` for `q ≤ 21` and `β` for every `22 ≤ q ≤ 64`, because `β`'s slope `1/39.50` exceeds `1/80.62`. V26's `R` uses the smaller ring-2 term, which is the one with the larger `|1 − F'|`: ring-2 upper (`233.42`) for `p = 1` and ring-2 lower (`260.50`) for `p = (q−1)/2`. The ratios of the fitted intercepts, `233.42/39.50 = 5.91` (`p = 1`) and `260.50/84.00 = 3.10` (`p = (q−1)/2`), are the fitted plateaus of V26's `R(q)`. The largest computed values are `R(64) = 4.239` and `R(63) = 2.437`.
 
 ---
 
@@ -168,6 +179,7 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 | C14″ | `κ̂(x̃)` exists, cusps in `Re`, jumps in `Im` at rationals | V21 steps `J` at `q' ≤ 7`; `J·q'² ∈ [−0.167, −0.106]` for `q' ≤ 6` | conjectured |
 | C16′ | two-ended resonance sum for `ι/q` | V16 vs V16b gaps at `p = 1, 2, 3` | conjectured |
 | C17′ | `ι_{p/q} = ½ + qκ̂(x̃) + O(1)` | P6 gives `ι` as a finite exact sum; the dominant terms are untested | conjectured |
+| P11′ | `q·\|1 − F'_β\|` tends to `4π²` for `p = 1` (proven in the original register) | exact values `54.096` (`q = 64`), `42.668` (`q = 256`), `40.248` (`q = 1024`), `39.669` (`q = 4096`) |  proven, classical |
 | C20 | `κ(1/q)` has a Lavaurs-phase value as `q` grows | V16 row `[0;N]` at `N ≤ 384` | untested |
 | C2′, C9′, C8, C11, C15′ | as in the original | none new | unchanged |
 
@@ -186,7 +198,7 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 
 ## 7. Next moves (finite forms)
 
-1. **The flank cycle.** P6 is evaluated for `q ≤ 20` (V22), its Farey prediction is falsified (F6), and the flank term is compared with `κ` and `G` (V23). V22(b) is proven as P7, and the second-rank terms are the second ring except at the two smallest `x*` (V24). V24(a) is P8, and the small-`x*` intruders are the widest arcs next to the characteristic arc (P9, V25). The crossings are located and `R` increases after them to `q = 64` (V26). Next: a closed form for the growth of the intruder and ring-2 terms in `q` (form T).
+1. **The flank cycle.** P6 is evaluated for `q ≤ 20` (V22), its Farey prediction is falsified (F6), and the flank term is compared with `κ` and `G` (V23). V22(b) is proven as P7, and the second-rank terms are the second ring except at the two smallest `x*` (V24). V24(a) is P8, and the small-`x*` intruders are the widest arcs next to the characteristic arc (P9, V25). The crossings are located and `R` increases after them to `q = 64` (V26). Term growth: `β` in closed form (P11), and the other named cycles have settling multipliers (V27). Next: relate the multiplier plateaus to C20 (form T).
 2. **Steps and cusps.** Tabulate `J(p'/q')` and the cusp depths at `q = 2003` for `q' ≤ 7`, next to the `q = 1009` table (form T).
 3. ~~**Certified antipodes.**~~ Done as P10 (`q ≤ 16`, form C). Next: a certified replacement for `SatelliteLabel`, and boxes at `q = 59` beside the V14 table.
 4. **`z³ + c`.** Repeat V15–V19 as tables (`MAIN3` is wired).
