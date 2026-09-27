@@ -1,4 +1,4 @@
-"""Rigorous ι_{p/q} (ball arithmetic) for p ≤ q/2; writes data/index_q<q>.json with mid/rad."""
+"""Rigorous ι_{p/q} (ball arithmetic) for p ≤ q/2; writes experiments/data/index_q<q>.json with mid/rad."""
 from paths import DATA
 import json, sys, time
 from bulbford.cf import coprime_numerators, xstar

@@ -1,5 +1,5 @@
 """κ and Ĝ along sequences x̃ = p̄/q = [0; a1, …, a_k] with a_k = N → ∞ (one-sided limits at rationals),
-plus a quadratic-irrational sequence. p = p̄⁻¹ mod q.  Output: data/sequences.json"""
+plus a quadratic-irrational sequence. p = p̄⁻¹ mod q.  Output: experiments/data/sequences.json"""
 from __future__ import annotations
 from paths import DATA
 import json, sys

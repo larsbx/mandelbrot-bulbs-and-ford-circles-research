@@ -1,5 +1,5 @@
 """Sweep p over 1..q/2 for given q: x*, Taylor r_0..r_K of R_q(u), G_ant, G_cen, series-reconstructed
-|u_a|/2 and |u_c|.  Writes data/taylor_q<q>.json."""
+|u_a|/2 and |u_c|.  Writes experiments/data/taylor_q<q>.json."""
 from __future__ import annotations
 from paths import DATA
 import json, sys, time

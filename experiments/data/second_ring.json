@@ -1,0 +1,2788 @@
+[
+ {
+  "p": 1,
+  "q": 5,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   [
+    [
+     -2,
+     -1
+    ]
+   ],
+   [
+    [
+     -1,
+     -1
+    ]
+   ],
+   []
+  ]
+ },
+ {
+  "p": 2,
+  "q": 5,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     -1,
+     -1
+    ],
+    [
+     0,
+     -1
+    ]
+   ],
+   []
+  ]
+ },
+ {
+  "p": 1,
+  "q": 6,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -1,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 1,
+  "q": 7,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -1,
+     -1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ],
+    [
+     3,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 2,
+  "q": 7,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ]
+   ],
+   []
+  ]
+ },
+ {
+  "p": 3,
+  "q": 7,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     -3,
+     -1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 1,
+  "q": 8,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   [
+    [
+     -1,
+     -1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ],
+    [
+     3,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 3,
+  "q": 8,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     4,
+     -1
+    ]
+   ],
+   [
+    [
+     2,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 1,
+  "q": 9,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   [
+    [
+     -1,
+     -1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ],
+    [
+     3,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 2,
+  "q": 9,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [],
+   [
+    [
+     -3,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 4,
+  "q": 9,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -4,
+     -1
+    ]
+   ],
+   [
+    [
+     -4,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 1,
+  "q": 10,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   [
+    [
+     -1,
+     -1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     0,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 3,
+  "q": 10,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     4,
+     -1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 1,
+  "q": 11,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -1,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     0,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 2,
+  "q": 11,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [],
+   [
+    [
+     -1,
+     -1
+    ],
+    [
+     0,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 3,
+  "q": 11,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     4,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 4,
+  "q": 11,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ]
+   ],
+   [
+    [
+     4,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 5,
+  "q": 11,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -5,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     -5,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 1,
+  "q": 12,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -1,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     0,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 5,
+  "q": 12,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [],
+   [
+    [
+     -3,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 1,
+  "q": 13,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -1,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   [
+    [
+     0,
+     -1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 2,
+  "q": 13,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [],
+   [
+    [
+     -1,
+     -1
+    ],
+    [
+     0,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 3,
+  "q": 13,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     4,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 4,
+  "q": 13,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ]
+   ],
+   [
+    [
+     -4,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 5,
+  "q": 13,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [],
+   [
+    [
+     -3,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 6,
+  "q": 13,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -6,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -6,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 1,
+  "q": 14,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -1,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   [
+    [
+     0,
+     -1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 3,
+  "q": 14,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     2,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 5,
+  "q": 14,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     -4,
+     1
+    ]
+   ],
+   [
+    [
+     4,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 1,
+  "q": 15,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true,
+   true
+  ],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -1,
+     -1
+    ]
+   ],
+   [
+    [
+     0,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 2,
+  "q": 15,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [],
+   [
+    [
+     -1,
+     -1
+    ],
+    [
+     0,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 4,
+  "q": 15,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ]
+   ],
+   [
+    [
+     4,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 7,
+  "q": 15,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -7,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     -7,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 1,
+  "q": 16,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true,
+   true
+  ],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -1,
+     -1
+    ]
+   ],
+   [
+    [
+     0,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 3,
+  "q": 16,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     4,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 5,
+  "q": 16,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -4,
+     1
+    ]
+   ],
+   [
+    [
+     -5,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 7,
+  "q": 16,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [],
+   [
+    [
+     -3,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 1,
+  "q": 17,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true,
+   true
+  ],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -1,
+     -1
+    ]
+   ],
+   [
+    [
+     0,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 2,
+  "q": 17,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [],
+   [
+    [
+     -1,
+     -1
+    ],
+    [
+     0,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 3,
+  "q": 17,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     2,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 4,
+  "q": 17,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ]
+   ],
+   [
+    [
+     -4,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 5,
+  "q": 17,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [],
+   [
+    [
+     -3,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 6,
+  "q": 17,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     -5,
+     1
+    ]
+   ],
+   [
+    [
+     6,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 7,
+  "q": 17,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ]
+   ],
+   [
+    [
+     4,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 8,
+  "q": 17,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -8,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     -8,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 1,
+  "q": 18,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true,
+   true
+  ],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -1,
+     -1
+    ]
+   ],
+   [
+    [
+     0,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 5,
+  "q": 18,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [],
+   [
+    [
+     -3,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 7,
+  "q": 18,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     4,
+     -1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 1,
+  "q": 19,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true,
+   true
+  ],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -1,
+     -1
+    ]
+   ],
+   [
+    [
+     0,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 2,
+  "q": 19,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [],
+   [
+    [
+     -1,
+     -1
+    ],
+    [
+     0,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 3,
+  "q": 19,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     4,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 4,
+  "q": 19,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ]
+   ],
+   [
+    [
+     4,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 5,
+  "q": 19,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     -4,
+     1
+    ]
+   ],
+   [
+    [
+     4,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 6,
+  "q": 19,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -6,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     -5,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 7,
+  "q": 19,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [],
+   [
+    [
+     4,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 8,
+  "q": 19,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [],
+   [
+    [
+     4,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 9,
+  "q": 19,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -9,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     -9,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 1,
+  "q": 20,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true,
+   true
+  ],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -1,
+     -1
+    ]
+   ],
+   [
+    [
+     0,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 3,
+  "q": 20,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -3,
+     1
+    ],
+    [
+     1,
+     1
+    ]
+   ],
+   [
+    [
+     2,
+     1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 7,
+  "q": 20,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [
+    [
+     -6,
+     1
+    ]
+   ],
+   [
+    [
+     7,
+     -1
+    ]
+   ]
+  ]
+ },
+ {
+  "p": 9,
+  "q": 20,
+  "ring2_distinct_orbits": true,
+  "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
+  "top": [
+   [
+    [
+     -1,
+     1
+    ],
+    [
+     2,
+     -1
+    ]
+   ],
+   [
+    [
+     3,
+     -1
+    ]
+   ],
+   [
+    [
+     -2,
+     1
+    ]
+   ],
+   [],
+   [
+    [
+     -3,
+     1
+    ]
+   ]
+  ]
+ }
+]

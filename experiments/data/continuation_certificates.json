@@ -1,0 +1,639 @@
+{
+ "schema": "bulbford-continuation-certificates/v1",
+ "claim": "the certified antipode lies on the boundary of the hyperbolic component of the certified centre",
+ "arithmetic": "Arb complex balls (python-flint acb), exact entry of the rational P3/P10 boxes",
+ "certificates": [
+  {
+   "p": 1,
+   "q": 2,
+   "accepted": true,
+   "pieces": 12,
+   "last_piece_from_s": "55/64",
+   "reason": "accepted"
+  },
+  {
+   "p": 1,
+   "q": 3,
+   "accepted": true,
+   "pieces": 19,
+   "last_piece_from_s": "15/16",
+   "reason": "accepted"
+  },
+  {
+   "p": 2,
+   "q": 3,
+   "accepted": true,
+   "pieces": 19,
+   "last_piece_from_s": "15/16",
+   "reason": "accepted"
+  },
+  {
+   "p": 1,
+   "q": 4,
+   "accepted": true,
+   "pieces": 34,
+   "last_piece_from_s": "123/128",
+   "reason": "accepted"
+  },
+  {
+   "p": 3,
+   "q": 4,
+   "accepted": true,
+   "pieces": 34,
+   "last_piece_from_s": "123/128",
+   "reason": "accepted"
+  },
+  {
+   "p": 1,
+   "q": 5,
+   "accepted": true,
+   "pieces": 48,
+   "last_piece_from_s": "31/32",
+   "reason": "accepted"
+  },
+  {
+   "p": 2,
+   "q": 5,
+   "accepted": true,
+   "pieces": 61,
+   "last_piece_from_s": "501/512",
+   "reason": "accepted"
+  },
+  {
+   "p": 3,
+   "q": 5,
+   "accepted": true,
+   "pieces": 61,
+   "last_piece_from_s": "501/512",
+   "reason": "accepted"
+  },
+  {
+   "p": 4,
+   "q": 5,
+   "accepted": true,
+   "pieces": 48,
+   "last_piece_from_s": "31/32",
+   "reason": "accepted"
+  },
+  {
+   "p": 1,
+   "q": 6,
+   "accepted": true,
+   "pieces": 83,
+   "last_piece_from_s": "251/256",
+   "reason": "accepted"
+  },
+  {
+   "p": 5,
+   "q": 6,
+   "accepted": true,
+   "pieces": 83,
+   "last_piece_from_s": "251/256",
+   "reason": "accepted"
+  },
+  {
+   "p": 1,
+   "q": 7,
+   "accepted": true,
+   "pieces": 145,
+   "last_piece_from_s": "2025/2048",
+   "reason": "accepted"
+  },
+  {
+   "p": 2,
+   "q": 7,
+   "accepted": true,
+   "pieces": 139,
+   "last_piece_from_s": "1013/1024",
+   "reason": "accepted"
+  },
+  {
+   "p": 3,
+   "q": 7,
+   "accepted": true,
+   "pieces": 187,
+   "last_piece_from_s": "2031/2048",
+   "reason": "accepted"
+  },
+  {
+   "p": 4,
+   "q": 7,
+   "accepted": true,
+   "pieces": 187,
+   "last_piece_from_s": "2031/2048",
+   "reason": "accepted"
+  },
+  {
+   "p": 5,
+   "q": 7,
+   "accepted": true,
+   "pieces": 139,
+   "last_piece_from_s": "1013/1024",
+   "reason": "accepted"
+  },
+  {
+   "p": 6,
+   "q": 7,
+   "accepted": true,
+   "pieces": 145,
+   "last_piece_from_s": "2025/2048",
+   "reason": "accepted"
+  },
+  {
+   "p": 1,
+   "q": 8,
+   "accepted": true,
+   "pieces": 203,
+   "last_piece_from_s": "127/128",
+   "reason": "accepted"
+  },
+  {
+   "p": 3,
+   "q": 8,
+   "accepted": true,
+   "pieces": 199,
+   "last_piece_from_s": "4065/4096",
+   "reason": "accepted"
+  },
+  {
+   "p": 5,
+   "q": 8,
+   "accepted": true,
+   "pieces": 199,
+   "last_piece_from_s": "4065/4096",
+   "reason": "accepted"
+  },
+  {
+   "p": 7,
+   "q": 8,
+   "accepted": true,
+   "pieces": 203,
+   "last_piece_from_s": "127/128",
+   "reason": "accepted"
+  },
+  {
+   "p": 1,
+   "q": 9,
+   "accepted": true,
+   "pieces": 252,
+   "last_piece_from_s": "8143/8192",
+   "reason": "accepted"
+  },
+  {
+   "p": 2,
+   "q": 9,
+   "accepted": true,
+   "pieces": 485,
+   "last_piece_from_s": "16329/16384",
+   "reason": "accepted"
+  },
+  {
+   "p": 4,
+   "q": 9,
+   "accepted": true,
+   "pieces": 519,
+   "last_piece_from_s": "2041/2048",
+   "reason": "accepted"
+  },
+  {
+   "p": 5,
+   "q": 9,
+   "accepted": true,
+   "pieces": 519,
+   "last_piece_from_s": "2041/2048",
+   "reason": "accepted"
+  },
+  {
+   "p": 7,
+   "q": 9,
+   "accepted": true,
+   "pieces": 485,
+   "last_piece_from_s": "16329/16384",
+   "reason": "accepted"
+  },
+  {
+   "p": 8,
+   "q": 9,
+   "accepted": true,
+   "pieces": 252,
+   "last_piece_from_s": "8143/8192",
+   "reason": "accepted"
+  },
+  {
+   "p": 1,
+   "q": 10,
+   "accepted": true,
+   "pieces": 330,
+   "last_piece_from_s": "1019/1024",
+   "reason": "accepted"
+  },
+  {
+   "p": 3,
+   "q": 10,
+   "accepted": true,
+   "pieces": 575,
+   "last_piece_from_s": "8167/8192",
+   "reason": "accepted"
+  },
+  {
+   "p": 7,
+   "q": 10,
+   "accepted": true,
+   "pieces": 575,
+   "last_piece_from_s": "8167/8192",
+   "reason": "accepted"
+  },
+  {
+   "p": 9,
+   "q": 10,
+   "accepted": true,
+   "pieces": 330,
+   "last_piece_from_s": "1019/1024",
+   "reason": "accepted"
+  },
+  {
+   "p": 1,
+   "q": 11,
+   "accepted": true,
+   "pieces": 407,
+   "last_piece_from_s": "16315/16384",
+   "reason": "accepted"
+  },
+  {
+   "p": 2,
+   "q": 11,
+   "accepted": true,
+   "pieces": 1250,
+   "last_piece_from_s": "65425/65536",
+   "reason": "accepted"
+  },
+  {
+   "p": 3,
+   "q": 11,
+   "accepted": true,
+   "pieces": 1170,
+   "last_piece_from_s": "130879/131072",
+   "reason": "accepted"
+  },
+  {
+   "p": 4,
+   "q": 11,
+   "accepted": true,
+   "pieces": 573,
+   "last_piece_from_s": "32675/32768",
+   "reason": "accepted"
+  },
+  {
+   "p": 5,
+   "q": 11,
+   "accepted": true,
+   "pieces": 1573,
+   "last_piece_from_s": "32723/32768",
+   "reason": "accepted"
+  },
+  {
+   "p": 6,
+   "q": 11,
+   "accepted": true,
+   "pieces": 1573,
+   "last_piece_from_s": "32723/32768",
+   "reason": "accepted"
+  },
+  {
+   "p": 7,
+   "q": 11,
+   "accepted": true,
+   "pieces": 573,
+   "last_piece_from_s": "32675/32768",
+   "reason": "accepted"
+  },
+  {
+   "p": 8,
+   "q": 11,
+   "accepted": true,
+   "pieces": 1170,
+   "last_piece_from_s": "130879/131072",
+   "reason": "accepted"
+  },
+  {
+   "p": 9,
+   "q": 11,
+   "accepted": true,
+   "pieces": 1250,
+   "last_piece_from_s": "65425/65536",
+   "reason": "accepted"
+  },
+  {
+   "p": 10,
+   "q": 11,
+   "accepted": true,
+   "pieces": 407,
+   "last_piece_from_s": "16315/16384",
+   "reason": "accepted"
+  },
+  {
+   "p": 1,
+   "q": 12,
+   "accepted": true,
+   "pieces": 441,
+   "last_piece_from_s": "4081/4096",
+   "reason": "accepted"
+  },
+  {
+   "p": 5,
+   "q": 12,
+   "accepted": true,
+   "pieces": 1964,
+   "last_piece_from_s": "261893/262144",
+   "reason": "accepted"
+  },
+  {
+   "p": 7,
+   "q": 12,
+   "accepted": true,
+   "pieces": 1964,
+   "last_piece_from_s": "261893/262144",
+   "reason": "accepted"
+  },
+  {
+   "p": 11,
+   "q": 12,
+   "accepted": true,
+   "pieces": 441,
+   "last_piece_from_s": "4081/4096",
+   "reason": "accepted"
+  },
+  {
+   "p": 1,
+   "q": 13,
+   "accepted": true,
+   "pieces": 470,
+   "last_piece_from_s": "16329/16384",
+   "reason": "accepted"
+  },
+  {
+   "p": 2,
+   "q": 13,
+   "accepted": true,
+   "pieces": 4045,
+   "last_piece_from_s": "65497/65536",
+   "reason": "accepted"
+  },
+  {
+   "p": 3,
+   "q": 13,
+   "accepted": true,
+   "pieces": 4509,
+   "last_piece_from_s": "1048099/1048576",
+   "reason": "accepted"
+  },
+  {
+   "p": 4,
+   "q": 13,
+   "accepted": true,
+   "pieces": 2243,
+   "last_piece_from_s": "65475/65536",
+   "reason": "accepted"
+  },
+  {
+   "p": 5,
+   "q": 13,
+   "accepted": true,
+   "pieces": 2182,
+   "last_piece_from_s": "32741/32768",
+   "reason": "accepted"
+  },
+  {
+   "p": 6,
+   "q": 13,
+   "accepted": true,
+   "pieces": 4289,
+   "last_piece_from_s": "523997/524288",
+   "reason": "accepted"
+  },
+  {
+   "p": 7,
+   "q": 13,
+   "accepted": true,
+   "pieces": 4289,
+   "last_piece_from_s": "523997/524288",
+   "reason": "accepted"
+  },
+  {
+   "p": 8,
+   "q": 13,
+   "accepted": true,
+   "pieces": 2182,
+   "last_piece_from_s": "32741/32768",
+   "reason": "accepted"
+  },
+  {
+   "p": 9,
+   "q": 13,
+   "accepted": true,
+   "pieces": 2243,
+   "last_piece_from_s": "65475/65536",
+   "reason": "accepted"
+  },
+  {
+   "p": 10,
+   "q": 13,
+   "accepted": true,
+   "pieces": 4509,
+   "last_piece_from_s": "1048099/1048576",
+   "reason": "accepted"
+  },
+  {
+   "p": 11,
+   "q": 13,
+   "accepted": true,
+   "pieces": 4045,
+   "last_piece_from_s": "65497/65536",
+   "reason": "accepted"
+  },
+  {
+   "p": 12,
+   "q": 13,
+   "accepted": true,
+   "pieces": 470,
+   "last_piece_from_s": "16329/16384",
+   "reason": "accepted"
+  },
+  {
+   "p": 1,
+   "q": 14,
+   "accepted": true,
+   "pieces": 496,
+   "last_piece_from_s": "16333/16384",
+   "reason": "accepted"
+  },
+  {
+   "p": 3,
+   "q": 14,
+   "accepted": true,
+   "pieces": 8010,
+   "last_piece_from_s": "2096545/2097152",
+   "reason": "accepted"
+  },
+  {
+   "p": 5,
+   "q": 14,
+   "accepted": true,
+   "pieces": 2027,
+   "last_piece_from_s": "130939/131072",
+   "reason": "accepted"
+  },
+  {
+   "p": 9,
+   "q": 14,
+   "accepted": true,
+   "pieces": 2027,
+   "last_piece_from_s": "130939/131072",
+   "reason": "accepted"
+  },
+  {
+   "p": 11,
+   "q": 14,
+   "accepted": true,
+   "pieces": 8010,
+   "last_piece_from_s": "2096545/2097152",
+   "reason": "accepted"
+  },
+  {
+   "p": 13,
+   "q": 14,
+   "accepted": true,
+   "pieces": 496,
+   "last_piece_from_s": "16333/16384",
+   "reason": "accepted"
+  },
+  {
+   "p": 1,
+   "q": 15,
+   "accepted": true,
+   "pieces": 532,
+   "last_piece_from_s": "32671/32768",
+   "reason": "accepted"
+  },
+  {
+   "p": 2,
+   "q": 15,
+   "accepted": true,
+   "pieces": 9307,
+   "last_piece_from_s": "4193251/4194304",
+   "reason": "accepted"
+  },
+  {
+   "p": 4,
+   "q": 15,
+   "accepted": true,
+   "pieces": 9670,
+   "last_piece_from_s": "4193381/4194304",
+   "reason": "accepted"
+  },
+  {
+   "p": 7,
+   "q": 15,
+   "accepted": true,
+   "pieces": 10781,
+   "last_piece_from_s": "65521/65536",
+   "reason": "accepted"
+  },
+  {
+   "p": 8,
+   "q": 15,
+   "accepted": true,
+   "pieces": 10781,
+   "last_piece_from_s": "65521/65536",
+   "reason": "accepted"
+  },
+  {
+   "p": 11,
+   "q": 15,
+   "accepted": true,
+   "pieces": 9670,
+   "last_piece_from_s": "4193381/4194304",
+   "reason": "accepted"
+  },
+  {
+   "p": 13,
+   "q": 15,
+   "accepted": true,
+   "pieces": 9307,
+   "last_piece_from_s": "4193251/4194304",
+   "reason": "accepted"
+  },
+  {
+   "p": 14,
+   "q": 15,
+   "accepted": true,
+   "pieces": 532,
+   "last_piece_from_s": "32671/32768",
+   "reason": "accepted"
+  },
+  {
+   "p": 1,
+   "q": 16,
+   "accepted": true,
+   "pieces": 557,
+   "last_piece_from_s": "32675/32768",
+   "reason": "accepted"
+  },
+  {
+   "p": 3,
+   "q": 16,
+   "accepted": true,
+   "pieces": 21770,
+   "last_piece_from_s": "8387633/8388608",
+   "reason": "accepted"
+  },
+  {
+   "p": 5,
+   "q": 16,
+   "accepted": true,
+   "pieces": 9222,
+   "last_piece_from_s": "4193129/4194304",
+   "reason": "accepted"
+  },
+  {
+   "p": 7,
+   "q": 16,
+   "accepted": true,
+   "pieces": 16157,
+   "last_piece_from_s": "4193727/4194304",
+   "reason": "accepted"
+  },
+  {
+   "p": 9,
+   "q": 16,
+   "accepted": true,
+   "pieces": 16157,
+   "last_piece_from_s": "4193727/4194304",
+   "reason": "accepted"
+  },
+  {
+   "p": 11,
+   "q": 16,
+   "accepted": true,
+   "pieces": 9222,
+   "last_piece_from_s": "4193129/4194304",
+   "reason": "accepted"
+  },
+  {
+   "p": 13,
+   "q": 16,
+   "accepted": true,
+   "pieces": 21770,
+   "last_piece_from_s": "8387633/8388608",
+   "reason": "accepted"
+  },
+  {
+   "p": 15,
+   "q": 16,
+   "accepted": true,
+   "pieces": 557,
+   "last_piece_from_s": "32675/32768",
+   "reason": "accepted"
+  }
+ ]
+}

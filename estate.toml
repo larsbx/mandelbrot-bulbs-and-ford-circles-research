@@ -37,7 +37,7 @@ id = "proof"
 target = "RESEARCH_bulb-ford-correction.md"
 authority = "claim_state"
 required = true
-current = ["RESEARCH_bulb-ford-correction.md"]
+current = ["RESEARCH_bulb-ford-correction.md", "RESEARCH_bulb-ford-correction_finite.md"]
 
 [[plane]]
 id = "reference"

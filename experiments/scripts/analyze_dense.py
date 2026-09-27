@@ -1,4 +1,4 @@
-"""Dense-q analysis (data/kappa_q<q>.json): additive model G ≈ F(x*) + H(t), local residuals vs t,
+"""Dense-q analysis (experiments/data/kappa_q<q>.json): additive model G ≈ F(x*) + H(t), local residuals vs t,
 and the local structure of κ, G around rational x*."""
 from paths import DATA
 import json, sys

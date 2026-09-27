@@ -1,4 +1,4 @@
-"""Tables from data/taylor_q<q>.json (+ data/index_q<q>.json when present)."""
+"""Tables from experiments/data/taylor_q<q>.json (+ experiments/data/index_q<q>.json when present)."""
 from paths import DATA
 import json, sys, os
 import numpy as np

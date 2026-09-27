@@ -1,4 +1,4 @@
-"""Dense κ(p/q) via FFT for all p ≤ q/2 (double precision, N=64). Writes data/kappa_q<q>.json."""
+"""Dense κ(p/q) via FFT for all p ≤ q/2 (double precision, N=64). Writes experiments/data/kappa_q<q>.json."""
 from paths import DATA
 import json, sys, time
 from bulbford.cf import coprime_numerators, xstar, modinv
