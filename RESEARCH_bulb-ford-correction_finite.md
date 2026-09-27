@@ -111,6 +111,14 @@ As in the original §1, with these changes.
 - **V19 (component comparison), form T.** As in the original. The `disk2/main2` ratios are values at the stated `a₁` and `N`.
 - **V20 (golden tail), forms T + S.** `κ = 0.05716, 0.06216, 0.06390` at `q = 34, 89, 610`. A geometric fit on these three nodes gives the statistic `κ₀ ≈ 0.0648 − 0.0058i`, `G₀ ≈ 1.158`.
 - **V21 (`Im κ` steps), form T.** `J` is already finite: a difference of window means over `0.002 < |x̃ − p'/q'| < 0.009` at `q = 1009`. The original table of `J` and `J·q'²` stands unchanged.
+- **V22 (P6 evaluated, `q ≤ 20`), forms E + T.** `bulbford/cycles.py` pulls back all `2^q − 1` rays of period dividing `q` at the root of `B_{p/q}`. The `q` rays of the `p/q` rotation cycle land at `z₀`, and the other `2^q − q − 1` land one each on the other fixed points of `F = f^q`, which are summed. Runs cover every `p ≤ q/2` with `2 ≤ q ≤ 20` (64 fractions; the rest are complex conjugates). Data: `data/cycle_index_sum.json`, `scripts/cycle_index_sweep.py`.
+  (a) *T.* The cycle sum equals the Arb ball of `ι` to `≤ 1.8e-14` on all 64. For `q ≤ 12` the tests also check that the points are distinct and satisfy `f(z_j) = z_{2j}`.
+  (b) *E.* Let `α_0 < … < α_{q−1}` be the rotation-cycle angles, `(α_w, α_{w+1})` the characteristic arc, and `M = 2^q − 1`. For every `p` and `3 ≤ q ≤ 20`, the doubling orbit of `α_{w−1} + 1/M` contains `α_{w+2} − 1/M` and has period `q`. This is the **flank cycle** (`flank_angles`, checked in integers).
+  (c) *T.* The flank cycle carries the largest `|term|` for all 63 fractions with `q ≥ 3`. Its share of `Σ|term|` is `0.04–0.79` (`0.04–0.11` at `q ≥ 17`), and its `|F′| ∈ [14.9, 51.3]`. For `q ≥ 4` it is not a rotation cycle; at `q = 3` it is the `2/3` rotation cycle.
+  (d) *T.* For `p ≥ 2` at fixed `q`, the flank `|F′|` is strictly decreasing in `x* = |p̄/q|`: 30 of 30 adjacent comparisons for `q = 5 … 20`. At `q = 19` it runs from `51.29` (`x* = 2/19`) to `33.92` (`x* = 9/19`). `p = 1` is off this order (`47.93` at `q = 19`), the bounded-`p` exception of V16. For `p = 1`, the values for `q = 2 … 20` are `9.00, 14.93, 20.22, …, 47.93, 48.31`, with increasing values and decreasing increments.
+  (e) *T.* The sum cancels heavily: `Σ|term| / |ι| ∈ [1.18, 7.40]`, and `5.5–7.4` for `p ≥ 2` at `q = 19, 20`. There the ten largest terms carry `0.12–0.20` of `Σ|term|`.
+  (f) *T.* The period-`q` rotation cycles carry at most `0.084` of `Σ|term|` for `q ≥ 11` (largest at `p = 1`, `≤ 0.001` for `p ≥ 2` at `q = 20`). `β` carries `0.035–0.047` for `p = 1` at `q ≥ 8`, and `≤ 0.008` for `p ≥ 2`.
+- **V23 (flank against `κ` and `G`, `q ≤ 20`), form T.** Over the 78 within-`q` pairs with `p ≥ 2` (`q = 5 … 20`), the flank `|F′|` is anti-ordered with `Re κ` on 67 pairs and with `G_ant` on 68. Every exception involves `p = 2`, the bulb with `x*` nearest `½`, where `Re κ` and `G` have passed their V15 peak near `x* ≈ 0.40` while the flank keeps falling (strictly decreasing in `x*`, V22(d)). At `q = 19`, `x* = 0.105 … 0.421` gives flank `51.29 … 34.91`, `Re κ` `0.0309 … 0.0490` and `G` `1.0560 … 1.1188`, while `x* = 0.474` gives flank `33.92`, `Re κ = 0.0443` and `G = 1.1031` (`scripts/flank_vs_kappa.py`, `data/flank_vs_kappa.json`).
 
 ---
 
@@ -129,6 +137,7 @@ As in the original §1, with these changes.
 
   Across all 504 bulbs at `q = 1009`, `G` ranges over `[1.0144, 1.1571]` (width `0.143`). The `x*`-bin fit of V18 leaves residual sd `1.6e-3`. So `G = g(x̃)` with `g` of Lipschitz constant `< 6.8·10⁴` is false on this finite data. Every `|ΔG|` exceeds the `1e-5` doubling stability of V16 by a factor of at least 600. This is the finite content of the original F4. The five pairs have the largest slopes among the pairs with `|ΔG| ≥ 0.005`, found by scanning all 678 computed bulbs.
 - **F5 (the `(q_{n−1}/q)²` weight), form X.** The model "the digit `a₁` enters with weight `≤ C/N²`" requires `C ≥ gap · N²` on the rows of V17: `C ≥ 1.8, 20.8, 108` at `N = 32, 64, 128`. The required constant grows with `N` on the computed rows, and the model with any `C < 108` is false at `N = 128`.
+- **F6 (the Farey-neighbour prediction of the P6 move), form X.** Prediction: "the cycles of the Farey neighbours `|pq' − p'q| = 1` carry the largest share". For prime `q`, a neighbour with `1 < q' < q` has `q' ∤ q`, so its cycle is not a fixed point of `f^q` and has no term in the sum. The one neighbour with a term, `β` (`q' = 1`), carries `≤ 0.047` for `q ≥ 6`, and the period-`q` rotation cycles carry `≤ 0.084` (V22(f)). The largest term belongs to the flank cycle in all 63 fractions (V22(c)).
 - ~~V6's equal one-sided values at `⅓`~~ superseded, as in the original.
 
 ---
@@ -162,7 +171,7 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 
 ## 7. Next moves (finite forms)
 
-1. **P6 at work.** Evaluate `ι_{p/q} = −Σ 1/(1−ρ_z)` exactly for `q ≤ 20` over the dynatomic factors, and tabulate the share of each cycle. The expectation to test is that the cycles of the Farey neighbours `|pq' − p'q| = 1` carry the largest share (form T).
+1. **The flank cycle.** P6 is evaluated for `q ≤ 20` (V22), its Farey prediction is falsified (F6), and the flank term is compared with `κ` and `G` (V23). Next: extend V22(b) from `q ≤ 20` to a proof in `ℚ/ℤ` (form E), and name the second-largest terms, which carry one `α`-neighbour each (gap pattern `1, 2, 4, 8`).
 2. **Steps and cusps.** Tabulate `J(p'/q')` and the cusp depths at `q = 2003` for `q' ≤ 7`, next to the `q = 1009` table (form T).
 3. **Certified antipodes.** A two-variable Krawczyk witness for `(f_c^q(z) − z, (f_c^q)'(z) + 1)`, turning `G_ant` for `q ≤ 16` into form C.
 4. **`z³ + c`.** Repeat V15–V19 as tables (`MAIN3` is wired).

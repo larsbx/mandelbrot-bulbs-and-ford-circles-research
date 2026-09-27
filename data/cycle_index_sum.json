@@ -1,0 +1,5034 @@
+[
+ {
+  "p": 1,
+  "q": 2,
+  "pbar": 1,
+  "iota_cycles": [
+   0.125,
+   1.1481063742006436e-17
+  ],
+  "iota_arb": [
+   0.125,
+   6.35882078486523e-32
+  ],
+  "deviation": 1.1481063742006372e-17,
+  "cycles": 1,
+  "points": 1,
+  "mass": 0.125,
+  "flank_rank": 0,
+  "flank_share": 1.0,
+  "flank_multiplier_modulus": 9.0,
+  "top10_share": 1.0,
+  "rotation_share": 0.0,
+  "beta_share": 1.0,
+  "top": [
+   {
+    "period": 1,
+    "rotation": "0",
+    "min_angle": 0,
+    "multiplier_modulus": 9.0,
+    "contribution": [
+     0.125,
+     1.1481063742006436e-17
+    ],
+    "share": 1.0
+   }
+  ]
+ },
+ {
+  "p": 1,
+  "q": 3,
+  "pbar": 1,
+  "iota_cycles": [
+   0.22675736961451248,
+   -0.03142042281304083
+  ],
+  "iota_arb": [
+   0.22675736961451248,
+   -0.03142042281304086
+  ],
+  "deviation": 2.7755575615628914e-17,
+  "cycles": 2,
+  "points": 4,
+  "mass": 0.2698412698412699,
+  "flank_rank": 0,
+  "flank_share": 0.7941176470588235,
+  "flank_multiplier_modulus": 14.933184523068078,
+  "top10_share": 1.0,
+  "rotation_share": 0.7941176470588235,
+  "beta_share": 0.20588235294117643,
+  "top": [
+   {
+    "period": 3,
+    "rotation": "2/3",
+    "min_angle": 3,
+    "multiplier_modulus": 14.933184523068078,
+    "contribution": [
+     0.19897959183673472,
+     -0.07953294524550965
+    ],
+    "share": 0.7941176470588235
+   },
+   {
+    "period": 1,
+    "rotation": "0",
+    "min_angle": 0,
+    "multiplier_modulus": 18.520259177452136,
+    "contribution": [
+     0.027777777777777766,
+     0.048112522432468816
+    ],
+    "share": 0.20588235294117643
+   }
+  ]
+ },
+ {
+  "p": 1,
+  "q": 4,
+  "pbar": 1,
+  "iota_cycles": [
+   0.31293252595155713,
+   -0.07893598615916955
+  ],
+  "iota_arb": [
+   0.3129325259515571,
+   -0.07893598615916955
+  ],
+  "deviation": 5.551115123125783e-17,
+  "cycles": 4,
+  "points": 11,
+  "mass": 0.4306634780178159,
+  "flank_rank": 0,
+  "flank_share": 0.479391389804827,
+  "flank_multiplier_modulus": 20.21510135741853,
+  "top10_share": 1.0,
+  "rotation_share": 0.2646334590675469,
+  "beta_share": 0.09178505438640772,
+  "top": [
+   {
+    "period": 4,
+    "rotation": null,
+    "min_angle": 3,
+    "multiplier_modulus": 20.21510135741853,
+    "contribution": [
+     0.1719726368774676,
+     -0.11423503008306458
+    ],
+    "share": 0.479391389804827
+   },
+   {
+    "period": 4,
+    "rotation": "3/4",
+    "min_angle": 7,
+    "multiplier_modulus": 36.00782238082793,
+    "contribution": [
+     0.10345988907408953,
+     0.04779904392389503
+    ],
+    "share": 0.2646334590675469
+   },
+   {
+    "period": 2,
+    "rotation": "1/2",
+    "min_angle": 5,
+    "multiplier_modulus": 28.999999999999996,
+    "contribution": [
+     0.05,
+     -0.05
+    ],
+    "share": 0.16419009674121834
+   },
+   {
+    "period": 1,
+    "rotation": "0",
+    "min_angle": 0,
+    "multiplier_modulus": 25.000000000000004,
+    "contribution": [
+     -0.012500000000000011,
+     0.03749999999999999
+    ],
+    "share": 0.09178505438640772
+   }
+  ]
+ },
+ {
+  "p": 1,
+  "q": 5,
+  "pbar": 1,
+  "iota_cycles": [
+   0.3869530112900036,
+   -0.13545772108227822
+  ],
+  "iota_arb": [
+   0.38695301129000365,
+   -0.13545772108227833
+  ],
+  "deviation": 1.2412670766236366e-16,
+  "cycles": 6,
+  "points": 26,
+  "mass": 0.6050232598645072,
+  "flank_rank": 0,
+  "flank_share": 0.3426076002180602,
+  "flank_multiplier_modulus": 24.892455472753735,
+  "top10_share": 1.0,
+  "rotation_share": 0.4407287531505842,
+  "beta_share": 0.058347447849676236,
+  "top": [
+   {
+    "period": 5,
+    "rotation": null,
+    "min_angle": 3,
+    "multiplier_modulus": 24.892455472753735,
+    "contribution": [
+     0.15810511785277154,
+     -0.13405251975476762
+    ],
+    "share": 0.3426076002180602
+   },
+   {
+    "period": 5,
+    "rotation": "2/5",
+    "min_angle": 5,
+    "multiplier_modulus": 43.78649296406845,
+    "contribution": [
+     0.059751752210899206,
+     -0.09893336152244545
+    ],
+    "share": 0.19102929808236446
+   },
+   {
+    "period": 5,
+    "rotation": null,
+    "min_angle": 7,
+    "multiplier_modulus": 53.19913223914369,
+    "contribution": [
+     0.09567591082863071,
+     0.004569791395810013
+    ],
+    "share": 0.15831619878167935
+   },
+   {
+    "period": 5,
+    "rotation": "4/5",
+    "min_angle": 15,
+    "multiplier_modulus": 57.93811067943251,
+    "contribution": [
+     0.03932334362086465,
+     0.07759244604204721
+    ],
+    "share": 0.14377629902761307
+   },
+   {
+    "period": 5,
+    "rotation": "3/5",
+    "min_angle": 11,
+    "multiplier_modulus": 79.01880015872011,
+    "contribution": [
+     0.06399556297683595,
+     -0.0034029216129838284
+    ],
+    "share": 0.10592315604060665
+   }
+  ]
+ },
+ {
+  "p": 2,
+  "q": 5,
+  "pbar": 3,
+  "iota_cycles": [
+   0.407555119875019,
+   0.011603699846337912
+  ],
+  "iota_arb": [
+   0.407555119875019,
+   0.011603699846337861
+  ],
+  "deviation": 5.0306980803327406e-17,
+  "cycles": 6,
+  "points": 26,
+  "mass": 0.6501667391843606,
+  "flank_rank": 0,
+  "flank_share": 0.34700989832462276,
+  "flank_multiplier_modulus": 23.10104260773417,
+  "top10_share": 1.0,
+  "rotation_share": 0.4328150891782789,
+  "beta_share": 0.007921704286919282,
+  "top": [
+   {
+    "period": 5,
+    "rotation": null,
+    "min_angle": 3,
+    "multiplier_modulus": 23.10104260773417,
+    "contribution": [
+     0.21132647735140805,
+     0.0790122120543556
+    ],
+    "share": 0.34700989832462276
+   },
+   {
+    "period": 5,
+    "rotation": null,
+    "min_angle": 7,
+    "multiplier_modulus": 37.15783033863187,
+    "contribution": [
+     0.12751054650578084,
+     -0.05277378064065379
+    ],
+    "share": 0.21225330821017907
+   },
+   {
+    "period": 5,
+    "rotation": "3/5",
+    "min_angle": 11,
+    "multiplier_modulus": 40.797800068293334,
+    "contribution": [
+     0.018641830222650348,
+     -0.12162836812732433
+    ],
+    "share": 0.18925711369412912
+   },
+   {
+    "period": 5,
+    "rotation": "1/5",
+    "min_angle": 1,
+    "multiplier_modulus": 43.721462526076444,
+    "contribution": [
+     0.005232325232228189,
+     0.11439027373205558
+    ],
+    "share": 0.17612386206736863
+   },
+   {
+    "period": 5,
+    "rotation": "4/5",
+    "min_angle": 15,
+    "multiplier_modulus": 115.0054474696956,
+    "contribution": [
+     0.042217991635680366,
+     -0.01182736030254386
+    ],
+    "share": 0.06743411341678106
+   }
+  ]
+ },
+ {
+  "p": 1,
+  "q": 6,
+  "pbar": 1,
+  "iota_cycles": [
+   0.45121231803218953,
+   -0.19696458990870405
+  ],
+  "iota_arb": [
+   0.45121231803218953,
+   -0.19696458990870408
+  ],
+  "deviation": 2.7755575615628914e-17,
+  "cycles": 12,
+  "points": 57,
+  "mass": 0.7913273924964557,
+  "flank_rank": 0,
+  "flank_share": 0.2686098465363169,
+  "flank_multiplier_modulus": 28.953555343630054,
+  "top10_share": 0.961686072873853,
+  "rotation_share": 0.09907344167628168,
+  "beta_share": 0.045132123635472025,
+  "top": [
+   {
+    "period": 6,
+    "rotation": null,
+    "min_angle": 3,
+    "multiplier_modulus": 28.953555343630054,
+    "contribution": [
+     0.1525388074024124,
+     -0.1480302525108283
+    ],
+    "share": 0.2686098465363169
+   },
+   {
+    "period": 6,
+    "rotation": null,
+    "min_angle": 5,
+    "multiplier_modulus": 58.473752799061835,
+    "contribution": [
+     0.03999244465118733,
+     -0.09525190117974384
+    ],
+    "share": 0.13054890279770728
+   },
+   {
+    "period": 6,
+    "rotation": null,
+    "min_angle": 7,
+    "multiplier_modulus": 70.09073369691407,
+    "contribution": [
+     0.08502525430746365,
+     -0.017545834428045096
+    ],
+    "share": 0.10971029549889517
+   },
+   {
+    "period": 6,
+    "rotation": "5/6",
+    "min_angle": 31,
+    "multiplier_modulus": 76.46405434147597,
+    "contribution": [
+     -0.005764116828864705,
+     0.07818734545772035
+    ],
+    "share": 0.09907344167628168
+   },
+   {
+    "period": 6,
+    "rotation": null,
+    "min_angle": 15,
+    "multiplier_modulus": 93.10340955324209,
+    "contribution": [
+     0.053854351779472696,
+     0.03643954485161495
+    ],
+    "share": 0.08217090126175386
+   }
+  ]
+ },
+ {
+  "p": 1,
+  "q": 7,
+  "pbar": 1,
+  "iota_cycles": [
+   0.5076295319112608,
+   -0.26102732324263694
+  ],
+  "iota_arb": [
+   0.507629531911261,
+   -0.2610273232426371
+  ],
+  "deviation": 2.7755575615628914e-16,
+  "cycles": 18,
+  "points": 120,
+  "mass": 0.9883614139451818,
+  "flank_rank": 0,
+  "flank_share": 0.2233214521379187,
+  "flank_multiplier_modulus": 32.41256586207081,
+  "top10_share": 0.7795859933924889,
+  "rotation_share": 0.21898181783222917,
+  "beta_share": 0.03920311039476878,
+  "top": [
+   {
+    "period": 7,
+    "rotation": null,
+    "min_angle": 3,
+    "multiplier_modulus": 32.41256586207081,
+    "contribution": [
+     0.15239428627037968,
+     -0.15966940209723957
+    ],
+    "share": 0.2233214521379187
+   },
+   {
+    "period": 7,
+    "rotation": null,
+    "min_angle": 5,
+    "multiplier_modulus": 72.3644469897473,
+    "contribution": [
+     0.02958419651660311,
+     -0.09253574152333832
+    ],
+    "share": 0.09829382430720451
+   },
+   {
+    "period": 7,
+    "rotation": null,
+    "min_angle": 7,
+    "multiplier_modulus": 86.37321489400139,
+    "contribution": [
+     0.0763572572897795,
+     -0.029695664512767457
+    ],
+    "share": 0.0828931622852584
+   },
+   {
+    "period": 7,
+    "rotation": "6/7",
+    "min_angle": 63,
+    "multiplier_modulus": 90.08366443854484,
+    "contribution": [
+     -0.037867842331645175,
+     0.06737644141557024
+    ],
+    "share": 0.07819892318407597
+   },
+   {
+    "period": 7,
+    "rotation": "2/7",
+    "min_angle": 9,
+    "multiplier_modulus": 102.2206372174937,
+    "contribution": [
+     0.005461126753777039,
+     -0.0683180815121239
+    ],
+    "share": 0.06934306154279678
+   }
+  ]
+ },
+ {
+  "p": 2,
+  "q": 7,
+  "pbar": 4,
+  "iota_cycles": [
+   0.5675704632744504,
+   -0.026478217307082746
+  ],
+  "iota_arb": [
+   0.5675704632744504,
+   -0.026478217307082864
+  ],
+  "deviation": 1.1796119636642288e-16,
+  "cycles": 18,
+  "points": 120,
+  "mass": 1.1569121923694634,
+  "flank_rank": 0,
+  "flank_share": 0.22882918505399788,
+  "flank_multiplier_modulus": 27.37901216421908,
+  "top10_share": 0.8818109403453269,
+  "rotation_share": 0.16832412592888246,
+  "beta_share": 0.00173950748769308,
+  "top": [
+   {
+    "period": 7,
+    "rotation": null,
+    "min_angle": 5,
+    "multiplier_modulus": 27.37901216421908,
+    "contribution": [
+     0.24758412402462934,
+     0.09373828948175436
+    ],
+    "share": 0.22882918505399788
+   },
+   {
+    "period": 7,
+    "rotation": null,
+    "min_angle": 13,
+    "multiplier_modulus": 56.61421564136995,
+    "contribution": [
+     0.08978563490246633,
+     -0.0873121723642677
+    ],
+    "share": 0.10825305025708451
+   },
+   {
+    "period": 7,
+    "rotation": null,
+    "min_angle": 19,
+    "multiplier_modulus": 59.218905433608114,
+    "contribution": [
+     0.002920933837065774,
+     -0.11823559817979692
+    ],
+    "share": 0.1022304660158858
+   },
+   {
+    "period": 7,
+    "rotation": null,
+    "min_angle": 11,
+    "multiplier_modulus": 78.6691707578875,
+    "contribution": [
+     0.08228650512191124,
+     -0.03652209330148946
+    ],
+    "share": 0.07781696629174041
+   },
+   {
+    "period": 7,
+    "rotation": null,
+    "min_angle": 3,
+    "multiplier_modulus": 78.07604168967879,
+    "contribution": [
+     0.016041858901934363,
+     0.08842543422342716
+    ],
+    "share": 0.07767986745785906
+   }
+  ]
+ },
+ {
+  "p": 3,
+  "q": 7,
+  "pbar": 5,
+  "iota_cycles": [
+   0.557811178259378,
+   0.09036832317398492
+  ],
+  "iota_arb": [
+   0.557811178259378,
+   0.09036832317398495
+  ],
+  "deviation": 2.7755575615628914e-17,
+  "cycles": 18,
+  "points": 120,
+  "mass": 1.1401479896585252,
+  "flank_rank": 0,
+  "flank_share": 0.21143980403913865,
+  "flank_multiplier_modulus": 29.821466220864544,
+  "top10_share": 0.8744298215075472,
+  "rotation_share": 0.18530175510740537,
+  "beta_share": 0.000469599002340733,
+  "top": [
+   {
+    "period": 7,
+    "rotation": null,
+    "min_angle": 19,
+    "multiplier_modulus": 29.821466220864544,
+    "contribution": [
+     0.18754455832335545,
+     0.1514696988285456
+    ],
+    "share": 0.21143980403913865
+   },
+   {
+    "period": 7,
+    "rotation": null,
+    "min_angle": 13,
+    "multiplier_modulus": 61.601902814000965,
+    "contribution": [
+     0.10420420645936786,
+     0.04941508399403939
+    ],
+    "share": 0.101151095178395
+   },
+   {
+    "period": 7,
+    "rotation": null,
+    "min_angle": 11,
+    "multiplier_modulus": 63.06735658968999,
+    "contribution": [
+     0.10857231001458759,
+     -0.030277444107626842
+    ],
+    "share": 0.09885996917642106
+   },
+   {
+    "period": 7,
+    "rotation": null,
+    "min_angle": 29,
+    "multiplier_modulus": 65.93552984480115,
+    "contribution": [
+     0.09199569983590378,
+     -0.05573653968691038
+    ],
+    "share": 0.09434114633465515
+   },
+   {
+    "period": 7,
+    "rotation": "4/7",
+    "min_angle": 43,
+    "multiplier_modulus": 70.43921665134901,
+    "contribution": [
+     -0.060873730708185095,
+     -0.07746136562604751
+    ],
+    "share": 0.08640842803677692
+   }
+  ]
+ },
+ {
+  "p": 1,
+  "q": 8,
+  "pbar": 1,
+  "iota_cycles": [
+   0.5577787044183131,
+   -0.32616616694833434
+  ],
+  "iota_arb": [
+   0.5577787044183136,
+   -0.3261661669483348
+  ],
+  "deviation": 6.280369834735101e-16,
+  "cycles": 34,
+  "points": 247,
+  "mass": 1.1950677537581837,
+  "flank_rank": 0,
+  "flank_share": 0.19327798627543347,
+  "flank_multiplier_modulus": 35.31756877097007,
+  "top10_share": 0.6357324367271766,
+  "rotation_share": 0.09025068068128433,
+  "beta_share": 0.0365379659603672,
+  "top": [
+   {
+    "period": 8,
+    "rotation": null,
+    "min_angle": 3,
+    "multiplier_modulus": 35.31756877097007,
+    "contribution": [
+     0.15588133125501447,
+     -0.17044912563779818
+    ],
+    "share": 0.19327798627543347
+   },
+   {
+    "period": 8,
+    "rotation": null,
+    "min_angle": 5,
+    "multiplier_modulus": 85.02322272688409,
+    "contribution": [
+     0.023938329051522697,
+     -0.09129329164779759
+    ],
+    "share": 0.0789742662302137
+   },
+   {
+    "period": 8,
+    "rotation": "7/8",
+    "min_angle": 127,
+    "multiplier_modulus": 99.0741971273206,
+    "contribution": [
+     -0.061056722560190395,
+     0.05189773359580782
+    ],
+    "share": 0.06705310427031688
+   },
+   {
+    "period": 8,
+    "rotation": null,
+    "min_angle": 7,
+    "multiplier_modulus": 101.67782886259228,
+    "contribution": [
+     0.07025160208040601,
+     -0.036940084232673455
+    ],
+    "share": 0.06641601774874756
+   },
+   {
+    "period": 8,
+    "rotation": null,
+    "min_angle": 9,
+    "multiplier_modulus": 133.34262186742546,
+    "contribution": [
+     -0.002099034901726139,
+     -0.05994502485233475
+    ],
+    "share": 0.05019109862781368
+   }
+  ]
+ },
+ {
+  "p": 3,
+  "q": 8,
+  "pbar": 3,
+  "iota_cycles": [
+   0.6462168877927988,
+   -0.061875667871139066
+  ],
+  "iota_arb": [
+   0.646216887792799,
+   -0.06187566787113904
+  ],
+  "deviation": 1.1443916996305594e-16,
+  "cycles": 34,
+  "points": 247,
+  "mass": 1.4806942133238399,
+  "flank_rank": 0,
+  "flank_share": 0.18508459863509663,
+  "flank_multiplier_modulus": 30.09933973996091,
+  "top10_share": 0.7137187362658366,
+  "rotation_share": 0.016704884997359545,
+  "beta_share": 0.00017979758922232424,
+  "top": [
+   {
+    "period": 8,
+    "rotation": null,
+    "min_angle": 21,
+    "multiplier_modulus": 30.09933973996091,
+    "contribution": [
+     0.24801109502828203,
+     -0.11660156102506643
+    ],
+    "share": 0.18508459863509663
+   },
+   {
+    "period": 8,
+    "rotation": null,
+    "min_angle": 19,
+    "multiplier_modulus": 58.80536921621442,
+    "contribution": [
+     0.1159102475186706,
+     0.07492695645546651
+    ],
+    "share": 0.09321233395150905
+   },
+   {
+    "period": 8,
+    "rotation": null,
+    "min_angle": 25,
+    "multiplier_modulus": 66.87409718607796,
+    "contribution": [
+     0.04290009954033015,
+     0.11237039983809001
+    ],
+    "share": 0.0812328604176894
+   },
+   {
+    "period": 8,
+    "rotation": null,
+    "min_angle": 39,
+    "multiplier_modulus": 85.62289367820738,
+    "contribution": [
+     0.08900710159106641,
+     -0.031668945740853785
+    ],
+    "share": 0.06380331810914837
+   },
+   {
+    "period": 8,
+    "rotation": null,
+    "min_angle": 53,
+    "multiplier_modulus": 89.97209932735257,
+    "contribution": [
+     -0.04036063510853785,
+     -0.07872958551581866
+    ],
+    "share": 0.05975048038976994
+   }
+  ]
+ },
+ {
+  "p": 1,
+  "q": 9,
+  "pbar": 1,
+  "iota_cycles": [
+   0.6029393079769433,
+   -0.3914949090624659
+  ],
+  "iota_arb": [
+   0.6029393079769433,
+   -0.3914949090624659
+  ],
+  "deviation": 0.0,
+  "cycles": 58,
+  "points": 502,
+  "mass": 1.4104750631650536,
+  "flank_rank": 0,
+  "flank_share": 0.17216327422217245,
+  "flank_multiplier_modulus": 37.73659281971147,
+  "top10_share": 0.5468914413700865,
+  "rotation_share": 0.11065954207015338,
+  "beta_share": 0.03555480965826301,
+  "top": [
+   {
+    "period": 9,
+    "rotation": null,
+    "min_angle": 3,
+    "multiplier_modulus": 37.73659281971147,
+    "contribution": [
+     0.1618644304125964,
+     -0.18101737170764376
+    ],
+    "share": 0.17216327422217245
+   },
+   {
+    "period": 9,
+    "rotation": null,
+    "min_angle": 5,
+    "multiplier_modulus": 96.26406953176716,
+    "contribution": [
+     0.020904771591137815,
+     -0.09135345038582451
+    ],
+    "share": 0.06644200607111697
+   },
+   {
+    "period": 9,
+    "rotation": "8/9",
+    "min_angle": 255,
+    "multiplier_modulus": 104.41215512214175,
+    "contribution": [
+     -0.07811054375614924,
+     0.03464598229525974
+    ],
+    "share": 0.06058200467724531
+   },
+   {
+    "period": 9,
+    "rotation": null,
+    "min_angle": 7,
+    "multiplier_modulus": 115.73566537664074,
+    "contribution": [
+     0.06630554621700398,
+     -0.04171669594176427
+    ],
+    "share": 0.05553954576072982
+   },
+   {
+    "period": 9,
+    "rotation": null,
+    "min_angle": 9,
+    "multiplier_modulus": 163.5708624439695,
+    "contribution": [
+     -0.005937144996877455,
+     -0.05466527433012723
+    ],
+    "share": 0.0389845552461135
+   }
+  ]
+ },
+ {
+  "p": 2,
+  "q": 9,
+  "pbar": 5,
+  "iota_cycles": [
+   0.7143559766603554,
+   -0.07372521158764798
+  ],
+  "iota_arb": [
+   0.7143559766603552,
+   -0.07372521158764811
+  ],
+  "deviation": 2.5476231888929306e-16,
+  "cycles": 58,
+  "points": 502,
+  "mass": 1.8067307710407012,
+  "flank_rank": 0,
+  "flank_share": 0.17307504271136293,
+  "flank_multiplier_modulus": 29.718742814073508,
+  "top10_share": 0.5883513292672885,
+  "rotation_share": 0.05727309817602677,
+  "beta_share": 0.0007760407913026206,
+  "top": [
+   {
+    "period": 9,
+    "rotation": null,
+    "min_angle": 9,
+    "multiplier_modulus": 29.718742814073508,
+    "contribution": [
+     0.2923897939357339,
+     0.11085802523043757
+    ],
+    "share": 0.17307504271136293
+   },
+   {
+    "period": 9,
+    "rotation": null,
+    "min_angle": 25,
+    "multiplier_modulus": 73.80768776916932,
+    "contribution": [
+     0.06830861671509449,
+     -0.10213428972023912
+    ],
+    "share": 0.06800781063556498
+   },
+   {
+    "period": 9,
+    "rotation": null,
+    "min_angle": 35,
+    "multiplier_modulus": 73.23055390496667,
+    "contribution": [
+     -0.004405635372522946,
+     -0.12277177768960351
+    ],
+    "share": 0.06799618504545847
+   },
+   {
+    "period": 9,
+    "rotation": null,
+    "min_angle": 5,
+    "multiplier_modulus": 97.96835306962113,
+    "contribution": [
+     0.025535580375508845,
+     0.08852199918791281
+    ],
+    "share": 0.05099347657326072
+   },
+   {
+    "period": 9,
+    "rotation": null,
+    "min_angle": 19,
+    "multiplier_modulus": 111.80269615812493,
+    "contribution": [
+     0.07430029426513578,
+     -0.03266601465997174
+    ],
+    "share": 0.04492315432539013
+   }
+  ]
+ },
+ {
+  "p": 4,
+  "q": 9,
+  "pbar": 7,
+  "iota_cycles": [
+   0.6831387777908594,
+   0.18768070084397415
+  ],
+  "iota_arb": [
+   0.6831387777908592,
+   0.187680700843974
+  ],
+  "deviation": 2.618455766672135e-16,
+  "cycles": 58,
+  "points": 502,
+  "mass": 1.7486065112623075,
+  "flank_rank": 0,
+  "flank_share": 0.14718136057489437,
+  "flank_multiplier_modulus": 35.65086756212646,
+  "top10_share": 0.5745812277178245,
+  "rotation_share": 0.06037386929258941,
+  "beta_share": 3.2834191037681006e-05,
+  "top": [
+   {
+    "period": 9,
+    "rotation": null,
+    "min_angle": 83,
+    "multiplier_modulus": 35.65086756212646,
+    "contribution": [
+     0.1732140732609044,
+     0.19034765769529496
+    ],
+    "share": 0.14718136057489437
+   },
+   {
+    "period": 9,
+    "rotation": null,
+    "min_angle": 75,
+    "multiplier_modulus": 84.99979010244093,
+    "contribution": [
+     0.10311821627132445,
+     0.0289180529837213
+    ],
+    "share": 0.06124666274376793
+   },
+   {
+    "period": 9,
+    "rotation": null,
+    "min_angle": 77,
+    "multiplier_modulus": 85.18470223851047,
+    "contribution": [
+     0.06935944998207644,
+     0.08077987023144248
+    ],
+    "share": 0.06088918206600577
+   },
+   {
+    "period": 9,
+    "rotation": null,
+    "min_angle": 117,
+    "multiplier_modulus": 96.05905100129121,
+    "contribution": [
+     0.07002001378165829,
+     -0.0633483509409024
+    ],
+    "share": 0.053999340384019504
+   },
+   {
+    "period": 9,
+    "rotation": "5/9",
+    "min_angle": 171,
+    "multiplier_modulus": 96.14047690148455,
+    "contribution": [
+     -0.0895214951264859,
+     -0.02399774859084618
+    ],
+    "share": 0.05300346217825891
+   }
+  ]
+ },
+ {
+  "p": 1,
+  "q": 10,
+  "pbar": 1,
+  "iota_cycles": [
+   0.6441371631563626,
+   -0.4565013688086098
+  ],
+  "iota_arb": [
+   0.6441371631563627,
+   -0.45650136880860964
+  ],
+  "deviation": 2.0014830212433605e-16,
+  "cycles": 106,
+  "points": 1013,
+  "mass": 1.633697329954062,
+  "flank_rank": 0,
+  "flank_share": 0.15665621106740119,
+  "flank_multiplier_modulus": 39.74313165650169,
+  "top10_share": 0.4810253959343393,
+  "rotation_share": 0.06449701287881861,
+  "beta_share": 0.035519684820252556,
+  "top": [
+   {
+    "period": 10,
+    "rotation": null,
+    "min_angle": 3,
+    "multiplier_modulus": 39.74313165650169,
+    "contribution": [
+     0.16960748224277664,
+     -0.19165821116656492
+    ],
+    "share": 0.15665621106740119
+   },
+   {
+    "period": 10,
+    "rotation": null,
+    "min_angle": 5,
+    "multiplier_modulus": 106.07764250148493,
+    "contribution": [
+     0.019393275247064523,
+     -0.09244513965797513
+    ],
+    "share": 0.05781818443373773
+   },
+   {
+    "period": 10,
+    "rotation": "9/10",
+    "min_angle": 511,
+    "multiplier_modulus": 107.14300831077612,
+    "contribution": [
+     -0.09092456022661578,
+     0.016915839656835945
+    ],
+    "share": 0.05661067486732821
+   },
+   {
+    "period": 10,
+    "rotation": null,
+    "min_angle": 7,
+    "multiplier_modulus": 128.41688997837898,
+    "contribution": [
+     0.06400017522087317,
+     -0.045231848261353604
+    ],
+    "share": 0.04797127647258572
+   },
+   {
+    "period": 1,
+    "rotation": "0",
+    "min_angle": 0,
+    "multiplier_modulus": 17.076907362942688,
+    "contribution": [
+     -0.010696805061764198,
+     -0.05703398304548315
+    ],
+    "share": 0.035519684820252556
+   }
+  ]
+ },
+ {
+  "p": 3,
+  "q": 10,
+  "pbar": 7,
+  "iota_cycles": [
+   0.778340490985202,
+   0.08464113970003133
+  ],
+  "iota_arb": [
+   0.7783404909852015,
+   0.08464113970003115
+  ],
+  "deviation": 4.793364605007606e-16,
+  "cycles": 106,
+  "points": 1013,
+  "mass": 2.2291314799973154,
+  "flank_rank": 0,
+  "flank_share": 0.1342506471201418,
+  "flank_multiplier_modulus": 34.1591773680297,
+  "top10_share": 0.4839765334764245,
+  "rotation_share": 0.0037461058061236726,
+  "beta_share": 4.7563839948467115e-05,
+  "top": [
+   {
+    "period": 10,
+    "rotation": null,
+    "min_angle": 69,
+    "multiplier_modulus": 34.1591773680297,
+    "contribution": [
+     0.2205541277351292,
+     0.20227166657521886
+    ],
+    "share": 0.1342506471201418
+   },
+   {
+    "period": 10,
+    "rotation": null,
+    "min_angle": 37,
+    "multiplier_modulus": 73.46111967549786,
+    "contribution": [
+     0.13547559944303755,
+     -0.02612236641075537
+    ],
+    "share": 0.06189454095815284
+   },
+   {
+    "period": 10,
+    "rotation": null,
+    "min_angle": 41,
+    "multiplier_modulus": 80.16873829872232,
+    "contribution": [
+     0.1204381812343719,
+     0.037831274122233784
+    ],
+    "share": 0.05663196317678639
+   },
+   {
+    "period": 10,
+    "rotation": null,
+    "min_angle": 105,
+    "multiplier_modulus": 104.0513137757704,
+    "contribution": [
+     0.047604705275382124,
+     -0.08401808337833386
+    ],
+    "share": 0.04332060074730372
+   },
+   {
+    "period": 10,
+    "rotation": null,
+    "min_angle": 147,
+    "multiplier_modulus": 103.29910095058776,
+    "contribution": [
+     -0.062231737821859666,
+     -0.07336818466664927
+    ],
+    "share": 0.0431587118415574
+   }
+  ]
+ },
+ {
+  "p": 1,
+  "q": 11,
+  "pbar": 1,
+  "iota_cycles": [
+   0.682185634850907,
+   -0.5209072773982765
+  ],
+  "iota_arb": [
+   0.6821856348509073,
+   -0.5209072773982766
+  ],
+  "deviation": 3.510833468576701e-16,
+  "cycles": 186,
+  "points": 2036,
+  "mass": 1.8639533612939152,
+  "flank_rank": 0,
+  "flank_share": 0.1448612833304745,
+  "flank_multiplier_modulus": 41.40684362717432,
+  "top10_share": 0.4362491993876248,
+  "rotation_share": 0.08401277922654904,
+  "beta_share": 0.03604744192206734,
+  "top": [
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 3,
+    "multiplier_modulus": 41.40684362717432,
+    "contribution": [
+     0.17862165873370695,
+     -0.20249006958022725
+    ],
+    "share": 0.1448612833304745
+   },
+   {
+    "period": 11,
+    "rotation": "10/11",
+    "min_angle": 1023,
+    "multiplier_modulus": 108.13170029311595,
+    "contribution": [
+     -0.10079310236098987,
+     -0.000719114976308944
+    ],
+    "share": 0.054076282007815245
+   },
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 5,
+    "multiplier_modulus": 114.55707302869358,
+    "contribution": [
+     0.01881519892248248,
+     -0.09433165391958219
+    ],
+    "share": 0.05160524726580122
+   },
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 7,
+    "multiplier_modulus": 139.70892647691215,
+    "contribution": [
+     0.06290548986125136,
+     -0.048097229335414673
+    ],
+    "share": 0.04248289553807972
+   },
+   {
+    "period": 1,
+    "rotation": "0",
+    "min_angle": 0,
+    "multiplier_modulus": 14.939188891235704,
+    "contribution": [
+     0.001525142030528039,
+     -0.06717343894330333
+    ],
+    "share": 0.03604744192206734
+   }
+  ]
+ },
+ {
+  "p": 2,
+  "q": 11,
+  "pbar": 6,
+  "iota_cycles": [
+   0.8515637291752153,
+   -0.12602831827253494
+  ],
+  "iota_arb": [
+   0.8515637291752151,
+   -0.12602831827253508
+  ],
+  "deviation": 2.618455766672135e-16,
+  "cycles": 186,
+  "points": 2036,
+  "mass": 2.6152338942877273,
+  "flank_rank": 0,
+  "flank_share": 0.1391795849748105,
+  "flank_multiplier_modulus": 31.15897322964114,
+  "top10_share": 0.425361396885315,
+  "rotation_share": 0.04645025200647434,
+  "beta_share": 0.0005053124920636181,
+  "top": [
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 17,
+    "multiplier_modulus": 31.15897322964114,
+    "contribution": [
+     0.34074427243759936,
+     0.12798437124696027
+    ],
+    "share": 0.1391795849748105
+   },
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 67,
+    "multiplier_modulus": 84.01419186492443,
+    "contribution": [
+     -0.008925878834428982,
+     -0.13052841110721997
+    ],
+    "share": 0.0500273581940476
+   },
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 49,
+    "multiplier_modulus": 88.83501905830278,
+    "contribution": [
+     0.056054605316426365,
+     -0.11112493723765184
+    ],
+    "share": 0.04759127881797583
+   },
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 9,
+    "multiplier_modulus": 109.94927403709731,
+    "contribution": [
+     0.036265163909699,
+     0.09359966981678502
+    ],
+    "share": 0.038382640010215095
+   },
+   {
+    "period": 11,
+    "rotation": "1/11",
+    "min_angle": 1,
+    "multiplier_modulus": 132.99303825140316,
+    "contribution": [
+     -0.059835917516857066,
+     -0.056451259199829504
+    ],
+    "share": 0.031455035045681
+   }
+  ]
+ },
+ {
+  "p": 3,
+  "q": 11,
+  "pbar": 4,
+  "iota_cycles": [
+   0.8646023985060802,
+   -0.1264005181048487
+  ],
+  "iota_arb": [
+   0.8646023985060801,
+   -0.12640051810484915
+  ],
+  "deviation": 4.577566798522237e-16,
+  "cycles": 186,
+  "points": 2036,
+  "mass": 2.722709520054308,
+  "flank_rank": 0,
+  "flank_share": 0.12273600102506159,
+  "flank_multiplier_modulus": 33.80853019843671,
+  "top10_share": 0.4126157440823552,
+  "rotation_share": 0.03270640648655654,
+  "beta_share": 2.9047878613551534e-05,
+  "top": [
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 73,
+    "multiplier_modulus": 33.80853019843671,
+    "contribution": [
+     0.2969070549638563,
+     -0.15335834752705818
+    ],
+    "share": 0.12273600102506159
+   },
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 69,
+    "multiplier_modulus": 68.4720103676,
+    "contribution": [
+     0.12823960057376818,
+     0.09985129739063323
+    ],
+    "share": 0.059693845996691856
+   },
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 81,
+    "multiplier_modulus": 80.56477759537121,
+    "contribution": [
+     0.0611619980572972,
+     0.12292894816476628
+    ],
+    "share": 0.05042908043841729
+   },
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 153,
+    "multiplier_modulus": 124.86197218593293,
+    "contribution": [
+     -0.007666110755774493,
+     -0.08770427983193808
+    ],
+    "share": 0.03233495302186783
+   },
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 141,
+    "multiplier_modulus": 127.21848632698668,
+    "contribution": [
+     0.06664605359911797,
+     -0.05590736610822924
+    ],
+    "share": 0.03194993861451518
+   }
+  ]
+ },
+ {
+  "p": 4,
+  "q": 11,
+  "pbar": 3,
+  "iota_cycles": [
+   0.844220226060683,
+   -0.1804410415693196
+  ],
+  "iota_arb": [
+   0.8442202260606833,
+   -0.18044104156931995
+  ],
+  "deviation": 4.236704743275018e-16,
+  "cycles": 186,
+  "points": 2036,
+  "mass": 2.6839724817901898,
+  "flank_rank": 0,
+  "flank_share": 0.11307034159933997,
+  "flank_multiplier_modulus": 36.98093890912959,
+  "top10_share": 0.41343366110865204,
+  "rotation_share": 0.03218010312002973,
+  "beta_share": 5.255791467355824e-06,
+  "top": [
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 165,
+    "multiplier_modulus": 36.98093890912959,
+    "contribution": [
+     0.22096161218269586,
+     -0.2080256509486963
+    ],
+    "share": 0.11307034159933997
+   },
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 149,
+    "multiplier_modulus": 84.1626810436631,
+    "contribution": [
+     0.12183472894410184,
+     -0.05118069395822901
+    ],
+    "share": 0.04923607392610278
+   },
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 169,
+    "multiplier_modulus": 85.07802228863106,
+    "contribution": [
+     0.13078456344553702,
+     0.003459952735615818
+    ],
+    "share": 0.048745031283290094
+   },
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 147,
+    "multiplier_modulus": 100.44892628278294,
+    "contribution": [
+     0.07373318639113399,
+     0.08196020481175495
+    ],
+    "share": 0.04107547482817092
+   },
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 201,
+    "multiplier_modulus": 116.65695600923,
+    "contribution": [
+     -0.02836515362908858,
+     0.08967435014066763
+    ],
+    "share": 0.03504266701826571
+   }
+  ]
+ },
+ {
+  "p": 5,
+  "q": 11,
+  "pbar": 9,
+  "iota_cycles": [
+   0.7885440212017089,
+   0.2940426342826261
+  ],
+  "iota_arb": [
+   0.7885440212017089,
+   0.2940426342826262
+  ],
+  "deviation": 1.1102230246251565e-16,
+  "cycles": 186,
+  "points": 2036,
+  "mass": 2.490645002131428,
+  "flank_rank": 0,
+  "flank_share": 0.11086168210594442,
+  "flank_multiplier_modulus": 40.46224422878745,
+  "top10_share": 0.4067863195465531,
+  "rotation_share": 0.056204442265664054,
+  "beta_share": 2.5046678574039916e-06,
+  "top": [
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 339,
+    "multiplier_modulus": 40.46224422878745,
+    "contribution": [
+     0.17020152135885774,
+     0.21742146164294285
+    ],
+    "share": 0.11086168210594442
+   },
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 331,
+    "multiplier_modulus": 107.34771138661702,
+    "contribution": [
+     0.08664503042501397,
+     0.05620707457457661
+    ],
+    "share": 0.04146685547728776
+   },
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 333,
+    "multiplier_modulus": 108.25949979714999,
+    "contribution": [
+     0.04783454258428633,
+     0.0901480063316969
+    ],
+    "share": 0.04097451031823792
+   },
+   {
+    "period": 11,
+    "rotation": "6/11",
+    "min_angle": 683,
+    "multiplier_modulus": 114.70785384842975,
+    "contribution": [
+     -0.09230106908389997,
+     0.02286645012292452
+    ],
+    "share": 0.03817940108264977
+   },
+   {
+    "period": 11,
+    "rotation": null,
+    "min_angle": 469,
+    "multiplier_modulus": 123.48178723053327,
+    "contribution": [
+     0.05395481902245578,
+     -0.0714342155762801
+    ],
+    "share": 0.03594280906485253
+   }
+  ]
+ },
+ {
+  "p": 1,
+  "q": 12,
+  "pbar": 1,
+  "iota_cycles": [
+   0.7177250780407137,
+   -0.5845784552422507
+  ],
+  "iota_arb": [
+   0.7177250780407142,
+   -0.5845784552422508
+  ],
+  "deviation": 4.577566798522237e-16,
+  "cycles": 350,
+  "points": 4083,
+  "mass": 2.100583191180494,
+  "flank_rank": 0,
+  "flank_share": 0.13562707474466545,
+  "flank_multiplier_modulus": 42.789112383391256,
+  "top10_share": 0.4040282594004383,
+  "rotation_share": 0.053179360983228806,
+  "beta_share": 0.03691626313998391,
+  "top": [
+   {
+    "period": 12,
+    "rotation": null,
+    "min_angle": 3,
+    "multiplier_modulus": 42.789112383391256,
+    "contribution": [
+     0.18857428687097683,
+     -0.21355430840661457
+    ],
+    "share": 0.13562707474466545
+   },
+   {
+    "period": 12,
+    "rotation": "11/12",
+    "min_angle": 2047,
+    "multiplier_modulus": 108.01501884629019,
+    "contribution": [
+     -0.10860529822826023,
+     -0.018021334693790563
+    ],
+    "share": 0.05240940890469027
+   },
+   {
+    "period": 12,
+    "rotation": null,
+    "min_angle": 5,
+    "multiplier_modulus": 121.84312439921273,
+    "contribution": [
+     0.018835106512576544,
+     -0.0968302185581244
+    ],
+    "share": 0.04696080771040326
+   },
+   {
+    "period": 12,
+    "rotation": null,
+    "min_angle": 7,
+    "multiplier_modulus": 149.67773402218427,
+    "contribution": [
+     0.06270244437448193,
+     -0.05063055612263229
+    ],
+    "share": 0.03836642689917108
+   },
+   {
+    "period": 1,
+    "rotation": "0",
+    "min_angle": 0,
+    "multiplier_modulus": 13.12728463936408,
+    "contribution": [
+     0.015118928513514188,
+     -0.07605754907670433
+    ],
+    "share": 0.03691626313998391
+   }
+  ]
+ },
+ {
+  "p": 5,
+  "q": 12,
+  "pbar": 5,
+  "iota_cycles": [
+   0.941847272003847,
+   -0.004328971051011516
+  ],
+  "iota_arb": [
+   0.9418472720038472,
+   -0.004328971051011851
+  ],
+  "deviation": 4.017411338227497e-16,
+  "cycles": 350,
+  "points": 4083,
+  "mass": 3.301554448639201,
+  "flank_rank": 0,
+  "flank_share": 0.11396281924814357,
+  "flank_multiplier_modulus": 32.817752607532704,
+  "top10_share": 0.35428243573429213,
+  "rotation_share": 0.0012450168059058681,
+  "beta_share": 8.237506232384057e-07,
+  "top": [
+   {
+    "period": 12,
+    "rotation": null,
+    "min_angle": 597,
+    "multiplier_modulus": 32.817752607532704,
+    "contribution": [
+     0.34696785175693806,
+     -0.14553598575714566
+    ],
+    "share": 0.11396281924814357
+   },
+   {
+    "period": 12,
+    "rotation": null,
+    "min_angle": 595,
+    "multiplier_modulus": 81.68688803375223,
+    "contribution": [
+     0.0731142277859717,
+     0.12845571426088742
+    ],
+    "share": 0.044768554833751056
+   },
+   {
+    "period": 12,
+    "rotation": null,
+    "min_angle": 613,
+    "multiplier_modulus": 87.59160913738809,
+    "contribution": [
+     0.01276458763214765,
+     0.13655873733720578
+    ],
+    "share": 0.04154225402356094
+   },
+   {
+    "period": 12,
+    "rotation": null,
+    "min_angle": 341,
+    "multiplier_modulus": 118.89620092651259,
+    "contribution": [
+     -0.000773780765962512,
+     -0.10092246729449404
+    ],
+    "share": 0.030569065311807055
+   },
+   {
+    "period": 12,
+    "rotation": null,
+    "min_angle": 339,
+    "multiplier_modulus": 135.08108174054448,
+    "contribution": [
+     0.06677624554059423,
+     -0.05933761615862723
+    ],
+    "share": 0.027057241419417503
+   }
+  ]
+ },
+ {
+  "p": 1,
+  "q": 13,
+  "pbar": 1,
+  "iota_cycles": [
+   0.7512579213513245,
+   -0.647467610246823
+  ],
+  "iota_arb": [
+   0.7512579213513247,
+   -0.647467610246824
+  ],
+  "deviation": 1.0235750533041806e-15,
+  "cycles": 630,
+  "points": 8178,
+  "mass": 2.3430540926292536,
+  "flank_rank": 0,
+  "flank_share": 0.1282188571037021,
+  "flank_multiplier_modulus": 43.941766009677764,
+  "top10_share": 0.38005733362627553,
+  "rotation_share": 0.06665965203127887,
+  "beta_share": 0.03798921480912504,
+  "top": [
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 3,
+    "multiplier_modulus": 43.941766009677764,
+    "contribution": [
+     0.19923357659962437,
+     -0.22485638133176453
+    ],
+    "share": 0.1282188571037021
+   },
+   {
+    "period": 13,
+    "rotation": "12/13",
+    "min_angle": 4095,
+    "multiplier_modulus": 107.23247493327656,
+    "contribution": [
+     -0.11497695756735024,
+     -0.034910757915225896
+    ],
+    "share": 0.051283558056711885
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 5,
+    "multiplier_modulus": 128.08994194239656,
+    "contribution": [
+     0.01925261740106723,
+     -0.09980449102411157
+    ],
+    "share": 0.0433811909522452
+   },
+   {
+    "period": 1,
+    "rotation": "0",
+    "min_angle": 0,
+    "multiplier_modulus": 11.608188451081144,
+    "contribution": [
+     0.029845422467421837,
+     -0.08385803864726633
+    ],
+    "share": 0.03798921480912504
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 7,
+    "multiplier_modulus": 158.4327518510438,
+    "contribution": [
+     0.06316219372280146,
+     -0.053000463101216484
+    ],
+    "share": 0.03519043319113798
+   }
+  ]
+ },
+ {
+  "p": 2,
+  "q": 13,
+  "pbar": 7,
+  "iota_cycles": [
+   0.9814421279389663,
+   -0.18111124360090114
+  ],
+  "iota_arb": [
+   0.981442127938967,
+   -0.1811112436009011
+  ],
+  "deviation": 6.667118051786499e-16,
+  "cycles": 630,
+  "points": 8178,
+  "mass": 3.5962186531617277,
+  "flank_rank": 0,
+  "flank_share": 0.115820101710875,
+  "flank_multiplier_modulus": 32.150877857566115,
+  "top10_share": 0.33085513742641665,
+  "rotation_share": 0.031871805381813736,
+  "beta_share": 0.0004092555680128864,
+  "top": [
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 33,
+    "multiplier_modulus": 32.150877857566115,
+    "contribution": [
+     0.3905206396554112,
+     0.1448374395445978
+    ],
+    "share": 0.115820101710875
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 131,
+    "multiplier_modulus": 92.47551464909317,
+    "contribution": [
+     -0.012017090212056962,
+     -0.13994093415804884
+    ],
+    "share": 0.03905656727593501
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 97,
+    "multiplier_modulus": 101.74256538658992,
+    "contribution": [
+     0.04923761351689001,
+     -0.11843553062568614
+    ],
+    "share": 0.03566598747151064
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 17,
+    "multiplier_modulus": 118.38300009642566,
+    "contribution": [
+     0.04753712416762973,
+     0.09943937548295646
+    ],
+    "share": 0.030648252896314974
+   },
+   {
+    "period": 13,
+    "rotation": "1/13",
+    "min_angle": 1,
+    "multiplier_modulus": 147.20288494658683,
+    "contribution": [
+     -0.026010665447220523,
+     -0.0842132163845824
+    ],
+    "share": 0.024508699915165712
+   }
+  ]
+ },
+ {
+  "p": 3,
+  "q": 13,
+  "pbar": 9,
+  "iota_cycles": [
+   0.9854996452225651,
+   0.07110341620289776
+  ],
+  "iota_arb": [
+   0.9854996452225663,
+   0.07110341620289762
+  ],
+  "deviation": 1.2291051413029514e-15,
+  "cycles": 630,
+  "points": 8178,
+  "mass": 3.820396836345559,
+  "flank_rank": 0,
+  "flank_share": 0.09582366734308967,
+  "flank_multiplier_modulus": 36.22862370497776,
+  "top10_share": 0.31266438908915134,
+  "rotation_share": 0.016418666995051668,
+  "beta_share": 1.448294030348719e-05,
+  "top": [
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 265,
+    "multiplier_modulus": 36.22862370497776,
+    "contribution": [
+     0.26023572197378203,
+     0.2574785097273431
+    ],
+    "share": 0.09582366734308967
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 137,
+    "multiplier_modulus": 77.68249581067134,
+    "contribution": [
+     0.16731407194985326,
+     -0.02714673578915177
+    ],
+    "share": 0.04436765452877553
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 145,
+    "multiplier_modulus": 90.93992247348147,
+    "contribution": [
+     0.14083682509402434,
+     0.032332992412992624
+    ],
+    "share": 0.037823462282056665
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 547,
+    "multiplier_modulus": 124.50760089014581,
+    "contribution": [
+     -0.06837403053453418,
+     -0.0781839532584652
+    ],
+    "share": 0.02718671474595964
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 401,
+    "multiplier_modulus": 137.09865776596618,
+    "contribution": [
+     0.022354765730795947,
+     -0.0923196719077029
+    ],
+    "share": 0.02486329919321469
+   }
+  ]
+ },
+ {
+  "p": 4,
+  "q": 13,
+  "pbar": 10,
+  "iota_cycles": [
+   0.9514593080444542,
+   0.22465855937568335
+  ],
+  "iota_arb": [
+   0.9514593080444537,
+   0.22465855937568324
+  ],
+  "deviation": 5.661048867003676e-16,
+  "cycles": 630,
+  "points": 8178,
+  "mass": 3.7502785129372,
+  "flank_rank": 0,
+  "flank_share": 0.08718302796359176,
+  "flank_multiplier_modulus": 40.382423279967604,
+  "top10_share": 0.3032020771584921,
+  "rotation_share": 0.01625781722677692,
+  "beta_share": 1.5054083034188563e-06,
+  "top": [
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 581,
+    "multiplier_modulus": 40.382423279967604,
+    "contribution": [
+     0.20094335069393737,
+     0.25792446105259126
+    ],
+    "share": 0.08718302796359176
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 549,
+    "multiplier_modulus": 95.12264067636836,
+    "contribution": [
+     0.1256018748964477,
+     0.05713748904255449
+    ],
+    "share": 0.036793908348783516
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 553,
+    "multiplier_modulus": 106.2196323009507,
+    "contribution": [
+     0.08437069349725612,
+     0.0897561183399448
+    ],
+    "share": 0.032846926774570205
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 293,
+    "multiplier_modulus": 121.88126560537135,
+    "contribution": [
+     0.08631684444323984,
+     -0.06385814171317641
+    ],
+    "share": 0.028630051218437428
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 1171,
+    "multiplier_modulus": 138.80646919085086,
+    "contribution": [
+     -0.08856309643909964,
+     -0.02844087705627432
+    ],
+    "share": 0.02480289655671643
+   }
+  ]
+ },
+ {
+  "p": 5,
+  "q": 13,
+  "pbar": 8,
+  "iota_cycles": [
+   1.0147498330721312,
+   0.05614735052019588
+  ],
+  "iota_arb": [
+   1.0147498330721318,
+   0.05614735052019594
+  ],
+  "deviation": 6.690547565963516e-16,
+  "cycles": 630,
+  "points": 8178,
+  "mass": 3.9465511150143358,
+  "flank_rank": 0,
+  "flank_share": 0.09883198050256961,
+  "flank_multiplier_modulus": 34.21792850286204,
+  "top10_share": 0.31146673532998326,
+  "rotation_share": 0.015977589090102357,
+  "beta_share": 3.433994245926666e-07,
+  "top": [
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 1173,
+    "multiplier_modulus": 34.21792850286204,
+    "contribution": [
+     0.34531544869373615,
+     0.1813634582391879
+    ],
+    "share": 0.09883198050256961
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 677,
+    "multiplier_modulus": 79.91221659218253,
+    "contribution": [
+     0.11308336217301614,
+     -0.11891626212362412
+    ],
+    "share": 0.04158069746701306
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 661,
+    "multiplier_modulus": 85.27716851831512,
+    "contribution": [
+     0.057437023752080256,
+     -0.1419463430271936
+    ],
+    "share": 0.03880012244789476
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 1171,
+    "multiplier_modulus": 134.55075833192637,
+    "contribution": [
+     -0.054443051527826004,
+     0.0793301875059257
+    ],
+    "share": 0.02437951220711149
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 659,
+    "multiplier_modulus": 138.9315968731597,
+    "contribution": [
+     0.07551549760778953,
+     0.05617084033340503
+    ],
+    "share": 0.023847566445894378
+   }
+  ]
+ },
+ {
+  "p": 6,
+  "q": 13,
+  "pbar": 11,
+  "iota_cycles": [
+   0.8784334486911202,
+   0.4041093149057918
+  ],
+  "iota_arb": [
+   0.8784334486911209,
+   0.4041093149057926
+  ],
+  "deviation": 1.0990647210786425e-15,
+  "cycles": 630,
+  "points": 8178,
+  "mass": 3.3860030228283704,
+  "flank_rank": 0,
+  "flank_share": 0.08788361054738308,
+  "flank_multiplier_modulus": 44.282317831377426,
+  "top10_share": 0.29958268472936794,
+  "rotation_share": 0.03890848683727761,
+  "beta_share": 2.015724547751231e-07,
+  "top": [
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 1363,
+    "multiplier_modulus": 44.282317831377426,
+    "contribution": [
+     0.17507692847823753,
+     0.24062098068001603
+    ],
+    "share": 0.08788361054738308
+   },
+   {
+    "period": 13,
+    "rotation": "7/13",
+    "min_angle": 2731,
+    "multiplier_modulus": 126.40803059187093,
+    "contribution": [
+     -0.08192232246343727,
+     0.0610939919511348
+    ],
+    "share": 0.03018149455827138
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 1355,
+    "multiplier_modulus": 128.78311068208686,
+    "contribution": [
+     0.07426767746478616,
+     0.0692187590056306
+    ],
+    "share": 0.029983146461494862
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 1357,
+    "multiplier_modulus": 129.128275587669,
+    "contribution": [
+     0.036299250045757216,
+     0.09420748288898154
+    ],
+    "share": 0.029816520975859274
+   },
+   {
+    "period": 13,
+    "rotation": null,
+    "min_angle": 1877,
+    "multiplier_modulus": 146.34703134621807,
+    "contribution": [
+     0.04079945933603497,
+     -0.07922161679383487
+    ],
+    "share": 0.026317278192187446
+   }
+  ]
+ },
+ {
+  "p": 1,
+  "q": 14,
+  "pbar": 1,
+  "iota_cycles": [
+   0.7831781826836045,
+   -0.7095782743886222
+  ],
+  "iota_arb": [
+   0.7831781826836031,
+   -0.7095782743886218
+  ],
+  "deviation": 1.5100665727558131e-15,
+  "cycles": 1180,
+  "points": 16369,
+  "mass": 2.5909567342042195,
+  "flank_rank": 0,
+  "flank_share": 0.12214864957791897,
+  "flank_multiplier_modulus": 44.90747159922592,
+  "top10_share": 0.36171920257168005,
+  "rotation_share": 0.05216945234688751,
+  "beta_share": 0.03917741271251444,
+  "top": [
+   {
+    "period": 14,
+    "rotation": null,
+    "min_angle": 3,
+    "multiplier_modulus": 44.90747159922592,
+    "contribution": [
+     0.21043445959020846,
+     -0.23638551108106742
+    ],
+    "share": 0.12214864957791897
+   },
+   {
+    "period": 14,
+    "rotation": "13/14",
+    "min_angle": 8191,
+    "multiplier_modulus": 106.07541492390537,
+    "contribution": [
+     -0.12033843825716027,
+     -0.051379580337454996
+    ],
+    "share": 0.05050181097559936
+   },
+   {
+    "period": 14,
+    "rotation": null,
+    "min_angle": 5,
+    "multiplier_modulus": 133.44628800899523,
+    "contribution": [
+     0.019942986692433207,
+     -0.10315327440416265
+    ],
+    "share": 0.040550045298946326
+   },
+   {
+    "period": 1,
+    "rotation": "0",
+    "min_angle": 0,
+    "multiplier_modulus": 10.338775397525778,
+    "contribution": [
+     0.04552908826786309,
+     -0.09072358774520355
+    ],
+    "share": 0.03917741271251444
+   },
+   {
+    "period": 14,
+    "rotation": null,
+    "min_angle": 7,
+    "multiplier_modulus": 166.10154311355495,
+    "contribution": [
+     0.06412150096305566,
+     -0.05529794408976873
+    ],
+    "share": 0.03268000682663742
+   }
+  ]
+ },
+ {
+  "p": 3,
+  "q": 14,
+  "pbar": 5,
+  "iota_cycles": [
+   1.0704552678834334,
+   -0.19784314220457563
+  ],
+  "iota_arb": [
+   1.0704552678834314,
+   -0.1978431422045757
+  ],
+  "deviation": 1.9991722838696e-15,
+  "cycles": 1180,
+  "points": 16369,
+  "mass": 4.507040827368001,
+  "flank_rank": 0,
+  "flank_share": 0.0882578996794114,
+  "flank_multiplier_modulus": 36.07635026736551,
+  "top10_share": 0.2741059696611948,
+  "rotation_share": 0.0013768691844625257,
+  "beta_share": 1.1201956415527938e-05,
+  "top": [
+   {
+    "period": 14,
+    "rotation": null,
+    "min_angle": 273,
+    "multiplier_modulus": 36.07635026736551,
+    "contribution": [
+     0.3492581691065785,
+     -0.1903922708003139
+    ],
+    "share": 0.0882578996794114
+   },
+   {
+    "period": 14,
+    "rotation": null,
+    "min_angle": 265,
+    "multiplier_modulus": 73.04074633029074,
+    "contribution": [
+     0.147870796531183,
+     0.1251247631075978
+    ],
+    "share": 0.04297851194590937
+   },
+   {
+    "period": 14,
+    "rotation": null,
+    "min_angle": 289,
+    "multiplier_modulus": 88.21137708363717,
+    "contribution": [
+     0.07946889679168427,
+     0.13842938192588788
+    ],
+    "share": 0.03541531988058057
+   },
+   {
+    "period": 14,
+    "rotation": null,
+    "min_angle": 561,
+    "multiplier_modulus": 146.72503155346172,
+    "contribution": [
+     -0.008911328895509406,
+     -0.09494073510995914
+    ],
+    "share": 0.021157570858032448
+   },
+   {
+    "period": 14,
+    "rotation": null,
+    "min_angle": 785,
+    "multiplier_modulus": 160.47434014895202,
+    "contribution": [
+     -0.06478027767497273,
+     -0.05783103417397522
+    ],
+    "share": 0.019267282707489668
+   }
+  ]
+ },
+ {
+  "p": 5,
+  "q": 14,
+  "pbar": 3,
+  "iota_cycles": [
+   1.007878518610428,
+   -0.3213191656216094
+  ],
+  "iota_arb": [
+   1.007878518610431,
+   -0.3213191656216106
+  ],
+  "deviation": 3.3399081181809284e-15,
+  "cycles": 1180,
+  "points": 16369,
+  "mass": 4.3784617385530575,
+  "flank_rank": 0,
+  "flank_share": 0.07559075548171734,
+  "flank_multiplier_modulus": 42.93384385870801,
+  "top10_share": 0.26441778951352596,
+  "rotation_share": 0.00048630083472646823,
+  "beta_share": 1.7206754721408678e-07,
+  "top": [
+   {
+    "period": 14,
+    "rotation": null,
+    "min_angle": 1317,
+    "multiplier_modulus": 42.93384385870801,
+    "contribution": [
+     0.20752793411581508,
+     -0.25782573977308637
+    ],
+    "share": 0.07559075548171734
+   },
+   {
+    "period": 14,
+    "rotation": null,
+    "min_angle": 1321,
+    "multiplier_modulus": 109.02639743668293,
+    "contribution": [
+     0.1136571050437365,
+     -0.06196885603530654
+    ],
+    "share": 0.0295658607583328
+   },
+   {
+    "period": 14,
+    "rotation": null,
+    "min_angle": 1189,
+    "multiplier_modulus": 111.96693421289534,
+    "contribution": [
+     0.08393613602878974,
+     -0.09368930229972185
+    ],
+    "share": 0.02872911913174103
+   },
+   {
+    "period": 14,
+    "rotation": null,
+    "min_angle": 1171,
+    "multiplier_modulus": 139.51829910301095,
+    "contribution": [
+     0.04665253349046678,
+     0.08922074066667453
+    ],
+    "share": 0.022994759312007142
+   },
+   {
+    "period": 14,
+    "rotation": null,
+    "min_angle": 1353,
+    "multiplier_modulus": 147.10098373225975,
+    "contribution": [
+     0.08768875614886837,
+     0.03850219343897232
+    ],
+    "share": 0.021872792552846403
+   }
+  ]
+ },
+ {
+  "p": 1,
+  "q": 15,
+  "pbar": 1,
+  "iota_cycles": [
+   0.8137953841784755,
+   -0.7709423267159495
+  ],
+  "iota_arb": [
+   0.8137953841784753,
+   -0.7709423267159468
+  ],
+  "deviation": 2.7844251801988247e-15,
+  "cycles": 2190,
+  "points": 32752,
+  "mass": 2.843994695186692,
+  "flank_rank": 0,
+  "flank_share": 0.1170814167746543,
+  "flank_multiplier_modulus": 45.720848499681914,
+  "top10_share": 0.3473446870276804,
+  "rotation_share": 0.05730365048537252,
+  "beta_share": 0.04042113069449174,
+  "top": [
+   {
+    "period": 15,
+    "rotation": null,
+    "min_angle": 3,
+    "multiplier_modulus": 45.720848499681914,
+    "contribution": [
+     0.22205701337114686,
+     -0.24812426210658614
+    ],
+    "share": 0.1170814167746543
+   },
+   {
+    "period": 15,
+    "rotation": "14/15",
+    "min_angle": 16383,
+    "multiplier_modulus": 104.73144303405977,
+    "contribution": [
+     -0.12499312478568186,
+     -0.06745112674856069
+    ],
+    "share": 0.049940831690129237
+   },
+   {
+    "period": 1,
+    "rotation": "0",
+    "min_angle": 0,
+    "multiplier_modulus": 9.27679382310979,
+    "contribution": [
+     0.06203616856481519,
+     -0.09678190062927226
+    ],
+    "share": 0.04042113069449174
+   },
+   {
+    "period": 15,
+    "rotation": null,
+    "min_angle": 5,
+    "multiplier_modulus": 138.046726355451,
+    "contribution": [
+     0.020825706646152593,
+     -0.1068009539204611
+    ],
+    "share": 0.03826043383577104
+   },
+   {
+    "period": 15,
+    "rotation": null,
+    "min_angle": 7,
+    "multiplier_modulus": 172.81375880944273,
+    "contribution": [
+     0.06546315596968541,
+     -0.057572513645590385
+    ],
+    "share": 0.030653393503759393
+   }
+  ]
+ },
+ {
+  "p": 2,
+  "q": 15,
+  "pbar": 8,
+  "iota_cycles": [
+   1.1055779889401707,
+   -0.23760529961391652
+  ],
+  "iota_arb": [
+   1.1055779889401698,
+   -0.23760529961391658
+  ],
+  "deviation": 8.899114524108741e-16,
+  "cycles": 2190,
+  "points": 32752,
+  "mass": 4.761199576480959,
+  "flank_rank": 0,
+  "flank_share": 0.09861184704363633,
+  "flank_multiplier_modulus": 32.888859246517484,
+  "top10_share": 0.26965870709309425,
+  "rotation_share": 0.022527805382564266,
+  "beta_share": 0.0003770601647354038,
+  "top": [
+   {
+    "period": 15,
+    "rotation": null,
+    "min_angle": 65,
+    "multiplier_modulus": 32.888859246517484,
+    "contribution": [
+     0.44082524080164354,
+     0.16159637935085455
+    ],
+    "share": 0.09861184704363633
+   },
+   {
+    "period": 15,
+    "rotation": null,
+    "min_angle": 259,
+    "multiplier_modulus": 99.19984981123439,
+    "contribution": [
+     -0.014220984640543291,
+     -0.15040334008945971
+    ],
+    "share": 0.03173027201198235
+   },
+   {
+    "period": 15,
+    "rotation": null,
+    "min_angle": 193,
+    "multiplier_modulus": 112.66603946784461,
+    "contribution": [
+     0.04573972917648966,
+     -0.1254703153253006
+    ],
+    "share": 0.02804911940552982
+   },
+   {
+    "period": 15,
+    "rotation": null,
+    "min_angle": 33,
+    "multiplier_modulus": 125.14972715651949,
+    "contribution": [
+     0.058607551225574414,
+     0.10508996868861815
+    ],
+    "share": 0.025272551899684026
+   },
+   {
+    "period": 15,
+    "rotation": "1/15",
+    "min_angle": 1,
+    "multiplier_modulus": 154.27771009909603,
+    "contribution": [
+     0.011302053518576822,
+     -0.0966439237291666
+    ],
+    "share": 0.02043655995479461
+   }
+  ]
+ },
+ {
+  "p": 4,
+  "q": 15,
+  "pbar": 4,
+  "iota_cycles": [
+   1.1106380741790747,
+   -0.2819952868212129
+  ],
+  "iota_arb": [
+   1.1106380741790751,
+   -0.281995286821213
+  ],
+  "deviation": 4.577566798522237e-16,
+  "cycles": 2190,
+  "points": 32752,
+  "mass": 5.278530444902772,
+  "flank_rank": 0,
+  "flank_share": 0.07062754444279919,
+  "flank_multiplier_modulus": 40.94717312540343,
+  "top10_share": 0.2403114501359325,
+  "rotation_share": 0.0004962533486090071,
+  "beta_share": 5.937823744817545e-07,
+  "top": [
+   {
+    "period": 15,
+    "rotation": null,
+    "min_angle": 1161,
+    "multiplier_modulus": 40.94717312540343,
+    "contribution": [
+     0.26321781092407603,
+     -0.2640140419865378
+    ],
+    "share": 0.07062754444279919
+   },
+   {
+    "period": 15,
+    "rotation": null,
+    "min_angle": 1097,
+    "multiplier_modulus": 94.92591253581344,
+    "contribution": [
+     0.14799532362370535,
+     -0.05968759079795456
+    ],
+    "share": 0.030231571425699252
+   },
+   {
+    "period": 15,
+    "rotation": null,
+    "min_angle": 1169,
+    "multiplier_modulus": 96.69409248102657,
+    "contribution": [
+     0.15603909134964677,
+     -0.014829845002600822
+    ],
+    "share": 0.029694290449378775
+   },
+   {
+    "period": 15,
+    "rotation": null,
+    "min_angle": 1093,
+    "multiplier_modulus": 113.4025536401305,
+    "contribution": [
+     0.07580144967822075,
+     0.10921660145383867
+    ],
+    "share": 0.025185811014422327
+   },
+   {
+    "period": 15,
+    "rotation": null,
+    "min_angle": 1297,
+    "multiplier_modulus": 139.85765166956,
+    "contribution": [
+     -0.014904571247278914,
+     0.10610632828550001
+    ],
+    "share": 0.020298836121393694
+   }
+  ]
+ },
+ {
+  "p": 7,
+  "q": 15,
+  "pbar": 13,
+  "iota_cycles": [
+   0.9564357238144989,
+   0.5149467967319807
+  ],
+  "iota_arb": [
+   0.956435723814501,
+   0.5149467967319797
+  ],
+  "deviation": 2.334110243043934e-15,
+  "cycles": 2190,
+  "points": 32752,
+  "mass": 4.458985221501856,
+  "flank_rank": 0,
+  "flank_share": 0.07208494374876248,
+  "flank_multiplier_modulus": 47.24998342840743,
+  "top10_share": 0.23313473037787713,
+  "rotation_share": 0.025275064019777777,
+  "beta_share": 1.6816452037208478e-08,
+  "top": [
+   {
+    "period": 15,
+    "rotation": null,
+    "min_angle": 5459,
+    "multiplier_modulus": 47.24998342840743,
+    "contribution": [
+     0.1850852414813631,
+     0.26278876170587073
+    ],
+    "share": 0.07208494374876248
+   },
+   {
+    "period": 15,
+    "rotation": "8/15",
+    "min_angle": 10923,
+    "multiplier_modulus": 132.84825642304642,
+    "contribution": [
+     -0.06476906832785399,
+     0.09189358158001577
+    ],
+    "share": 0.025213217527811256
+   },
+   {
+    "period": 15,
+    "rotation": null,
+    "min_angle": 5453,
+    "multiplier_modulus": 146.9965514080986,
+    "contribution": [
+     0.030369620881019316,
+     0.09763785738028093
+    ],
+    "share": 0.02293166795601607
+   },
+   {
+    "period": 15,
+    "rotation": null,
+    "min_angle": 5451,
+    "multiplier_modulus": 148.23916974459084,
+    "contribution": [
+     0.06679281161039982,
+     0.07661170170016336
+    ],
+    "share": 0.02279436108368263
+   },
+   {
+    "period": 15,
+    "rotation": null,
+    "min_angle": 7509,
+    "multiplier_modulus": 164.41187045459705,
+    "contribution": [
+     0.02922133953174737,
+     -0.08661725251506679
+    ],
+    "share": 0.020500973760881225
+   }
+  ]
+ },
+ {
+  "p": 1,
+  "q": 16,
+  "pbar": 1,
+  "iota_cycles": [
+   0.8433534626089384,
+   -0.8316061698958159
+  ],
+  "iota_arb": [
+   0.8433534626089373,
+   -0.8316061698958134
+  ],
+  "deviation": 2.7844251801988247e-15,
+  "cycles": 4114,
+  "points": 65519,
+  "mass": 3.101970663798239,
+  "flank_rank": 0,
+  "flank_share": 0.11278061416290873,
+  "flank_multiplier_modulus": 46.40977362659966,
+  "top10_share": 0.3359455247373936,
+  "rotation_share": 0.05033167190646332,
+  "beta_share": 0.041679344409769385,
+  "top": [
+   {
+    "period": 16,
+    "rotation": null,
+    "min_angle": 3,
+    "multiplier_modulus": 46.40977362659966,
+    "contribution": [
+     0.2340125247340117,
+     -0.26005321145316207
+    ],
+    "share": 0.11278061416290873
+   },
+   {
+    "period": 16,
+    "rotation": "15/16",
+    "min_angle": 32767,
+    "multiplier_modulus": 103.3183302055643,
+    "contribution": [
+     -0.12915656132272021,
+     -0.08316010936750101
+    ],
+    "share": 0.049521170855819835
+   },
+   {
+    "period": 1,
+    "rotation": "0",
+    "min_angle": 0,
+    "multiplier_modulus": 8.385025356870896,
+    "contribution": [
+     0.07926138236935787,
+     -0.10214228805511696
+    ],
+    "share": 0.041679344409769385
+   },
+   {
+    "period": 16,
+    "rotation": null,
+    "min_angle": 5,
+    "multiplier_modulus": 142.00857611267185,
+    "contribution": [
+     0.021847160519081532,
+     -0.11069037917897785
+    ],
+    "share": 0.036372293729127585
+   },
+   {
+    "period": 16,
+    "rotation": null,
+    "min_angle": 7,
+    "multiplier_modulus": 178.69211119800286,
+    "contribution": [
+     0.06710198263871045,
+     -0.05985101623783562
+    ],
+    "share": 0.028986614665200222
+   }
+  ]
+ },
+ {
+  "p": 3,
+  "q": 16,
+  "pbar": 11,
+  "iota_cycles": [
+   1.1837314954916993,
+   0.05322896865155321
+  ],
+  "iota_arb": [
+   1.18373149549171,
+   0.053228968651552175
+  ],
+  "deviation": 1.07081702274109e-14,
+  "cycles": 4114,
+  "points": 65519,
+  "mass": 6.060804715229357,
+  "flank_rank": 0,
+  "flank_share": 0.07209624664324571,
+  "flank_multiplier_modulus": 37.31796555594855,
+  "top10_share": 0.22234231161719,
+  "rotation_share": 0.0009127772234577584,
+  "beta_share": 7.862481465652335e-06,
+  "top": [
+   {
+    "period": 16,
+    "rotation": null,
+    "min_angle": 1041,
+    "multiplier_modulus": 37.31796555594855,
+    "contribution": [
+     0.30347476371795595,
+     0.3143854651055302
+    ],
+    "share": 0.07209624664324571
+   },
+   {
+    "period": 16,
+    "rotation": null,
+    "min_angle": 529,
+    "multiplier_modulus": 79.86119478835367,
+    "contribution": [
+     0.20048534167075882,
+     -0.03093803016431115
+    ],
+    "share": 0.033470540319395524
+   },
+   {
+    "period": 16,
+    "rotation": null,
+    "min_angle": 545,
+    "multiplier_modulus": 97.92116033147317,
+    "contribution": [
+     0.16259428452583313,
+     0.02840894129368749
+    ],
+    "share": 0.02723359033841631
+   },
+   {
+    "period": 16,
+    "rotation": null,
+    "min_angle": 2115,
+    "multiplier_modulus": 139.28587442844884,
+    "contribution": [
+     -0.07611455353143065,
+     -0.0853065131787011
+    ],
+    "share": 0.01886331037438102
+   },
+   {
+    "period": 16,
+    "rotation": null,
+    "min_angle": 1569,
+    "multiplier_modulus": 165.92016631900157,
+    "contribution": [
+     0.007205221930083711,
+     -0.09620765619661494
+    ],
+    "share": 0.01591819760342317
+   }
+  ]
+ },
+ {
+  "p": 5,
+  "q": 16,
+  "pbar": 13,
+  "iota_cycles": [
+   1.0944497255054058,
+   0.3777901417444359
+  ],
+  "iota_arb": [
+   1.094449725505406,
+   0.3777901417444356
+  ],
+  "deviation": 4.002966042486721e-16,
+  "cycles": 4114,
+  "points": 65519,
+  "mass": 5.874339455297308,
+  "flank_rank": 0,
+  "flank_share": 0.060653983953718134,
+  "flank_multiplier_modulus": 45.46831977337624,
+  "top10_share": 0.20304138339203157,
+  "rotation_share": 0.00033795213372907163,
+  "beta_share": 5.1445248181629786e-08,
+  "top": [
+   {
+    "period": 16,
+    "rotation": null,
+    "min_angle": 4677,
+    "multiplier_modulus": 45.46831977337624,
+    "contribution": [
+     0.19774591206569786,
+     0.29639118467870285
+    ],
+    "share": 0.060653983953718134
+   },
+   {
+    "period": 16,
+    "rotation": null,
+    "min_angle": 4645,
+    "multiplier_modulus": 119.4215394054897,
+    "contribution": [
+     0.09871622484675192,
+     0.09180578305297589
+    ],
+    "share": 0.022948621467290133
+   },
+   {
+    "period": 16,
+    "rotation": null,
+    "min_angle": 4649,
+    "multiplier_modulus": 133.47999568321995,
+    "contribution": [
+     0.05755253670377661,
+     0.10564212217226576
+    ],
+    "share": 0.020479225452259026
+   },
+   {
+    "period": 16,
+    "rotation": null,
+    "min_angle": 2341,
+    "multiplier_modulus": 161.4729089057033,
+    "contribution": [
+     0.054759447291206256,
+     -0.0829902778590391
+    ],
+    "share": 0.01692586594353216
+   },
+   {
+    "period": 16,
+    "rotation": null,
+    "min_angle": 9363,
+    "multiplier_modulus": 161.7851139693273,
+    "contribution": [
+     -0.09762451907637758,
+     0.011445965667692449
+    ],
+    "share": 0.016732641944146052
+   }
+  ]
+ },
+ {
+  "p": 7,
+  "q": 16,
+  "pbar": 7,
+  "iota_cycles": [
+   1.2135757192419918,
+   0.07303975237539138
+  ],
+  "iota_arb": [
+   1.213575719241991,
+   0.07303975237539101
+  ],
+  "deviation": 9.639819490876587e-16,
+  "cycles": 4114,
+  "points": 65519,
+  "mass": 6.267068349199262,
+  "flank_rank": 0,
+  "flank_share": 0.07754079805011305,
+  "flank_multiplier_modulus": 33.86063020103418,
+  "top10_share": 0.21312671538148267,
+  "rotation_share": 0.0005178936536519116,
+  "beta_share": 4.881708499447837e-09,
+  "top": [
+   {
+    "period": 16,
+    "rotation": null,
+    "min_angle": 10581,
+    "multiplier_modulus": 33.86063020103418,
+    "contribution": [
+     0.45377216136397813,
+     -0.17390115437251277
+    ],
+    "share": 0.07754079805011305
+   },
+   {
+    "period": 16,
+    "rotation": null,
+    "min_angle": 10579,
+    "multiplier_modulus": 101.7951465495363,
+    "contribution": [
+     0.04687388433035891,
+     0.15051592884332454
+    ],
+    "share": 0.025154636163651517
+   },
+   {
+    "period": 16,
+    "rotation": null,
+    "min_angle": 10645,
+    "multiplier_modulus": 102.13795259875715,
+    "contribution": [
+     -0.004740745161220434,
+     0.15654019371279834
+    ],
+    "share": 0.024989668875189133
+   },
+   {
+    "period": 16,
+    "rotation": null,
+    "min_angle": 9557,
+    "multiplier_modulus": 124.99316267024794,
+    "contribution": [
+     0.030377581572202286,
+     -0.12460444614384213
+    ],
+    "share": 0.02046473773276729
+   },
+   {
+    "period": 16,
+    "rotation": null,
+    "min_angle": 9555,
+    "multiplier_modulus": 172.5921014068014,
+    "contribution": [
+     0.0884100961717885,
+     -0.029546181186186158
+    ],
+    "share": 0.014874025188023766
+   }
+  ]
+ },
+ {
+  "p": 1,
+  "q": 17,
+  "pbar": 1,
+  "iota_cycles": [
+   0.8720454977378295,
+   -0.8916223725930136
+  ],
+  "iota_arb": [
+   0.8720454977378314,
+   -0.8916223725930105
+  ],
+  "deviation": 3.636721891222372e-15,
+  "cycles": 7710,
+  "points": 131054,
+  "mass": 3.3647718224045566,
+  "flank_rank": 0,
+  "flank_share": 0.10907520861483362,
+  "flank_multiplier_modulus": 46.99662585488808,
+  "top10_share": 0.32674918358920535,
+  "rotation_share": 0.054313192516716104,
+  "beta_share": 0.04292355032587331,
+  "top": [
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 3,
+    "multiplier_modulus": 46.99662585488808,
+    "contribution": [
+     0.24623428734405495,
+     -0.2721531852599705
+    ],
+    "share": 0.10907520861483362
+   },
+   {
+    "period": 17,
+    "rotation": "16/17",
+    "min_angle": 65535,
+    "multiplier_modulus": 101.9079554294784,
+    "contribution": [
+     -0.13298287958354846,
+     -0.09854339448672852
+    ],
+    "share": 0.04919058536484399
+   },
+   {
+    "period": 1,
+    "rotation": "0",
+    "min_angle": 0,
+    "multiplier_modulus": 7.632283550142722,
+    "contribution": [
+     0.09711955900513233,
+     -0.1068981981442752
+    ],
+    "share": 0.04292355032587331
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 5,
+    "multiplier_modulus": 145.43191850478374,
+    "contribution": [
+     0.022970648006390447,
+     -0.11477778371029528
+    ],
+    "share": 0.03478803274848565
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 7,
+    "multiplier_modulus": 183.84800502253574,
+    "contribution": [
+     0.06897520086761556,
+     -0.06214767255123401
+    ],
+    "share": 0.027592800821727947
+   }
+  ]
+ },
+ {
+  "p": 2,
+  "q": 17,
+  "pbar": 9,
+  "iota_cycles": [
+   1.2251688294307224,
+   -0.2946692430785804
+  ],
+  "iota_arb": [
+   1.2251688294307184,
+   -0.29466924307858233
+  ],
+  "deviation": 4.444013503773866e-15,
+  "cycles": 7710,
+  "points": 131054,
+  "mass": 6.119303213910188,
+  "flank_rank": 0,
+  "flank_share": 0.08542219778541171,
+  "flank_multiplier_modulus": 33.463585083350196,
+  "top10_share": 0.22657427087589663,
+  "rotation_share": 0.02063001821764354,
+  "beta_share": 0.00037480649707552705,
+  "top": [
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 129,
+    "multiplier_modulus": 33.463585083350196,
+    "contribution": [
+     0.4913197712745431,
+     0.1784533747260407
+    ],
+    "share": 0.08542219778541171
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 515,
+    "multiplier_modulus": 104.58686895282521,
+    "contribution": [
+     -0.015833748289535942,
+     -0.1616265405992904
+    ],
+    "share": 0.02653901265401373
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 385,
+    "multiplier_modulus": 121.8192068825564,
+    "contribution": [
+     0.0443422021540671,
+     -0.13270712549710065
+    ],
+    "share": 0.022865234913461548
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 65,
+    "multiplier_modulus": 130.95214803648128,
+    "contribution": [
+     0.06911105796755003,
+     0.11051922092984365
+    ],
+    "share": 0.02130126560183344
+   },
+   {
+    "period": 17,
+    "rotation": "1/17",
+    "min_angle": 1,
+    "multiplier_modulus": 156.40196999372864,
+    "contribution": [
+     0.047698443843974286,
+     -0.09801065795472103
+    ],
+    "share": 0.01781265841299606
+   }
+  ]
+ },
+ {
+  "p": 3,
+  "q": 17,
+  "pbar": 6,
+  "iota_cycles": [
+   1.2675931368663407,
+   -0.2729180014879664
+  ],
+  "iota_arb": [
+   1.267593136866336,
+   -0.27291800148796364
+  ],
+  "deviation": 5.426481224302087e-15,
+  "cycles": 7710,
+  "points": 131054,
+  "mass": 6.988836784194699,
+  "flank_rank": 0,
+  "flank_share": 0.06618760512439825,
+  "flank_multiplier_modulus": 37.6250993835243,
+  "top10_share": 0.19801348476764358,
+  "rotation_share": 0.0062865258389200795,
+  "beta_share": 6.953277347463501e-06,
+  "top": [
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 1057,
+    "multiplier_modulus": 37.6250993835243,
+    "contribution": [
+     0.40292337400207384,
+     -0.2272175210308335
+    ],
+    "share": 0.06618760512439825
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 1041,
+    "multiplier_modulus": 75.56204173726252,
+    "contribution": [
+     0.17071779110141147,
+     0.14999130045582973
+    ],
+    "share": 0.03251594923211548
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 1089,
+    "multiplier_modulus": 93.05165302736218,
+    "contribution": [
+     0.09806514693622402,
+     0.1554007176291906
+    ],
+    "share": 0.026292744044694023
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 2145,
+    "multiplier_modulus": 162.25741659629873,
+    "contribution": [
+     -0.010263351540921407,
+     -0.10420630362226264
+    ],
+    "share": 0.014982537064380816
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 3105,
+    "multiplier_modulus": 186.64594384757905,
+    "contribution": [
+     -0.07195211997317992,
+     -0.055215500655085376
+    ],
+    "share": 0.012977341534952877
+   }
+  ]
+ },
+ {
+  "p": 4,
+  "q": 17,
+  "pbar": 13,
+  "iota_cycles": [
+   1.2062054122088433,
+   0.25553921345490926
+  ],
+  "iota_arb": [
+   1.2062054122088401,
+   0.2555392134549102
+  ],
+  "deviation": 3.2487068343022356e-15,
+  "cycles": 7710,
+  "points": 131054,
+  "mass": 7.068955228470341,
+  "flank_rank": 0,
+  "flank_share": 0.05716847354666926,
+  "flank_multiplier_modulus": 42.65174179103609,
+  "top10_share": 0.18818843158881945,
+  "rotation_share": 0.004456953158920499,
+  "beta_share": 3.107902363551693e-07,
+  "top": [
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 4361,
+    "multiplier_modulus": 42.65174179103609,
+    "contribution": [
+     0.2333221940252094,
+     0.3299618819399151
+    ],
+    "share": 0.05716847354666926
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 4233,
+    "multiplier_modulus": 98.17358657176615,
+    "contribution": [
+     0.15307369071775026,
+     0.08424320259722981
+    ],
+    "share": 0.024717087932742833
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 4241,
+    "multiplier_modulus": 117.20892503005278,
+    "contribution": [
+     0.10188823655828753,
+     0.10444685290328279
+    ],
+    "share": 0.020641262139761498
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 2185,
+    "multiplier_modulus": 125.14880288073202,
+    "contribution": [
+     0.11368439143825233,
+     -0.07599924208696804
+    ],
+    "share": 0.01934487243080175
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 8739,
+    "multiplier_modulus": 162.42828711255387,
+    "contribution": [
+     -0.09836698158592617,
+     -0.03393560869529563
+    ],
+    "share": 0.014720163966761169
+   }
+  ]
+ },
+ {
+  "p": 5,
+  "q": 17,
+  "pbar": 7,
+  "iota_cycles": [
+   1.2922835039271996,
+   -0.050029491826959926
+  ],
+  "iota_arb": [
+   1.2922835039271907,
+   -0.050029491826956846
+  ],
+  "deviation": 9.400949082939405e-15,
+  "cycles": 7710,
+  "points": 131054,
+  "mass": 7.4250342993637695,
+  "flank_rank": 0,
+  "flank_share": 0.06750689503873647,
+  "flank_multiplier_modulus": 34.83519759239132,
+  "top10_share": 0.19322209105336155,
+  "rotation_share": 0.0050473385667023415,
+  "beta_share": 2.8657340337804904e-08,
+  "top": [
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 8777,
+    "multiplier_modulus": 34.83519759239132,
+    "contribution": [
+     0.45968617586268334,
+     -0.19982785325243316
+    ],
+    "share": 0.06750689503873647
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 8773,
+    "multiplier_modulus": 91.06611775900241,
+    "contribution": [
+     0.07068528295174445,
+     0.1736264217286884
+    ],
+    "share": 0.025247485511942728
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 8841,
+    "multiplier_modulus": 99.62344009806819,
+    "contribution": [
+     0.01809022496470099,
+     0.1698721403487875
+    ],
+    "share": 0.023007660392286102
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 4681,
+    "multiplier_modulus": 134.8147988958424,
+    "contribution": [
+     -0.012967320333128599,
+     -0.12533714877364588
+    ],
+    "share": 0.016970448152607266
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 4677,
+    "multiplier_modulus": 156.16214254669094,
+    "contribution": [
+     0.08835099049206997,
+     -0.06456420403947612
+    ],
+    "share": 0.014737676947342794
+   }
+  ]
+ },
+ {
+  "p": 6,
+  "q": 17,
+  "pbar": 3,
+  "iota_cycles": [
+   1.1444539369794884,
+   -0.47202154767726423
+  ],
+  "iota_arb": [
+   1.1444539369794922,
+   -0.4720215476772648
+  ],
+  "deviation": 3.815356980893987e-15,
+  "cycles": 7710,
+  "points": 131054,
+  "mass": 6.736058864545,
+  "flank_rank": 0,
+  "flank_share": 0.05364482344044841,
+  "flank_multiplier_modulus": 47.629917838754324,
+  "top10_share": 0.17697199600877672,
+  "rotation_share": 0.005688861006693667,
+  "beta_share": 5.996130583800717e-09,
+  "top": [
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 10533,
+    "multiplier_modulus": 47.629917838754324,
+    "contribution": [
+     0.20876671071603384,
+     -0.2949468958612975
+    ],
+    "share": 0.05364482344044841
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 10537,
+    "multiplier_modulus": 134.1812530745182,
+    "contribution": [
+     0.0913255747944987,
+     -0.08879440311890462
+    ],
+    "share": 0.018909667443636955
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 9509,
+    "multiplier_modulus": 138.88029224210223,
+    "contribution": [
+     0.06040152622177998,
+     -0.10696974956490918
+    ],
+    "share": 0.018236911459762858
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 9363,
+    "multiplier_modulus": 171.78598382215455,
+    "contribution": [
+     0.025710642069864897,
+     0.09571868946765051
+    ],
+    "share": 0.014713585296412209
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 12873,
+    "multiplier_modulus": 187.06251330953413,
+    "contribution": [
+     -0.08549353463678486,
+     0.029444189245485176
+    ],
+    "share": 0.01342354891278756
+   }
+  ]
+ },
+ {
+  "p": 7,
+  "q": 17,
+  "pbar": 5,
+  "iota_cycles": [
+   1.2591367404142804,
+   -0.18874147667072538
+  ],
+  "iota_arb": [
+   1.2591367404142808,
+   -0.1887414766707253
+  ],
+  "deviation": 4.518280359883027e-16,
+  "cycles": 7710,
+  "points": 131054,
+  "mass": 7.364620465800117,
+  "flank_rank": 0,
+  "flank_share": 0.0591465364222003,
+  "flank_multiplier_modulus": 39.731792642087306,
+  "top10_share": 0.18887206480253305,
+  "rotation_share": 0.004580905063456467,
+  "beta_share": 1.888400113134937e-09,
+  "top": [
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 19093,
+    "multiplier_modulus": 39.731792642087306,
+    "contribution": [
+     0.3040313773587062,
+     -0.31193770431914797
+    ],
+    "share": 0.0591465364222003
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 19109,
+    "multiplier_modulus": 87.69500864513671,
+    "contribution": [
+     0.19589259405098988,
+     0.008740617399674376
+    ],
+    "share": 0.02662560802942497
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 19029,
+    "multiplier_modulus": 96.80098317058872,
+    "contribution": [
+     0.17305785774925622,
+     -0.03903800330938374
+    ],
+    "share": 0.024088991392148637
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 19027,
+    "multiplier_modulus": 141.73676788803655,
+    "contribution": [
+     0.016847424874148174,
+     0.11887453267867668
+    ],
+    "share": 0.016302597487957045
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 19621,
+    "multiplier_modulus": 148.02475670535836,
+    "contribution": [
+     -0.057193389785500794,
+     0.09914782329602431
+    ],
+    "share": 0.015542041466932532
+   }
+  ]
+ },
+ {
+  "p": 8,
+  "q": 17,
+  "pbar": 15,
+  "iota_cycles": [
+   1.025401318005404,
+   0.6250236738167019
+  ],
+  "iota_arb": [
+   1.025401318005406,
+   0.6250236738167013
+  ],
+  "deviation": 2.0740677722252305e-15,
+  "cycles": 7710,
+  "points": 131054,
+  "mass": 5.739127543486218,
+  "flank_rank": 0,
+  "flank_share": 0.060507180937435054,
+  "flank_multiplier_modulus": 49.53321372698675,
+  "top10_share": 0.1891161239678344,
+  "rotation_share": 0.024241190184347266,
+  "beta_share": 1.4392443186139812e-09,
+  "top": [
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 21843,
+    "multiplier_modulus": 49.53321372698675,
+    "contribution": [
+     0.1984654569205687,
+     0.28495592415360865
+    ],
+    "share": 0.060507180937435054
+   },
+   {
+    "period": 17,
+    "rotation": "9/17",
+    "min_angle": 43691,
+    "multiplier_modulus": 135.71109434136386,
+    "contribution": [
+     -0.044074627420873626,
+     0.11691238894245475
+    ],
+    "share": 0.02177060964891274
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 21837,
+    "multiplier_modulus": 161.82261756959167,
+    "contribution": [
+     0.027533237418185124,
+     0.1015592832352629
+    ],
+    "share": 0.018334723426955326
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 21835,
+    "multiplier_modulus": 165.24555869849178,
+    "contribution": [
+     0.06287891306954742,
+     0.08190631121081589
+    ],
+    "share": 0.01799209104928961
+   },
+   {
+    "period": 17,
+    "rotation": null,
+    "min_angle": 30037,
+    "multiplier_modulus": 178.22754488307572,
+    "contribution": [
+     0.01856425107202503,
+     -0.09366735505233487
+    ],
+    "share": 0.01663829404893436
+   }
+  ]
+ },
+ {
+  "p": 1,
+  "q": 18,
+  "pbar": 1,
+  "iota_cycles": [
+   0.9000250837295677,
+   -0.9510447375383797
+  ],
+  "iota_arb": [
+   0.9000250837295665,
+   -0.9510447375383838
+  ],
+  "deviation": 4.285518399176076e-15,
+  "cycles": 14600,
+  "points": 262125,
+  "mass": 3.6323559827646683,
+  "flank_rank": 0,
+  "flank_share": 0.10583897022704673,
+  "flank_multiplier_modulus": 47.499369211221165,
+  "top10_share": 0.31914910812305614,
+  "rotation_share": 0.04895066611751385,
+  "beta_share": 0.04413390247349868,
+  "top": [
+   {
+    "period": 18,
+    "rotation": null,
+    "min_angle": 3,
+    "multiplier_modulus": 47.499369211221165,
+    "contribution": [
+     0.25867139708314657,
+     -0.2844062682663837
+    ],
+    "share": 0.10583897022704673
+   },
+   {
+    "period": 18,
+    "rotation": "17/18",
+    "min_angle": 131071,
+    "multiplier_modulus": 100.54252615950148,
+    "contribution": [
+     -0.13658284176552915,
+     -0.11363594251915453
+    ],
+    "share": 0.048914219760405234
+   },
+   {
+    "period": 1,
+    "rotation": "0",
+    "min_angle": 0,
+    "multiplier_modulus": 6.993085729013487,
+    "contribution": [
+     0.11554022063242084,
+     -0.11112950933698788
+    ],
+    "share": 0.04413390247349868
+   },
+   {
+    "period": 18,
+    "rotation": null,
+    "min_angle": 5,
+    "multiplier_modulus": 148.4010403563206,
+    "contribution": [
+     0.02417043905876337,
+     -0.11902919835508281
+    ],
+    "share": 0.0334379316366478
+   },
+   {
+    "period": 18,
+    "rotation": null,
+    "min_angle": 7,
+    "multiplier_modulus": 188.3800107739764,
+    "contribution": [
+     0.07103585058518044,
+     -0.06446957884238859
+    ],
+    "share": 0.026409646591088992
+   }
+  ]
+ },
+ {
+  "p": 5,
+  "q": 18,
+  "pbar": 11,
+  "iota_cycles": [
+   1.3634102069584508,
+   0.0389930195982358
+  ],
+  "iota_arb": [
+   1.363410206958452,
+   0.0389930195982362
+  ],
+  "deviation": 1.1809173860735548e-15,
+  "cycles": 14600,
+  "points": 262125,
+  "mass": 8.63096521268031,
+  "flank_rank": 0,
+  "flank_share": 0.060057308859981014,
+  "flank_multiplier_modulus": 35.60486454607155,
+  "top10_share": 0.17537384824564894,
+  "rotation_share": 5.224280477651783e-05,
+  "beta_share": 1.8398255111484963e-08,
+  "top": [
+   {
+    "period": 18,
+    "rotation": null,
+    "min_angle": 17481,
+    "multiplier_modulus": 35.60486454607155,
+    "contribution": [
+     0.45418126677005294,
+     0.24981740593310564
+    ],
+    "share": 0.060057308859981014
+   },
+   {
+    "period": 18,
+    "rotation": null,
+    "min_angle": 9353,
+    "multiplier_modulus": 91.14088786936496,
+    "contribution": [
+     0.12124071796840037,
+     -0.15759355739702294
+    ],
+    "share": 0.02303730810761763
+   },
+   {
+    "period": 18,
+    "rotation": null,
+    "min_angle": 9289,
+    "multiplier_modulus": 93.09110954394188,
+    "contribution": [
+     0.07283536987455723,
+     -0.17997115684102027
+    ],
+    "share": 0.022494702392037737
+   },
+   {
+    "period": 18,
+    "rotation": null,
+    "min_angle": 17477,
+    "multiplier_modulus": 150.18301075499295,
+    "contribution": [
+     -0.0732653633980087,
+     0.09423802488056816
+    ],
+    "share": 0.013830154055966562
+   },
+   {
+    "period": 18,
+    "rotation": null,
+    "min_angle": 9285,
+    "multiplier_modulus": 162.76161840503084,
+    "contribution": [
+     0.07905537232942232,
+     0.0780291918388971
+    ],
+    "share": 0.012869699725750484
+   }
+  ]
+ },
+ {
+  "p": 7,
+  "q": 18,
+  "pbar": 13,
+  "iota_cycles": [
+   1.3185555794213981,
+   0.25010462208382056
+  ],
+  "iota_arb": [
+   1.3185555794213917,
+   0.2501046220838202
+  ],
+  "deviation": 6.447901588538409e-15,
+  "cycles": 14600,
+  "points": 262125,
+  "mass": 8.548518588759228,
+  "flank_rank": 0,
+  "flank_share": 0.05184961274157341,
+  "flank_multiplier_modulus": 41.29373836272154,
+  "top10_share": 0.16868303744599702,
+  "rotation_share": 8.152268958438446e-05,
+  "beta_share": 8.110886048583727e-10,
+  "top": [
+   {
+    "period": 18,
+    "rotation": null,
+    "min_angle": 38037,
+    "multiplier_modulus": 41.29373836272154,
+    "contribution": [
+     0.3000201727452057,
+     0.32626257754270926
+    ],
+    "share": 0.05184961274157341
+   },
+   {
+    "period": 18,
+    "rotation": null,
+    "min_angle": 37525,
+    "multiplier_modulus": 92.99005884308262,
+    "contribution": [
+     0.19472281930592303,
+     0.019160200153142917
+    ],
+    "share": 0.022888551104280078
+   },
+   {
+    "period": 18,
+    "rotation": null,
+    "min_angle": 37541,
+    "multiplier_modulus": 99.83176856943201,
+    "contribution": [
+     0.171799698074979,
+     0.06015017076035211
+    ],
+    "share": 0.021293188313682373
+   },
+   {
+    "period": 18,
+    "rotation": null,
+    "min_angle": 21669,
+    "multiplier_modulus": 135.31471927020763,
+    "contribution": [
+     0.052103056745188676,
+     -0.12281637788787236
+    ],
+    "share": 0.015606371963656626
+   },
+   {
+    "period": 18,
+    "rotation": null,
+    "min_angle": 21141,
+    "multiplier_modulus": 142.4799966662298,
+    "contribution": [
+     -0.02681855080947662,
+     -0.12326455153366767
+    ],
+    "share": 0.014756739660222106
+   }
+  ]
+ },
+ {
+  "p": 1,
+  "q": 19,
+  "pbar": 1,
+  "iota_cycles": [
+   0.9274150713159542,
+   -1.009925499351555
+  ],
+  "iota_arb": [
+   0.927415071315946,
+   -1.0099254993515636
+  ],
+  "deviation": 1.1936833793160784e-14,
+  "cycles": 27594,
+  "points": 524268,
+  "mass": 3.9047392797072007,
+  "flank_rank": 0,
+  "flank_share": 0.10297705728967095,
+  "flank_multiplier_modulus": 47.93245168265943,
+  "top10_share": 0.3127111586547326,
+  "rotation_share": 0.05190779180913976,
+  "beta_share": 0.04529668418041973,
+  "top": [
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 3,
+    "multiplier_modulus": 47.93245168265943,
+    "contribution": [
+     0.27128448624666274,
+     -0.2967961925028655
+    ],
+    "share": 0.10297705728967095
+   },
+   {
+    "period": 19,
+    "rotation": "18/19",
+    "min_angle": 262143,
+    "multiplier_modulus": 99.24531529799587,
+    "contribution": [
+     -0.14003629998627418,
+     -0.12846926786532775
+    ],
+    "share": 0.04866860194039128
+   },
+   {
+    "period": 1,
+    "rotation": "0",
+    "min_angle": 0,
+    "multiplier_modulus": 6.446864731480289,
+    "contribution": [
+     0.13446397198140128,
+     -0.1149045401316709
+    ],
+    "share": 0.04529668418041973
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 5,
+    "multiplier_modulus": 150.98641635993448,
+    "contribution": [
+     0.025428112418067198,
+     -0.12341791369746127
+    ],
+    "share": 0.03227109167950064
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 7,
+    "multiplier_modulus": 192.3739418180657,
+    "contribution": [
+     0.07324829192638385,
+     -0.06681978376063413
+    ],
+    "share": 0.025391540034845346
+   }
+  ]
+ },
+ {
+  "p": 2,
+  "q": 19,
+  "pbar": 10,
+  "iota_cycles": [
+   1.341144049665927,
+   -0.35179086307594837
+  ],
+  "iota_arb": [
+   1.3411440496659122,
+   -0.3517908630759462
+  ],
+  "deviation": 1.5033686535036272e-14,
+  "cycles": 27594,
+  "points": 524268,
+  "mass": 7.677526960698907,
+  "flank_rank": 0,
+  "flank_share": 0.0750364743225798,
+  "flank_multiplier_modulus": 33.92303908502565,
+  "top10_share": 0.1947244086296611,
+  "rotation_share": 0.01817399426490884,
+  "beta_share": 0.00038919775263729166,
+  "top": [
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 257,
+    "multiplier_modulus": 33.92303908502565,
+    "contribution": [
+     0.5418999805273435,
+     0.19552326459745978
+    ],
+    "share": 0.0750364743225798
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 1027,
+    "multiplier_modulus": 108.92942257403627,
+    "contribution": [
+     -0.01704420343883745,
+     -0.17344020383743008
+    ],
+    "share": 0.022699453998821922
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 769,
+    "multiplier_modulus": 129.44892584916195,
+    "contribution": [
+     0.044320566975158494,
+     -0.14028788020428187
+    ],
+    "share": 0.019162733720946852
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 129,
+    "multiplier_modulus": 136.0468747446863,
+    "contribution": [
+     0.07897145154881034,
+     0.11589216384582901
+    ],
+    "share": 0.018266403646943284
+   },
+   {
+    "period": 19,
+    "rotation": "1/19",
+    "min_angle": 1,
+    "multiplier_modulus": 155.43644107962075,
+    "contribution": [
+     0.0815063270043631,
+     -0.09180026438725768
+    ],
+    "share": 0.015989816779684675
+   }
+  ]
+ },
+ {
+  "p": 3,
+  "q": 19,
+  "pbar": 13,
+  "iota_cycles": [
+   1.375360596007736,
+   0.03284049599420049
+  ],
+  "iota_arb": [
+   1.375360596007725,
+   0.03284049599420049
+  ],
+  "deviation": 1.0880185641326534e-14,
+  "cycles": 27594,
+  "points": 524268,
+  "mass": 9.119903532986038,
+  "flank_rank": 0,
+  "flank_share": 0.055910650196280984,
+  "flank_multiplier_modulus": 37.953239533291274,
+  "top10_share": 0.16610700006084186,
+  "rotation_share": 0.004190280474414828,
+  "beta_share": 5.943461074919501e-06,
+  "top": [
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 4129,
+    "multiplier_modulus": 37.953239533291274,
+    "contribution": [
+     0.3487718424839868,
+     0.37196228696587635
+    ],
+    "share": 0.055910650196280984
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 2081,
+    "multiplier_modulus": 81.29528061492202,
+    "contribution": [
+     0.2338099283191986,
+     -0.03617833424555372
+    ],
+    "share": 0.025942421377027822
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 2113,
+    "multiplier_modulus": 102.94306350593578,
+    "contribution": [
+     0.1846524735438865,
+     0.0251840548363142
+    ],
+    "share": 0.020434639370930652
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 8323,
+    "multiplier_modulus": 150.26946008675029,
+    "contribution": [
+     -0.08436177912838352,
+     -0.09342793855044106
+    ],
+    "share": 0.013802740592250675
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 6209,
+    "multiplier_modulus": 190.7643576744819,
+    "contribution": [
+     -0.0024504406264163974,
+     -0.09955768838911036
+    ],
+    "share": 0.010919834858536537
+   }
+  ]
+ },
+ {
+  "p": 4,
+  "q": 19,
+  "pbar": 5,
+  "iota_cycles": [
+   1.3651627499631915,
+   -0.3889498634624213
+  ],
+  "iota_arb": [
+   1.365162749963184,
+   -0.38894986346242416
+  ],
+  "deviation": 8.082545620880531e-15,
+  "cycles": 27594,
+  "points": 524268,
+  "mass": 9.469877338568793,
+  "flank_rank": 0,
+  "flank_share": 0.046952293829841764,
+  "flank_multiplier_modulus": 43.43244755788241,
+  "top10_share": 0.15506353349462335,
+  "rotation_share": 0.0028491830629622733,
+  "beta_share": 1.9297493226993864e-07,
+  "top": [
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 8721,
+    "multiplier_modulus": 43.43244755788241,
+    "contribution": [
+     0.30882665577677354,
+     -0.31988142198530856
+    ],
+    "share": 0.046952293829841764
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 8465,
+    "multiplier_modulus": 101.12253207879965,
+    "contribution": [
+     0.17602274035086832,
+     -0.07054507223672177
+    ],
+    "share": 0.020024846027010615
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 8737,
+    "multiplier_modulus": 103.8863169736308,
+    "contribution": [
+     0.18205315160624042,
+     -0.030828341713197524
+    ],
+    "share": 0.019498129364190854
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 8457,
+    "multiplier_modulus": 118.57742156864701,
+    "contribution": [
+     0.08415401497544153,
+     0.13719310710084684
+    ],
+    "share": 0.01699564998020515
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 9249,
+    "multiplier_modulus": 152.66174882738628,
+    "contribution": [
+     -0.005010458142894643,
+     0.12432708084856132
+    ],
+    "share": 0.01313934676425537
+   }
+  ]
+ },
+ {
+  "p": 5,
+  "q": 19,
+  "pbar": 4,
+  "iota_cycles": [
+   1.3132006868989299,
+   -0.4641904235962546
+  ],
+  "iota_arb": [
+   1.3132006868989226,
+   -0.4641904235962585
+  ],
+  "deviation": 8.29404220664454e-15,
+  "cycles": 27594,
+  "points": 524268,
+  "mass": 9.36709099854193,
+  "flank_rank": 0,
+  "flank_share": 0.04375722249475462,
+  "flank_multiplier_modulus": 46.971011519850016,
+  "top10_share": 0.1464308959434348,
+  "rotation_share": 0.0026629743736508817,
+  "beta_share": 1.331193150872836e-08,
+  "top": [
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 18569,
+    "multiplier_modulus": 46.971011519850016,
+    "contribution": [
+     0.24963399281081314,
+     -0.32508883432979063
+    ],
+    "share": 0.04375722249475462
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 18577,
+    "multiplier_modulus": 122.65652756556356,
+    "contribution": [
+     0.1280882932503565,
+     -0.08895963271284388
+    ],
+    "share": 0.016648720393602604
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 17545,
+    "multiplier_modulus": 125.93522429975499,
+    "contribution": [
+     0.10249146255292209,
+     -0.11182416805482993
+    ],
+    "share": 0.016193677876282092
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 17477,
+    "multiplier_modulus": 153.22854625712162,
+    "contribution": [
+     0.041383554136858965,
+     0.11717716205446789
+    ],
+    "share": 0.013266681524085411
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 18705,
+    "multiplier_modulus": 166.7029310775962,
+    "contribution": [
+     0.11148035882690203,
+     0.02674673197975115
+    ],
+    "share": 0.01223902377742342
+   }
+  ]
+ },
+ {
+  "p": 6,
+  "q": 19,
+  "pbar": 16,
+  "iota_cycles": [
+   1.2143257243875167,
+   0.535565155841462
+  ],
+  "iota_arb": [
+   1.2143257243875094,
+   0.5355651558414615
+  ],
+  "deviation": 7.348468830491633e-15,
+  "cycles": 27594,
+  "points": 524268,
+  "mass": 8.817396190368484,
+  "flank_rank": 0,
+  "flank_share": 0.04412026912541331,
+  "flank_multiplier_modulus": 49.37625019565671,
+  "top10_share": 0.14032720260742199,
+  "rotation_share": 0.003132491812697167,
+  "beta_share": 1.8397340995562506e-09,
+  "top": [
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 37445,
+    "multiplier_modulus": 49.37625019565671,
+    "contribution": [
+     0.20580270036016493,
+     0.3301308738584896
+    ],
+    "share": 0.04412026912541331
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 37413,
+    "multiplier_modulus": 143.05549147133394,
+    "contribution": [
+     0.08043765951306504,
+     0.10639546036893603
+    ],
+    "share": 0.015126909021016982
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 37417,
+    "multiplier_modulus": 158.08007905813437,
+    "contribution": [
+     0.043364096186132316,
+     0.11239330013962849
+    ],
+    "share": 0.013662611995049045
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 74899,
+    "multiplier_modulus": 174.17687675250895,
+    "contribution": [
+     -0.09784640917315321,
+     0.046939748946549016
+    ],
+    "share": 0.012307838042651531
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 18725,
+    "multiplier_modulus": 189.66219665163334,
+    "contribution": [
+     0.03053688397760858,
+     -0.09558080666604485
+    ],
+    "share": 0.01137981984368426
+   }
+  ]
+ },
+ {
+  "p": 7,
+  "q": 19,
+  "pbar": 11,
+  "iota_cycles": [
+   1.4311497533261779,
+   -0.02893388145994102
+  ],
+  "iota_arb": [
+   1.4311497533261741,
+   -0.028933881459940962
+  ],
+  "deviation": 3.77521904152813e-15,
+  "cycles": 27594,
+  "points": 524268,
+  "mass": 9.987228887994771,
+  "flank_rank": 0,
+  "flank_share": 0.05596529271618171,
+  "flank_multiplier_modulus": 34.91362157071568,
+  "top10_share": 0.15416833035910119,
+  "rotation_share": 0.003397822836481736,
+  "beta_share": 3.7497816246790835e-10,
+  "top": [
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 74917,
+    "multiplier_modulus": 34.91362157071568,
+    "contribution": [
+     0.5133026024683564,
+     0.22120654705633724
+    ],
+    "share": 0.05596529271618171
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 42277,
+    "multiplier_modulus": 102.18717156907475,
+    "contribution": [
+     0.06324045833508991,
+     -0.1755144250809547
+    ],
+    "share": 0.018679865748490707
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 42149,
+    "multiplier_modulus": 104.10345699285963,
+    "contribution": [
+     0.01586378044213813,
+     -0.18198136446954927
+    ],
+    "share": 0.018290508913031963
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 74901,
+    "multiplier_modulus": 132.9413382982197,
+    "contribution": [
+     -0.002579443131170598,
+     0.1428815373439859
+    ],
+    "share": 0.01430875575377361
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 43301,
+    "multiplier_modulus": 176.82312907912507,
+    "contribution": [
+     0.09356743011265313,
+     0.05389954430276002
+    ],
+    "share": 0.010811967582671082
+   }
+  ]
+ },
+ {
+  "p": 8,
+  "q": 19,
+  "pbar": 12,
+  "iota_cycles": [
+   1.425700809167034,
+   0.16928328708945997
+  ],
+  "iota_arb": [
+   1.4257008091670331,
+   0.16928328708946014
+  ],
+  "deviation": 9.036560719766055e-16,
+  "cycles": 27594,
+  "points": 524268,
+  "mass": 9.987958217244861,
+  "flank_rank": 0,
+  "flank_share": 0.052665102871539915,
+  "flank_multiplier_modulus": 36.985704546257224,
+  "top10_share": 0.15376588784705778,
+  "rotation_share": 0.0028753670028300975,
+  "beta_share": 1.4533378993029027e-10,
+  "top": [
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 84565,
+    "multiplier_modulus": 36.985704546257224,
+    "contribution": [
+     0.4532727849532173,
+     0.26690355137349936
+    ],
+    "share": 0.052665102871539915
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 76437,
+    "multiplier_modulus": 83.81735158210444,
+    "contribution": [
+     0.157394366693589,
+     -0.16574421639271394
+    ],
+    "share": 0.022884532345326957
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 76373,
+    "multiplier_modulus": 93.02337512636376,
+    "contribution": [
+     0.1004279643510277,
+     -0.17910351121065066
+    ],
+    "share": 0.020558592615833142
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 84563,
+    "multiplier_modulus": 178.0790546579247,
+    "contribution": [
+     -0.08325961335544409,
+     0.06597025063064316
+    ],
+    "share": 0.010635536102055783
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 78485,
+    "multiplier_modulus": 179.9319661121456,
+    "contribution": [
+     0.005885456556614459,
+     0.10546571297548693
+    ],
+    "share": 0.010575715313725585
+   }
+  ]
+ },
+ {
+  "p": 9,
+  "q": 19,
+  "pbar": 17,
+  "iota_cycles": [
+   1.0875065567818842,
+   0.7336093146534468
+  ],
+  "iota_arb": [
+   1.0875065567818865,
+   0.7336093146534439
+  ],
+  "deviation": 3.6418022968069345e-15,
+  "cycles": 27594,
+  "points": 524268,
+  "mass": 7.262244126219813,
+  "flank_rank": 0,
+  "flank_share": 0.05159457638718015,
+  "flank_multiplier_modulus": 51.28628501830407,
+  "top10_share": 0.15782899517442942,
+  "rotation_share": 0.020570712008946095,
+  "beta_share": 1.255193073790211e-10,
+  "top": [
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 87379,
+    "multiplier_modulus": 51.28628501830407,
+    "contribution": [
+     0.21412152005358634,
+     0.3074839446969898
+    ],
+    "share": 0.05159457638718015
+   },
+   {
+    "period": 19,
+    "rotation": "10/19",
+    "min_angle": 174763,
+    "multiplier_modulus": 136.31342053186995,
+    "contribution": [
+     -0.021508734045877748,
+     0.13755913215614426
+    ],
+    "share": 0.019171832778517174
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 87373,
+    "multiplier_modulus": 173.92518718346102,
+    "contribution": [
+     0.026474154110528954,
+     0.10614455920520148
+    ],
+    "share": 0.015063703200466332
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 87371,
+    "multiplier_modulus": 179.76873449365408,
+    "contribution": [
+     0.061343007965456595,
+     0.08648800608697614
+    ],
+    "share": 0.014600675937041892
+   },
+   {
+    "period": 19,
+    "rotation": null,
+    "min_angle": 120149,
+    "multiplier_modulus": 188.58925523554504,
+    "contribution": [
+     0.008476982022261615,
+     -0.10043731103965885
+    ],
+    "share": 0.013879237077914289
+   }
+  ]
+ },
+ {
+  "p": 1,
+  "q": 20,
+  "pbar": 1,
+  "iota_cycles": [
+   0.9543142808904939,
+   -1.0683138335630196
+  ],
+  "iota_arb": [
+   0.9543142808904828,
+   -1.0683138335630318
+  ],
+  "deviation": 1.6504651808933463e-14,
+  "cycles": 52486,
+  "points": 1048555,
+  "mass": 4.1819857214961775,
+  "flank_rank": 0,
+  "flank_share": 0.10041708619582247,
+  "flank_multiplier_modulus": 48.30753117224821,
+  "top10_share": 0.30713851262968134,
+  "rotation_share": 0.048643384781207395,
+  "beta_share": 0.04640259125730855,
+  "top": [
+   {
+    "period": 20,
+    "rotation": null,
+    "min_angle": 3,
+    "multiplier_modulus": 48.30753117224821,
+    "contribution": [
+     0.28404273741514163,
+     -0.30930841558215133
+    ],
+    "share": 0.10041708619582247
+   },
+   {
+    "period": 20,
+    "rotation": "19/20",
+    "min_angle": 524287,
+    "multiplier_modulus": 98.02767214706664,
+    "contribution": [
+     -0.1434008964674032,
+     -0.14307109095029086
+    ],
+    "share": 0.04843785528100857
+   },
+   {
+    "period": 1,
+    "rotation": "0",
+    "min_angle": 0,
+    "multiplier_modulus": 5.977104178140237,
+    "contribution": [
+     0.15384002369520366,
+     -0.11828178251134751
+    ],
+    "share": 0.04640259125730855
+   },
+   {
+    "period": 20,
+    "rotation": null,
+    "min_angle": 5,
+    "multiplier_modulus": 153.24676430207174,
+    "contribution": [
+     0.02673023439550376,
+     -0.12792266977607636
+    ],
+    "share": 0.031249642144217955
+   },
+   {
+    "period": 20,
+    "rotation": null,
+    "min_angle": 7,
+    "multiplier_modulus": 195.90375238063706,
+    "contribution": [
+     0.0755850985906839,
+     -0.0691990420226338
+    ],
+    "share": 0.02450448001457865
+   }
+  ]
+ },
+ {
+  "p": 3,
+  "q": 20,
+  "pbar": 7,
+  "iota_cycles": [
+   1.4582966894534137,
+   -0.34988556152496697
+  ],
+  "iota_arb": [
+   1.4582966894534313,
+   -0.34988556152496647
+  ],
+  "deviation": 1.7548636908989926e-14,
+  "cycles": 52486,
+  "points": 1048555,
+  "mass": 10.344584881420534,
+  "flank_rank": 0,
+  "flank_share": 0.05102842393716269,
+  "flank_multiplier_modulus": 38.757916338745794,
+  "top10_share": 0.14947310628872612,
+  "rotation_share": 0.0005606108714013126,
+  "beta_share": 5.6843957620562885e-06,
+  "top": [
+   {
+    "period": 20,
+    "rotation": null,
+    "min_angle": 4161,
+    "multiplier_modulus": 38.757916338745794,
+    "contribution": [
+     0.457360718472033,
+     -0.26356337711816813
+    ],
+    "share": 0.05102842393716269
+   },
+   {
+    "period": 20,
+    "rotation": null,
+    "min_angle": 4129,
+    "multiplier_modulus": 77.19545058058632,
+    "contribution": [
+     0.19506019525149984,
+     0.1743448620371392
+    ],
+    "share": 0.025290450252826724
+   },
+   {
+    "period": 20,
+    "rotation": null,
+    "min_angle": 4225,
+    "multiplier_modulus": 96.48213695519138,
+    "contribution": [
+     0.11664627472096344,
+     0.1728283168383433
+    ],
+    "share": 0.02015633766451256
+   },
+   {
+    "period": 20,
+    "rotation": null,
+    "min_angle": 8385,
+    "multiplier_modulus": 173.91121232181666,
+    "contribution": [
+     -0.011553408822540655,
+     -0.11435451158252023
+    ],
+    "share": 0.01111080437595011
+   },
+   {
+    "period": 20,
+    "rotation": null,
+    "min_angle": 12353,
+    "multiplier_modulus": 208.17250409590272,
+    "contribution": [
+     -0.07838179824589962,
+     -0.054903573136242924
+    ],
+    "share": 0.009251024434189596
+   }
+  ]
+ },
+ {
+  "p": 7,
+  "q": 20,
+  "pbar": 3,
+  "iota_cycles": [
+   1.2604011443180088,
+   -0.6258516032660643
+  ],
+  "iota_arb": [
+   1.2604011443180083,
+   -0.6258516032660576
+  ],
+  "deviation": 6.676124710113433e-15,
+  "cycles": 52486,
+  "points": 1048555,
+  "mass": 9.996579493187774,
+  "flank_rank": 0,
+  "flank_share": 0.039527660463205494,
+  "flank_multiplier_modulus": 51.17708230501367,
+  "top10_share": 0.12153483215752231,
+  "rotation_share": 2.5911378003927736e-05,
+  "beta_share": 2.1707061797416776e-10,
+  "top": [
+   {
+    "period": 20,
+    "rotation": null,
+    "min_angle": 84261,
+    "multiplier_modulus": 51.17708230501367,
+    "contribution": [
+     0.2195146744672644,
+     -0.3285575043848864
+    ],
+    "share": 0.039527660463205494
+   },
+   {
+    "period": 20,
+    "rotation": null,
+    "min_angle": 84265,
+    "multiplier_modulus": 157.6165436540217,
+    "contribution": [
+     0.07720336319464981,
+     -0.10131994531869772
+    ],
+    "share": 0.012742525886390224
+   },
+   {
+    "period": 20,
+    "rotation": null,
+    "min_angle": 76069,
+    "multiplier_modulus": 162.17833117211072,
+    "contribution": [
+     0.048405395338736924,
+     -0.11375057028208783
+    ],
+    "share": 0.012366379635405277
+   },
+   {
+    "period": 20,
+    "rotation": null,
+    "min_angle": 74899,
+    "multiplier_modulus": 196.53483375500178,
+    "contribution": [
+     0.0077825742003424184,
+     0.10150612829395049
+    ],
+    "share": 0.010183887396825353
+   },
+   {
+    "period": 20,
+    "rotation": null,
+    "min_angle": 102985,
+    "multiplier_modulus": 204.4147881326,
+    "contribution": [
+     -0.09735874090528297,
+     0.0010118919784366616
+    ],
+    "share": 0.009739731409888059
+   }
+  ]
+ },
+ {
+  "p": 9,
+  "q": 20,
+  "pbar": 9,
+  "iota_cycles": [
+   1.4675163462566714,
+   0.1608777020663054
+  ],
+  "iota_arb": [
+   1.4675163462566667,
+   0.1608777020663044
+  ],
+  "deviation": 4.768792382073734e-15,
+  "cycles": 52486,
+  "points": 1048555,
+  "mass": 10.91912721306088,
+  "flank_rank": 0,
+  "flank_share": 0.05455896767707782,
+  "flank_multiplier_modulus": 34.51545111509772,
+  "top10_share": 0.13965758508283635,
+  "rotation_share": 0.00019287797914661285,
+  "beta_share": 3.2726549679899073e-11,
+  "top": [
+   {
+    "period": 20,
+    "rotation": null,
+    "min_angle": 173397,
+    "multiplier_modulus": 34.51545111509772,
+    "contribution": [
+     0.5611340153162028,
+     -0.20007590143228404
+    ],
+    "share": 0.05455896767707782
+   },
+   {
+    "period": 20,
+    "rotation": null,
+    "min_angle": 173653,
+    "multiplier_modulus": 112.95863774133106,
+    "contribution": [
+     -0.016330735941163098,
+     0.176162930334308
+    ],
+    "share": 0.016202600924331602
+   },
+   {
+    "period": 20,
+    "rotation": null,
+    "min_angle": 173395,
+    "multiplier_modulus": 118.73643222576565,
+    "contribution": [
+     0.033450065180361706,
+     0.16537881165447768
+    ],
+    "share": 0.015452495450774428
+   },
+   {
+    "period": 20,
+    "rotation": null,
+    "min_angle": 169301,
+    "multiplier_modulus": 128.76663190984908,
+    "contribution": [
+     0.06317981356336148,
+     -0.1424303826877939
+    ],
+    "share": 0.014269851276878028
+   },
+   {
+    "period": 20,
+    "rotation": null,
+    "min_angle": 169299,
+    "multiplier_modulus": 205.97906409552212,
+    "contribution": [
+     0.09697827475725358,
+     -0.01071185422845514
+    ],
+    "share": 0.008935519737214268
+   }
+  ]
+ }
+]
