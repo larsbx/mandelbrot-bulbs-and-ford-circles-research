@@ -144,7 +144,7 @@ As in the original §1, with these changes.
   | widest-arc intruder (`α_{w−1} − 1/M` for `p = 1`; `θ₊ + 1/M` for `(q−1)/2`) | `80.62` | `84.00` |
   | `β`, as `q·\|1 − F'_β\|` (P11) | `39.499` | not bounded: `\|2 − λ₀\|` is near `3` |
 
-  The largest residual is `6.2e-03` for `p = 1` and `2.3e-02` for `p = (q−1)/2`. Every named cycle except `β` has a multiplier that settles, so its term grows linearly in `q`. For `p = 1` the leading intruder is `α_{w−1} − 1/M` for `q ≤ 21` and `β` for every `22 ≤ q ≤ 64`, because `β`'s slope `1/39.50` exceeds `1/80.62`. The ratios of the fitted intercepts, `175.78/39.50 = 4.45` (`p = 1`) and `260.50/84.00 = 3.10` (`p = (q−1)/2`), are the fitted plateaus of V26's `R(q)`. The largest computed values are `R(64) = 4.239` and `R(63) = 2.437`.
+  The largest residual is `6.2e-03` for `p = 1` and `2.3e-02` for `p = (q−1)/2`. Every named cycle except `β` has a multiplier that settles, so its term grows linearly in `q`. For `p = 1` the leading intruder is `α_{w−1} − 1/M` for `q ≤ 21` and `β` for every `22 ≤ q ≤ 64`, because `β`'s slope `1/39.50` exceeds `1/80.62`. V26's `R` uses the smaller ring-2 term, which is the one with the larger `|1 − F'|`: ring-2 upper (`233.42`) for `p = 1` and ring-2 lower (`260.50`) for `p = (q−1)/2`. The ratios of the fitted intercepts, `233.42/39.50 = 5.91` (`p = 1`) and `260.50/84.00 = 3.10` (`p = (q−1)/2`), are the fitted plateaus of V26's `R(q)`. The largest computed values are `R(64) = 4.239` and `R(63) = 2.437`.
 
 ---
 
