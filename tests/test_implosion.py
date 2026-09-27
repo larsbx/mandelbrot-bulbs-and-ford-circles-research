@@ -1,4 +1,4 @@
-"""P12 / V28: the p = 1 plateaus and κ₀ from the horn map of w + w²."""
+"""V28 (C20′, C21): the p = 1 plateaus and κ₀ from the horn map of w + w²."""
 import json
 from fractions import Fraction as F
 from pathlib import Path
@@ -56,7 +56,7 @@ def test_kappa0_does_not_depend_on_the_sampling_line():
 
 
 def test_kappa0_meets_the_exact_index_at_q_1009():
-    """κ(1/q) − κ₀ + i/(2πq) is O(q⁻²) (V28): 3e-6 at q = 1009."""
+    """|κ(1/q) − κ₀ − 1/(2πiq)| = 2.9e-6 at q = 1009 (V28b)."""
     rows = json.loads((Path(__file__).resolve().parents[1] / "data" / "kappa_q1009.json").read_text())
     k = mp.mpc(*next(r["kappa"] for r in rows if r["p"] == 1))
     assert abs(k - kappa0() + 1j / (2 * mp.pi * 1009)) < 4e-6
