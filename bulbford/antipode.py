@@ -30,6 +30,7 @@ VALIDATED by continuation only).
 from __future__ import annotations
 
 import cmath
+import math
 from dataclasses import dataclass
 from fractions import Fraction
 from functools import lru_cache, reduce
@@ -60,7 +61,13 @@ TWO = Box.point(2)
 
 
 def power(b: Box, n: int, prec: int = PREC) -> Box:
-    return reduce(lambda acc, _: (acc * b).rounded(prec), range(n), ONE)
+    """b^n by square-and-multiply: O(log n) box products, so the rectangular wrapping of a rotating
+    factor compounds O(log n) times rather than n times (n = 251 overflows a 2^-100 box otherwise)."""
+    if n == 0:
+        return ONE
+    half = power(b, n // 2, prec)
+    sq = (half * half).rounded(prec)
+    return (sq * b).rounded(prec) if n % 2 else sq
 
 
 def quadrance(b: Box) -> I:
@@ -139,13 +146,38 @@ def root_box(lam: Box, prec: int = PREC) -> Box:
 # --- 2: antipode --------------------------------------------------------------------------------
 
 
+BLOWUP = Fraction(2**40)
+
+
+class Blowup(ArithmeticError):
+    """An orbit enclosure left |x| ≤ 2^40: the box is too wide for this orbit, so no inclusion can follow."""
+
+
+def _bounded(b: Box) -> Box:
+    if max(abs(b.re.lo), abs(b.re.hi), abs(b.im.lo), abs(b.im.hi)) > BLOWUP:
+        raise Blowup
+    return b
+
+
+def expansion_bits(q: int, z: complex, c: complex) -> int:
+    """⌈log₂ max_k ∏_{i<k} (|Re 2z_i| + |Im 2z_i|)⌉ along the (untrusted, floating-point) orbit.
+
+    Rectangular arithmetic widens a box multiplied by a by |Re a| + |Im a| (not |a|): the rotation is
+    wrapped at every step, so this, not |(f^k)'|, is how far an enclosure grows along the orbit."""
+    log2, best = 0.0, 0.0
+    for _ in range(q):
+        log2 += math.log2(max(abs((2 * z).real) + abs((2 * z).imag), 1e-300))
+        best, z = max(best, log2), z * z + c
+    return math.ceil(best)
+
+
 def jet(z: Box, c: Box, n: int, prec: int = PREC) -> tuple[Box, Box, Box, Box, Box]:
-    """(f^n, ∂_z f^n, ∂_c f^n, ∂_zz f^n, ∂_zc f^n) at (z, c)."""
+    """(f^n, ∂_z f^n, ∂_c f^n, ∂_zz f^n, ∂_zc f^n) at (z, c); raises Blowup if the orbit enclosure explodes."""
 
     def step(s, _):
         w, a, b, zz, zc = s
         r = lambda x: x.rounded(prec)
-        return (r(w * w + c), r(TWO * w * a), r(TWO * w * b + ONE), r(TWO * (a * a + w * zz)), r(TWO * (a * b + w * zc)))
+        return (_bounded(r(w * w + c)), r(TWO * w * a), r(TWO * w * b + ONE), r(TWO * (a * a + w * zz)), r(TWO * (a * b + w * zc)))
 
     return reduce(step, range(n), (z, ONE, ZERO, ZERO, ZERO))
 
@@ -201,7 +233,7 @@ def krawczyk2(f, x: Vec, prec: int = PREC) -> Vec:
 
 def failed_cycle_exclusions(z: Box, c: Box, q: int, prec: int = PREC) -> tuple[tuple[int, int], ...]:
     """Forbidden pairs of type (0, q) on the orbit of Z under f_C (empty ⇔ exact period q)."""
-    orbit = reduce(lambda acc, _: acc + ((acc[-1] * acc[-1] + c).rounded(prec),), range(q), (z,))
+    orbit = reduce(lambda acc, _: acc + (_bounded((acc[-1] * acc[-1] + c).rounded(prec)),), range(q), (z,))
     return tuple(sorted(p for p in forbidden_pairs(0, q, q) if not (orbit[p[1]] - orbit[p[0]]).excludes_zero()))
 
 
@@ -245,13 +277,31 @@ class AntipodeCertificate:
         }
 
 
+BLOWN = ((-1, -1),)  # failed_exclusions marker: the orbit enclosure exploded before the horizon
+
+
 def check_antipode(p: int, q: int, z: Box, c: Box, prec: int = PREC) -> AntipodeCertificate:
-    inside = all(k.strictly_inside(b) for k, b in zip(krawczyk2(system(q), (z, c), prec), (z, c)))
-    return AntipodeCertificate(p, q, z, c, inside, failed_cycle_exclusions(z, c, q, prec), prec)
+    try:
+        inside = all(k.strictly_inside(b) for k, b in zip(krawczyk2(system(q), (z, c), prec), (z, c)))
+    except Blowup:
+        inside = False
+    try:
+        failed = failed_cycle_exclusions(z, c, q, prec)
+    except Blowup:
+        failed = BLOWN
+    return AntipodeCertificate(p, q, z, c, inside, failed, prec)
 
 
-def certify_antipode(p: int, q: int, seed_z: complex, seed_c: complex, radius_bits: int = 64, prec: int = PREC, newton_steps: int = 4) -> AntipodeCertificate:
-    """Polish (z, c) by untrusted dyadic Newton steps, then check on a box of half-width 2^-radius_bits."""
+def certify_antipode(p: int, q: int, seed_z: complex, seed_c: complex, radius_bits: int | None = 64, prec: int | None = PREC, newton_steps: int = 4) -> AntipodeCertificate:
+    """Polish (z, c) by untrusted dyadic Newton steps, then check on a box of half-width 2^-radius_bits.
+
+    radius_bits=None sizes the box from the orbit: expansion_bits + 48 (at least 64). prec=None keeps
+    expansion_bits + 96 bits below the box, because a point evaluation of the jet also loses the orbit's
+    growth, so the Newton residual floor sits near 2^(expansion − prec). Both only choose the box;
+    acceptance is still the inclusion checks."""
+    growth = expansion_bits(q, seed_z, seed_c) if radius_bits is None or prec is None else 0
+    radius_bits = max(64, growth + 48) if radius_bits is None else radius_bits
+    prec = radius_bits + growth + 96 if prec is None else prec
     f = system(q)
 
     def step(x: Vec, _) -> Vec:

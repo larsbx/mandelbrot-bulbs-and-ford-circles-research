@@ -66,7 +66,7 @@ As in the original §1, with these changes.
 - **P9 (arc-width lemma), form E.** In the setting of P7, the arc from `α_{w+j}` to `α_{w+j+1}` (indices mod `q`; for `w + j ≡ q − 1` this is the arc through angle `0`) has width `2^{e_j}/M` with `e_j = (j·p̄) mod q`. So Goldberg's `q` arc widths `2^0/M, …, 2^{q−1}/M` are placed around the characteristic arc by `x̃ = p̄/q`. In particular, the two arcs flanking the characteristic arc have widths `2^{p̄}/M` (`j = 1`) and `2^{q−p̄}/M` (`j = −1`). One of them is among the two widest (`e ≥ q − 2`, width at least `2^{q−2}/M`) if and only if `x* ≤ 2/q`.
   *Proof.* For `0 ≤ r ≤ q − 2`, P7 (iii) gives `α_{r+1} − α_r = 2^{q−2−k₁}` with `k₁ ≡ (q − p − 1 − r)·p̄` and `0 ≤ k₁ ≤ q − 2`. With `r = w + j = p − 1 + j`, `k₁ ≡ −2 − j·p̄`, so `q − 2 − k₁ ≡ j·p̄ (mod q)` and `0 ≤ q − 2 − k₁ ≤ q − 2`. Hence the exponent of each of these `q − 1` arcs is `e_j`, and `e_j ≠ q − 1` for them. Since `j ↦ j·p̄` is injective, their exponents are exactly `0, …, q − 2`. Their widths sum to `2^{q−1} − 1`, so the remaining arc, through `0`, has width `M − (2^{q−1} − 1) = 2^{q−1}`, the exponent `q − 1 = e_j` for its `j ≡ −p`. For the flanking arcs, `e_1 = p̄` and `e_{−1} = q − p̄` with `1 ≤ p̄ ≤ q − 1`. The larger is at least `q − 2` iff `p̄ ≤ 2` or `p̄ ≥ q − 2`, iff `x* = min(p̄, q − p̄)/q ≤ 2/q`. ∎
   *Checked in integers* (`tests/test_arc_widths.py`): every arc width and the flanking-arc equivalence for all fractions with `q ≤ 60`.
-- **P10 (certified antipodes), form C.** For every `p/q`, `2 ≤ q ≤ 16` (79 cases), a box `Z × C` of half-width `2⁻⁶⁴` carries a two-variable Krawczyk inclusion for `(f_c^q(z) − z, (f_c^q)'(z) + 1)` and the type-`(0, q)` exclusions on the orbit of `Z`: exactly one `(z, c)` in the box, `z` of exact period `q` with multiplier `−1`. `ζ_q` is a Krawczyk box selected by an exact order check (no angle), `λ₀ = ζ_q^p` and `c_root = λ₀/2 − λ₀²/4` are interval expressions, and `G_ant² ∈ q⁴ Qd(C − c_root)/Qd(1 − λ₀)` is bracketed with width below `10⁻¹⁶` (`data/antipode_certificates.json`, replayed by `tests/test_antipode.py`). Reading `C` as the antipode of `B_{p/q}` uses [DH] and `SatelliteLabel` (§5 referents; the label is also checked as a table: at all 79 certified centres the critical orbit is cyclically ordered about `α` with step `p`, form T).
+- **P10 (certified antipodes), form C.** For every `p/q`, `2 ≤ q ≤ 16` (79 cases), a box `Z × C` of half-width `2⁻⁶⁴` carries a two-variable Krawczyk inclusion for `(f_c^q(z) − z, (f_c^q)'(z) + 1)` and the type-`(0, q)` exclusions on the orbit of `Z`: exactly one `(z, c)` in the box, `z` of exact period `q` with multiplier `−1`. `ζ_q` is a Krawczyk box selected by an exact order check (no angle), `λ₀ = ζ_q^p` and `c_root = λ₀/2 − λ₀²/4` are interval expressions, and `G_ant² ∈ q⁴ Qd(C − c_root)/Qd(1 − λ₀)` is bracketed with width below `10⁻¹⁶` (`data/antipode_certificates.json`, replayed by `tests/test_antipode.py`). Reading `C` as the antipode of `B_{p/q}` uses [DH] and `SatelliteLabel` (§5 referents; the label is also checked as a table: at all 79 certified centres the critical orbit is cyclically ordered about `α` with step `p`, form T). The same certificate covers every `p ≤ q/2` at `q = 59, 127, 251` (217 records, `data/antipode_certificates_v14.json`, boxes sized from the orbit's rectangular growth), with brackets narrower than `3·10⁻¹³`.
 
 - **P11 (the β term in closed form), form E.** At the root of `B_{p/q}`, the fixed points of `z² + c` are `λ₀/2` (the parabolic point `z₀`) and `β = 1 − λ₀/2`: they sum to `1` and multiply to `c = λ₀/2 − λ₀²/4`. Their multipliers are `2z`, that is, `λ₀` and `2 − λ₀`. So `β`, the landing point of the ray of angle `0` [DH], contributes the exact term `T_β = −1/(1 − (2 − λ₀)^q)` to the P6 sum, with `|2 − λ₀|² = 5 − 4 cos(2πp/q) = 1 + 8 sin²(πp/q)`. ∎ *Checked* against the orbit computation of angle `0` (`tests/test_cycles.py`, 7 fractions up to `q = 64`, to `1e-9`).
 ---
@@ -85,11 +85,11 @@ As in the original §1, with these changes.
 
   | `q` | `Δ` | `q²Δ` |
   |---|---|---|
-  | 59 | `5.7e-4` | 1.98 |
-  | 127 | `1.3e-4` | 2.10 |
+  | 59 | `5.7e-4` | 1.99 |
+  | 127 | `1.3e-4` | 2.06 |
   | 251 | `5.5e-5` | 3.47 |
 
-  The `q²Δ` column is not constant, so these rows do not support the reading `O(q⁻²)` of the original. Only the table is claimed. The tail satisfies `|r_k| < 1e-16` at `k = 16`.
+  The `q²Δ` column is not constant, so these rows do not support the reading `O(q⁻²)` of the original. Only the table is claimed. The `q²Δ` column is computed from the unrounded `Δ` (an earlier `1.98, 2.10` came from the rounded one). The `G_ant` side is form C (P10 at `q = 59, 127, 251`, every `p ≤ q/2`); `|u_a|/2` is still an FFT value, so `Δ` stays form T. The tail satisfies `|r_k| < 1e-16` at `k = 16`.
 - **V15 (`κ` and `G` on four `q`), form T.** Over all `p` and `q ∈ {59, 127, 251, 1009}`: `Re κ ∈ [0.015, 0.064]`, `|Im κ| ≤ 0.055`, `|r₃| ≤ 2.3e-3`, `|r₄| ≤ 1e-4`. `κ(−x̃) = conj κ(x̃)` holds exactly by conjugation (form E). Newton on the cubic `1 − u + κu² + r₃u³ = −1` from `u = 2` reproduces `G` to `≤ 3e-3` on the same sets.
 - **V16 (bounded `p`), form T.** Values at the largest computed `N`, and the last doubling step (`data/sequences.json`):
 
@@ -220,7 +220,7 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 
 1. **The flank cycle.** P6 is evaluated for `q ≤ 20` (V22), its Farey prediction is falsified (F6), and the flank term is compared with `κ` and `G` (V23). V22(b) is proven as P7, and the second-rank terms are the second ring except at the two smallest `x*` (V24). V24(a) is P8, and the small-`x*` intruders are the widest arcs next to the characteristic arc (P9, V25). The crossings are located and `R` increases after them to `q = 64` (V26). Term growth: `β` in closed form (P11), and the other named cycles have settling multipliers (V27). The `p = 1` plateaus are tabulated against the multipliers of the Lavaurs map `L_{iπ}`, and `κ(1/q)` against the horn-map ratio `κ₀` (V28; §5 C20′, C21). Next: the same tables for `p = (q−1)/2`, whose parabolic point is the period-doubling one at `c = −¾` (form T).
 2. **Steps and cusps.** Tabulate `J(p'/q')` and the cusp depths at `q = 2003` for `q' ≤ 7`, next to the `q = 1009` table (form T).
-3. ~~**Certified antipodes.**~~ Done as P10 (`q ≤ 16`, form C). Next: a certified replacement for `SatelliteLabel`, and boxes at `q = 59` beside the V14 table.
+3. ~~**Certified antipodes.**~~ Done as P10 (`q ≤ 16`, and `q = 59, 127, 251` beside V14; form C). Next: a certified replacement for `SatelliteLabel`, and a certified `|u_a|/2`.
 4. **`z³ + c`.** Repeat V15–V19 as tables (`MAIN3` is wired).
 
 ---
@@ -234,7 +234,7 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 | none | P6 | projective index sum, exact at `ε = 0` |
 | P10 | P10 | certified antipodes and `G_ant` brackets; unchanged (form C) |
 | V12, V13, V15, V19, V21 | same ids | remainders and arrows removed; values unchanged |
-| V14 | V14 | table only; the `O(q⁻²)` reading is withdrawn (`q²Δ` = 1.98, 2.10, 3.47) |
+| V14 | V14 | table only; the `O(q⁻²)` reading is withdrawn (`q²Δ` = 1.99, 2.06, 3.47); `G_ant` column certified (P10) |
 | V16, V17, V20 | V16, V16b, V17, V20 | limits become values at the largest `N` (T) or fit intercepts (S) |
 | V18 | V18 | regressions on stated bins |
 | F4 | F4 | "no single continuous `Ĝ`" becomes a Lipschitz lower bound `6.8·10⁴` from exact pairs |
