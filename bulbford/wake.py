@@ -52,6 +52,21 @@ def mechanical(p: int, q: int, r: int) -> int:
     return int("".join("1" if (r + k * p) % q >= q - p else "0" for k in range(q)), 2)
 
 
+def heights(word: int, q: int) -> list[int]:
+    """g_k = q·H_k − k·m for the cyclic q-bit word (most significant bit first), k < q (P8).
+
+    H_k is the number of 1s among the first k bits and m the weight. Rotating the
+    word by t translates the set {g_k} by −g_t, so that set up to translation is a
+    doubling invariant.
+    """
+    bits = [int(b) for b in format(word, f"0{q}b")]
+    m, out, h = sum(bits), [], 0
+    for k, bit in enumerate(bits):
+        out.append(q * h - k * m)
+        h += bit
+    return out
+
+
 def acts_as_rotation(p: int, q: int, cycle: tuple[Fraction, ...]) -> bool:
     """Finite check: doubling maps x_i to x_{i+p mod q} for every i."""
     return all(double(x) == cycle[(i + p) % q] for i, x in enumerate(cycle))
