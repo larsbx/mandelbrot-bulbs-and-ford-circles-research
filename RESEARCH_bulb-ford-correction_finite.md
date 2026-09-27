@@ -118,6 +118,7 @@ As in the original §1, with these changes.
   (d) *T.* For `p ≥ 2` at fixed `q`, the flank `|F′|` is strictly decreasing in `x* = |p̄/q|`: 30 of 30 adjacent comparisons for `q = 5 … 20`. At `q = 19` it runs from `51.29` (`x* = 2/19`) to `33.92` (`x* = 9/19`). `p = 1` is off this order (`47.93` at `q = 19`), the bounded-`p` exception of V16. For `p = 1`, the values for `q = 2 … 20` are `9.00, 14.93, 20.22, …, 47.93, 48.31`, with increasing values and decreasing increments.
   (e) *T.* The sum cancels heavily: `Σ|term| / |ι| ∈ [1.18, 7.40]`, and `5.5–7.4` for `p ≥ 2` at `q = 19, 20`. There the ten largest terms carry `0.12–0.20` of `Σ|term|`.
   (f) *T.* The period-`q` rotation cycles carry at most `0.084` of `Σ|term|` for `q ≥ 11` (largest at `p = 1`, `≤ 0.001` for `p ≥ 2` at `q = 20`). `β` carries `0.035–0.047` for `p = 1` at `q ≥ 8`, and `≤ 0.008` for `p ≥ 2`.
+- **V23 (flank against `κ` and `G`, `q ≤ 20`), form T.** Over the 78 within-`q` pairs with `p ≥ 2` (`q = 5 … 20`), the flank `|F′|` is anti-ordered with `Re κ` on 67 pairs and with `G_ant` on 68. Every exception involves `p = 2`, the bulb with `x*` nearest `½`, where `Re κ` and `G` have passed their V15 peak near `x* ≈ 0.40` while the flank keeps falling (strictly decreasing in `x*`, V22(d)). At `q = 19`, `x* = 0.105 … 0.421` gives flank `51.29 … 34.91`, `Re κ` `0.0309 … 0.0490` and `G` `1.0560 … 1.1188`, while `x* = 0.474` gives flank `33.92`, `Re κ = 0.0443` and `G = 1.1031` (`scripts/flank_vs_kappa.py`, `data/flank_vs_kappa.json`).
 
 ---
 
@@ -170,7 +171,7 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 
 ## 7. Next moves (finite forms)
 
-1. **The flank cycle.** P6 is evaluated for `q ≤ 20` (V22), and its Farey prediction is falsified (F6). Next: tabulate the flank `|F′|` against `Re κ` and `G` on the same `p/q` at `q ≤ 20` (form T), and extend V22(b) from `q ≤ 20` to a proof in `ℚ/ℤ` (form E).
+1. **The flank cycle.** P6 is evaluated for `q ≤ 20` (V22), its Farey prediction is falsified (F6), and the flank term is compared with `κ` and `G` (V23). Next: extend V22(b) from `q ≤ 20` to a proof in `ℚ/ℤ` (form E), and name the second-largest terms, which carry one `α`-neighbour each (gap pattern `1, 2, 4, 8`).
 2. **Steps and cusps.** Tabulate `J(p'/q')` and the cusp depths at `q = 2003` for `q' ≤ 7`, next to the `q = 1009` table (form T).
 3. **Certified antipodes.** A two-variable Krawczyk witness for `(f_c^q(z) − z, (f_c^q)'(z) + 1)`, turning `G_ant` for `q ≤ 16` into form C.
 4. **`z³ + c`.** Repeat V15–V19 as tables (`MAIN3` is wired).
