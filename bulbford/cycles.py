@@ -173,13 +173,13 @@ def cycle_terms(p: int, q: int) -> tuple[CycleTerm, ...]:
     return tuple(terms)
 
 
-def cycle_through(p: int, q: int, angle: int) -> CycleTerm:
-    """The term of the one cycle whose rays include angle/(2^q − 1), from its q rays alone.
+def cycle_points(p: int, q: int, angle: int) -> tuple[tuple[int, ...], np.ndarray]:
+    """The orbit of angle/(2^q − 1) and the landing points of its rays, from those rays alone.
 
     The angle must not land at z₀ (not in the p/q rotation cycle). A ray of period q
-    needs several periods of pull-back to land, so the depth grows with q. The result
-    is checked (the ray relation f(z_j) = z_{2j} and |F(z) − z|); a check that fails
-    raises instead of returning an unverified term.
+    needs several periods of pull-back to land, so the depth grows with q. The points
+    are checked (the ray relation f(z_j) = z_{2j} and |F(z) − z|); a check that fails
+    raises instead of returning unverified points.
     """
     M, c = 2**q - 1, parameter(p, q)
     orbit = _orbit(angle % M, M)
@@ -189,7 +189,13 @@ def cycle_through(p: int, q: int, angle: int) -> CycleTerm:
     residual = float(np.max(np.abs(_iterate(z, c, q)[0] - z)))
     if not (ray < 1e-9 and residual < 1e-9):
         raise ValueError(f"cycle through {angle}/{M} did not verify: ray {ray:.1e}, residual {residual:.1e}")
-    return _term(orbit, z, q, M)
+    return orbit, z
+
+
+def cycle_through(p: int, q: int, angle: int) -> CycleTerm:
+    """The term of the one cycle whose rays include angle/(2^q − 1) (`cycle_points`)."""
+    orbit, z = cycle_points(p, q, angle)
+    return _term(orbit, z, q, 2**q - 1)
 
 
 def index_by_cycles(p: int, q: int) -> complex:
