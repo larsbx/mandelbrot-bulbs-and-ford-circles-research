@@ -144,6 +144,24 @@ the size proxy of `B_{p/q}` still needs `[DH]` and `SatelliteLabel`; it
 says nothing about `q → ∞`, and so leaves every limit and conjecture in the
 register at its current grade.
 
+## Centre and antipode in one component
+
+`bulbford/continuation.py` certifies, for all 79 bulbs with `q <= 16`, that
+the P10 antipode lies on the boundary of the hyperbolic component of the P3
+centre. Along the segment between the two certified boxes, a chain of
+parameter boxes carries one attracting `q`-cycle: a parametric Krawczyk
+inclusion on each box (one fixed point of `f_c^q` per `c`, analytic in
+`c`), `|rho| < 1` on the interior boxes, junction inclusions so that
+neighbouring boxes hold the same point, and on the last box a certified
+positive derivative of `|rho|^2` along the path, so `|rho|` rises strictly to
+`1` at the antipode. The computation uses Arb complex balls; the rational
+certificate boxes enter exactly. `data/continuation_certificates.json`
+holds the verdicts, `scripts/certify_continuation.py --check` recomputes
+all of them, and CI recomputes `q <= 7`.
+
+This removes the antipode half of `SatelliteLabel`. The centre half, that
+the certified centre is the centre of `B_{p/q}`, is still a named import.
+
 ## Wake combinatorics
 
 `bulbford/wake.py` builds, in exact `Q/Z` arithmetic, the doubling cycle of
