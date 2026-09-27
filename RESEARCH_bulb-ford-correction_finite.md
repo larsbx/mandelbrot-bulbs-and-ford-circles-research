@@ -1,7 +1,7 @@
 # RESEARCH BRANCH, finite version: bulb geometry of M vs Ford circles, without limits
 
 Branch id: `bulb-ford-correction`  ·  finite revision 2026-09-27 of `RESEARCH_bulb-ford-correction.md` (2026-09-25)  ·  status: **active**
-Discipline: PROVEN / VALIDATED / CONJECTURED / FALSIFIED are absolute, as in the original register. This version adds a second rule. **No claim below is a limit.** Every limit, `O(·)`, `→` and "converges" in the original is replaced by one of the statement forms in §0, or moved to §5 as a named classical referent that this document never asserts. The original register is unchanged and remains the claim-state file of record. §8 maps every original item to its form here.
+Discipline: PROVEN / VALIDATED / CONJECTURED / FALSIFIED are absolute, as in the original register. This version adds a second rule. **No claim below is a limit.** Each claim of the original takes one of the statement forms of §0, or moves to §5 as a named classical referent that this document never asserts. The original register is unchanged and remains the claim-state file of record. §8 maps every original item to its form here.
 
 ---
 
@@ -20,6 +20,8 @@ Two replacements carry the load.
 
 1. **Coefficient extraction replaces the remainder.** `f(ε) = a + bε + O(ε²)` becomes `[ε⁰]f = a`, `[ε¹]f = b` for a convergent power series `f ∈ ℂ{ε}`. A Laurent coefficient is read off an identity of series, not approached.
 2. **A point of `ℙ¹` replaces the value at infinity.** A value at `x = ∞` is the value at `[1:0]` in the chart `s = 1/x` (`larsbx/finite-math-kernels`, `projective_limits`). An S-statistic is a named finite computation, and its intercept is a fit parameter, never a limit.
+
+**Enforcement.** `tools/audit_limits.py` (run in CI and by `tests/test_audit_limits.py`) rejects the idioms `→`, `lim`, `O(`, `o(`, "limit", "converges", "asymptotic", "tends to" and "approaches" everywhere in this file except §0, §5 and §8, a clause that denies the idiom, or a paragraph marked `<!-- limit-exempt: reason -->`. Continued-fraction convergents and convergent power series are not limit idioms.
 
 ---
 
@@ -52,7 +54,7 @@ As in the original §1, with these changes.
 - **P5 (exact `ι`, `q ≤ 8`), form E.** As in the original: cyclotomic vectors replayed coordinate by coordinate, and `ι_{p/q} = σ_p(ι_{1/q})` holds exactly.
 - **P6 (projective index sum), form E.** For a polynomial `F` of degree `d ≥ 2`, the lift `[Z:W] ↦ [W^d F(Z/W) : W^d]` fixes `∞ = [1:0]` with multiplier `0`, so `ι_∞ = 1`. The index formula on `ℙ¹` [Mil, §12], `Σ_{z ∈ ℙ¹} ι_z = 1`, gives `Σ_{z ∈ ℂ} ι_z = 0`. Apply it to `F = f_{λ₀}^{q}`. Every fixed point `z ≠ z₀` lies on a cycle of period dividing `q`, and these cycles are repelling [DH: a parabolic quadratic map has one non-repelling cycle]. So each such `z` is simple with `ι_z = 1/(1 − ρ_z)`, and
   `ι_{p/q} = −Σ_{fixed points z ≠ z₀} 1/(1 − ρ_z)`,
-  as an exact identity at `ε = 0`, over the finitely many other fixed points. This is the limit-free form of the route in C17′: it evaluates `ι` as a finite sum rather than as the index of a merger.
+  as an exact identity at `ε = 0`, over the finitely many other fixed points. This is the finite form of the route in C17′: it evaluates `ι` as a finite sum rather than as the index of a merger.
 
 ---
 
@@ -74,7 +76,7 @@ As in the original §1, with these changes.
   | 127 | `1.3e-4` | 2.10 |
   | 251 | `5.5e-5` | 3.47 |
 
-  The `q²Δ` column is not constant, so these three rows do not support the original's reading "i.e. `O(q⁻²)`". Only the table is claimed. The tail satisfies `|r_k| < 1e-16` at `k = 16`.
+  The `q²Δ` column is not constant, so these rows do not support the reading `O(q⁻²)` of the original. Only the table is claimed. The tail satisfies `|r_k| < 1e-16` at `k = 16`.
 - **V15 (`κ` and `G` on four `q`), form T.** Over all `p` and `q ∈ {59, 127, 251, 1009}`: `Re κ ∈ [0.015, 0.064]`, `|Im κ| ≤ 0.055`, `|r₃| ≤ 2.3e-3`, `|r₄| ≤ 1e-4`. `κ(−x̃) = conj κ(x̃)` holds exactly by conjugation (form E). Newton on the cubic `1 − u + κu² + r₃u³ = −1` from `u = 2` reproduces `G` to `≤ 3e-3` on the same sets.
 - **V16 (bounded `p`), form T.** Values at the largest computed `N`, and the last doubling step (`data/sequences.json`):
 
@@ -164,7 +166,6 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 2. **Steps and cusps.** Tabulate `J(p'/q')` and the cusp depths at `q = 2003` for `q' ≤ 7`, next to the `q = 1009` table (form T).
 3. **Certified antipodes.** A two-variable Krawczyk witness for `(f_c^q(z) − z, (f_c^q)'(z) + 1)`, turning `G_ant` for `q ≤ 16` into form C.
 4. **`z³ + c`.** Repeat V15–V19 as tables (`MAIN3` is wired).
-5. **An audit.** A prose check that rejects `→`, `lim`, `O(` and "converges" outside §0, §5 and §8, in the manner of the terminology audits of the sibling repositories.
 
 ---
 
