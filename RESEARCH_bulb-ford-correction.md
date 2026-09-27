@@ -23,7 +23,7 @@ The satellite bulbs of every hyperbolic component of the quadratic family obey
 - `r_k(p/q) := [u^k] R_q(u)`; `r₀ = 1`, `r₁ = −1` (P0), `r₂ = κ` (P2).
 - Ford circle `C(p/q)`: tangent to ℝ at `p/q`, radius `1/(2q²)`; `C(p/q) ⟂ C(r/s)` tangent iff `|ps−qr| = 1`.
 
-Theorem tags: **[GM84]** Guckenheimer–McGehee `diam B_{p/q} = O(q⁻²)`; **[DH]** Douady–Hubbard multiplier map; **[BS94]** Bullett–Sentenac; **[Yoc95]** Yoccoz; **[MMY]** Marmi–Moussa–Yoccoz; **[Weil]** Kloosterman; **[FL]** Franel–Landau; **[Mil]** Milnor, *Dynamics in One Complex Variable*, §12 (holomorphic index, `ι = b/a²` for `z + az² + bz³`, index sum `Σ 1/(1−ρ) = 0` over finite fixed points of a polynomial); **[Gol92]** Goldberg, rotation sets of `θ ↦ 2θ`; **[Mil00]** Milnor, *Periodic orbits, external rays and the Mandelbrot set*; **[BE02]** Buff–Epstein, parabolic Pommerenke–Levin–Yoccoz inequality (bounds `Re resit` for quadratic parabolic points — *statement to be re-checked before use*).
+Theorem tags: **[GM84]** Guckenheimer–McGehee `diam B_{p/q} = O(q⁻²)`; **[DH]** Douady–Hubbard multiplier map; **[BS94]** Bullett–Sentenac; **[Yoc95]** Yoccoz; **[MMY]** Marmi–Moussa–Yoccoz; **[Weil]** Kloosterman; **[FL]** Franel–Landau; **[Mil]** Milnor, *Dynamics in One Complex Variable*, §12 (holomorphic index, `ι = b/a²` for `z + az² + bz³`, index sum `Σ 1/(1−ρ) = 0` over finite fixed points of a polynomial); **[Gol92]** Goldberg, rotation sets of `θ ↦ 2θ`; **[Mil00]** Milnor, *Periodic orbits, external rays and the Mandelbrot set*; **[Lav89]** Lavaurs, *Systèmes dynamiques holomorphes : explosion de points périodiques paraboliques* (thesis, Orsay); **[Shi00]** Shishikura, *Bifurcation of parabolic fixed points* (in *The Mandelbrot set, theme and variations*); **[BE02]** Buff–Epstein, parabolic Pommerenke–Levin–Yoccoz inequality (bounds `Re resit` for quadratic parabolic points — *statement to be re-checked before use*).
 
 ---
 
@@ -104,6 +104,19 @@ Legacy items V1–V11 stand (reproduced 2026-09-25 by the new instruments: V5/V9
 
   The largest residual is `6.2e-03` for `p = 1` and `2.3e-02` for `p = (q−1)/2`. Every named cycle except `β` has a multiplier that settles, so its term grows linearly in `q`. For `p = 1` the leading intruder is `α_{w−1} − 1/M` for `q ≤ 21` and `β` for every `22 ≤ q ≤ 64`, because `β`'s slope `1/39.50` exceeds `1/80.62`. V26's `R` uses the smaller ring-2 term, which is the one with the larger `|1 − F'|`: ring-2 upper (`233.42`) for `p = 1` and ring-2 lower (`260.50`) for `p = (q−1)/2`. The ratios of the fitted intercepts, `233.42/39.50 = 5.91` (`p = 1`) and `260.50/84.00 = 3.10` (`p = (q−1)/2`), are the fitted plateaus of V26's `R(q)`. The largest computed values are `R(64) = 4.239` and `R(63) = 2.437`.
 
+- **V28 (the horn map of `w + w²`; `bulbford/implosion.py`, `scripts/horn_invariants.py`, `data/horn_invariants.json`).** In `w = z − ½` the root map of `B_{1/q}` is `w + w² + ε²` with `ε = (λ₀ − 1)/2i`. The Fatou coordinates of `g(w) = w + w²` are normalised by `Φ(w) = −1/w + log(∓w) + Σ c_k w^k` (exact `c_k`: `−½, ⅓, −13/36, 113/240, …`; `log(−w)` incoming, `log w` outgoing) and computed in mpmath at 40 digits. Matching them to the perturbed coordinate `arctan(w/ε)/ε + ½ log(w² + ε²)` gives Lavaurs' phase `σ = n − π/ε` for `n` iterates [Lav89, Shi00]. For `n = q` this is `σ_q = q − π cot(π/q) + iπ → iπ`. The horn lift `E(Z) − Z` is `∓iπ` at the upper and lower ends, so `σ = iπ` is the constant of the upper end, where the parabolic cycle sits.
+  (a) *The plateaus are Lavaurs multipliers.* Each named `p = 1` cycle of V27 seeds one fixed point `w*` of `L_{iπ} = Ψ_out ∘ (· + iπ) ∘ Φ_in` (Newton in `w` from the cycle's four points farthest from `½`, which agree to `1e-20`). The values are:
+
+  | cycle | `\|1 − L'(w*)\|` | `q²·\|F'_q − L'\|` at `q = 64, 128, 256` |
+  |---|---|---|
+  | flank | `51.188173139` | `1730, 1742, 1745` |
+  | ring 2, lower | `175.796297009` | `10872, 10975, 11000` |
+  | ring 2, upper | `233.425199818` | `17557, 17758, 17808` |
+  | widest-arc intruder | `80.667619672` | `16170, 16123, 16107` |
+
+  So `F'_q` meets `L'` at rate `q⁻²`. V27's intercepts carry the bias of the `b/q` term in its model (`80.62` against `80.668`). With `σ_q` in place of `iπ` the gap is of order `1/q` (`0.55` for the flank at `q = 256`): the phase's `π²/3q` shift is offset by the `ε`-dependence of the coordinates. V26's `p = 1` plateau is `233.425199818/4π² = 5.9127` (P11).
+  (b) *`κ₀` from the horn map.* Write `E(Z) − Z + iπ = Σ_{k≥1} a_k e^{2πikZ}` on the upper end. The ratio `a₂/(2πi a₁²)` is unchanged by translating either Fatou coordinate, and it is `0.0238258874022 − 0.0523046591140i` on the lines `Im Z = 2.8` and `3.2` alike (difference `1e-36`). This agrees with C20's `0.0238 − 0.0527i` (`±0.001`). Against the exact index, `q(κ(1/q) − κ₀)` is `0.0018 − 0.1137i`, `0.0020 − 0.1364i`, `0.0013 − 0.1478i` and `0.0007 − 0.1535i` at `q = 64 … 512`, and `0.0004 − 0.1563i` at `q = 1009` (`data/kappa_q1009.json`). Richardson on consecutive pairs gives `−0.159102i, −0.159187i, −0.159169i, −0.159159i` (the last with real part `3.5e-5`), against `1/2πi = −0.159155i`. So `|κ(1/1009) − κ₀ − 1/(2πi·1009)| = 2.9e-6`.
+
 Precision caveats: doubles for `R_q`; the FFT route is accurate to `~1e-12` in `r₂` (verified against balls, V12) and is the instrument for `q > 300`. `G` from `|u_a|/2` carries the `O(q⁻²)` proxy difference of V14 (irrelevant for limits). Prime `q` used in sweeps; sequences use whatever `q` the CF gives.
 
 ---
@@ -132,7 +145,9 @@ Precision caveats: doubles for `R_q`; the FFT route is accurate to `~1e-12` in `
 
 **C17′ (analytic mechanism, now half proven).** ~~`ρ = 1 − q²ε + κ q⁴ε² + …` with `κ` a small-denominator sum~~ → **P2**: `κ = (ι − ½)/q`. Remaining: the asymptotics `ι_{p/q} = ½ + q κ̂(x̃) + O(1)` as `q → ∞`, `p → ∞`. Route: index formula on the `W = w^q` quotient map `Φ(W) = W h(W)^q` (`ι = [W²]`-data of `Φ`), with `h` from the resonant normal form of `f_{λ₀}` whose coefficients are products of `1/(1 − λ₀^j)`; equivalently, `ι = −Σ_{other cycles of period | q} 1/(1−ρ)` [Mil] — a sum over the repelling cycles at the root, dominated by the least repelling ones. Cross-reference [BE02] for an a-priori bound `|Re ι| ≲ q`.
 
-**C20 (`p=1` constant).** `κ₀ := lim_{q→∞} (ι_{1/q} − ½)/q = 0.0238 − 0.0527i` (Im to `±0.001`) is an Écalle–Voronin / horn-map invariant of `z + z²` (parabolic implosion at `λ₀ → 1`: the `1/q`-cycle's multiplier is governed by the Lavaurs phase), hence expressible via the Fatou coordinate of `z+z²`. Untested.
+**C20′ (`p = 1` constant, horn-map form; replaces C20).** `κ(1/q) = κ₀ + 1/(2πiq) + O(q⁻²)`, where `κ₀ = a₂/(2πi a₁²) = 0.0238258874 − 0.0523046591i` is the ratio of the first two upper-end Fourier coefficients of the horn map of `z + z²` (V28b). *Derivation (not a proof).* Along `λ = λ₀e^{u/q²}`, `σ = q − π/ε = iπ + u/2πi + O(1/q)`. The fixed point of `L_σ` leaving the upper end solves `Σ a_k t^k = −u/2πi` (`t = e^{2πiZ}`), and its multiplier is `E' = 1 + 2πi Σ k a_k t^k = 1 − u + (a₂/(2πi a₁²)) u² + O(u³)`. Comparing with `R_q(u) = 1 − u + κu² + …` (P2) gives `κ₀`, provided `q → ∞` commutes with `[u²]`. The linear coefficient `−1` comes out of the same computation, which checks the phase normalisation. Numerically confirmed to `3e-6` at `q = 1009`. The `1/(2πiq)` term is a Richardson reading (V28b).
+
+**C21 (the plateaus are Lavaurs multipliers).** For each fixed point `w*` of `L_{iπ}` in the basin with `L'(w*) ≠ 1`, `z² + c_{1/q}` has for large `q` one cycle of period `q` through a point near `½ + w*`, with `(f^q)' = L'(w*) + O(q⁻²)`. The named cycles of V27 are those of V28a. Existence with an `o(1)` error follows from Lavaurs' theorem in this normalisation [Lav89, Shi00] by Hurwitz. The rate `q⁻²` and the matching of cycles are V28a.
 
 **C2′ (bulb zeta), C9′ (limit measure), C8 (Christoffel discrepancy), C11 (quadratic irrationals), C15′ (family universality):** unchanged; in C2′/C9′ read `⟨Ĝ⟩` as `⟨G⟩` (the bounded-`p` part has density zero in the Farey sequence, so the constants are unaffected); C11's rate is now seen for `κ` (V20). C15′'s question "is the cusp law family-universal?" is sharpened by V19: for `z³+c` the `x̃`-part should be a *different* universal function `Ĝ₃`, with its own bounded-`p` part.
 
@@ -151,14 +166,14 @@ Precision caveats: doubles for `R_q`; the FFT route is accurate to `~1e-12` in `
 
 ## 7. Next moves (ordered)
 
-1. **C17′ → asymptotics of `ι`.** ~~Farey-neighbour cycles dominate~~ (F6). Done for `q ≤ 20` (V22, V23): the flank cycle dominates, its `|F'|` is monotone in `x*`, and it orders the rising branch of `Re κ` and `G` but not their fall toward `½`. The flank-orbit identity is P7; the second-rank terms are the second ring except at the two smallest `x*` (V24). V24(a) is P8, and the small-`x*` intruders are the widest arcs next to the characteristic arc (P9, V25). The crossings are located and `R` increases after them to `q = 64` (V26). Term growth: `β` in closed form (P11), and the other named cycles have settling multipliers, so their terms grow linearly (V27). Next: identify the multiplier plateaus (flank near `51.18` for `p = 1`) as parabolic-implosion invariants (cf. C20), and push the ray method to `q = 24` (16M rays).
+1. **C17′ → asymptotics of `ι`.** ~~Farey-neighbour cycles dominate~~ (F6). Done for `q ≤ 20` (V22, V23): the flank cycle dominates, its `|F'|` is monotone in `x*`, and it orders the rising branch of `Re κ` and `G` but not their fall toward `½`. The flank-orbit identity is P7; the second-rank terms are the second ring except at the two smallest `x*` (V24). V24(a) is P8, and the small-`x*` intruders are the widest arcs next to the characteristic arc (P9, V25). The crossings are located and `R` increases after them to `q = 64` (V26). Term growth: `β` in closed form (P11), and the other named cycles have settling multipliers, so their terms grow linearly (V27). The `p = 1` plateaus are the multipliers of the Lavaurs map `L_{iπ}` of `z + z²`, met at rate `q⁻²` (V28a, C21). Next: the same for `p = (q−1)/2`, where the parabolic point is the period-doubling one at `c = −¾` (`f² = w − 2w³ + w⁴`, two petals), and push the ray method to `q = 24` (16M rays).
 2. **Cusp/jump laws.** From `data/kappa_q1009.json`, fit `Re κ̂` cusps and `Im κ̂` jumps at `p'/q'` for `q' ≤ 7` against `q'^{-1}`, `q'^{-2}`; confirm with `q = 2003`.
-3. **Fatou-coordinate computation of `κ₀`** (C20), cheap via the standard `z + z²` Fatou coordinate series.
+3. ~~**Fatou-coordinate computation of `κ₀`** (C20)~~ → V28b, C20′: `κ₀ = a₂/(2πi a₁²)` from the horn map. Open: a proof of the interchange in C20′, and a closed form for `1/(2πiq)`.
 4. **`z³+c`**: repeat V15–V19 (`MAIN3` is already wired: `G(MAIN3, p, q)`, `taylor(p, q, MAIN3)`).
 5. C2′ numerics, then C8, C11 as before.
 6. ~~**Certified antipodes.**~~ → **P10** (`q ≤ 16`, and the V14 range `q = 59, 127, 251`); V14 is certified on both proxies. Remaining: replace `SatelliteLabel` by a finite argument (certified continuation from the root, or a certified path of `ρ` from `0` to `−1` inside the box family).
 
-## 8. Instruments (`bulbford/`, tests in `tests/`, 14797 passing)
+## 8. Instruments (`bulbford/`, tests in `tests/`, 14807 passing)
 
 - `cf.py` — `modinv`, `xstar`, `cf`, `from_cf`, `convergent_denominators`.
 - `dynamics.py` — `Family` records (`MAIN2`, `DISK2`, `MAIN3`), `orbit` with second derivatives, `Cycle` tracking with analytic `dρ/dc` and a period-collapse guard, `bulb(fam, p, q)` → `G_ant`, `G_cen`; `rho_on_path`.
@@ -168,6 +183,7 @@ Precision caveats: doubles for `R_q`; the FFT route is accurate to `~1e-12` in `
 - `wake.py` — rotation cycles of doubling, characteristic arcs, Farey fractions; `mechanical(p, q, r)`, the conjugate words `c(r)` of P7; `heights(word, q)`, the rotation invariant of P8. P9 is tested in `tests/test_arc_widths.py`.
 - `taylor.py` — `taylor(p, q, fam, r, N)`: `r_k`, `solve(target, u0)`; `kappa_fft` (N=64) for `q > 300`.
 - `cycles.py` — P6: all fixed points of `f^q` by vectorized ray pull-back, `cycle_terms`, `index_by_cycles`, `flank_angles`; `cycle_through` (one cycle from its own `q` rays, verified, used to `q = 256`); `scripts/crossings.py`, `scripts/multiplier_growth.py`; `scripts/cycle_index_sweep.py`, `scripts/flank_vs_kappa.py`.
+- `implosion.py` — Fatou coordinates of `w + w²` (exact series `fatou_coefficients`), `horn`, `lavaurs_phase`, `lavaurs_map`, `lavaurs_fixed_point`, `fixed_point_of_cycle`, `kappa0` (mpmath, 40 digits); `scripts/horn_invariants.py` (V28).
 - `tools/audit_limits.py` — the no-limits audit of the finite register (CI).
 - `scripts/` — `exact_index.py` (ℚ(ζ_q)), `taylor_sweep.py`, `index_sweep.py`, `kappa_sweep.py` (dense, `q=1009`), `sequences.py`, `prefix_test.py`, `a1_scan*.py`, `limit_grid.py`, `analyze.py`, `analyze_dense.py`. Data in `data/` (JSON). Legacy instruments in `legacy/`.
 - Run: `PYTHONPATH=. pytest -q`; `PYTHONPATH=. python3 scripts/analyze.py 59 127 251`.
