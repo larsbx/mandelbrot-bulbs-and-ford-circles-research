@@ -131,3 +131,12 @@ def test_interval_helpers_refuse_out_of_domain():
     assert quadrance(Box(I(F(-1), F(2)), I.point(0))) == I(F(0), F(4))
     s = sqrt_bounds(I(F(2), F(2)), 40)
     assert s.lo**2 <= 2 <= s.hi**2 and s.hi - s.lo <= F(1, 2**39)
+
+
+@pytest.mark.parametrize("q", [127, 251])
+def test_long_powers_do_not_wrap(q):
+    """Square-and-multiply keeps ζ_q^q tight; n successive box products would inflate a 2^-100 box past use."""
+    z = zeta_box(q)
+    w = power(z, q) - ONE
+    assert w.re.contains_zero() and w.im.contains_zero()
+    assert w.re.hi - w.re.lo < F(1, 2**80)
