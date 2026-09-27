@@ -124,6 +124,7 @@ As in the original §1, with these changes.
   (e) *T.* The sum cancels heavily: `Σ|term| / |ι| ∈ [1.18, 7.40]`, and `5.5–7.4` for `p ≥ 2` at `q = 19, 20`. There the ten largest terms carry `0.12–0.20` of `Σ|term|`.
   (f) *T.* The period-`q` rotation cycles carry at most `0.084` of `Σ|term|` for `q ≥ 11` (largest at `p = 1`, `≤ 0.001` for `p ≥ 2` at `q = 20`). `β` carries `0.035–0.047` for `p = 1` at `q ≥ 8`, and `≤ 0.008` for `p ≥ 2`.
 - **V23 (flank against `κ` and `G`, `q ≤ 20`), form T.** Over the 78 within-`q` pairs with `p ≥ 2` (`q = 5 … 20`), the flank `|F′|` is anti-ordered with `Re κ` on 67 pairs and with `G_ant` on 68. Every exception involves `p = 2`, the bulb with `x*` nearest `½`, where `Re κ` and `G` have passed their V15 peak near `x* ≈ 0.40` while the flank keeps falling (strictly decreasing in `x*`, V22(d)). At `q = 19`, `x* = 0.105 … 0.421` gives flank `51.29 … 34.91`, `Re κ` `0.0309 … 0.0490` and `G` `1.0560 … 1.1188`, while `x* = 0.474` gives flank `33.92`, `Re κ = 0.0443` and `G = 1.1031` (`scripts/flank_vs_kappa.py`, `data/flank_vs_kappa.json`).
+- **V24 (the second ring, `q ≤ 20`), forms E + T (`scripts/second_ring.py`, `data/second_ring.json`).** Ring `k` around the characteristic arc is the pair `α_{w−k} + 1/M`, `α_{w+1+k} − 1/M`; ring 1 is the flank cycle (P7). (a) *Exact, in integers:* the two ring-2 angles lie on **distinct** doubling orbits, each of period `q`, for every `p` with `5 ≤ q ≤ 60` (`tests/test_flank_lemma.py`). (b) *Numerical:* for `p ≤ q/2`, `5 ≤ q ≤ 20` (61 fractions), ranks 2 and 3 of the P6 sum are exactly these two cycles in 44. The 17 exceptions are exactly `p = 1` (`q ≥ 8`) and `p̄ = q − 2` (`q ≥ 13`), the two smallest values `x* = 1/q, 2/q`. There, a cycle through a neighbour of the arc itself intrudes at rank 2 or 3: `θ₊ + 1/M` for `p̄ = q − 2`, and `α_{w−1} − 1/M` or `θ₋ − 1/M` for `p = 1`. The ring-2 cycles then sit at ranks 2–5.
 
 ---
 
@@ -176,7 +177,7 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 
 ## 7. Next moves (finite forms)
 
-1. **The flank cycle.** P6 is evaluated for `q ≤ 20` (V22), its Farey prediction is falsified (F6), and the flank term is compared with `κ` and `G` (V23). V22(b) is proven as P7. Next: name the second-largest terms, which carry one `α`-neighbour each (gap pattern `1, 2, 4, 8`).
+1. **The flank cycle.** P6 is evaluated for `q ≤ 20` (V22), its Farey prediction is falsified (F6), and the flank term is compared with `κ` and `G` (V23). V22(b) is proven as P7, and the second-rank terms are the second ring except at the two smallest `x*` (V24). Next: prove V24(a) for all `q` along the lines of P7, and explain the small-`x*` intruders (form T).
 2. **Steps and cusps.** Tabulate `J(p'/q')` and the cusp depths at `q = 2003` for `q' ≤ 7`, next to the `q = 1009` table (form T).
 3. **Certified antipodes.** A two-variable Krawczyk witness for `(f_c^q(z) − z, (f_c^q)'(z) + 1)`, turning `G_ant` for `q ≤ 16` into form C.
 4. **`z³ + c`.** Repeat V15–V19 as tables (`MAIN3` is wired).

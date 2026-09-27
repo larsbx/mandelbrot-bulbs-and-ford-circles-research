@@ -68,3 +68,13 @@ def test_step_v_p_equal_one_in_closed_form(q):
     assert [mechanical(1, q, r) for r in range(q)] == [2**r for r in range(q)]
     assert (mechanical(1, q, q - 1) + 1, mechanical(1, q, 2) - 1) == (2 ** (q - 1) + 1, 3)
     assert shift(2 ** (q - 1) + 1, 1, q) == 3 % M
+
+
+@pytest.mark.parametrize("p,q", [(p, q) for p, q in FRACTIONS if q >= 5])
+def test_ring_two_angles_lie_on_distinct_period_q_orbits(p, q):
+    """V24(a): unlike ring 1 (P7), α_{w−2} + 1 and α_{w+3} − 1 are on different orbits."""
+    M, w = 2**q - 1, p - 1
+    a = (mechanical(p, q, (w - 2) % q) + 1) % M
+    b = (mechanical(p, q, (w + 3) % q) - 1) % M
+    orbit = {shift(a, d, q) for d in range(q)}
+    assert b not in orbit and len(orbit) == q and len({shift(b, d, q) for d in range(q)}) == q
