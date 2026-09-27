@@ -280,6 +280,46 @@ class AntipodeCertificate:
 BLOWN = ((-1, -1),)  # failed_exclusions marker: the orbit enclosure exploded before the horizon
 
 
+# --- |u_a|/2 from the certified antipode (Arb balls) -----------------------------------------------
+
+
+def _arb(i: I):
+    """An Arb ball equal to the dyadic interval i (exact at the working precision set by the caller)."""
+    from flint import arb
+
+    to = lambda x: arb(x.numerator) / arb(x.denominator)
+    return arb(to((i.lo + i.hi) / 2), to((i.hi - i.lo) / 2))
+
+
+def _fraction(x) -> Fraction:
+    m, e = x.man_exp()
+    return Fraction(int(m)) * Fraction(2) ** int(e)
+
+
+def u_half_abs(p: int, q: int, c: Box, prec: int) -> I:
+    """Enclosure of |u_a|/2 for every c_ant ∈ C, where λ₀e^{u_a/q²} is the main-cardioid parameter of c_ant.
+
+    From c = λ/2 − λ²/4: 1 − 4c = (1 − λ)², and the branch near λ₀ has Re(1 − λ) > 0, i.e. λ = 1 − √(1 − 4c)
+    with the principal root, which is checked on the ball (refused otherwise). Then u = q²·log(λ/λ₀). Arb's
+    √, log and e^{2πip/q} are rigorous, so this is a certified enclosure; reading u_a as the root of
+    R_q(u) = −1 near u = 2 uses [DH] (one ρ = −1 point on ∂B_{p/q}), as P10 does for c_ant."""
+    from flint import acb, arb, ctx
+
+    old = ctx.prec
+    try:
+        ctx.prec = prec + 64
+        cb = acb(_arb(c.re), _arb(c.im))
+        root = (1 - 4 * cb).sqrt()
+        if not root.real > 0:
+            raise ValueError("branch not separated: Re √(1 − 4c) does not exclude 0")
+        lam = 1 - root
+        lam0 = acb(arb(2 * p) / q).exp_pi_i()
+        half = abs(q * q * (lam / lam0).log()) / 2
+        return I(_fraction(half.lower()), _fraction(half.upper()))
+    finally:
+        ctx.prec = old
+
+
 def check_antipode(p: int, q: int, z: Box, c: Box, prec: int = PREC) -> AntipodeCertificate:
     try:
         inside = all(k.strictly_inside(b) for k, b in zip(krawczyk2(system(q), (z, c), prec), (z, c)))
