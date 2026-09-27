@@ -89,3 +89,19 @@ def test_the_two_crossings_of_v26():
 
     assert record(1, 7)["ratio"] < 1 < record(1, 8)["ratio"]
     assert record(5, 11)["ratio"] < 1 < record(6, 13)["ratio"]
+
+
+@pytest.mark.parametrize("p,q", [(1, 5), (2, 7), (3, 8), (1, 13), (6, 13), (1, 40), (5, 64)])
+def test_p10_the_beta_term_in_closed_form(p, q):
+    """β = 1 − λ₀/2 has multiplier 2 − λ₀, so its term is −1/(1 − (2 − λ₀)^q)."""
+    lam = np.exp(2j * np.pi * p / q)
+    assert abs(cycle_through(p, q, 0).contribution - (-1 / (1 - (2 - lam) ** q))) < 1e-9
+    assert abs(abs(2 - lam) ** 2 - (1 + 8 * np.sin(np.pi * p / q) ** 2)) < 1e-12
+
+
+def test_beta_takes_the_lead_among_p_equal_one_intruders_at_q_22():
+    from scripts.crossings import record
+
+    beta = lambda q: abs(1 / (1 - (2 - np.exp(2j * np.pi / q)) ** q))  # noqa: E731
+    assert record(1, 21)["intruders"][0] > beta(21)
+    assert abs(record(1, 22)["intruders"][0] - beta(22)) < 1e-9
