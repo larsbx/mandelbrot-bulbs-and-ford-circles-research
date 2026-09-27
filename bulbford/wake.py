@@ -42,6 +42,16 @@ def rotation_cycle(p: int, q: int) -> tuple[Fraction, ...]:
     return tuple(sorted(orbit))
 
 
+def mechanical(p: int, q: int, r: int) -> int:
+    """The conjugate c(r) of the rotation cycle as a numerator over 2^q − 1 (P7).
+
+    Bit k (most significant first) is [(r + k·p) mod q ≥ q − p]. c(0) is the word
+    `rotation_cycle` starts from, doubling sends c(r) to c(r + p), and the sorted
+    cycle is c(0) < c(1) < … < c(q − 1).
+    """
+    return int("".join("1" if (r + k * p) % q >= q - p else "0" for k in range(q)), 2)
+
+
 def acts_as_rotation(p: int, q: int, cycle: tuple[Fraction, ...]) -> bool:
     """Finite check: doubling maps x_i to x_{i+p mod q} for every i."""
     return all(double(x) == cycle[(i + p) % q] for i, x in enumerate(cycle))
