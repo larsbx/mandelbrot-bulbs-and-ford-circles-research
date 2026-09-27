@@ -4,6 +4,7 @@
   "q": 5,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -45,6 +46,7 @@
   "q": 5,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -90,6 +92,7 @@
   "q": 6,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -136,6 +139,7 @@
   "q": 7,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -186,6 +190,7 @@
   "q": 7,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -227,6 +232,7 @@
   "q": 7,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -273,6 +279,9 @@
   "q": 8,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
   "top": [
    [
     [
@@ -323,6 +332,7 @@
   "q": 8,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -365,6 +375,9 @@
   "q": 9,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
   "top": [
    [
     [
@@ -415,6 +428,7 @@
   "q": 9,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -456,6 +470,7 @@
   "q": 9,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -502,6 +517,9 @@
   "q": 10,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
   "top": [
    [
     [
@@ -548,6 +566,7 @@
   "q": 10,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -594,6 +613,9 @@
   "q": 11,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
   "top": [
    [
     [
@@ -640,6 +662,7 @@
   "q": 11,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -685,6 +708,7 @@
   "q": 11,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -731,6 +755,7 @@
   "q": 11,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -773,6 +798,7 @@
   "q": 11,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -819,6 +845,9 @@
   "q": 12,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
   "top": [
    [
     [
@@ -865,6 +894,7 @@
   "q": 12,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -902,6 +932,9 @@
   "q": 13,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
   "top": [
    [
     [
@@ -948,6 +981,7 @@
   "q": 13,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -993,6 +1027,7 @@
   "q": 13,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -1039,6 +1074,7 @@
   "q": 13,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -1085,6 +1121,7 @@
   "q": 13,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -1122,6 +1159,9 @@
   "q": 13,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
   "top": [
    [
     [
@@ -1168,6 +1208,9 @@
   "q": 14,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
   "top": [
    [
     [
@@ -1214,6 +1257,7 @@
   "q": 14,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -1260,6 +1304,7 @@
   "q": 14,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -1302,6 +1347,10 @@
   "q": 15,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true,
+   true
+  ],
   "top": [
    [
     [
@@ -1348,6 +1397,7 @@
   "q": 15,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -1393,6 +1443,7 @@
   "q": 15,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -1435,6 +1486,9 @@
   "q": 15,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
   "top": [
    [
     [
@@ -1481,6 +1535,10 @@
   "q": 16,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true,
+   true
+  ],
   "top": [
    [
     [
@@ -1527,6 +1585,7 @@
   "q": 16,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -1573,6 +1632,7 @@
   "q": 16,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -1619,6 +1679,7 @@
   "q": 16,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -1656,6 +1717,10 @@
   "q": 17,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true,
+   true
+  ],
   "top": [
    [
     [
@@ -1702,6 +1767,7 @@
   "q": 17,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -1747,6 +1813,7 @@
   "q": 17,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -1793,6 +1860,7 @@
   "q": 17,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -1839,6 +1907,7 @@
   "q": 17,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -1876,6 +1945,7 @@
   "q": 17,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -1918,6 +1988,7 @@
   "q": 17,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -1960,6 +2031,9 @@
   "q": 17,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
   "top": [
    [
     [
@@ -2006,6 +2080,10 @@
   "q": 18,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true,
+   true
+  ],
   "top": [
    [
     [
@@ -2052,6 +2130,7 @@
   "q": 18,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -2089,6 +2168,7 @@
   "q": 18,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -2131,6 +2211,10 @@
   "q": 19,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true,
+   true
+  ],
   "top": [
    [
     [
@@ -2177,6 +2261,7 @@
   "q": 19,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -2222,6 +2307,7 @@
   "q": 19,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -2268,6 +2354,7 @@
   "q": 19,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -2310,6 +2397,7 @@
   "q": 19,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -2352,6 +2440,7 @@
   "q": 19,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -2398,6 +2487,7 @@
   "q": 19,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -2435,6 +2525,7 @@
   "q": 19,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -2472,6 +2563,9 @@
   "q": 19,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true
+  ],
   "top": [
    [
     [
@@ -2518,6 +2612,10 @@
   "q": 20,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": false,
+  "intruders_through_widest_arcs": [
+   true,
+   true
+  ],
   "top": [
    [
     [
@@ -2564,6 +2662,7 @@
   "q": 20,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -2610,6 +2709,7 @@
   "q": 20,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
@@ -2652,6 +2752,7 @@
   "q": 20,
   "ring2_distinct_orbits": true,
   "ranks23_are_ring2": true,
+  "intruders_through_widest_arcs": [],
   "top": [
    [
     [
