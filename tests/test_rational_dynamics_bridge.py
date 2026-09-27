@@ -8,7 +8,7 @@ from bulbford.cf import cf, convergent_denominators, from_cf, modinv, xstar
 
 
 def test_shared_rational_dynamics_r1_vectors():
-    path = Path(__file__).resolve().parents[1] / "data" / "rational_dynamics_r1_vectors.json"
+    path = Path(__file__).resolve().parent / "vectors" / "rational_dynamics_r1_vectors.json"
     payload = json.loads(path.read_text())
     assert payload["schema"] == "rational-dynamics-r1-fixtures/v1"
     assert payload["source_repository"] == "larsbx/finite-math-kernels"

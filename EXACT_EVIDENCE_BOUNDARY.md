@@ -7,7 +7,7 @@ boundary for the new cross-repository exact replay work.
 
 ## Exact low-q corpus
 
-`data/parabolic_index_exact_vectors.json` pins four exact Gaussian-rational
+`tests/vectors/parabolic_index_exact_vectors.json` pins four exact Gaussian-rational
 values of the parabolic fixed-point index:
 
 ```text
@@ -30,9 +30,9 @@ fractions are exact.
 The following remain research instruments rather than exact certificate
 objects:
 
-- cycle continuation in `bulbford/dynamics.py`;
+- cycle continuation in `kernel/bulbford/dynamics.py`;
 - Newton solves for centers and multiplier targets;
-- Cauchy/FFT coefficient extraction in `bulbford/taylor.py`;
+- Cauchy/FFT coefficient extraction in `kernel/bulbford/taylor.py`;
 - dense asymptotic sweeps and fitted limits.
 
 Their output remains VALIDATED numerical evidence under the research register.
@@ -56,7 +56,7 @@ asymptotic convergence, or any classical landing/connectivity theorem.
 
 The q=1,2,4 vectors live in Q(i).  General p/q requires an exact cyclotomic
 coefficient representation.  Until that shared representation is implemented
-and independently replayed, general-q values from `bulbford/index.py` remain
+and independently replayed, general-q values from `kernel/bulbford/index.py` remain
 rigorous ball computations rather than canonical exact coefficient objects.
 
 
@@ -64,7 +64,7 @@ rigorous ball computations rather than canonical exact coefficient objects.
 
 The arithmetic of the internal fraction is now cross-checked against
 `larsbx/finite-math-kernels` R1 through
-`data/rational_dynamics_r1_vectors.json`. The consumer replay covers
+`tests/vectors/rational_dynamics_r1_vectors.json`. The consumer replay covers
 reduction-compatible fractions, doubling modulo one, modular inverse, the
 centered inverse representative, canonical continued fractions, convergent
 denominators, and the specimen identity

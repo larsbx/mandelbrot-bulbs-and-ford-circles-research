@@ -1,5 +1,6 @@
 """Generic (p → ∞) one-sided limits: x̃ = tail + [a1] with a1 large, N growing.  Families:
 ⅓⁺: [0;2,1,N,a1];  ⅓⁻: [0;3,N,a1];  0⁺: [0;N,a1];  ½⁻: [0;2,N,a1]."""
+from paths import DATA
 import json, sys
 from bulbford.cf import from_cf, modinv
 from bulbford.taylor import kappa_fft
@@ -16,4 +17,4 @@ for name in names:
             xt = (pb if pb <= q / 2 else pb - q) / q
             rows.append(dict(fam=name, N=N, a1=a, p=p, q=q, xt=xt, kappa=[t.coeffs[2].real, t.coeffs[2].imag], G=G))
             print(f"{name:<5} N={N:>3} a1={a:>2} p/q={p}/{q:<6} x̃={xt:+.5f} κ={t.coeffs[2]:+.5f} G={G:.5f}", flush=True)
-json.dump(rows, open("data/generic_limits.json", "w"))
+json.dump(rows, open(DATA / "generic_limits.json", "w"))

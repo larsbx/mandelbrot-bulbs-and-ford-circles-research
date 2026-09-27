@@ -16,12 +16,12 @@ The ordering rule is:
 authority -> mathematical/domain concern -> implementation language
 ```
 
-Python under `bulbford/` is the canonical executable. The claim register
+Python under `kernel/bulbford/` is the canonical executable. The claim register
 `RESEARCH_bulb-ford-correction.md` holds claim state; `EXACT_EVIDENCE_BOUNDARY.md`
 separates exact conformance vectors from ball/FFT/continuation evidence;
-`legacy/` and `scripts/` are non-authoritative.
+`reference/legacy/` and `experiments/scripts/` are non-authoritative.
 
-The layout is transitional. Each plane in `estate.toml` records its future
-`target` and the existing paths it currently covers; existing paths remain
-authoritative until a dedicated migration PR moves one bounded context. Directory
-renames alone must not change claim status, acceptance, or authority.
+The layout is canonical: every plane in `estate.toml` maps exactly its `target`
+(root-level files aside) and no migration step is pending; the audit enforces
+both. Directory renames alone must not change claim status, acceptance, or
+authority.

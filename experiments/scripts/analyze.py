@@ -1,14 +1,15 @@
 """Tables from data/taylor_q<q>.json (+ data/index_q<q>.json when present)."""
+from paths import DATA
 import json, sys, os
 import numpy as np
 
 def load(q):
-    rows = json.load(open(f"data/taylor_q{q}.json"))
+    rows = json.load(open(DATA / f"taylor_q{q}.json"))
     for r in rows:
         r["r"] = np.array([complex(a, b) for a, b in r["r"]])
     idx = {}
-    if os.path.exists(f"data/index_q{q}.json"):
-        idx = {d["p"]: complex(d["re"], d["im"]) for d in json.load(open(f"data/index_q{q}.json"))}
+    if os.path.exists(DATA / f"index_q{q}.json"):
+        idx = {d["p"]: complex(d["re"], d["im"]) for d in json.load(open(DATA / f"index_q{q}.json"))}
     return sorted(rows, key=lambda r: r["xstar"]), idx
 
 if __name__ == "__main__":

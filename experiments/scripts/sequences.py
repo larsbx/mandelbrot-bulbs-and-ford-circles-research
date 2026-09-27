@@ -1,6 +1,7 @@
 """κ and Ĝ along sequences x̃ = p̄/q = [0; a1, …, a_k] with a_k = N → ∞ (one-sided limits at rationals),
 plus a quadratic-irrational sequence. p = p̄⁻¹ mod q.  Output: data/sequences.json"""
 from __future__ import annotations
+from paths import DATA
 import json, sys
 from bulbford.cf import from_cf, modinv
 from bulbford.taylor import kappa_fft
@@ -31,6 +32,6 @@ def entry(name, N):
 if __name__ == "__main__":
     names = sys.argv[1:] or list(SEQS)
     out = [e for name in names for N in NS if (e := entry(name, N))]
-    json.dump(out, open("data/sequences.json", "w"))
+    json.dump(out, open(DATA / "sequences.json", "w"))
     for e in out:
         print(f"{e['seq']:<18} N={e['N']:>3} q={e['q']:>5} x̃={e['xt']:+.5f}  κ={e['kappa'][0]:+.5f}{e['kappa'][1]:+.5f}i  r3={e['r3'][0]:+.5f}{e['r3'][1]:+.5f}i  Ĝ={e['G']:.5f}", flush=True)

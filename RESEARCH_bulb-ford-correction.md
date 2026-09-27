@@ -43,14 +43,14 @@ Theorem tags: **[GM84]** Guckenheimer–McGehee `diam B_{p/q} = O(q⁻²)`; **[D
 Legacy items V1–V11 stand (reproduced 2026-09-25 by the new instruments: V5/V9/V10 table at `q=59` identical to 4 digits). Corrections: V6's "one-sided limits agree" is superseded by V16; V4's "residual dependence on `a_{n−1}` ≈ 0.005" is explained by V17–V18.
 
 - **V12. P2 verified.** `[u²]R_q` (Cauchy/FFT on `|u| = 2.5`, 256 points) vs `(ι−½)/q` (ball arithmetic, radius `< 1e-12`): max deviation over all `p`: `9e-15 (q=59)`, `1e-13 (127)`, `1.3e-12 (251)`. `r₀ = 1`, `r₁ = −1` to `1e-11`.
-- **V13. Exact values** (`q ≤ 12`, `data/exact_index.txt`): `ι_{1/3} = (92 − 16ζ₃)/441`, `ι_{1/4} = (1447 − 365i)/4624`, `ι_{1/5} = (1068·31 − 9153ζ − 7113ζ² − 312ζ³)/93775`; denominators are squares of algebraic norms (`441 = 21²`, `4624 = 68²`, `3025 = 55²`), as expected for `b/a²`. `Im ι(1/q)` decreases by `0.064 ± 0.001` per unit `q` for `q = 3…12`: linear growth, i.e. `κ = O(1)` already visible exactly.
+- **V13. Exact values** (`q ≤ 12`, `experiments/data/exact_index.txt`): `ι_{1/3} = (92 − 16ζ₃)/441`, `ι_{1/4} = (1447 − 365i)/4624`, `ι_{1/5} = (1068·31 − 9153ζ − 7113ζ² − 312ζ³)/93775`; denominators are squares of algebraic norms (`441 = 21²`, `4624 = 68²`, `3025 = 55²`), as expected for `b/a²`. `Im ι(1/q)` decreases by `0.064 ± 0.001` per unit `q` for `q = 3…12`: linear growth, i.e. `κ = O(1)` already visible exactly.
 - **V14. The limit shape lives in the `ε`-plane.** `|u_a|/2` (root of the truncated Taylor series of `R_q` at `u=0`, radius of the sampling circle 2.5) reproduces `G_ant` (direct antipode continuation) to `5.7e-4 (q=59)`, `1.3e-4 (127)`, `5.5e-5 (251)` — i.e. `O(q⁻²)`, the nonlinearity of `c_H(λ)`. `|r_k|` decays like `q^{-k}`-ish (tail `< 1e-16` at `k=16`); `R_q` is analytic on `|u| ≲ cq`.
 - **V15. `κ` is `O(1)`, and `G` is a function of `(κ, r₃)`.** All `p`, `q ∈ {59,127,251,1009}`: `Re κ ∈ [0.015, 0.064]`, `|Im κ| ≤ 0.055`, `|r₃| ≤ 2.3e-3`, `|r₄| ≤ 1e-4`. `Re κ` is a smooth unimodal function of `x*` with the profile of `Ĝ` (`0.024` at `x*→0`, max `≈0.062` near `0.40`, `0.050` at `½`). `Im κ` is **odd in the signed inverse** `x̃` (`κ(−x̃) = conj κ(x̃)`, exact by conjugation), `|Im κ| ≈ 0.053` at `x*→0`, crossing `0` near `x* ≈ 0.32–0.39`, `0.024` at `½`. Newton on `1 − u + κu² + r₃u³ = −1` from `u=2` gives `G` to `≤ 3e-3` (peak `1.147` ✓, `x*→0`: `1.029` vs `1.026`).
 - **V16. One-sided limits at rationals.** Two kinds of sequence give two kinds of limit.
   *(a) Bounded `p`* (`x̃ = [0; tail, N]` exactly, `q ≤ 1153`, converged to 1e-5):
   `⅓⁻` via `[0;3,N]` (`p=3`): `κ → 0.05453 + 0.00506i`, `G → 1.12837`; `⅓⁺` via `[0;2,1,N]` (`p=3`): `κ → 0.05504 − 0.02351i`, `G → 1.12537`;
   `½⁻` via `[0;2,N]` (`p=2`): `κ → 0.04969 + 0.0240i`, `G → 1.11142`; `0⁺` via `[0;N]` (`p=1`): `κ → 0.02383 − 0.0527i` (Im log-slow), `G → 1.0263–1.0265`.
-  *(b) Generic* (`x̃ = [0; tail, N, a₁]`, `a₁ ∈ {16, 64}` — the `a₁`-dependence is `< 3e-4` — `N ∈ {64,128,256}`, `q ≤ 16385`; approach is `c/N`, `c ≈ 0.2–0.6`, quoted with the fit; `data/generic_limits.json`):
+  *(b) Generic* (`x̃ = [0; tail, N, a₁]`, `a₁ ∈ {16, 64}` — the `a₁`-dependence is `< 3e-4` — `N ∈ {64,128,256}`, `q ≤ 16385`; approach is `c/N`, `c ≈ 0.2–0.6`, quoted with the fit; `experiments/data/generic_limits.json`):
   `⅓⁻`: `G = 1.12345, 1.12196, 1.12122 → 1.1205`; `κ → 0.0517 + 0.0012i`.
   `⅓⁺`: `G = 1.12152, 1.12002, 1.11927 → 1.1185`; `κ → 0.0521 − 0.0195i`.
   `½⁻`: `G = 1.10505, 1.10257, 1.10133 → 1.100`; `κ → 0.0447 + 0.0173i`.
@@ -59,9 +59,9 @@ Legacy items V1–V11 stand (reproduced 2026-09-25 by the new instruments: V5/V9
 - **V17. The limit depends on the far end of the continued fraction (order of limits).** Same `x̃` to `1e-5`, different `G`:
   `x̃ = [0;3,N,5]` (`p/q = [0;5,N,3]`, `t→⅕`): `G = 1.12551, 1.12462, 1.12371, 1.12326` at `N = 48, 64, 96, 128`, fit `G_∞ + 0.17/N` ⇒ `G_∞ ≈ 1.1219`, vs `1.12837` for `[0;3,N]`.
   `x̃ = [0;N,4]` (`p/q=[0;4,N]`, `t→¼`): `G → ≈1.014` (`1.01509` at `q=1537`, slope `0.5/N`) vs `1.0265` for `p=1`.
-  At fixed `N`, `a₁ → ∞` (`p` fixed `= 3N+1`, `q → ∞`) converges smoothly: `[0;3,16,a₁]`: `G = 1.13089, 1.13164, 1.13179, …, 1.13143` for `a₁ = 2 … 100`; `[0;64,a₁]`: `1.02585 → 1.01689`. Grid `[0;3,N,a₁]` (`data/limit_grid.json`): `lim_{a₁→∞} G = 1.12614, 1.12322, 1.12173` for `N = 32, 64, 128` (`c/N`, `c = 0.19`) `→ 1.1202` as `N → ∞`, against `1.12837` for `a₁ = ∞` taken *first* (`p=3`). The `a₁`-dependence at fixed `N` is monotone (`a₁ = 2`: `1.12855 → 1.12614` at `N=32`) and of size `0.002–0.005`; the two orders of limits differ by `0.008`.
+  At fixed `N`, `a₁ → ∞` (`p` fixed `= 3N+1`, `q → ∞`) converges smoothly: `[0;3,16,a₁]`: `G = 1.13089, 1.13164, 1.13179, …, 1.13143` for `a₁ = 2 … 100`; `[0;64,a₁]`: `1.02585 → 1.01689`. Grid `[0;3,N,a₁]` (`experiments/data/limit_grid.json`): `lim_{a₁→∞} G = 1.12614, 1.12322, 1.12173` for `N = 32, 64, 128` (`c/N`, `c = 0.19`) `→ 1.1202` as `N → ∞`, against `1.12837` for `a₁ = ∞` taken *first* (`p=3`). The `a₁`-dependence at fixed `N` is monotone (`a₁ = 2`: `1.12855 → 1.12614` at `N=32`) and of size `0.002–0.005`; the two orders of limits differ by `0.008`.
 - **V18. The second variable is arithmetic in `t`, not smooth.** At tail `(N=128, 3)` (`x̃ = ⅓ − 9e-4`), prefixes giving `t = 0.5, 0.4, 0.4286, 0.4545, 0.333, 0.286, 0.25, 0.2, 0.111`: `G = 1.1260, 1.1238, 1.1232, 1.1241, 1.1246, 1.1236, 1.1238, 1.1233, 1.1238` — peaks at `t = ½` (`+0.0024`), `⅓` (`+0.001`) over a `≈1.1236` floor, and `t→0` with `p=3`: `1.1284`. Symmetry `t ↔ 1−t` exact (`(2,2)≡(1,1,2)`, `(3,)≡(1,2)`, `(4,)≡(1,3)`).
-  Dense `q = 1009` (all 504 `p ≤ q/2`, `data/kappa_q1009.json`): `var G = 1.64e-3`; a 100-bin function of `x*` alone leaves residual variance `2.65e-6` (`R² = 0.9984`, residual sd `1.6e-3`); adding a 50-bin function of `t` (backfitting) leaves `1.87e-6` (`R² = 0.9989`, `sd H = 1.0e-3`). So generically the `t`-part is `≈ 1e-3`. The large residuals (local: `G` minus its 8 nearest `x*`-neighbours) are the bounded-`p` bulbs: `p = 1,2,3,4`: `+0.0080, +0.0044, +0.0025, +0.0005`; and the bulbs with `p·p̄ = q−1` (`x̃ = −1/p` exactly, `6 ≤ p ≤ 36`): `−0.0036 … −0.0053` (they sit at the bottom of the `1/p` cusps). Small-denominator `t` classes (`t ≈ ⅓, ¼, ⅖`, `n = 4` each) average `−0.002 … −0.003` (2–3σ). Generic `p ≥ 20` off these sets: `|e| < 1e-3`.
+  Dense `q = 1009` (all 504 `p ≤ q/2`, `experiments/data/kappa_q1009.json`): `var G = 1.64e-3`; a 100-bin function of `x*` alone leaves residual variance `2.65e-6` (`R² = 0.9984`, residual sd `1.6e-3`); adding a 50-bin function of `t` (backfitting) leaves `1.87e-6` (`R² = 0.9989`, `sd H = 1.0e-3`). So generically the `t`-part is `≈ 1e-3`. The large residuals (local: `G` minus its 8 nearest `x*`-neighbours) are the bounded-`p` bulbs: `p = 1,2,3,4`: `+0.0080, +0.0044, +0.0025, +0.0005`; and the bulbs with `p·p̄ = q−1` (`x̃ = −1/p` exactly, `6 ≤ p ≤ 36`): `−0.0036 … −0.0053` (they sit at the bottom of the `1/p` cusps). Small-denominator `t` classes (`t ≈ ⅓, ¼, ⅖`, `n = 4` each) average `−0.002 … −0.003` (2–3σ). Generic `p ≥ 20` off these sets: `|e| < 1e-3`.
 - **V21. `Im κ` jumps at rationals `p'/q'` (q = 1009, means over `0.002 < |x̃ − p'/q'| < 0.009` on each side, `J := Im κ(p'/q'⁺) − Im κ(p'/q'⁻)`):**
   `½: −0.034 (from the two conjugate sides)`, `⅓: −0.0186`, `¼: −0.0105`, `⅕: −0.0045`, `⅖: −0.0053`, `⅙: −0.0029`, `⅐: −0.0004`, `2/7: −0.0007`, `3/7: 0.0000`.
   `J·q'² = −0.137, −0.167, −0.167, −0.112, −0.132, −0.106` for `q' = 2,3,4,5,5,6`: Ford-type `q'^{-2}` weight, equal for `⅕` and `⅖`, then falling faster at `q' = 7` (window-limited at this `q`). Same sign everywhere (the jump is *down* in `Im κ` for `x̃ > 0`; odd in `x̃`). Together with V16(b): `Re κ` has the cusps, `Im κ` the jumps.
@@ -114,20 +114,20 @@ Precision caveats: doubles for `R_q`; the FFT route is accurate to `~1e-12` in `
 
 ## 7. Next moves (ordered)
 
-1. **C17′ → asymptotics of `ι`.** Compute `ι` through the cycle-index sum `−Σ 1/(1−ρ)` over the repelling cycles of `f_{λ₀}` (all `2^q` fixed points of `f^q` for `q ≤ 20`, exact in `ℚ(ζ_q)` via `scripts/exact_index.py` + dynatomic factorisation); identify the dominant cycles (expect: the cycles of the neighbouring bulbs `B_{p'/q'}` with `|pq' − p'q| = 1`, i.e. the Farey neighbours — which would be the Ford-circle mechanism made literal).
-2. **Cusp/jump laws.** From `data/kappa_q1009.json`, fit `Re κ̂` cusps and `Im κ̂` jumps at `p'/q'` for `q' ≤ 7` against `q'^{-1}`, `q'^{-2}`; confirm with `q = 2003`.
+1. **C17′ → asymptotics of `ι`.** Compute `ι` through the cycle-index sum `−Σ 1/(1−ρ)` over the repelling cycles of `f_{λ₀}` (all `2^q` fixed points of `f^q` for `q ≤ 20`, exact in `ℚ(ζ_q)` via `experiments/scripts/exact_index.py` + dynatomic factorisation); identify the dominant cycles (expect: the cycles of the neighbouring bulbs `B_{p'/q'}` with `|pq' − p'q| = 1`, i.e. the Farey neighbours — which would be the Ford-circle mechanism made literal).
+2. **Cusp/jump laws.** From `experiments/data/kappa_q1009.json`, fit `Re κ̂` cusps and `Im κ̂` jumps at `p'/q'` for `q' ≤ 7` against `q'^{-1}`, `q'^{-2}`; confirm with `q = 2003`.
 3. **Fatou-coordinate computation of `κ₀`** (C20), cheap via the standard `z + z²` Fatou coordinate series.
 4. **`z³+c`**: repeat V15–V19 (`MAIN3` is already wired: `G(MAIN3, p, q)`, `taylor(p, q, MAIN3)`).
 5. C2′ numerics, then C8, C11 as before.
 
-## 8. Instruments (`bulbford/`, tests in `tests/`, 17 passing)
+## 8. Instruments (`kernel/bulbford/`, tests in `tests/`, 17 passing)
 
 - `cf.py` — `modinv`, `xstar`, `cf`, `from_cf`, `convergent_denominators`.
 - `dynamics.py` — `Family` records (`MAIN2`, `DISK2`, `MAIN3`), `orbit` with second derivatives, `Cycle` tracking with analytic `dρ/dc` and a period-collapse guard, `bulb(fam, p, q)` → `G_ant`, `G_cen`; `rho_on_path`.
 - `index.py` — `index(p, q)`: `ι_{p/q}` as an `acb` ball (python-flint), auto precision; `kappa(p, q)`.
 - `taylor.py` — `taylor(p, q, fam, r, N)`: `r_k`, `solve(target, u0)`; `kappa_fft` (N=64) for `q > 300`.
-- `scripts/` — `exact_index.py` (ℚ(ζ_q)), `taylor_sweep.py`, `index_sweep.py`, `kappa_sweep.py` (dense, `q=1009`), `sequences.py`, `prefix_test.py`, `a1_scan*.py`, `limit_grid.py`, `analyze.py`, `analyze_dense.py`. Data in `data/` (JSON). Legacy instruments in `legacy/`.
-- Run: `PYTHONPATH=. pytest -q`; `PYTHONPATH=. python3 scripts/analyze.py 59 127 251`.
+- `experiments/scripts/` — `exact_index.py` (ℚ(ζ_q)), `taylor_sweep.py`, `index_sweep.py`, `kappa_sweep.py` (dense, `q=1009`), `sequences.py`, `prefix_test.py`, `a1_scan*.py`, `limit_grid.py`, `analyze.py`, `analyze_dense.py`. Data in `experiments/data/` (JSON). Legacy instruments in `reference/legacy/`.
+- Run: `PYTHONPATH=kernel pytest -q`; `PYTHONPATH=kernel python3 experiments/scripts/analyze.py 59 127 251`.
 
 ## 9. Error / caveat catalog
 
