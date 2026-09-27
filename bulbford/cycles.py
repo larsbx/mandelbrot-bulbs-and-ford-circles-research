@@ -63,20 +63,31 @@ def parameter(p: int, q: int) -> complex:
     return lam / 2 - lam * lam / 4
 
 
-def _pull_back_rays(c: complex, q: int) -> np.ndarray:
+def _pull_back_rays(c: complex, q: int, angles: list[int] | None = None, octaves: int = OCTAVES) -> np.ndarray:
+    """Landing points of the rays of angles j/(2^q − 1), for a doubling-closed set of j.
+
+    `angles` defaults to all j; a single doubling orbit is also closed, which makes
+    one cycle cheap for large q. Angles are exact integers; only the starting
+    points of the rays are rounded to floats.
+    """
     M = 2**q - 1
-    j = np.arange(M)
-    doubled = (2 * j) % M
-    theta = 2j * np.pi * j / M
+    if angles is None:
+        j = np.arange(M)
+        doubled, frac = (2 * j) % M, j / M
+    else:
+        position = {a: i for i, a in enumerate(angles)}
+        doubled = np.array([position[2 * a % M] for a in angles])
+        frac = np.array([a / M for a in angles])
+    theta = 2j * np.pi * frac
     ring = []
     for m in range(SUBSTEPS):
         w = np.exp(LOG_RADIUS * 2.0 ** (-m / SUBSTEPS) + theta)
         ring.append(w - c / (2 * w))  # inverse Böttcher map to O(w⁻³)
-    for m in range(SUBSTEPS, SUBSTEPS * OCTAVES):
+    for m in range(SUBSTEPS, SUBSTEPS * octaves):
         previous = ring[(m - 1) % SUBSTEPS]
         root = np.sqrt(ring[m % SUBSTEPS][doubled] - c)
         ring[m % SUBSTEPS] = np.where(np.abs(root - previous) <= np.abs(root + previous), root, -root)
-    return ring[(SUBSTEPS * OCTAVES - 1) % SUBSTEPS]
+    return ring[(SUBSTEPS * octaves - 1) % SUBSTEPS]
 
 
 def _iterate(z: np.ndarray, c: complex, n: int) -> tuple[np.ndarray, np.ndarray]:
@@ -138,6 +149,12 @@ def _orbit(j: int, M: int) -> tuple[int, ...]:
     return tuple(orbit)
 
 
+def _term(orbit: tuple[int, ...], z: np.ndarray, q: int, M: int) -> CycleTerm:
+    k = len(orbit)
+    rho = complex(np.prod(2 * z))
+    return CycleTerm(orbit, k, rho, rotation_number(orbit, M), -k / (1 - rho ** (q // k)))
+
+
 @lru_cache(maxsize=None)
 def cycle_terms(p: int, q: int) -> tuple[CycleTerm, ...]:
     fp = fixed_points(p, q)
@@ -152,10 +169,27 @@ def cycle_terms(p: int, q: int) -> tuple[CycleTerm, ...]:
         orbit = _orbit(j, M)
         seen[list(orbit)] = True
         assert not alpha.intersection(orbit)
-        k = len(orbit)
-        rho = complex(np.prod(2 * fp.z[list(orbit)]))
-        terms.append(CycleTerm(orbit, k, rho, rotation_number(orbit, M), -k / (1 - rho ** (q // k))))
+        terms.append(_term(orbit, fp.z[list(orbit)], q, M))
     return tuple(terms)
+
+
+def cycle_through(p: int, q: int, angle: int) -> CycleTerm:
+    """The term of the one cycle whose rays include angle/(2^q − 1), from its q rays alone.
+
+    The angle must not land at z₀ (not in the p/q rotation cycle). A ray of period q
+    needs several periods of pull-back to land, so the depth grows with q. The result
+    is checked (the ray relation f(z_j) = z_{2j} and |F(z) − z|); a check that fails
+    raises instead of returning an unverified term.
+    """
+    M, c = 2**q - 1, parameter(p, q)
+    orbit = _orbit(angle % M, M)
+    z = _polish(_pull_back_rays(c, q, list(orbit), octaves=max(OCTAVES, 6 * q)), c, q)
+    position = {a: i for i, a in enumerate(orbit)}
+    ray = max(abs(z[i] ** 2 + c - z[position[2 * a % M]]) for i, a in enumerate(orbit))
+    residual = float(np.max(np.abs(_iterate(z, c, q)[0] - z)))
+    if not (ray < 1e-9 and residual < 1e-9):
+        raise ValueError(f"cycle through {angle}/{M} did not verify: ray {ray:.1e}, residual {residual:.1e}")
+    return _term(orbit, z, q, M)
 
 
 def index_by_cycles(p: int, q: int) -> complex:

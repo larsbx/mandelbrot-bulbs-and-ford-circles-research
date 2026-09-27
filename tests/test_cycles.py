@@ -6,7 +6,9 @@ import numpy as np
 import pytest
 
 from bulbford.cf import coprime_numerators
-from bulbford.cycles import _orbit, cycle_terms, fixed_points, flank_angles, index_by_cycles, rotation_number
+from bulbford.cycles import (
+    _orbit, cycle_terms, cycle_through, fixed_points, flank_angles, index_by_cycles, rotation_number,
+)
 from bulbford.index import index_complex
 
 PAIRS = [(p, q) for q in range(2, 13) for p in coprime_numerators(q)]
@@ -69,3 +71,21 @@ def test_the_two_flank_angles_lie_on_one_doubling_orbit(q):
 def test_the_flank_cycle_carries_the_largest_term(p, q):
     top = max(cycle_terms(p, q), key=lambda t: abs(t.contribution))
     assert set(flank_angles(p, q)) <= set(top.angles)
+
+
+@pytest.mark.parametrize("p,q", [(2, 7), (4, 9), (3, 11), (5, 12)])
+def test_a_single_orbit_gives_the_same_term_as_the_full_sum(p, q):
+    for t in cycle_terms(p, q):
+        assert abs(cycle_through(p, q, t.angles[-1]).contribution - t.contribution) < 1e-12
+
+
+@pytest.mark.parametrize("q", [40, 64])
+def test_single_orbits_verify_beyond_the_full_sum(q):
+    assert cycle_through(1, q, 2 ** (q - 2) + 1).period == q  # ring-2 X₂ for p = 1
+
+
+def test_the_two_crossings_of_v26():
+    from scripts.crossings import record
+
+    assert record(1, 7)["ratio"] < 1 < record(1, 8)["ratio"]
+    assert record(5, 11)["ratio"] < 1 < record(6, 13)["ratio"]
