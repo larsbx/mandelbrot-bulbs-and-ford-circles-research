@@ -1,7 +1,7 @@
 """V14 with both proxies certified: Δ = ||u_a|/2 − G_ant| from the P10 antipode boxes.
 
-Reads data/antipode_certificates_v14.json (replayed by the tests), encloses |u_a|/2 on each certified
-c box with Arb (bulbford.antipode.u_half_abs), and writes data/v14_certified.json: per-p brackets for
+Reads experiments/data/antipode_certificates_v14.json (replayed by the tests), encloses |u_a|/2 on each certified
+c box with Arb (bulbford.antipode.u_half_abs), and writes experiments/data/v14_certified.json: per-p brackets for
 G_ant, |u_a|/2 and Δ, and per-q brackets for max_p Δ and q²·max_p Δ. `--check` exits 1 on drift.
 """
 from __future__ import annotations
@@ -13,8 +13,8 @@ from pathlib import Path
 
 from bulbford.antipode import u_half_abs
 from bulbford.certify import I, box_from_numerators
+from paths import DATA
 
-DATA = Path(__file__).resolve().parents[1] / "data"
 SOURCE = DATA / "antipode_certificates_v14.json"
 OUT = DATA / "v14_certified.json"
 

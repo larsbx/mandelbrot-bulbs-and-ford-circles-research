@@ -1,7 +1,7 @@
 """Certified antipodes at the V14 denominators q = 59, 127, 251 (every unit p ≤ q/2).
 
 CI replays all of q = 59 and a sample at q = 127, 251 that includes the records needing the smaller
-box of the precision ladder; `python scripts/certify_bulbs.py --check` replays everything.
+box of the precision ladder; `python experiments/scripts/certify_bulbs.py --check` replays everything.
 """
 
 import json
@@ -14,12 +14,12 @@ from bulbford.antipode import replay
 from bulbford.certify import Verdict
 
 ROOT = Path(__file__).resolve().parents[1]
-RECORDS = json.loads((ROOT / "data" / "antipode_certificates_v14.json").read_text())["certificates"]
+RECORDS = json.loads((ROOT / "experiments/data/antipode_certificates_v14.json").read_text())["certificates"]
 QS = tuple(sorted({r["q"] for r in RECORDS}))  # the V14 denominators certified so far
 
 
 def taylor(q: int) -> dict[int, dict]:
-    return {r["p"]: r for r in json.loads((ROOT / "data" / f"taylor_q{q}.json").read_text())}
+    return {r["p"]: r for r in json.loads((ROOT / "experiments/data" / f"taylor_q{q}.json").read_text())}
 
 
 def bracket(row) -> tuple[F, F]:

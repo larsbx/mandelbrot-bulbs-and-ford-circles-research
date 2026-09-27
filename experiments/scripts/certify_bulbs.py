@@ -1,9 +1,9 @@
 """Finite certificates for the satellites of the main cardioid: 2 ≤ q ≤ Q_MAX with every unit p,
 and the antipodes of the V14 sweeps (q ∈ V14_QS, every unit p ≤ q/2).
 
-  data/center_certificates.json    type (0, q) joint boxes for the centres (bulbford.certify)
-  data/antipode_certificates.json  two-variable Krawczyk boxes for ρ = −1, with G_ant bounds (bulbford.antipode)
-  data/antipode_certificates_v14.json  the same at q = 59 and 127, beside data/taylor_q59.json and taylor_q127.json
+  experiments/data/center_certificates.json    type (0, q) joint boxes for the centres (bulbford.certify)
+  experiments/data/antipode_certificates.json  two-variable Krawczyk boxes for ρ = −1, with G_ant bounds (bulbford.antipode)
+  experiments/data/antipode_certificates_v14.json  the same at q = 59 and 127, beside experiments/data/taylor_q59.json and taylor_q127.json
 
 `--check` recomputes both and exits 1 on drift.  Seeds come from the floating-point continuation in
 bulbford.dynamics and are untrusted: the tests replay every stored box from its dyadic endpoints alone.
@@ -16,8 +16,8 @@ from pathlib import Path
 from bulbford import antipode, certify
 from bulbford.cf import coprime_numerators
 from bulbford.dynamics import MAIN2, bulb, center
+from paths import DATA
 
-DATA = Path(__file__).resolve().parents[1] / "data"
 Q_MAX = 16
 CALCULUS = "finite-mandelbrot-research docs/finite-certificate-calculus.md"
 PAIRS = tuple((p, q) for q in range(2, Q_MAX + 1) for p in coprime_numerators(q))

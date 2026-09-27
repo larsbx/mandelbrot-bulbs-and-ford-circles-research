@@ -1,11 +1,11 @@
-"""Flank cycle against κ and G, on the fractions of data/cycle_index_sum.json.
+"""Flank cycle against κ and G, on the fractions of experiments/data/cycle_index_sum.json.
 
 For every p/q with 3 ≤ q ≤ 20, p ≤ q/2: the flank |F'| (V22), κ = (ι − ½)/q from
 the Arb index, and G_ant from `bulbford.dynamics.bulb`. Reports Spearman rank
 correlations within each q (p ≥ 2, where the flank order in x* holds) and
-writes data/flank_vs_kappa.json.
+writes experiments/data/flank_vs_kappa.json.
 
-    PYTHONPATH=. python3 scripts/flank_vs_kappa.py
+    PYTHONPATH=kernel python3 experiments/scripts/flank_vs_kappa.py
 """
 from __future__ import annotations
 
@@ -16,8 +16,8 @@ from pathlib import Path
 import numpy as np
 
 from bulbford.dynamics import MAIN2, bulb
+from paths import DATA
 
-DATA = Path(__file__).resolve().parents[1] / "data"
 
 
 def xstar(p: int, q: int) -> Fraction:

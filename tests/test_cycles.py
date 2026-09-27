@@ -85,7 +85,7 @@ def test_single_orbits_verify_beyond_the_full_sum(q):
 
 
 def test_the_two_crossings_of_v26():
-    from scripts.crossings import record
+    from crossings import record
 
     assert record(1, 7)["ratio"] < 1 < record(1, 8)["ratio"]
     assert record(5, 11)["ratio"] < 1 < record(6, 13)["ratio"]
@@ -100,7 +100,7 @@ def test_p11_the_beta_term_in_closed_form(p, q):
 
 
 def test_beta_takes_the_lead_among_p_equal_one_intruders_at_q_22():
-    from scripts.crossings import record
+    from crossings import record
 
     beta = lambda q: abs(1 / (1 - (2 - np.exp(2j * np.pi / q)) ** q))  # noqa: E731
     assert record(1, 21)["intruders"][0] > beta(21)

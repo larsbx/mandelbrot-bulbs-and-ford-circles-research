@@ -1,6 +1,6 @@
 """P12: certified continuation from each certified centre (P3) to its certified antipode (P10), q ≤ 16.
 
-Writes data/continuation_certificates.json; `--check` recomputes every path and exits 1 on drift.
+Writes experiments/data/continuation_certificates.json; `--check` recomputes every path and exits 1 on drift.
 Each record is a verdict about the stored P3/P10 boxes: it is recomputed from them, not from floats
 (the float Newton only chooses where the next box goes). Runs on all cores (deterministic per bulb).
 """
@@ -13,8 +13,8 @@ from pathlib import Path
 
 from bulbford.certify import box_from_numerators
 from bulbford.continuation import continue_centre_to_antipode
+from paths import DATA
 
-DATA = Path(__file__).resolve().parents[1] / "data"
 OUT = DATA / "continuation_certificates.json"
 
 

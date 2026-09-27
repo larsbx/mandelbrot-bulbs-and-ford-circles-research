@@ -25,7 +25,7 @@ from bulbford.certify import ONE, Box, I, Verdict, box_from_numerators
 from bulbford.dynamics import MAIN2, bulb
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / "data" / "antipode_certificates.json"
+DATA = ROOT / "experiments/data/antipode_certificates.json"
 RECORDS = json.loads(DATA.read_text())["certificates"]
 
 
@@ -89,7 +89,7 @@ def test_conjugate_bulbs_have_equal_bounds_up_to_width():
 
 
 def test_stored_records_are_current():
-    script = runpy.run_path(str(ROOT / "scripts" / "certify_bulbs.py"))
+    script = runpy.run_path(str(ROOT / "experiments/scripts/certify_bulbs.py"))
     assert DATA.read_text() == script["OUTPUTS"][DATA]()
 
 

@@ -57,7 +57,7 @@ def test_kappa0_does_not_depend_on_the_sampling_line():
 
 def test_kappa0_meets_the_exact_index_at_q_1009():
     """|κ(1/q) − κ₀ − 1/(2πiq)| = 2.9e-6 at q = 1009 (V28b)."""
-    rows = json.loads((Path(__file__).resolve().parents[1] / "data" / "kappa_q1009.json").read_text())
+    rows = json.loads((Path(__file__).resolve().parents[1] / "experiments/data/kappa_q1009.json").read_text())
     k = mp.mpc(*next(r["kappa"] for r in rows if r["p"] == 1))
     assert abs(k - kappa0() + 1j / (2 * mp.pi * 1009)) < 4e-6
     assert abs(k - kappa0()) > 1e-4
@@ -67,7 +67,7 @@ def test_the_flank_plateau_is_a_lavaurs_multiplier():
     """V27's flank intercept is |1 − L'| at the fixed point of L_{iπ}, and F'_q meets L' at rate q⁻²."""
     from bulbford.cycles import cycle_points
     from bulbford.implosion import fixed_point_of_cycle
-    from scripts.multiplier_growth import named_angles
+    from multiplier_growth import named_angles
 
     gaps = []
     for q in (64, 128):

@@ -7,7 +7,7 @@ boundary for the new cross-repository exact replay work.
 
 ## Exact low-q corpus
 
-`data/parabolic_index_exact_vectors.json` pins four exact Gaussian-rational
+`tests/vectors/parabolic_index_exact_vectors.json` pins four exact Gaussian-rational
 values of the parabolic fixed-point index:
 
 ```text
@@ -30,9 +30,9 @@ fractions are exact.
 The following remain research instruments rather than exact certificate
 objects:
 
-- cycle continuation in `bulbford/dynamics.py`;
+- cycle continuation in `kernel/bulbford/dynamics.py`;
 - Newton solves for centers and multiplier targets;
-- Cauchy/FFT coefficient extraction in `bulbford/taylor.py`;
+- Cauchy/FFT coefficient extraction in `kernel/bulbford/taylor.py`;
 - dense asymptotic sweeps and fitted limits.
 
 Their output remains VALIDATED numerical evidence under the research register.
@@ -58,22 +58,22 @@ The q=1,2,4 vectors live in Q(i).  General p/q requires an exact cyclotomic
 coefficient representation.  `larsbx/finite-math-kernels` now carries an
 independent reference for it (bridge stages C1, C2, Q1, Q2 in
 `tools/cyclotomic_reference.py`, commit `16bf936`), and its pinned vectors
-are copied byte-for-byte to `data/cyclotomic_germ_v1_vectors.json`
+are copied byte-for-byte to `tests/vectors/cyclotomic_germ_v1_vectors.json`
 (`q <= 8`, every unit `p`).
 
 `tests/test_cyclotomic_replay.py` replays them against two local instruments
-that share no code with the kernel: `scripts/exact_index.py` (exact equality
-of every coordinate) and the Arb ball of `bulbford/index.py` (containment).
+that share no code with the kernel: `experiments/scripts/exact_index.py` (exact equality
+of every coordinate) and the Arb ball of `kernel/bulbford/index.py` (containment).
 Galois equivariance `ι_{p/q} = σ_p(ι_{1/q})` is an exact test in the kernel.
 
 The kernel stage is a reference, not yet the canonical Mojo kernel, and it
 does not name its coefficient.  Reading `[w^q] 1/P` as the holomorphic index
-is this repository's.  For `q > 8`, `bulbford/index.py` remains a rigorous
+is this repository's.  For `q > 8`, `kernel/bulbford/index.py` remains a rigorous
 ball computation rather than a canonical exact coefficient object.
 
 ## Joint box certificates for bulb centres
 
-`bulbford/certify.py` applies the certificate calculus of
+`kernel/bulbford/certify.py` applies the certificate calculus of
 `larsbx/finite-mandelbrot-research` (`docs/finite-certificate-calculus.md`)
 to satellite centres.  A centre of period `q` has critical-orbit type
 `(0, q)`: `R_{0,q} = Q_q` is the Gleason polynomial, and a certificate is one
@@ -85,7 +85,7 @@ K_{Q_q}(β) ⊂ int β                                      (unique simple root)
 ```
 
 checked on the same `β` in rational interval arithmetic with outward dyadic
-rounding.  `data/center_certificates.json` stores 79 accepted boxes
+rounding.  `experiments/data/center_certificates.json` stores 79 accepted boxes
 (`2 <= q <= 16`, every unit `p`, half-width `2^-64`); the tests replay each
 from its endpoints alone and check the boxes of one `q` are pairwise
 disjoint.  The interval semantics is additionally replayed on the two boxes
@@ -102,7 +102,7 @@ What the box does **not** carry: that the certified centre is the centre of
 
 ## Certified antipodes and G_ant enclosures
 
-`bulbford/antipode.py` extends the joint box to the `ρ = −1` point. On a box
+`kernel/bulbford/antipode.py` extends the joint box to the `ρ = −1` point. On a box
 `Z × C` a two-variable Krawczyk inclusion for
 
 ```text
@@ -121,22 +121,22 @@ G_ant² = q⁴ Qd(c_ant − c_root) / Qd(1 − λ₀)
 ```
 
 and `G_ant` is bracketed by rational square-root bounds.
-`data/antipode_certificates.json` holds 79 accepted records (`q <= 16`),
+`experiments/data/antipode_certificates.json` holds 79 accepted records (`q <= 16`),
 each replayed from its endpoints; the stored bounds are recomputed, not
 trusted.
 
-`data/antipode_certificates_v14.json` extends this to every `p <= q/2` at
+`experiments/data/antipode_certificates_v14.json` extends this to every `p <= q/2` at
 the V14 denominators `q = 59, 127, 251`. Along an orbit of length `q`,
 rectangular arithmetic widens an enclosure by `|Re 2z_i| + |Im 2z_i|` per
 step, not by `|2z_i|`, so the generator sizes each box from that growth
 (estimated from the untrusted float orbit; it only chooses the box) and
 stops any enclosure that passes `2^40` as INCONCLUSIVE. Only the `G_ant`
 column of V14 becomes certified this way. The `|u_a|/2` column is certified
-separately by `scripts/v14_certified.py`: on each certified `c_ant` box,
+separately by `experiments/scripts/v14_certified.py`: on each certified `c_ant` box,
 Arb encloses `λ_a = 1 − √(1 − 4c_ant)` (the branch `Re(1 − λ) > 0` is
 checked on the ball, else refused) and `u_a = q² log(λ_a/λ₀)`. Arb's
 square root, logarithm and `e^{2πip/q}` are rigorous balls, so both V14
-columns and `Δ` are certified; `data/v14_certified.json` holds the
+columns and `Δ` are certified; `experiments/data/v14_certified.json` holds the
 brackets.
 
 This is a certified enclosure of a finite algebraic quantity. Reading it as
@@ -146,7 +146,7 @@ register at its current grade.
 
 ## Centre and antipode in one component
 
-`bulbford/continuation.py` certifies, for all 79 bulbs with `q <= 16`, that
+`kernel/bulbford/continuation.py` certifies, for all 79 bulbs with `q <= 16`, that
 the P10 antipode lies on the boundary of the hyperbolic component of the P3
 centre. Along the segment between the two certified boxes, a chain of
 parameter boxes carries one attracting `q`-cycle: a parametric Krawczyk
@@ -155,8 +155,8 @@ inclusion on each box (one fixed point of `f_c^q` per `c`, analytic in
 neighbouring boxes hold the same point, and on the last box a certified
 positive derivative of `|rho|^2` along the path, so `|rho|` rises strictly to
 `1` at the antipode. The computation uses Arb complex balls; the rational
-certificate boxes enter exactly. `data/continuation_certificates.json`
-holds the verdicts, `scripts/certify_continuation.py --check` recomputes
+certificate boxes enter exactly. `experiments/data/continuation_certificates.json`
+holds the verdicts, `experiments/scripts/certify_continuation.py --check` recomputes
 all of them, and CI recomputes `q <= 7`.
 
 This removes the antipode half of `SatelliteLabel`. The centre half, that
@@ -164,7 +164,7 @@ the certified centre is the centre of `B_{p/q}`, is still a named import.
 
 ## Wake combinatorics
 
-`bulbford/wake.py` builds, in exact `Q/Z` arithmetic, the doubling cycle of
+`kernel/bulbford/wake.py` builds, in exact `Q/Z` arithmetic, the doubling cycle of
 rotation number `p/q` and its characteristic arc `(θ₋, θ₊)`, of width
 `1/(2^q − 1)`.  Finite facts, tested for `q <= 16`: the cycle acts as the
 rotation `x_i ↦ x_{i+p}`; the conjugate wake is the mirror; wakes are
@@ -178,7 +178,7 @@ root of `B_{p/q}` `[DH/Mil00]` are imports.
 
 The arithmetic of the internal fraction is now cross-checked against
 `larsbx/finite-math-kernels` R1 through
-`data/rational_dynamics_r1_vectors.json`. The consumer replay covers
+`tests/vectors/rational_dynamics_r1_vectors.json`. The consumer replay covers
 reduction-compatible fractions, doubling modulo one, modular inverse, the
 centered inverse representative, canonical continued fractions, convergent
 denominators, and the specimen identity

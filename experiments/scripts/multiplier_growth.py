@@ -6,9 +6,9 @@ the two ring-2 cycles and the widest-arc intruders, from single verified orbits
 (`bulbford.cycles.cycle_through`), and fits the model a + b/q + c/q² on the
 nodes q ≥ 64 (a fitted statistic, not a limit). The β fixed point (angle 0) has
 the exact multiplier (2 − λ₀)^q and is tabulated from that closed form.
-Writes data/multiplier_growth.json.
+Writes experiments/data/multiplier_growth.json.
 
-    PYTHONPATH=. python3 scripts/multiplier_growth.py [Q]
+    PYTHONPATH=kernel python3 experiments/scripts/multiplier_growth.py [Q]
 """
 from __future__ import annotations
 
@@ -22,8 +22,9 @@ import numpy as np
 
 from bulbford.cycles import cycle_through
 from bulbford.wake import mechanical
+from paths import DATA
 
-OUT = Path(__file__).resolve().parents[1] / "data" / "multiplier_growth.json"
+OUT = DATA / "multiplier_growth.json"
 
 
 def named_angles(p: int, q: int) -> dict[str, int]:

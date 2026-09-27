@@ -22,7 +22,7 @@ from bulbford.certify import (
     replay,
 )
 
-DATA = Path(__file__).resolve().parents[1] / "data" / "center_certificates.json"
+DATA = Path(__file__).resolve().parents[1] / "experiments/data/center_certificates.json"
 RECORDS = json.loads(DATA.read_text())["certificates"]
 
 
@@ -77,7 +77,7 @@ def test_one_certified_centre_per_satellite_and_boxes_disjoint():
 def test_stored_records_are_current():
     import runpy
 
-    script = runpy.run_path(str(Path(__file__).resolve().parents[1] / "scripts" / "certify_bulbs.py"))
+    script = runpy.run_path(str(Path(__file__).resolve().parents[1] / "experiments/scripts/certify_bulbs.py"))
     assert DATA.read_text() == script["OUTPUTS"][DATA]()
 
 

@@ -4,9 +4,9 @@ For the named cycles of V27 (p = 1) this finds the fixed point of the Lavaurs ma
 L_{iπ} seeded by the cycle, and tabulates |1 − L'| against |1 − F'_q| and the gap
 |F'_q − L'| for q = 64, 128, 256. It computes κ₀ = a₂/(2πi a₁²) from the Fourier
 coefficients of the horn map on two lines, and tabulates q(κ(1/q) − κ₀) from the
-exact index (q ≤ 512) and data/kappa_q1009.json. Writes data/horn_invariants.json.
+exact index (q ≤ 512) and experiments/data/kappa_q1009.json. Writes experiments/data/horn_invariants.json.
 
-    PYTHONPATH=. python3 scripts/horn_invariants.py
+    PYTHONPATH=kernel python3 experiments/scripts/horn_invariants.py
 """
 from __future__ import annotations
 
@@ -19,10 +19,10 @@ import numpy as np
 from bulbford.cycles import cycle_points
 from bulbford.implosion import DPS, fixed_point_of_cycle, kappa0, phi_in
 from bulbford.index import kappa
-from scripts.multiplier_growth import named_angles
+from multiplier_growth import named_angles
+from paths import DATA
 
-ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "data" / "horn_invariants.json"
+OUT = DATA / "horn_invariants.json"
 
 
 def c(x) -> list[float]:
@@ -48,7 +48,7 @@ def cycles() -> list[dict]:
 
 def kappas(k0) -> list[dict]:
     rows = [{"q": q, "kappa": c(kappa(1, q))} for q in (64, 128, 256, 512)]
-    table = json.loads((ROOT / "data" / "kappa_q1009.json").read_text())
+    table = json.loads((DATA / "kappa_q1009.json").read_text())
     rows.append({"q": 1009, "kappa": next(r["kappa"] for r in table if r["p"] == 1)})
     for r in rows:
         r["q_times_gap"] = c(r["q"] * (complex(*r["kappa"]) - complex(k0)))

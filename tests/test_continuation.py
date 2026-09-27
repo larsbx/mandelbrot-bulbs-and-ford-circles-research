@@ -10,8 +10,8 @@ import pytest
 from bulbford.continuation import continue_centre_to_antipode
 
 ROOT = Path(__file__).resolve().parents[1]
-DOC = json.loads((ROOT / "data" / "continuation_certificates.json").read_text())
-SCRIPT = runpy.run_path(str(ROOT / "scripts" / "certify_continuation.py"))
+DOC = json.loads((ROOT / "experiments/data/continuation_certificates.json").read_text())
+SCRIPT = runpy.run_path(str(ROOT / "experiments/scripts/certify_continuation.py"))
 BOXES = {(b[0], b[1]): b for b in SCRIPT["boxes"]()}
 
 
@@ -22,7 +22,7 @@ def test_every_bulb_up_to_q16_is_accepted():
 
 @pytest.mark.parametrize("row", [r for r in DOC["certificates"] if r["q"] <= 7], ids=lambda r: f'{r["p"]}/{r["q"]}')
 def test_records_recompute_from_the_certificate_boxes(row):
-    """`scripts/certify_continuation.py --check` recomputes all 79; CI recomputes q ≤ 7."""
+    """`experiments/scripts/certify_continuation.py --check` recomputes all 79; CI recomputes q ≤ 7."""
     assert SCRIPT["record"](BOXES[(row["p"], row["q"])]) == row
 
 

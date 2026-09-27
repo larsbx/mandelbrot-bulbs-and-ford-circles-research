@@ -1,11 +1,12 @@
-"""Dense-q analysis (data/kappa_q<q>.json): additive model G ≈ F(x*) + H(t), local residuals vs t,
+"""Dense-q analysis (experiments/data/kappa_q<q>.json): additive model G ≈ F(x*) + H(t), local residuals vs t,
 and the local structure of κ, G around rational x*."""
+from paths import DATA
 import json, sys
 import numpy as np
 from fractions import Fraction
 
 q = int(sys.argv[1]) if len(sys.argv) > 1 else 1009
-rows = json.load(open(f"data/kappa_q{q}.json"))
+rows = json.load(open(DATA / f"kappa_q{q}.json"))
 xt = np.array([r["xt"] for r in rows]); xs = np.abs(xt); t = np.array([r["p"] / q for r in rows])
 G = np.array([r["G"] for r in rows]); k = np.array([complex(*r["kappa"]) for r in rows]); p = np.array([r["p"] for r in rows])
 

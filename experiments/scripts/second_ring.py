@@ -8,9 +8,9 @@ of the sum are exactly those two cycles (numerical), and whether each other
 cycle at rank 2 or 3 passes through an endpoint of one of the two widest arcs,
 of widths 2^{q−1}/M and 2^{q−2}/M (P9). For each of the top five
 cycles it also records which α-neighbours it contains, as (i − w, ±1).
-Writes data/second_ring.json.
+Writes experiments/data/second_ring.json.
 
-    PYTHONPATH=. python3 scripts/second_ring.py [Q]
+    PYTHONPATH=kernel python3 experiments/scripts/second_ring.py [Q]
 """
 from __future__ import annotations
 
@@ -21,8 +21,9 @@ from pathlib import Path
 from bulbford.cf import coprime_numerators
 from bulbford.cycles import _orbit, cycle_terms, fixed_points
 from bulbford.wake import mechanical
+from paths import DATA
 
-OUT = Path(__file__).resolve().parents[1] / "data" / "second_ring.json"
+OUT = DATA / "second_ring.json"
 
 
 def ring(p: int, q: int, k: int) -> tuple[int, int]:

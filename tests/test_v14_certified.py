@@ -11,18 +11,18 @@ from bulbford.antipode import u_half_abs
 from bulbford.certify import Box, I
 
 ROOT = Path(__file__).resolve().parents[1]
-SCRIPT = runpy.run_path(str(ROOT / "scripts" / "v14_certified.py"))
-DOC = json.loads((ROOT / "data" / "v14_certified.json").read_text())
+SCRIPT = runpy.run_path(str(ROOT / "experiments/scripts/v14_certified.py"))
+DOC = json.loads((ROOT / "experiments/data/v14_certified.json").read_text())
 
 
 def test_table_is_current_and_recomputed_from_the_boxes():
-    assert (ROOT / "data" / "v14_certified.json").read_text() == SCRIPT["render"]()
+    assert (ROOT / "experiments/data/v14_certified.json").read_text() == SCRIPT["render"]()
 
 
 def test_fft_series_value_lies_within_1e_11_of_every_certified_u_bracket():
     """The V14 |u_a|/2 was a root of the FFT-truncated Taylor series; it is the same root to 1e-11."""
     for q in (59, 127, 251):
-        fft = {r["p"]: F(r["G_ant_series"]) for r in json.loads((ROOT / "data" / f"taylor_q{q}.json").read_text())}
+        fft = {r["p"]: F(r["G_ant_series"]) for r in json.loads((ROOT / "experiments/data" / f"taylor_q{q}.json").read_text())}
         for r in (r for r in DOC["rows"] if r["q"] == q):
             lo, hi = (F(x) for x in r["u_a_half"])
             assert lo - F(1, 10**11) <= fft[r["p"]] <= hi + F(1, 10**11), (r["p"], q)

@@ -7,9 +7,9 @@ a widest arc (the intruders), and the ratio
 
     R(q) = max |intruder term| / min |ring-2 term|.
 
-R > 1 means an intruder outranks a ring-2 cycle. Writes data/crossings.json.
+R > 1 means an intruder outranks a ring-2 cycle. Writes experiments/data/crossings.json.
 
-    PYTHONPATH=. python3 scripts/crossings.py [Q]
+    PYTHONPATH=kernel python3 experiments/scripts/crossings.py [Q]
 """
 from __future__ import annotations
 
@@ -19,8 +19,9 @@ from pathlib import Path
 
 from bulbford.cycles import _orbit, cycle_through
 from bulbford.wake import mechanical
+from paths import DATA
 
-OUT = Path(__file__).resolve().parents[1] / "data" / "crossings.json"
+OUT = DATA / "crossings.json"
 
 
 def record(p: int, q: int) -> dict:

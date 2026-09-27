@@ -20,6 +20,4 @@ jobs:
       - name: Install dependencies
         run: python -m pip install numpy python-flint sympy pytest
       - name: Test
-        env:
-          PYTHONPATH: .
         run: python -m pytest -q tests/

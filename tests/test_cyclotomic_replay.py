@@ -1,11 +1,11 @@
 """Replay finite-math-kernels cyclotomic-germ/v1 vectors against two independent local instruments.
 
 The kernel's `[w^q] 1/P` for g(w) = ζ_q^p w + w² is, in this repository's reading, the holomorphic index
-ι_{p/q} (bulbford/index.py docstring).  The vectors are checked against
+ι_{p/q} (kernel/bulbford/index.py docstring).  The vectors are checked against
 
-  * scripts/exact_index.py — separately written ℚ(ζ_q) series code (sympy for the field inverse);
+  * experiments/scripts/exact_index.py — separately written ℚ(ζ_q) series code (sympy for the field inverse);
   * bulbford.index.index    — Arb ball arithmetic, with a rigorous radius;
-  * data/parabolic_index_exact_vectors.json — the pinned Q(i) fixtures.
+  * tests/vectors/parabolic_index_exact_vectors.json — the pinned Q(i) fixtures.
 """
 
 import cmath
@@ -20,11 +20,11 @@ import pytest
 from bulbford.index import index
 
 ROOT = Path(__file__).resolve().parents[1]
-PAYLOAD = json.loads((ROOT / "data" / "cyclotomic_germ_v1_vectors.json").read_text())
+PAYLOAD = json.loads((ROOT / "tests/vectors/cyclotomic_germ_v1_vectors.json").read_text())
 VECTORS = PAYLOAD["vectors"]
 SOURCE_COMMIT = "16bf936f308303a0012ceb0bc388400db6595d46"  # larsbx/finite-math-kernels, fixtures/cyclotomic_germ_v1.json
 
-_spec = importlib.util.spec_from_file_location("exact_index", ROOT / "scripts" / "exact_index.py")
+_spec = importlib.util.spec_from_file_location("exact_index", ROOT / "experiments/scripts/exact_index.py")
 exact_index = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(exact_index)
 
@@ -58,7 +58,7 @@ def test_vectors_lie_in_the_arb_ball(row):
 
 
 def test_vectors_agree_with_pinned_gaussian_fixtures():
-    fixtures = json.loads((ROOT / "data" / "parabolic_index_exact_vectors.json").read_text())["vectors"]
+    fixtures = json.loads((ROOT / "tests/vectors/parabolic_index_exact_vectors.json").read_text())["vectors"]
     kernel = {(r["p"], r["q"]): coords(r) for r in VECTORS}
     for f in fixtures:
         re, im = F(f["re_num"], f["re_den"]), F(f["im_num"], f["im_den"])

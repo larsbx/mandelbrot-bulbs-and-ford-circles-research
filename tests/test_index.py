@@ -14,7 +14,7 @@ def test_index_q1_q2_exact():
 
 
 def test_pinned_exact_low_q_vectors_agree_with_ball_oracle():
-    path = Path(__file__).resolve().parents[1] / "data" / "parabolic_index_exact_vectors.json"
+    path = Path(__file__).resolve().parent / "vectors" / "parabolic_index_exact_vectors.json"
     payload = json.loads(path.read_text())
     assert payload["schema"] == "bulbford-parabolic-index-exact/v1"
     for row in payload["vectors"]:

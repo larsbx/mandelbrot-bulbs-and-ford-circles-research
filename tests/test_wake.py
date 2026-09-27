@@ -54,7 +54,7 @@ def test_mediant_wake_sits_in_the_gap_between_farey_neighbours(n):
 
 
 def test_doubling_agrees_with_shared_r1_vectors():
-    path = Path(__file__).resolve().parents[1] / "data" / "rational_dynamics_r1_vectors.json"
+    path = Path(__file__).resolve().parents[1] / "tests/vectors/rational_dynamics_r1_vectors.json"
     for row in json.loads(path.read_text())["vectors"]:
         assert double(F(row["p"], row["q"])) == F(row["double_num"], row["double_den"])
 

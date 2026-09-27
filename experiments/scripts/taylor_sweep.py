@@ -1,6 +1,7 @@
 """Sweep p over 1..q/2 for given q: x*, Taylor r_0..r_K of R_q(u), G_ant, G_cen, series-reconstructed
-|u_a|/2 and |u_c|.  Writes data/taylor_q<q>.json."""
+|u_a|/2 and |u_c|.  Writes experiments/data/taylor_q<q>.json."""
 from __future__ import annotations
+from paths import DATA
 import json, sys, time
 import numpy as np
 from bulbford.cf import xstar, coprime_numerators, cf
@@ -23,5 +24,5 @@ if __name__ == "__main__":
     for q in map(int, sys.argv[1:]):
         t0 = time.time()
         rows = [row(p, q) for p in coprime_numerators(q) if p <= q // 2]
-        json.dump(rows, open(f"data/taylor_q{q}.json", "w"))
+        json.dump(rows, open(DATA / f"taylor_q{q}.json", "w"))
         print(f"q={q}: {len(rows)} bulbs, {time.time() - t0:.1f}s", flush=True)

@@ -3,9 +3,9 @@
 For every p ≤ q/2 (the rest by conjugation), records the cycle sum against the
 Arb ball of `bulbford.index`, the leading cycles, the share of the flank cycle
 through α_{w−1} + 1/M and α_{w+2} − 1/M, and the shares of the rotation cycles
-and of β. Writes data/cycle_index_sum.json.
+and of β. Writes experiments/data/cycle_index_sum.json.
 
-    PYTHONPATH=. python3 scripts/cycle_index_sweep.py [Q]
+    PYTHONPATH=kernel python3 experiments/scripts/cycle_index_sweep.py [Q]
 """
 from __future__ import annotations
 
@@ -17,8 +17,9 @@ from pathlib import Path
 from bulbford.cf import coprime_numerators
 from bulbford.cycles import cycle_terms, fixed_points, flank_angles, index_by_cycles
 from bulbford.index import index_complex
+from paths import DATA
 
-OUT = Path(__file__).resolve().parents[1] / "data" / "cycle_index_sum.json"
+OUT = DATA / "cycle_index_sum.json"
 
 
 def pair(z: complex) -> list[float]:
