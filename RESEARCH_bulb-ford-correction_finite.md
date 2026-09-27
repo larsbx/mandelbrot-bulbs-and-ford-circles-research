@@ -31,7 +31,7 @@ As in the original §1, with these changes.
 
 - `G(p/q) := d(p/q) / (2|c_H'(λ₀)| q⁻²)` is a number attached to one bulb. No law `d = … · (1 + O(q⁻²))` is asserted; `G` is the finite ratio itself.
 - `r_k(p/q) := [u^k] R_q(u)`, `u = q²ε`. `κ(p/q) := (ι_{p/q} − ½)/q` exactly.
-- `u_a`: the root of `R_q(u) = −1` found by Newton from `u = 2`. `|u_a|/2` is a second proxy for `G`, compared to `G_ant` in V14 as a table only.
+- `u_a`: the root of `R_q(u) = −1` found by Newton from `u = 2`. `|u_a|/2` is a second proxy for `G`, compared to `G_ant` in V14 as a certified table.
 - `x̃ := p̄/q ∈ (−½, ½]`, `x* := |x̃|`, `t := p/q`, all exact rationals (`bulbford/cf.py`; R1 vectors of `finite-math-kernels`).
 - Tags as in the original, plus **[Hol]**: a contour integral of a holomorphic family is holomorphic in the parameter; a holomorphic function is determined by its Laurent expansion. **[GM84]** is recorded but used by no claim here.
 
@@ -81,15 +81,15 @@ As in the original §1, with these changes.
 
   `|r₀ − 1|, |r₁ + 1| < 1e-11` at the same `q`.
 - **V13 (exact values), form E.** `ι_{1/3} = (92 − 16ζ₃)/441`, `ι_{1/4} = (1447 − 365i)/4624`, `ι_{1/5} = (33108 − 9153ζ − 7113ζ² − 312ζ³)/93775`. The first two denominators are squares of algebraic norms: `441 = 21²`, `4624 = 68²`. For `q = 3 … 12`, successive differences of `Im ι(1/q)` lie in `[−0.065, −0.063]` (`data/exact_index.txt`).
-- **V14 (two proxies), form T.** `Δ := |(|u_a|/2) − G_ant|`, maximum over `p`:
+- **V14 (two proxies), form C.** `Δ := |(|u_a|/2) − G_ant|`, maximum over `p ≤ q/2`, both proxies certified on the P10 antipode boxes (`data/v14_certified.json`, `scripts/v14_certified.py`):
 
-  | `q` | `Δ` | `q²Δ` |
+  | `q` | argmax `p` | `q²·max_p Δ` (certified, endpoints rounded outward) |
   |---|---|---|
-  | 59 | `5.7e-4` | 1.99 |
-  | 127 | `1.3e-4` | 2.06 |
-  | 251 | `5.5e-5` | 3.47 |
+  | 59 | 8 | `[1.988415053774, 1.988415053781]` |
+  | 127 | 6 | `[2.060638919206, 2.060638919484]` |
+  | 251 | 1 | `[3.469486569810, 3.469486608205]` |
 
-  The `q²Δ` column is not constant, so these rows do not support the reading `O(q⁻²)` of the original. Only the table is claimed. The `q²Δ` column is computed from the unrounded `Δ` (an earlier `1.98, 2.10` came from the rounded one). The `G_ant` side is form C (P10 at `q = 59, 127, 251`, every `p ≤ q/2`); `|u_a|/2` is still an FFT value, so `Δ` stays form T. The tail satisfies `|r_k| < 1e-16` at `k = 16`.
+  `G_ant` is the P10 bracket. `|u_a|/2` is enclosed in Arb balls on the same certified `c_ant` box: from `c = λ/2 − λ²/4`, `λ_a = 1 − √(1 − 4c_ant)` on the branch `Re(1 − λ) > 0` (checked on every ball) and `u_a = q²·log(λ_a/λ₀)`. `Δ > 0` on every bulb. The `q²Δ` column is not constant, so these rows do not support the reading `O(q⁻²)` of the original; only the table is claimed. (An earlier `1.98, 2.10` came from the rounded `Δ`.) The FFT values of the original V14 (Taylor tail `|r_k| < 1e-16` at `k = 16`) agree with the certified `|u_a|/2` to `4·10⁻¹²`. Reading `u_a` as the root of `R_q(u) = −1` near `u = 2` uses [DH] and `SatelliteLabel`, as P10 does.
 - **V15 (`κ` and `G` on four `q`), form T.** Over all `p` and `q ∈ {59, 127, 251, 1009}`: `Re κ ∈ [0.015, 0.064]`, `|Im κ| ≤ 0.055`, `|r₃| ≤ 2.3e-3`, `|r₄| ≤ 1e-4`. `κ(−x̃) = conj κ(x̃)` holds exactly by conjugation (form E). Newton on the cubic `1 − u + κu² + r₃u³ = −1` from `u = 2` reproduces `G` to `≤ 3e-3` on the same sets.
 - **V16 (bounded `p`), form T.** Values at the largest computed `N`, and the last doubling step (`data/sequences.json`):
 
@@ -220,7 +220,7 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 
 1. **The flank cycle.** P6 is evaluated for `q ≤ 20` (V22), its Farey prediction is falsified (F6), and the flank term is compared with `κ` and `G` (V23). V22(b) is proven as P7, and the second-rank terms are the second ring except at the two smallest `x*` (V24). V24(a) is P8, and the small-`x*` intruders are the widest arcs next to the characteristic arc (P9, V25). The crossings are located and `R` increases after them to `q = 64` (V26). Term growth: `β` in closed form (P11), and the other named cycles have settling multipliers (V27). The `p = 1` plateaus are tabulated against the multipliers of the Lavaurs map `L_{iπ}`, and `κ(1/q)` against the horn-map ratio `κ₀` (V28; §5 C20′, C21). Next: the same tables for `p = (q−1)/2`, whose parabolic point is the period-doubling one at `c = −¾` (form T).
 2. **Steps and cusps.** Tabulate `J(p'/q')` and the cusp depths at `q = 2003` for `q' ≤ 7`, next to the `q = 1009` table (form T).
-3. ~~**Certified antipodes.**~~ Done as P10 (`q ≤ 16`, and `q = 59, 127, 251` beside V14; form C). Next: a certified replacement for `SatelliteLabel`, and a certified `|u_a|/2`.
+3. ~~**Certified antipodes.**~~ Done as P10 (`q ≤ 16`, and `q = 59, 127, 251` beside V14; form C), and V14 is certified on both proxies. Next: a certified replacement for `SatelliteLabel`.
 4. **`z³ + c`.** Repeat V15–V19 as tables (`MAIN3` is wired).
 
 ---
@@ -234,7 +234,7 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 | none | P6 | projective index sum, exact at `ε = 0` |
 | P10 | P10 | certified antipodes and `G_ant` brackets; unchanged (form C) |
 | V12, V13, V15, V19, V21 | same ids | remainders and arrows removed; values unchanged |
-| V14 | V14 | table only; the `O(q⁻²)` reading is withdrawn (`q²Δ` = 1.99, 2.06, 3.47); `G_ant` column certified (P10) |
+| V14 | V14 | table only; the `O(q⁻²)` reading is withdrawn (`q²Δ` = 1.99, 2.06, 3.47); both columns certified (P10, `|u_a|/2` by Arb) |
 | V16, V17, V20 | V16, V16b, V17, V20 | limits become values at the largest `N` (T) or fit intercepts (S) |
 | V18 | V18 | regressions on stated bins |
 | F4 | F4 | "no single continuous `Ĝ`" becomes a Lipschitz lower bound `6.8·10⁴` from exact pairs |

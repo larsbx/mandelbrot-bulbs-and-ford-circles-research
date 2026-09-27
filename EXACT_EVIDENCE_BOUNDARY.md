@@ -131,7 +131,13 @@ rectangular arithmetic widens an enclosure by `|Re 2z_i| + |Im 2z_i|` per
 step, not by `|2z_i|`, so the generator sizes each box from that growth
 (estimated from the untrusted float orbit; it only chooses the box) and
 stops any enclosure that passes `2^40` as INCONCLUSIVE. Only the `G_ant`
-column of V14 becomes certified: `|u_a|/2` is still an FFT value.
+column of V14 becomes certified this way. The `|u_a|/2` column is certified
+separately by `scripts/v14_certified.py`: on each certified `c_ant` box,
+Arb encloses `λ_a = 1 − √(1 − 4c_ant)` (the branch `Re(1 − λ) > 0` is
+checked on the ball, else refused) and `u_a = q² log(λ_a/λ₀)`. Arb's
+square root, logarithm and `e^{2πip/q}` are rigorous balls, so both V14
+columns and `Δ` are certified; `data/v14_certified.json` holds the
+brackets.
 
 This is a certified enclosure of a finite algebraic quantity. Reading it as
 the size proxy of `B_{p/q}` still needs `[DH]` and `SatelliteLabel`; it
