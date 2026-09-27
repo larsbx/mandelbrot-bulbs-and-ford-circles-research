@@ -83,11 +83,11 @@ As in the original §1, with these changes.
 - **V13 (exact values), form E.** `ι_{1/3} = (92 − 16ζ₃)/441`, `ι_{1/4} = (1447 − 365i)/4624`, `ι_{1/5} = (33108 − 9153ζ − 7113ζ² − 312ζ³)/93775`. The first two denominators are squares of algebraic norms: `441 = 21²`, `4624 = 68²`. For `q = 3 … 12`, successive differences of `Im ι(1/q)` lie in `[−0.065, −0.063]` (`data/exact_index.txt`).
 - **V14 (two proxies), form C.** `Δ := |(|u_a|/2) − G_ant|`, maximum over `p ≤ q/2`, both proxies certified on the P10 antipode boxes (`data/v14_certified.json`, `scripts/v14_certified.py`):
 
-  | `q` | argmax `p` | `q²·max_p Δ` (certified) |
+  | `q` | argmax `p` | `q²·max_p Δ` (certified, endpoints rounded outward) |
   |---|---|---|
-  | 59 | 8 | `[1.988415053775, 1.988415053780]` |
-  | 127 | 6 | `[2.060638919207, 2.060638919484]` |
-  | 251 | 1 | `[3.469486569811, 3.469486608205]` |
+  | 59 | 8 | `[1.988415053774, 1.988415053781]` |
+  | 127 | 6 | `[2.060638919206, 2.060638919484]` |
+  | 251 | 1 | `[3.469486569810, 3.469486608205]` |
 
   `G_ant` is the P10 bracket. `|u_a|/2` is enclosed in Arb balls on the same certified `c_ant` box: from `c = λ/2 − λ²/4`, `λ_a = 1 − √(1 − 4c_ant)` on the branch `Re(1 − λ) > 0` (checked on every ball) and `u_a = q²·log(λ_a/λ₀)`. `Δ > 0` on every bulb. The `q²Δ` column is not constant, so these rows do not support the reading `O(q⁻²)` of the original; only the table is claimed. (An earlier `1.98, 2.10` came from the rounded `Δ`.) The FFT values of the original V14 (Taylor tail `|r_k| < 1e-16` at `k = 16`) agree with the certified `|u_a|/2` to `4·10⁻¹²`. Reading `u_a` as the root of `R_q(u) = −1` near `u = 2` uses [DH] and `SatelliteLabel`, as P10 does.
 - **V15 (`κ` and `G` on four `q`), form T.** Over all `p` and `q ∈ {59, 127, 251, 1009}`: `Re κ ∈ [0.015, 0.064]`, `|Im κ| ≤ 0.055`, `|r₃| ≤ 2.3e-3`, `|r₄| ≤ 1e-4`. `κ(−x̃) = conj κ(x̃)` holds exactly by conjugation (form E). Newton on the cubic `1 − u + κu² + r₃u³ = −1` from `u = 2` reproduces `G` to `≤ 3e-3` on the same sets.

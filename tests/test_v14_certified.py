@@ -45,3 +45,19 @@ def test_branch_that_cannot_be_separated_is_refused():
     c = Box(I(F(1, 4) - F(1, 2**30), F(1, 4) + F(1, 2**30)), I(-F(1, 2**30), F(1, 2**30)))
     with pytest.raises(ValueError):
         u_half_abs(1, 3, c, 160)
+
+
+def test_quoted_intervals_contain_the_certified_enclosures():
+    """Every q²Δ interval quoted in the registers is rounded outward: it contains the stored enclosure."""
+    import re
+
+    stored = {s["q"]: tuple(F(x) for x in s["q2_max_delta"]) for s in DOC["summary"]}
+    quoted = []
+    for name in ("RESEARCH_bulb-ford-correction.md", "RESEARCH_bulb-ford-correction_finite.md"):
+        text = (ROOT / name).read_text()
+        quoted += [(F(a), F(b)) for a, b in re.findall(r"\[(\d\.\d{9,}), (\d\.\d{9,})\]", text)]
+    assert len(quoted) >= 6
+    for lo, hi in quoted:
+        match = [q for q, (slo, shi) in stored.items() if lo <= slo and shi <= hi]
+        assert match, (lo, hi)
+    assert SCRIPT["outward"](F(-1, 3), 3, up=False) == "-0.334" and SCRIPT["outward"](F(-1, 3), 3, up=True) == "-0.333"

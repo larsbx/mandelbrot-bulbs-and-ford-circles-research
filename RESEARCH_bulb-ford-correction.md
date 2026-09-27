@@ -158,7 +158,7 @@ Precision caveats: doubles for `R_q`; the FFT route is accurate to `~1e-12` in `
 5. C2′ numerics, then C8, C11 as before.
 6. ~~**Certified antipodes.**~~ → **P10** (`q ≤ 16`, and the V14 range `q = 59, 127, 251`); V14 is certified on both proxies. Remaining: replace `SatelliteLabel` by a finite argument (certified continuation from the root, or a certified path of `ρ` from `0` to `−1` inside the box family).
 
-## 8. Instruments (`bulbford/`, tests in `tests/`, 14796 passing)
+## 8. Instruments (`bulbford/`, tests in `tests/`, 14797 passing)
 
 - `cf.py` — `modinv`, `xstar`, `cf`, `from_cf`, `convergent_denominators`.
 - `dynamics.py` — `Family` records (`MAIN2`, `DISK2`, `MAIN3`), `orbit` with second derivatives, `Cycle` tracking with analytic `dρ/dc` and a period-collapse guard, `bulb(fam, p, q)` → `G_ant`, `G_cen`; `rho_on_path`.

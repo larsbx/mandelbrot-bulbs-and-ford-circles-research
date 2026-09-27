@@ -19,6 +19,14 @@ SOURCE = DATA / "antipode_certificates_v14.json"
 OUT = DATA / "v14_certified.json"
 
 
+def outward(x: Fraction, digits: int, up: bool) -> str:
+    """x as a decimal rounded away from the enclosure's inside (down for a lower end, up for an upper)."""
+    scaled = x * 10**digits
+    k = -((-scaled.numerator) // scaled.denominator) if up else scaled.numerator // scaled.denominator
+    sign, k = ("-", -k) if k < 0 else ("", k)
+    return f"{sign}{k // 10**digits}.{k % 10**digits:0{digits}d}"
+
+
 def abs_interval(d: I) -> I:
     if d.lo > 0:
         return d
@@ -59,5 +67,5 @@ if __name__ == "__main__":
         sys.exit(0 if OUT.read_text() == text else 1)
     OUT.write_text(text)
     for s in json.loads(text)["summary"]:
-        lo, hi = (float(Fraction(x)) for x in s["q2_max_delta"])
-        print(f"q={s['q']}: max Δ at p={s['argmax_p']}, q²Δ ∈ [{lo:.12f}, {hi:.12f}]")
+        lo, hi = (Fraction(x) for x in s["q2_max_delta"])
+        print(f"q={s['q']}: max Δ at p={s['argmax_p']}, q²Δ ∈ [{outward(lo, 12, up=False)}, {outward(hi, 12, up=True)}]")
