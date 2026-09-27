@@ -145,6 +145,24 @@ As in the original §1, with these changes.
   | `β`, as `q·\|1 − F'_β\|` (P11) | `39.499` | not bounded: `\|2 − λ₀\|` is near `3` |
 
   The largest residual is `6.2e-03` for `p = 1` and `2.3e-02` for `p = (q−1)/2`. Every named cycle except `β` has a multiplier that settles, so its term grows linearly in `q`. For `p = 1` the leading intruder is `α_{w−1} − 1/M` for `q ≤ 21` and `β` for every `22 ≤ q ≤ 64`, because `β`'s slope `1/39.50` exceeds `1/80.62`. V26's `R` uses the smaller ring-2 term, which is the one with the larger `|1 − F'|`: ring-2 upper (`233.42`) for `p = 1` and ring-2 lower (`260.50`) for `p = (q−1)/2`. The ratios of the fitted intercepts, `233.42/39.50 = 5.91` (`p = 1`) and `260.50/84.00 = 3.10` (`p = (q−1)/2`), are the fitted plateaus of V26's `R(q)`. The largest computed values are `R(64) = 4.239` and `R(63) = 2.437`.
+- **V28 (the horn map of `w + w²`), forms T + S (`bulbford/implosion.py`, `scripts/horn_invariants.py`, `data/horn_invariants.json`).** In `w = z − ½` the root map of `B_{1/q}` is `w + w² + ε²` with `ε = (λ₀ − 1)/2i`. The Fatou coordinates of `g(w) = w + w²` solve `Φ(g(w)) = Φ(w) + 1` and are normalised by the expansion `Φ(w) = −1/w + log(∓w) + Σ_{k≤12} c_k w^k` (exact `c_k`: `−½, ⅓, −13/36, 113/240, …`; `log(−w)` incoming, `log w` outgoing), used only at `|w| < 10⁻³`. They are computed in mpmath at 40 digits. Matching them to the perturbed coordinate `arctan(w/ε)/ε + ½ log(w² + ε²)` gives Lavaurs' phase `σ = n − π/ε` for `n` iterates [Lav89, Shi00, §5]. For `n = q` this is `σ_q = q − π cot(π/q) + iπ`, and `σ_q − iπ = 0.0033` at `q = 1009`. The horn lift `E(Z) − Z` equals `−iπ` and `+iπ` to `1e-12` on `Im Z = 8` and `Im Z = −8`, so `iπ` is the constant of the upper end.
+  (a) *Plateaus against Lavaurs multipliers (T).* Each named `p = 1` cycle of V27 seeds one fixed point `w*` of `L_{iπ} = Ψ_out ∘ (· + iπ) ∘ Φ_in` (Newton in `w` from the cycle's four points farthest from `½`, which agree to `1e-20`). The values are:
+
+  | cycle | `\|1 − L'(w*)\|` | `q²·\|F'_q − L'\|` at `q = 64, 128, 256` |
+  |---|---|---|
+  | flank | `51.188173139` | `1730, 1742, 1745` |
+  | ring 2, lower | `175.796297009` | `10872, 10975, 11000` |
+  | ring 2, upper | `233.425199818` | `17557, 17758, 17808` |
+  | widest-arc intruder | `80.667619672` | `16170, 16123, 16107` |
+
+  The product `q²·|F'_q − L'|` changes by less than `0.3%` from `q = 128` to `256` in every row. V27's intercepts differ from `|1 − L'|` by up to `0.047` (the intruder: `80.62` against `80.668`), which is the size of its fitted `b/q` term. With `σ_q` in place of `iπ` the flank gap at `q = 256` is `0.55` instead of `0.027`. The ratio `233.425199818/4π² = 5.9127` sits beside V26's `R(64) = 4.239`.
+  (b) *`κ₀` against the horn map (T + S).* Write `E(Z) − Z + iπ = Σ_{k≥1} a_k e^{2πikZ}` on the upper end (48 nodes on a line `Im Z = y`). The ratio `κ₀ := a₂/(2πi a₁²)` is unchanged by translating either Fatou coordinate. It is `0.0238258874022 − 0.0523046591140i` on `y = 2.8` and on `y = 3.2`, which differ by `1e-36`. The exact index gives these values of `q(κ(1/q) − κ₀)`:
+
+  | `q` | `64` | `128` | `256` | `512` | `1009` |
+  |---|---|---|---|---|---|
+  | `q(κ − κ₀)` | `0.0018 − 0.1137i` | `0.0020 − 0.1364i` | `0.0013 − 0.1478i` | `0.0007 − 0.1535i` | `0.0004 − 0.1563i` |
+
+  Richardson on consecutive pairs, `(q'x' − qx)/(q' − q)`, gives `−0.159102i`, `−0.159187i`, `−0.159169i` and `0.000035 − 0.159159i` (form S). For comparison, `1/2πi = −0.159155i`. At `q = 1009`, `|κ(1/1009) − κ₀ − 1/(2πi·1009)| = 2.9e-6`.
 
 ---
 
@@ -180,7 +198,9 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 | C16′ | two-ended resonance sum for `ι/q` | V16 vs V16b gaps at `p = 1, 2, 3` | conjectured |
 | C17′ | `ι_{p/q} = ½ + qκ̂(x̃) + O(1)` | P6 gives `ι` as a finite exact sum; the dominant terms are untested | conjectured |
 | P11′ | `q·\|1 − F'_β\|` tends to `4π²` for `p = 1` (proven in the original register) | exact values `54.096` (`q = 64`), `42.668` (`q = 256`), `40.248` (`q = 1024`), `39.669` (`q = 4096`) |  proven, classical |
-| C20 | `κ(1/q)` has a Lavaurs-phase value as `q` grows | V16 row `[0;N]` at `N ≤ 384` | untested |
+| C20′ | `κ(1/q) = κ₀ + 1/(2πiq) + O(q⁻²)` with `κ₀ = a₂/(2πi a₁²)` from the horn map of `z + z²`; derived in the original register assuming `q → ∞` commutes with `[u²]` | V28b: `2.9e-6` at `q = 1009`; Richardson `0.000035 − 0.159159i` at `(512, 1009)` against `1/2πi` | conjectured |
+| C21 | at each named `p = 1` cycle, `(f^q)' = L'_{iπ}(w*) + O(q⁻²)`; `o(1)` from [Lav89, Shi00] by Hurwitz | V28a: `q²·\|F'_q − L'\| = 1745, 11000, 17808, 16107` at `q = 256` | conjectured |
+| [Lav89], [Shi00] | Lavaurs' theorem: `g_ε^n` tends to `L_σ` when `n − π/ε` tends to `σ` | the phase normalisation reproduces `[u¹]R_q = −1` (P0) | imported |
 | C2′, C9′, C8, C11, C15′ | as in the original | none new | unchanged |
 
 ---
@@ -198,7 +218,7 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 
 ## 7. Next moves (finite forms)
 
-1. **The flank cycle.** P6 is evaluated for `q ≤ 20` (V22), its Farey prediction is falsified (F6), and the flank term is compared with `κ` and `G` (V23). V22(b) is proven as P7, and the second-rank terms are the second ring except at the two smallest `x*` (V24). V24(a) is P8, and the small-`x*` intruders are the widest arcs next to the characteristic arc (P9, V25). The crossings are located and `R` increases after them to `q = 64` (V26). Term growth: `β` in closed form (P11), and the other named cycles have settling multipliers (V27). Next: relate the multiplier plateaus to C20 (form T).
+1. **The flank cycle.** P6 is evaluated for `q ≤ 20` (V22), its Farey prediction is falsified (F6), and the flank term is compared with `κ` and `G` (V23). V22(b) is proven as P7, and the second-rank terms are the second ring except at the two smallest `x*` (V24). V24(a) is P8, and the small-`x*` intruders are the widest arcs next to the characteristic arc (P9, V25). The crossings are located and `R` increases after them to `q = 64` (V26). Term growth: `β` in closed form (P11), and the other named cycles have settling multipliers (V27). The `p = 1` plateaus are tabulated against the multipliers of the Lavaurs map `L_{iπ}`, and `κ(1/q)` against the horn-map ratio `κ₀` (V28; §5 C20′, C21). Next: the same tables for `p = (q−1)/2`, whose parabolic point is the period-doubling one at `c = −¾` (form T).
 2. **Steps and cusps.** Tabulate `J(p'/q')` and the cusp depths at `q = 2003` for `q' ≤ 7`, next to the `q = 1009` table (form T).
 3. ~~**Certified antipodes.**~~ Done as P10 (`q ≤ 16`, and `q = 59, 127, 251` beside V14; form C). Next: a certified replacement for `SatelliteLabel`, and a certified `|u_a|/2`.
 4. **`z³ + c`.** Repeat V15–V19 as tables (`MAIN3` is wired).
@@ -219,5 +239,5 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 | V18 | V18 | regressions on stated bins |
 | F4 | F4 | "no single continuous `Ĝ`" becomes a Lipschitz lower bound `6.8·10⁴` from exact pairs |
 | F5 | F5 | "survives `N → ∞`" becomes `C ≥ 1.8, 20.8, 108` at `N = 32, 64, 128` |
-| C1‴, C14″, C16′, C17′, C20, C2′, C9′, C8, C11, C15′ | §5 | classical referents with finite shadows |
+| C1‴, C14″, C16′, C17′, C20′, C21, C2′, C9′, C8, C11, C15′ | §5 | classical referents with finite shadows |
 | §6 "asymptotic at leading order" | §6 | a two-sided bound on computed bulbs |
