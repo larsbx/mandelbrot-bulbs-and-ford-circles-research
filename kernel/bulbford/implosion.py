@@ -240,9 +240,11 @@ def phase_along(u, q: int, germ: Germ = ONE):
     T = −πi/log λ² of f², log λ² = −2πi/q + 2u/q² (the residue of α).
     """
     with mp.workdps(max(DPS, mp.mp.dps)):
-        if germ is ONE:
+        if germ == ONE:
             return q - 2j * mp.pi / (mp.expjpi(mp.mpf(2) / q) * mp.exp(u / mp.mpf(q) ** 2) - 1)
-        return mp.mpf(q) / 2 + 1j * mp.pi / (-2j * mp.pi / q + 2 * u / mp.mpf(q) ** 2)
+        if germ == HALF:
+            return mp.mpf(q) / 2 + 1j * mp.pi / (-2j * mp.pi / q + 2 * u / mp.mpf(q) ** 2)
+        raise ValueError(f"no phase formula for germ {germ.name}")
 
 
 def phase_curvature(q: int, germ: Germ = ONE):

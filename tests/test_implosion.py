@@ -143,6 +143,14 @@ def test_the_phase_curvature_in_closed_form():
     assert abs(phase_curvature(101, HALF) - 1j / mp.pi) < 1e-30
 
 
+def test_the_phase_is_chosen_by_germ_value():
+    from dataclasses import replace
+
+    assert abs(phase_curvature(1009, replace(ONE)) - phase_curvature(1009, ONE)) < 1e-30
+    with pytest.raises(ValueError):
+        phase_curvature(1009, replace(ONE, name="other", end=-1))
+
+
 def test_the_half_constant_is_the_curvature_plus_a_remainder():
     """V30: C = i/π + R, R = 0.354856 − 0.069314i, fitted on the FFT κ for q = 1025 … 8193."""
     from bulbford.taylor import kappa_fft

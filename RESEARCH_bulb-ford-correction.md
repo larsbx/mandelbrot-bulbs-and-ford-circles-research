@@ -194,7 +194,7 @@ Precision caveats: doubles for `R_q`; the FFT route is accurate to `~1e-12` in `
 5. C2′ numerics, then C8, C11 as before.
 6. ~~**Certified antipodes.**~~ → **P10** (`q ≤ 16`, and the V14 range `q = 59, 127, 251`); V14 is certified on both proxies. The antipode half of `SatelliteLabel` is now P12 (certified continuation centre → antipode). Remaining: the centre half, that the certified centre is the centre of `B_{p/q}`. Every route found so far (the rays landing at `α`, or the cycle born at the parabolic root) ends in a limit at the root, so it stays a named import.
 
-## 8. Instruments (`kernel/bulbford/`, tests in `tests/`, 14834 passing)
+## 8. Instruments (`kernel/bulbford/`, tests in `tests/`, 14835 passing)
 
 - `cf.py` — `modinv`, `xstar`, `cf`, `from_cf`, `convergent_denominators`.
 - `dynamics.py` — `Family` records (`MAIN2`, `DISK2`, `MAIN3`), `orbit` with second derivatives, `Cycle` tracking with analytic `dρ/dc` and a period-collapse guard, `bulb(fam, p, q)` → `G_ant`, `G_cen`; `rho_on_path`.
