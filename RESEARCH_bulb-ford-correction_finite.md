@@ -182,6 +182,15 @@ As in the original §1, with these changes.
   | `q(κ − κ₀)` | `0.3525 + 0.1324i` | `0.3582 + 0.1897i` | `0.3577 + 0.2192i` | `0.3566 + 0.2341i` | `0.3558 + 0.2414i` |
 
   Richardson on consecutive pairs gives `0.3640 + 0.2479i`, `0.3572 + 0.2490i`, `0.3555 + 0.2490i` and `0.3550 + 0.2490i` (form S).
+- **V30 (the `1/q` constants), forms E + T + S (`phase_curvature` in `kernel/bulbford/implosion.py`, `experiments/scripts/kappa_constant.py`, `experiments/data/kappa_constant.json`).** The multiplier of the fixed point at the end is `1 − end·2πi·s + …`, with `s` the phase shift, so the `u²` coefficient of the phase adds `−end·2πi·q·[u²]σ` to `q(κ − κ₀)` (form E, the same computation as V28b).
+  (a) *`p = 1`.* `σ = q − 2πi/(λ − 1)` gives `[u²]σ = −πi λ₀(λ₀+1)/((λ₀−1)³q⁴)`. Its contribution `−2πi·q·[u²]σ` differs from `1/2πi` by `1.0e-12` at `q = 1009` (T), and V28b's `|κ(1/1009) − κ₀ − 1/(2πi·1009)| = 2.9e-6` is the rest.
+  (b) *`p = (q−1)/2`.* `σ = q/2 + πi/log λ²` with `log λ² = −2πi/q + 2u/q²` gives `[u²]σ = 1/(2π²q)` for every `q` (E). So the phase contributes exactly `i/π`. The FFT route gives these values of `q(κ − κ₀)` (T):
+
+  | `q` | `1025` | `2049` | `4097` | `8193` |
+  |---|---|---|---|---|
+  | `q(κ − κ₀)` | `0.355793 + 0.241551i` | `0.355343 + 0.245275i` | `0.355103 + 0.247136i` | `0.354982 + 0.248066i` |
+
+  The fit `C + D/q + E/q²` on the seven nodes `q = 1025 … 8193` gives `C = 0.354856 + 0.248996i` with max residual `1.1e-6` (S), and `C − i/π = 0.354856 − 0.069314i`.
 
 ---
 
@@ -217,9 +226,9 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 | C16′ | two-ended resonance sum for `ι/q` | V16 vs V16b gaps at `p = 1, 2, 3` | conjectured |
 | C17′ | `ι_{p/q} = ½ + qκ̂(x̃) + O(1)` | P6 gives `ι` as a finite exact sum; the dominant terms are untested | conjectured |
 | P11′ | `q·\|1 − F'_β\|` tends to `4π²` for `p = 1` (proven in the original register) | exact values `54.096` (`q = 64`), `42.668` (`q = 256`), `40.248` (`q = 1024`), `39.669` (`q = 4096`) |  proven, classical |
-| C20′ | `κ(1/q) = κ₀ + 1/(2πiq) + O(q⁻²)` with `κ₀ = a₂/(2πi a₁²)` from the horn map of `z + z²`; derived in the original register assuming `q → ∞` commutes with `[u²]` | V28b: `2.9e-6` at `q = 1009`; Richardson `0.000035 − 0.159159i` at `(512, 1009)` against `1/2πi` | conjectured |
+| C20′ | `κ(1/q) = κ₀ + 1/(2πiq) + O(q⁻²)` with `κ₀ = a₂/(2πi a₁²)` from the horn map of `z + z²`; derived in the original register assuming `q → ∞` commutes with `[u²]` | V28b: `2.9e-6` at `q = 1009`; Richardson `0.000035 − 0.159159i` at `(512, 1009)` against `1/2πi`; V30a: the phase curvature is `1/2πi` to `1e-12` at `q = 1009` | conjectured |
 | C21 | at each named `p = 1` cycle, `(f^q)' = L'_{iπ}(w*) + O(q⁻²)`; `o(1)` from [Lav89, Shi00] by Hurwitz | V28a: `q²·\|F'_q − L'\| = 1745, 11000, 17808, 16107` at `q = 256` | conjectured |
-| C22 | for `p = (q−1)/2`, `κ = κ₀ + C/q + O(q⁻²)` with `κ₀ = −b₂/(2πi b₁²)` from the half-step horn map at `c = −¾`, and `(f^q)' = L'_{−11πi/16}(w*) + O(q⁻¹)` at the named cycles | V29: `q·\|F'_q − L'\| = 115.1, 668.2, 514.1, 1984.4` at `q = 2049`; Richardson `0.3550 + 0.2490i` at `(513, 1009)` | conjectured |
+| C22 | for `p = (q−1)/2`, `κ = κ₀ + C/q + O(q⁻²)` with `κ₀ = −b₂/(2πi b₁²)` from the half-step horn map at `c = −¾`, and `(f^q)' = L'_{−11πi/16}(w*) + O(q⁻¹)` at the named cycles | V29: `q·\|F'_q − L'\| = 115.1, 668.2, 514.1, 1984.4` at `q = 2049`; V30b: `C = 0.354856 + 0.248996i` (fit, `q ≤ 8193`) against the phase's exact `i/π` | conjectured |
 | [Lav89], [Shi00] | Lavaurs' theorem: `g_ε^n` tends to `L_σ` when `n − π/ε` tends to `σ` | the phase normalisation reproduces `[u¹]R_q = −1` (P0) | imported |
 | C2′, C9′, C8, C11, C15′ | as in the original | none new | unchanged |
 
@@ -238,7 +247,7 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 
 ## 7. Next moves (finite forms)
 
-1. **The flank cycle.** P6 is evaluated for `q ≤ 20` (V22), its Farey prediction is falsified (F6), and the flank term is compared with `κ` and `G` (V23). V22(b) is proven as P7, and the second-rank terms are the second ring except at the two smallest `x*` (V24). V24(a) is P8, and the small-`x*` intruders are the widest arcs next to the characteristic arc (P9, V25). The crossings are located and `R` increases after them to `q = 64` (V26). Term growth: `β` in closed form (P11), and the other named cycles have settling multipliers (V27). The `p = 1` plateaus are tabulated against the multipliers of the Lavaurs map `L_{iπ}`, and `κ(1/q)` against the horn-map ratio `κ₀` (V28; §5 C20′, C21). The same tables for `p = (q−1)/2` use the half-step horn map at `c = −¾` (V29; §5 C22). Next: tables of the `1/q` terms of C20′ and C22 against candidate closed forms (form T).
+1. **The flank cycle.** P6 is evaluated for `q ≤ 20` (V22), its Farey prediction is falsified (F6), and the flank term is compared with `κ` and `G` (V23). V22(b) is proven as P7, and the second-rank terms are the second ring except at the two smallest `x*` (V24). V24(a) is P8, and the small-`x*` intruders are the widest arcs next to the characteristic arc (P9, V25). The crossings are located and `R` increases after them to `q = 64` (V26). Term growth: `β` in closed form (P11), and the other named cycles have settling multipliers (V27). The `p = 1` plateaus are tabulated against the multipliers of the Lavaurs map `L_{iπ}`, and `κ(1/q)` against the horn-map ratio `κ₀` (V28; §5 C20′, C21). The same tables for `p = (q−1)/2` use the half-step horn map at `c = −¾` (V29; §5 C22). The `1/q` terms are tabulated against the phase curvature: all of it for `p = 1`, and `i/π` of `0.354856 + 0.248996i` for `p = (q−1)/2` (V30). Next: the remaining `0.354856 − 0.069314i` against the first-order correction of the half-step Fatou coordinates (form T).
 2. **Steps and cusps.** Tabulate `J(p'/q')` and the cusp depths at `q = 2003` for `q' ≤ 7`, next to the `q = 1009` table (form T).
 3. ~~**Certified antipodes.**~~ Done as P10 (`q ≤ 16`, and `q = 59, 127, 251` beside V14; form C), and V14 is certified on both proxies. The antipode half of `SatelliteLabel` is P12 (form C). Next: the centre half. Every route found so far needs the parabolic root itself, where no box certificate applies, so it stays a §5 referent.
 4. **`z³ + c`.** Repeat V15–V19 as tables (`MAIN3` is wired).
