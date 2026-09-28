@@ -233,6 +233,31 @@ def lavaurs_phase(q: int):
         return q - mp.pi * mp.cot(mp.pi / q) + 1j * mp.pi
 
 
+def phase_along(u, q: int, germ: Germ = ONE):
+    """σ_q(u) along λ = λ₀e^{u/q²}, up to a constant in u.
+
+    `ONE`: q − π/ε = q − 2πi/(λ − 1). `HALF`: q/2 − T with the transit time
+    T = −πi/log λ² of f², log λ² = −2πi/q + 2u/q² (the residue of α).
+    """
+    with mp.workdps(max(DPS, mp.mp.dps)):
+        if germ is ONE:
+            return q - 2j * mp.pi / (mp.expjpi(mp.mpf(2) / q) * mp.exp(u / mp.mpf(q) ** 2) - 1)
+        return mp.mpf(q) / 2 + 1j * mp.pi / (-2j * mp.pi / q + 2 * u / mp.mpf(q) ** 2)
+
+
+def phase_curvature(q: int, germ: Germ = ONE):
+    """−end·2πi·q·[u²]σ_q(u): the part of q(κ − κ₀) that comes from the phase alone.
+
+    The fixed point leaving the end has multiplier 1 − end·2πi·s + …, s = σ − σ∞,
+    so the u² term of σ adds −end·2πi·[u²]σ to κ. It is i/π for `HALF` at every q
+    and 1/(2πi) + O(q⁻⁴) for `ONE`.
+    """
+    with mp.workdps(2 * DPS):
+        h = mp.mpf(10) ** (-DPS // 2)
+        second = (phase_along(h, q, germ) - 2 * phase_along(0, q, germ) + phase_along(-h, q, germ)) / (2 * h * h)
+        return -germ.end * 2j * mp.pi * q * second
+
+
 def horn_coefficients(kmax: int, height: float | None = None, nodes: int = 48, germ: Germ = ONE) -> list:
     """a_1 … a_kmax of E(Z) − Z + σ∞ = Σ a_k e^{2πi·end·kZ}, sampled on Im Z = height."""
     with mp.workdps(DPS):

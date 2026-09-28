@@ -1,4 +1,4 @@
-"""V28, V29 (C20′, C21, C22): the plateaus and κ₀ of the two V25 families from their horn maps."""
+"""V28–V30 (C20′, C21, C22): the plateaus, κ₀ and the 1/q constant of the two V25 families from their horn maps."""
 import json
 from fractions import Fraction as F
 from pathlib import Path
@@ -8,7 +8,7 @@ import numpy as np
 import pytest
 
 from bulbford.implosion import (
-    DPS, HALF, ONE, _expansion, fatou_coefficients, horn, kappa0, lavaurs_phase, phi_in, psi_out,
+    DPS, HALF, ONE, _expansion, fatou_coefficients, horn, kappa0, lavaurs_phase, phase_curvature, phi_in, psi_out,
 )
 
 KAPPA0 = mp.mpc("0.02382588740", "-0.05230465911")
@@ -59,10 +59,10 @@ def test_kappa0_does_not_depend_on_the_sampling_line():
 
 
 def test_kappa0_meets_the_exact_index_at_q_1009():
-    """|κ(1/q) − κ₀ − 1/(2πiq)| = 2.9e-6 at q = 1009 (V28b)."""
+    """|κ(1/q) − κ₀ − 1/(2πiq)| = 2.9e-6 at q = 1009 (V28b); the 1/q term is the phase curvature (V30)."""
     rows = json.loads((Path(__file__).resolve().parents[1] / "experiments/data/kappa_q1009.json").read_text())
     k = mp.mpc(*next(r["kappa"] for r in rows if r["p"] == 1))
-    assert abs(k - kappa0() + 1j / (2 * mp.pi * 1009)) < 4e-6
+    assert abs(k - kappa0() - phase_curvature(1009, ONE) / 1009) < 4e-6
     assert abs(k - kappa0()) > 1e-4
 
 
@@ -135,3 +135,22 @@ def test_the_half_flank_plateau_is_a_lavaurs_multiplier():
         assert abs(abs(1 - slope) - mp.mpf("56.2344028")) < 1e-6
         gaps.append(abs(slope - complex(np.prod(2 * z))))
     assert 1.6 < gaps[0] / gaps[1] < 2.4
+
+
+def test_the_phase_curvature_in_closed_form():
+    """1/(2πi) for p = 1 (to O(q⁻⁴)) and i/π for p = (q − 1)/2 at every q."""
+    assert abs(phase_curvature(1009, ONE) - 1 / (2j * mp.pi)) < 1e-11
+    assert abs(phase_curvature(101, HALF) - 1j / mp.pi) < 1e-30
+
+
+def test_the_half_constant_is_the_curvature_plus_a_remainder():
+    """V30: C = i/π + R, R = 0.354856 − 0.069314i, fitted on the FFT κ for q = 1025 … 8193."""
+    from bulbford.taylor import kappa_fft
+
+    data = json.loads((Path(__file__).resolve().parents[1] / "experiments/data/kappa_constant.json").read_text())
+    C = complex(*data["fits"]["3 terms"]["C"])
+    assert abs(C - complex(phase_curvature(4097, HALF)) - complex(0.354856, -0.069314)) < 2e-6
+    assert data["fits"]["3 terms"]["max_residual"] < 2e-6
+    row = next(r for r in data["rows"] if r["q"] == 1025)
+    fresh = 1025 * (complex(kappa_fft(512, 1025).coeffs[2]) - complex(kappa0(germ=HALF)))
+    assert abs(fresh - complex(*row["q_times_gap"])) < 1e-8
