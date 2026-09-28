@@ -38,7 +38,7 @@ Novelty is graded as follows:
 |---|---|---|---|---|
 | 1 | **P2**: `ρ = 1 − q²ε + q³(ι_{p/q} − ½)ε² + O(ε³)` | PROVEN | Proof correct. Independently re-derived at 1/3, 1/4, 2/5 (§2.1). | N/m |
 | 2 | The correction `G` depends mainly on `x̃ = p̄/q` (modular inverse) | VALIDATED (V3–V6, V15, V18) | Earned at the stated precision. `R² = 0.9984` at `q = 1009`. | N |
-| 3 | A second, bounded-`p` term, the only component-dependent part (F4, V16–V19) | VALIDATED; F4 FALSIFIED | Earned. The falsification of the study's own C1″ is well documented. | N |
+| 3 | A second, bounded-`p` term, which is the only component-dependent part **in the tested pair** `disk2`/`main2` (F4, V16–V19) | VALIDATED for the tested pair; F4 FALSIFIED | Earned for the bounded-`p` term and for the tested pair on two continued-fraction slices. "The only component-dependent part" for every `H` is the C1‴ conjecture (finding 8). | N |
 | 4 | `Re κ` has cusps and `Im κ` has jumps at rationals, with `q'^{-2}` weights (V21, C14″) | VALIDATED (weights), CONJECTURED (law) | The `q'^{-2}` fit uses 6 of the 9 rationals, all at one `q = 1009` (E-b). Correctly left conjectural. | N |
 | 5 | **P7–P9**: flank orbit, second-ring split, arc widths placed by `p̄` | PROVEN, integer-checked for `q ≤ 60` | Proofs read and complete. Tests pass. | N/m (P9 refines Goldberg) |
 | 6 | **P6/P11**: `ι = −Σ 1/(1 − F'(z))` over the other fixed points; closed-form `β` term | PROVEN | Correct. | R (P6 is [Mil] §12); P11 elementary |
@@ -117,27 +117,30 @@ index sum is monotone in `x*` (V22–V23). This gives a mechanism, not only a fi
 
 - Along bounded `p`, the offsets from the generic `x̃`-value are `+0.018, +0.011, +0.008` for `p = 1, 2, 3` (at `0⁺, ½⁻, ⅓⁻`).
 - The two orders of limits differ by `0.008` at `⅓`.
-- Across hyperbolic components (`disk2/main2`), the ratio is `1.0000 ± 0.0002` generically, and `0.988–0.992` only at bounded `p` (V19).
+- For one pair of hyperbolic components (`disk2/main2`), on the slices `[0;a₁,16,3]` and `[0;a₁,64]`, the ratio is `1.0000 ± 0.0002` generically, and `0.988–0.992` only at bounded `p` (V19).
 
 **Audit.** The evidence is well controlled:
 
 - The `c/N` approach rates are quoted with their fits (E-e).
 - The universality comparison isolates the bounded-`p` bulbs as the source of the older V9 scatter.
 
+**Limit of the evidence.** V19 compares two components on two slices. That shows the observation for this pair, not that no other component dependence exists for every `H`. The general statement is part of C1‴ and stays conjectural. The register's §0 and V19 heading stated it without that scope (finding 8).
+
 **Novelty.** No prior statement found. The two-ended resonance picture (C16′)
 is a conjecture that explains it.
 
 ### 2.4 Rational singularities of `κ̂` with Ford weights
 
-`Re κ` has V-cusps and `Im κ` has jumps at every `p'/q'`. The jump sizes `J`
-scaled by `q'²` are `−0.137 … −0.167` for `q' = 2 … 6` (V21).
+At `q = 1009`, `Re κ` has V-cusps and `Im κ` has jumps at each of the 9 rationals
+sampled (V21). The jump sizes `J` scaled by `q'²` are `−0.137 … −0.167` for
+`q' = 2 … 6`. That this happens at **every** rational is the C14″ conjecture.
 
 **Audit.** The weight law rests on 9 rationals at a single `q = 1009`, with
 window-limited values at `q' = 7`. Error E-b already notes this. The register
 correctly keeps the law in CONJECTURED (C14″).
 
-**Why it matters.** Singular at every rational, with weights decaying in the
-denominator, is the fingerprint of Brjuno-type functions (Yoccoz; Marmi–Moussa–Yoccoz). Here it sits on the parabolic side, in the variable `p̄/q`.
+**Why it matters.** If C14″ holds, `κ̂` is singular at every rational, with
+weights decaying in the denominator. That is the fingerprint of Brjuno-type functions (Yoccoz; Marmi–Moussa–Yoccoz). Here it sits on the parabolic side, in the variable `p̄/q`.
 
 ### 2.5 Combinatorial lemmas P7–P9
 
@@ -259,6 +262,10 @@ VALIDATED item cites a precision and a data file.
    - The first three are the V16 limit offsets. The fourth is the V18 local residual at `q = 1009`, whose own `p = 1..3` values are `+0.0080, +0.0044, +0.0025`.
    - The list mixes two measures.
 7. **Low — header theorem list.** The status line lists P2, P6–P11. It omits P3, P4, P5 and P12, which are proven too (P3, P10 and P12 are finite certificates).
+8. **Medium — universality stated beyond its sample.** (Raised in review on the audit PR.)
+   - §0 says the bounded-`p` part is "the *only* part that is not universal across hyperbolic components (V19)", and V19's heading says universality "is exact for the `x̃`-part".
+   - V19 compares one pair of components, `disk2`/`main2`, on two continued-fraction slices.
+   - The data support the statement for that pair. For every `H` it is the C1‴ conjecture.
 
 ---
 
@@ -272,6 +279,8 @@ Applied to the register on 2026-09-28 at the owner's go-ahead, in the same PR as
 4. Theorem tags: add **[Kap]** Kapiamba and **[FM19]** Fowler–McGuinness, each with one line on the relation (limbs versus bulbs; leading order versus first correction). *(Finding 4.)*
 5. [BE02]: "statement confirmed (Fund. Math. 172, 2002); applicability to `f^q` at satellite roots unchecked". *(Finding 5.)*
 6. C1‴: quote V16 offsets throughout, or V18 residuals throughout. *(Finding 6.)*
+7. Status line: list P0–P12. *(Finding 7.)*
+8. §0 and the V19 heading: scope the universality statement to the tested pair and point to C1‴ for the general claim. *(Finding 8.)*
 
 ---
 
@@ -282,7 +291,7 @@ Applied to the register on 2026-09-28 at the owner's go-ahead, in the same PR as
    - Leading order: asymptotic ([GM84]).
    - First correction: `PSL(2,ℤ)` gives way to Galois action on `ℚ(ζ_q)` and the involution `p ↦ p̄` (P2, remark (ii); P5).
 2. **A new arithmetic function on the parabolic side.**
-   - `κ̂(x̃)` (and `Ĝ`) is singular at every rational, with cusps and jumps, weights decaying in the denominator, and geometric convergence along quadratic irrationals (V20).
+   - Conjecturally (C14″; 9 rationals sampled at `q = 1009`), `κ̂(x̃)` (and `Ĝ`) is singular at every rational, with cusps and jumps, weights decaying in the denominator, and geometric convergence along quadratic irrationals (V20).
    - This is the behaviour of Brjuno-type functions, which control Siegel disk sizes on the elliptic side (Yoccoz, Buff–Chéritat).
    - A proof of C14″ would put bulb sizes in that family, in the variable `p̄/q`.
 3. **The modular inverse is a signature.** `p ↦ p̄` is the move behind Kloosterman sums and Dedekind reciprocity. C16′ proposes two families of `O(1/q)` resonances (`j ≡ mp̄` and small `j`). This gives a concrete small-divisor sum to estimate.
