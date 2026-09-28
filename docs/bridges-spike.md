@@ -17,7 +17,7 @@ argument:
 | B1 | modular inverse | Is `p̄/q` really the variable, spectrally? | Yes. Fourier mass in `p̄/q` is 100× that in `p/q` at `m = 1`, and 10× in `ℓ²` over `m ≤ 6`. | VALIDATED (`q = 1009`) |
 | B2 | Ramanujan sums / Ford weights | Does the spectrum carry the arithmetic of the rational singularities? | Yes for `Im κ`: a Ramanujan-sum expansion recovers the jump law at every denominator at once. No for `Re κ` under a V-cusp model. | VALIDATED, one `q` |
 | B3 | wake combinatorics ↔ ℚ(ζ_q) | Is there arithmetic in `ι`'s denominators? | Yes: the primitive primes of `2^q − 1` and `4^q − 1` divide `N(a_q)`, with multiplicities predicted exactly. | PROVEN for `λ ∈ {2, 4}`; VALIDATED for `λ = −2` (27/27, `q ≤ 20`) |
-| B4 | Dedekind sums | Is `s(p, q)` the two-ended variable of C16′? | No. It removes 2% of the residual variance, no more than `1/p`. | negative |
+| B4 | Dedekind sums | Is `s(p, q)` the two-ended variable of C16′? | No. It removes 3.9% of the residual variance (`1/p`: 1.2%), and most of that comes from the `p ≤ 4` bulbs. | negative |
 
 ---
 
@@ -141,12 +141,16 @@ Rademacher's `12 s(p, q) ≈ a₁ − a₂ + …` sees both ends of the continue
 the obvious candidate for C16′'s "two resonance ends". It fails. The residual of `G` after a
 100-bin function of `x*` has sd `1.63e-3`:
 
-- after `s(p,q)/q`: `1.60e-3`;
-- after `1/p`: `1.62e-3`;
-- after both: `1.59e-3`;
-- `corr(residual, s) = +0.20`, and `+0.06` once `p ≤ 4` is removed.
+| regressor | residual sd | variance removed |
+|---|---|---|
+| none | `1.628e-3` | — |
+| `1/p` | `1.618e-3` | 1.2% |
+| `s(p,q)/q` | `1.595e-3` | 3.9% |
+| both | `1.588e-3` | 4.9% |
 
-What little signal there is sits in the bounded-`p` bulbs, which `1/p` already names.
+`corr(residual, s) = +0.20`, so `r² = 3.9%`. With the `p ≤ 4` bulbs removed it is `+0.06`, which is 0.4% of the variance.
+So `s(p, q)` does better than `1/p`, but most of its signal is the bounded-`p` bulbs, and over 95% of the
+residual is untouched.
 
 ---
 
