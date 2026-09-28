@@ -164,6 +164,24 @@ As in the original §1, with these changes.
   | `q(κ − κ₀)` | `0.0018 − 0.1137i` | `0.0020 − 0.1364i` | `0.0013 − 0.1478i` | `0.0007 − 0.1535i` | `0.0004 − 0.1563i` |
 
   Richardson on consecutive pairs, `(q'x' − qx)/(q' − q)`, gives `−0.159102i`, `−0.159187i`, `−0.159169i` and `0.000035 − 0.159159i` (form S). For comparison, `1/2πi = −0.159155i`. At `q = 1009`, `|κ(1/1009) − κ₀ − 1/(2πi·1009)| = 2.9e-6`.
+- **V29 (the horn map of the period-doubling point), forms T + S (`kernel/bulbford/implosion.py` germ `HALF`, same script and data).** For `p = (q−1)/2`, `λ₀ = −e^{−iπ/q}`. In `w = z + ½` with `c = −¾`, `f(w) = w² − w`, and `f² = w − 2w³ + w⁴` has two attracting petals (`w ≷ 0`) and two repelling ones (`Im w ≷ 0`), swapped by `f`. The half-step coordinate `Φ(f(w)) = Φ(w) + ½` has the exact expansion `1/(4w²) + 1/(4w) + (11/16) log(±w²) − (5/16)w + (75/64)w² − …`, used with 26 terms at `|w| < 0.012`. The two repelling petals carry different coordinates, `Ψ_{R₋}(Z) = f(Ψ_{R₊}(Z − ½))`, which differs from `Ψ_{R₊}(Z)` by more than `0.1` at `Z = 0.2 − 3i`. So the horn map has period `1`, and the Lavaurs map uses the petal matching the parity of the half-steps from `w` to the incoming petal. The horn lift equals `∓11πi/16` to `1e-11` on `Im Z = ±6`, and the phase used is `σ = −11πi/16`. With it, `|f_c^q(w₀) − L_σ(w₀)|` is `0.014` and `0.0035` at `q = 257` and `1025` for `w₀ = 0.6 + 0.3i`, and `0.017` and `0.0043` for `w₀ = −0.45 − 0.2i`.
+  (a) *Plateaus against Lavaurs multipliers (T).* Each named cycle seeds one fixed point of `L_σ`, and every seed whose Newton iteration terminates agrees to `1e-20`:
+
+  | cycle | `\|1 − L'(w*)\|` | `q·\|F'_q − L'\|` at `q = 513, 1025, 2049` | V27 intercept |
+  |---|---|---|---|
+  | flank | `56.234402768` | `111.1, 113.8, 115.1` | `56.21` |
+  | ring 2, lower | `260.541115729` | `634.6, 656.5, 668.2` | `260.50` |
+  | ring 2, upper | `228.635821858` | `470.5, 499.5, 514.1` | `228.54` |
+  | widest-arc intruder | `84.183689881` | `2035.0, 2001.2, 1984.4` | `84.00` |
+
+  The product `q·|F'_q − L'|` changes by less than `3%` from `q = 1025` to `2049` in every row. The flank's `|1 − F'|` steps are `0.273, 0.183, 0.102, 0.054` over `q = 129, 257, …, 2049`. V27's intercepts differ from `|1 − L'|` by up to `0.18`. The ratio `260.541115729/84.183689881 = 3.0949` sits beside V26's `R(63) = 2.437`.
+  (b) *`κ₀` against the horn map (T + S).* Write `E(Z) − Z − 11πi/16 = Σ_{k≥1} b_k e^{−2πikZ}` on the lower end. The ratio `κ₀ := −b₂/(2πi b₁²)` is `0.0184052616180 + 0.0429037238802i` on `Im Z = −2.4` and on `−2.9`, which differ by `7e-32`. The exact index gives these values of `q(κ − κ₀)` for `p = (q−1)/2`:
+
+  | `q` | `65` | `129` | `257` | `513` | `1009` |
+  |---|---|---|---|---|---|
+  | `q(κ − κ₀)` | `0.3525 + 0.1324i` | `0.3582 + 0.1897i` | `0.3577 + 0.2192i` | `0.3566 + 0.2341i` | `0.3558 + 0.2414i` |
+
+  Richardson on consecutive pairs gives `0.3640 + 0.2479i`, `0.3572 + 0.2490i`, `0.3555 + 0.2490i` and `0.3550 + 0.2490i` (form S).
 
 ---
 
@@ -201,6 +219,7 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 | P11′ | `q·\|1 − F'_β\|` tends to `4π²` for `p = 1` (proven in the original register) | exact values `54.096` (`q = 64`), `42.668` (`q = 256`), `40.248` (`q = 1024`), `39.669` (`q = 4096`) |  proven, classical |
 | C20′ | `κ(1/q) = κ₀ + 1/(2πiq) + O(q⁻²)` with `κ₀ = a₂/(2πi a₁²)` from the horn map of `z + z²`; derived in the original register assuming `q → ∞` commutes with `[u²]` | V28b: `2.9e-6` at `q = 1009`; Richardson `0.000035 − 0.159159i` at `(512, 1009)` against `1/2πi` | conjectured |
 | C21 | at each named `p = 1` cycle, `(f^q)' = L'_{iπ}(w*) + O(q⁻²)`; `o(1)` from [Lav89, Shi00] by Hurwitz | V28a: `q²·\|F'_q − L'\| = 1745, 11000, 17808, 16107` at `q = 256` | conjectured |
+| C22 | for `p = (q−1)/2`, `κ = κ₀ + C/q + O(q⁻²)` with `κ₀ = −b₂/(2πi b₁²)` from the half-step horn map at `c = −¾`, and `(f^q)' = L'_{−11πi/16}(w*) + O(q⁻¹)` at the named cycles | V29: `q·\|F'_q − L'\| = 115.1, 668.2, 514.1, 1984.4` at `q = 2049`; Richardson `0.3550 + 0.2490i` at `(513, 1009)` | conjectured |
 | [Lav89], [Shi00] | Lavaurs' theorem: `g_ε^n` tends to `L_σ` when `n − π/ε` tends to `σ` | the phase normalisation reproduces `[u¹]R_q = −1` (P0) | imported |
 | C2′, C9′, C8, C11, C15′ | as in the original | none new | unchanged |
 
@@ -219,7 +238,7 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 
 ## 7. Next moves (finite forms)
 
-1. **The flank cycle.** P6 is evaluated for `q ≤ 20` (V22), its Farey prediction is falsified (F6), and the flank term is compared with `κ` and `G` (V23). V22(b) is proven as P7, and the second-rank terms are the second ring except at the two smallest `x*` (V24). V24(a) is P8, and the small-`x*` intruders are the widest arcs next to the characteristic arc (P9, V25). The crossings are located and `R` increases after them to `q = 64` (V26). Term growth: `β` in closed form (P11), and the other named cycles have settling multipliers (V27). The `p = 1` plateaus are tabulated against the multipliers of the Lavaurs map `L_{iπ}`, and `κ(1/q)` against the horn-map ratio `κ₀` (V28; §5 C20′, C21). Next: the same tables for `p = (q−1)/2`, whose parabolic point is the period-doubling one at `c = −¾` (form T).
+1. **The flank cycle.** P6 is evaluated for `q ≤ 20` (V22), its Farey prediction is falsified (F6), and the flank term is compared with `κ` and `G` (V23). V22(b) is proven as P7, and the second-rank terms are the second ring except at the two smallest `x*` (V24). V24(a) is P8, and the small-`x*` intruders are the widest arcs next to the characteristic arc (P9, V25). The crossings are located and `R` increases after them to `q = 64` (V26). Term growth: `β` in closed form (P11), and the other named cycles have settling multipliers (V27). The `p = 1` plateaus are tabulated against the multipliers of the Lavaurs map `L_{iπ}`, and `κ(1/q)` against the horn-map ratio `κ₀` (V28; §5 C20′, C21). The same tables for `p = (q−1)/2` use the half-step horn map at `c = −¾` (V29; §5 C22). Next: tables of the `1/q` terms of C20′ and C22 against candidate closed forms (form T).
 2. **Steps and cusps.** Tabulate `J(p'/q')` and the cusp depths at `q = 2003` for `q' ≤ 7`, next to the `q = 1009` table (form T).
 3. ~~**Certified antipodes.**~~ Done as P10 (`q ≤ 16`, and `q = 59, 127, 251` beside V14; form C), and V14 is certified on both proxies. The antipode half of `SatelliteLabel` is P12 (form C). Next: the centre half. Every route found so far needs the parabolic root itself, where no box certificate applies, so it stays a §5 referent.
 4. **`z³ + c`.** Repeat V15–V19 as tables (`MAIN3` is wired).
@@ -240,5 +259,5 @@ Each row is a statement about infinitely many bulbs. It is recorded so that the 
 | V18 | V18 | regressions on stated bins |
 | F4 | F4 | "no single continuous `Ĝ`" becomes a Lipschitz lower bound `6.8·10⁴` from exact pairs |
 | F5 | F5 | "survives `N → ∞`" becomes `C ≥ 1.8, 20.8, 108` at `N = 32, 64, 128` |
-| C1‴, C14″, C16′, C17′, C20′, C21, C2′, C9′, C8, C11, C15′ | §5 | classical referents with finite shadows |
+| C1‴, C14″, C16′, C17′, C20′, C21, C22, C2′, C9′, C8, C11, C15′ | §5 | classical referents with finite shadows |
 | §6 "asymptotic at leading order" | §6 | a two-sided bound on computed bulbs |
