@@ -1,7 +1,7 @@
 # Bridges spike — from bulb shapes to arithmetic
 
 2026-09-28, on `main` @ `2b1b41a`. Exploratory: this file is exposition (the `docs` plane) and
-changes no claim state. Register entries it could support are proposed in §6.
+changes no claim state itself; the register entries it supports were added after review (§6).
 
 - **Script:** `experiments/scripts/bridges_spike.py` (2.6 s)
 - **Data:** `experiments/data/bridges_spike.json`
@@ -159,7 +159,7 @@ What little signal there is sits in the bounded-`p` bulbs, which `1/p` already n
 3. **B1** confirms the variable. It is cheap, decisive, and belongs next to V18.
 4. **B4** is closed as a negative. It should not be retried.
 
-## 6. Proposed register entries (not applied)
+## 6. Register entries (applied 2026-09-28)
 
 - **P13** (the B3 lemma, for `λ ∈ {2, 4}`), with `kernel/bulbford/norms.py` and `tests/test_parabolic_norms.py`.
 - **V31** (B1 and B2 at `q = 1009`: the `p̄`-spectrum, the Ramanujan-sum jump law, and the failure of the V-cusp model for `Re κ`).
