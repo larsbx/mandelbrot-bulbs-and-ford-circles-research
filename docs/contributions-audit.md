@@ -3,8 +3,9 @@
 Audited 2026-09-28 against `main` @ `bb07e18` (register revision 2026-09-27).
 Scope: what the study contributes that is new, how strongly each contribution is
 established, what it is not, and why it matters. This file is exposition (the
-`docs` plane): it changes no claim state. Proposed register edits are listed in
-§5 for the register's owner to accept or refuse.
+`docs` plane): it changes no claim state. The register edits it
+proposed are listed in §5; they were applied after review, and none changes a
+claim's tier.
 
 **Method.**
 
@@ -261,13 +262,13 @@ VALIDATED item cites a precision and a data file.
 
 ---
 
-## 5. Recommended register edits
+## 5. Register edits
 
-These are not applied here, because the audit does not change claim state.
+Applied to the register on 2026-09-28 at the owner's go-ahead, in the same PR as this audit. Corrections are struck and replaced, never deleted. None changes a claim's tier.
 
 1. Status line: "numerics-validated to `q ≈ 16000` (FFT/sequence routes); continuation instrument to `q ≈ 2100`". Reword E-c the same way. *(Finding 1.)*
 2. §0: "to `3·10⁻³`". *(Finding 2.)*
-3. §0: pick one range for `Ĝ` and say what it measures. *(Finding 3.)*
+3. §0: label the `0.12` range with its `q` (`q = 59`, legacy V5) and give `0.143` at `q = 1009`. The generic `Ĝ` range `≈[1.01, 1.16]` is a separate quantity. *(Finding 3.)*
 4. Theorem tags: add **[Kap]** Kapiamba and **[FM19]** Fowler–McGuinness, each with one line on the relation (limbs versus bulbs; leading order versus first correction). *(Finding 4.)*
 5. [BE02]: "statement confirmed (Fund. Math. 172, 2002); applicability to `f^q` at satellite roots unchecked". *(Finding 5.)*
 6. C1‴: quote V16 offsets throughout, or V18 residuals throughout. *(Finding 6.)*
@@ -306,5 +307,5 @@ These are not applied here, because the audit does not change claim state.
 |---|---|
 | `python tools/audit_estate_layout.py` | passed |
 | `python tools/audit_limits.py` | passed |
-| `PYTHONPATH=kernel python -m pytest -q tests/` | run in CI on the audit PR (the full suite exceeds 20 min locally) |
+| `PYTHONPATH=kernel python -m pytest -q tests/` | 14835 passed (2 min 32 s); CI green |
 | `python3 experiments/scripts/audit_p2_independent.py` | agrees with P2 at 1/3, 1/4, 2/5 (§2.1) |
