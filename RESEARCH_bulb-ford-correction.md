@@ -122,7 +122,7 @@ Legacy items V1–V11 stand (reproduced 2026-09-25 by the new instruments: V5/V9
   1. The two repelling petals carry **different** outgoing coordinates, `Ψ_{R₋}(Z) = f(Ψ_{R₊}(Z − ½)) ≠ Ψ_{R₊}(Z)`. So the horn map `E = Φ_in ∘ Ψ_{R₊}` has period `1`, not `½`: every Fourier mode of a period-`½` reading decays at the same rate `2π`, the signature of the jump.
   2. The Lavaurs map uses the outgoing petal that matches the parity of the half-steps from `w` to the incoming petal, `L_σ(w) = Ψ_{R_{±}}(Φ_in(w) + σ)`. With `σ = −11πi/16`, `|f_c^q(w₀) − L_σ(w₀)|` falls by `4` from `q = 257` to `1025` on either side (`0.014 → 0.0035`, `0.017 → 0.0043`). The horn lift is `∓11πi/16` at the upper and lower ends, so `σ∞ = −11πi/16 = end·c·iπ`, with `c = 11/16` and the parabolic cycle at the lower end. This is the same rule that gives `iπ` for `p = 1`.
 
-  (a) *The plateaus are Lavaurs multipliers.* Each named cycle seeds one fixed point of `L_{σ∞}`, and every seed that converges agrees to `1e-20`:
+  (a) *The plateaus are Lavaurs multipliers.* Each named cycle seeds one fixed point of `L_{σ∞}` (Newton in `w` from the cycle's three points farthest from `−½`), and every seed that converges agrees to `1e-20`:
 
   | cycle | `\|1 − L'(w*)\|` | `q·\|F'_q − L'\|` at `q = 513, 1025, 2049` | V27 intercept |
   |---|---|---|---|

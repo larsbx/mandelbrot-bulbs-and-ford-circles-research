@@ -25,9 +25,10 @@ from paths import DATA
 OUT = DATA / "horn_invariants.json"
 
 FAMILIES = (
-    {"germ": ONE, "p": lambda q: 1, "cycles_q": (64, 128, 256), "kappa_q": (64, 128, 256, 512), "lines": (2.8, 3.2)},
+    {"germ": ONE, "p": lambda q: 1, "cycles_q": (64, 128, 256), "kappa_q": (64, 128, 256, 512), "lines": (2.8, 3.2),
+     "seeds": 4},
     {"germ": HALF, "p": lambda q: (q - 1) // 2, "cycles_q": (513, 1025, 2049), "kappa_q": (65, 129, 257, 513),
-     "lines": (-2.4, -2.9)},
+     "lines": (-2.4, -2.9), "seeds": 3},
 )
 
 
@@ -43,7 +44,7 @@ def cycles(family) -> list[dict]:
         for name, angle in named_angles(p, q).items():
             z = cycle_points(p, q, angle)[1]
             F = complex(np.prod(2 * z))
-            found = fixed_point_of_cycle(z, germ=germ, seeds=3)
+            found = fixed_point_of_cycle(z, germ=germ, seeds=family["seeds"])
             w, slope = found[0]
             rows.append({"q": q, "cycle": name, "seeds_agreeing": sum(abs(s - slope) < 1e-20 for _, s in found),
                          "seeds_converged": len(found), "Z": c(phi_in(w, germ)[0] + phase(germ)),
