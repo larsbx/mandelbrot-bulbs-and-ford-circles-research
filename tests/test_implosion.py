@@ -1,4 +1,4 @@
-"""V28–V30 (C20′, C21, C22): the plateaus, κ₀ and the 1/q constant of the two V25 families from their horn maps."""
+"""V28–V30, V33 (C20′, C21, C22): the plateaus, κ₀ and the 1/q constant of the two V25 families from their horn maps."""
 import json
 from fractions import Fraction as F
 from pathlib import Path
@@ -8,7 +8,8 @@ import numpy as np
 import pytest
 
 from bulbford.implosion import (
-    DPS, HALF, ONE, _expansion, fatou_coefficients, horn, kappa0, lavaurs_phase, phase_curvature, phi_in, psi_out,
+    DPS, HALF, ONE, _expansion, fatou_coefficients, fatou_correction, horn, kappa0, kappa0_slope, lavaurs_phase, num,
+    phase_curvature, phi_in, psi_out, remainder, root_offset,
 )
 
 KAPPA0 = mp.mpc("0.02382588740", "-0.05230465911")
@@ -162,3 +163,43 @@ def test_the_half_constant_is_the_curvature_plus_a_remainder():
     row = next(r for r in data["rows"] if r["q"] == 1025)
     fresh = 1025 * (complex(kappa_fft(512, 1025).coeffs[2]) - complex(kappa0(germ=HALF)))
     assert abs(fresh - complex(*row["q_times_gap"])) < 1e-8
+
+
+def test_the_first_order_fatou_corrections():
+    one, half = fatou_correction(ONE), fatou_correction(HALF)
+    assert (one.principal, one.log, one.taylor[:2]) == ((F(1, 3), F(1, 2), F(-1, 3)), F(-1, 3), (F(5, 12), F(-109, 360)))
+    assert (half.principal, half.log, half.taylor[:2]) == ((F(0), F(-1, 8), F(0), F(9, 16), F(-1, 8)), F(-19, 64),
+                                                          (F(-5, 8), F(713, 768)))
+
+
+@pytest.mark.parametrize("germ, w", [(HALF, mp.mpf("0.01")), (ONE, mp.mpf("-0.01"))])
+def test_the_corrected_expansion_solves_abel_for_f_plus_delta_to_second_order(germ, w):
+    def residual(d):
+        d = 1j * mp.mpf(d)
+        return abs(_expansion(germ.f(w) + d, False, germ, d)[0] - _expansion(w, False, germ, d)[0] - num(germ.step))
+
+    assert 0.9e4 < residual("1e-9") / residual("1e-11") < 1.1e4
+
+
+def test_the_root_offsets():
+    """δ_root = iπ/q + 3π²/4q² + … for p = (q − 1)/2, π²/q² + 2iπ³/q³ + … for p = 1: only HALF moves at 1/q."""
+    q = 10**8 + 1
+    assert abs(q * root_offset((q - 1) // 2, q) - 1j * mp.pi) < 1e-5
+    assert abs(q**2 * root_offset(1, q) - mp.pi**2) < 1e-5
+
+
+def test_kappa0_is_holomorphic_in_delta():
+    with mp.workdps(3 * DPS // 2):
+        h = mp.mpf("1e-13")
+        real = (kappa0(germ=HALF, delta=h) - kappa0(germ=HALF, delta=-h)) / (2 * h)
+    assert abs(real - kappa0_slope(HALF)) < 1e-9
+    assert abs(kappa0_slope(HALF) - mp.mpc("-0.0220629894", "-0.1129536261")) < 1e-9
+
+
+def test_the_remainder_is_the_slope_of_kappa0_along_the_root():
+    """V33: R = C − i/π = iπ·dκ₀/dδ, predicted to 2·10⁻⁶ of the FFT fit."""
+    data = json.loads((Path(__file__).resolve().parents[1] / "experiments/data/kappa_constant.json").read_text())
+    q = 10**8 + 1
+    predicted = complex(remainder((q - 1) // 2, q))
+    assert abs(predicted - complex(*data["R"])) < 3e-6
+    assert abs(predicted - complex(*data["R_predicted"])) < 1e-8
