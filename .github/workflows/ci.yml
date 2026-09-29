@@ -13,8 +13,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Audit estate repository architecture
-        run: python tools/audit_estate_layout.py
+      - name: Estate audit (pinned estate-governance)
+        env:
+          ESTATE_GOVERNANCE_TOKEN: ${{ secrets.ESTATE_GOVERNANCE_TOKEN }}
+        run: |
+          rev=$(python3 -c 'import tomllib; print(next(d["rev"] for d in tomllib.load(open("ESTATE.toml", "rb"))["dep"] if d["id"] == "estate-governance"))')
+          git clone -q "https://x-access-token:${ESTATE_GOVERNANCE_TOKEN}@github.com/larsbx/estate-governance" .estate
+          git -C .estate checkout -q "$rev"
+          python3 .estate/kernel/audit_estate_layout.py --root .
       - name: Audit the no-limits rule of the finite register
         run: python tools/audit_limits.py
       - name: Install dependencies
