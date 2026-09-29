@@ -26,7 +26,7 @@ from math import gcd
 import numpy as np
 
 from paths import DATA
-from spectral import brjuno, coefficients, kappa_table, ramanujan_fit
+from spectral import brjuno, brjuno_spectrum, coefficients, joint_brjuno_fit, kappa_table, ramanujan_fit
 
 QMAX = 10
 LOG, V, XLOGX = (lambda m: 1.0 / m), (lambda m: 1.0 / m**2), (lambda m: np.log(m) / m**2)
@@ -90,6 +90,15 @@ def analyse(q: int) -> dict:
                                "D_over_J_by_pi": [float(D[b - 1] / (J[b - 1] / np.pi)) for b in range(2, 8)],
                                "signal_at_hi": {"S": float(abs(S[hi - 1])), "C": float(abs(C[hi - 1]))}})
     out["real_space"] = real_space(q)
+    out["brjuno_spectral"] = []
+    for lo, hi in WINDOWS:
+        for T in (45, 300):
+            b = brjuno_spectrum(q, hi, T)
+            A = np.column_stack([b[lo - 1:hi], 1.0 / np.arange(lo, hi + 1) ** 2])
+            c = np.linalg.lstsq(A, C[lo - 1:hi], rcond=None)[0]
+            residual = C[lo - 1:hi] - A @ c
+            out["brjuno_spectral"].append({"window": [lo, hi], "T": T, "amplitude": float(c[0]),
+                                            "r2": float(1 - residual.var() / C[lo - 1:hi].var())})
     return out
 
 
@@ -110,7 +119,9 @@ def report(r: dict) -> None:
 
 
 if __name__ == "__main__":
-    results = [analyse(int(q)) for q in sys.argv[1:]]
+    qs = [int(q) for q in sys.argv[1:]]
+    results = [analyse(q) for q in qs]
+    joint = [joint_brjuno_fit(qs, n, T) for n in (8, 16, 32) for T in (45, 300)]
     for r in results:
         report(r)
-    (DATA / "jump_law.json").write_text(json.dumps(results, indent=1))
+    (DATA / "jump_law.json").write_text(json.dumps({"datasets": results, "joint_brjuno": joint}, indent=1))
