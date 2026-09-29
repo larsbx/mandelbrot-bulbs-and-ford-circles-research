@@ -1,4 +1,4 @@
-"""V28–V30, V33 (C20′, C21, C22): the plateaus, κ₀ and the 1/q constant of the two V25 families from their horn maps."""
+"""V28–V30, V34 (C20′, C21, C22): the plateaus, κ₀ and the 1/q constant of the two V25 families from their horn maps."""
 import json
 from fractions import Fraction as F
 from pathlib import Path
@@ -197,7 +197,7 @@ def test_kappa0_is_holomorphic_in_delta():
 
 
 def test_the_remainder_is_the_slope_of_kappa0_along_the_root():
-    """V33: R = C − i/π = iπ·dκ₀/dδ, predicted to 2·10⁻⁶ of the FFT fit."""
+    """V34: R = C − i/π = iπ·dκ₀/dδ, predicted to 2·10⁻⁶ of the FFT fit."""
     data = json.loads((Path(__file__).resolve().parents[1] / "experiments/data/kappa_constant.json").read_text())
     q = 10**8 + 1
     predicted = complex(remainder((q - 1) // 2, q))

@@ -16,30 +16,17 @@ from __future__ import annotations
 
 import json
 from fractions import Fraction
-from math import gcd
 
 import numpy as np
 from sympy import cyclotomic_poly, factorint, n_order
 
 from bulbford.norms import norm_a
 from paths import DATA
+from spectral import coefficients, kappa_table, ramanujan_fit
 
 Q = 1009
 OUT = DATA / "bridges_spike.json"
 V21 = {2: -0.034, 3: -0.0186, 4: -0.0105, 5: -0.0049, 6: -0.0029}
-
-
-def kappa_table() -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """(p, p̄/q, κ) over all units p mod Q, from the p ≤ Q/2 table and κ(Q − p) = conj κ(p)."""
-    rows = json.loads((DATA / "kappa_q1009.json").read_text())
-    half = {r["p"]: complex(*r["kappa"]) for r in rows}
-    full = {**half, **{Q - p: k.conjugate() for p, k in half.items()}}
-    p = np.array(sorted(full))
-    return p, np.array([pow(int(a), -1, Q) for a in p]) / Q, np.array([full[a] for a in p])
-
-
-def fourier(x: np.ndarray, y: np.ndarray, m: np.ndarray, trig) -> np.ndarray:
-    return np.array([2 * np.mean(y * trig(2 * np.pi * k * x)) for k in m])
 
 
 def b1(p, xt, kappa) -> dict:
@@ -51,28 +38,12 @@ def b1(p, xt, kappa) -> dict:
             "ratio_l2": float(np.linalg.norm(in_pbar) / np.linalg.norm(in_p))}
 
 
-def ramanujan(qq: int, m: np.ndarray) -> np.ndarray:
-    return sum(np.cos(2 * np.pi * a * m / qq) for a in range(qq) if gcd(a, qq) == 1)
-
-
-def ramanujan_fit(T: np.ndarray, lo: int, hi: int, qmax: int) -> tuple[np.ndarray, float]:
-    """Least squares T(m) = Σ_{q' ≤ qmax} X_{q'} c_{q'}(m) + b/m² on m ∈ [lo, hi]."""
-    m = np.arange(lo, hi + 1)
-    X = np.column_stack([ramanujan(b, m) for b in range(1, qmax + 1)] + [1.0 / m**2])
-    c, *_ = np.linalg.lstsq(X, T[lo - 1:hi], rcond=None)
-    r = T[lo - 1:hi] - X @ c
-    return c[:qmax], float(1 - r.var() / T[lo - 1:hi].var())
-
-
 WINDOWS = ((4, 60, 10), (8, 120, 12), (12, 200, 14), (20, 300, 16))
 
 
-def b2(p, xt, kappa) -> dict:
-    keep = np.minimum(p, Q - p) > 4                       # the bounded-p term is separate (C1‴)
-    x, k = xt[keep], kappa[keep]
-    m = np.arange(1, WINDOWS[-1][1] + 1)
-    S = fourier(x, k.imag, m, np.sin)
-    C = fourier(x, k.real - k.real.mean(), m, np.cos)
+def b2() -> dict:
+    co = coefficients(Q, WINDOWS[-1][1])
+    m, S, C = co["m"], co["S"], co["C"]
     fits = lambda T, power: [
         {"window": [lo, hi], "qmax": qm, "r2": r2, "scaled": [float(c[b - 1] * b**power) for b in range(1, 9)]}
         for lo, hi, qm in WINDOWS for c, r2 in [ramanujan_fit(T, lo, hi, qm)]]
@@ -120,8 +91,8 @@ def b4() -> dict:
 
 
 def main() -> None:
-    p, xt, kappa = kappa_table()
-    out = {"B1": b1(p, xt, kappa), "B2": b2(p, xt, kappa), "B3": b3(), "B4": b4()}
+    p, xt, kappa = kappa_table(Q)
+    out = {"B1": b1(p, xt, kappa), "B2": b2(), "B3": b3(), "B4": b4()}
     OUT.write_text(json.dumps(out, indent=1))
     print(f"B1 ‖c‖ in p̄/q over p/q (m ≤ 6): {out['B1']['ratio_l2']:.1f}")
     for f in out["B2"]["jump_J_times_q2"]:

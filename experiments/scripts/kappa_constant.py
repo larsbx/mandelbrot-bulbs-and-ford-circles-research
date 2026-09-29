@@ -1,10 +1,10 @@
-"""The 1/q constant of κ for p = (q − 1)/2 (V30, V33).
+"""The 1/q constant of κ for p = (q − 1)/2 (V30, V34).
 
 q(κ((q−1)/2 / q) − κ₀) from the FFT route (`bulbford.taylor.kappa_fft`) for
 q = 1025 … 8193, fitted by C + D/q + E/q². The phase alone contributes
 `phase_curvature(q, HALF)` = i/π; the rest, R = C − i/π, is what the phase does
 not explain. For p = 1 the phase contributes 1/(2πi), which is all of C (V28b).
-V33 predicts R = iπ·dκ₀/dδ: the root sits at δ = iπ/q + … off c₀ = −3/4, and the
+V34 predicts R = iπ·dκ₀/dδ: the root sits at δ = iπ/q + … off c₀ = −3/4, and the
 horn map of f + δ moves κ₀ by δ·dκ₀/dδ (`remainder`, at q = 10⁸ + 1). For p = 1,
 δ = π²/q² + …, so the same term enters only at q⁻².
 Writes experiments/data/kappa_constant.json.
