@@ -3,12 +3,17 @@
 This note makes the parameter-plane interpretation of `kernel/bulbford/wake.py`
 visual without changing the repository's evidence boundary.
 
-![3/7 wake cycle mapped to the satellite root](visuals/wake-cycle-3-7.svg)
+The visuals are drawn in
+[`larsbx/math-vizops`](https://github.com/larsbx/math-vizops), which reads this
+repository and writes nothing back:
 
-An interactive browser version is in
-[`docs/visuals/wake-to-mandelbrot.html`](visuals/wake-to-mandelbrot.html).
-It renders a numerical Mandelbrot raster for `z² + c`, lets you choose any
-reduced `p/q` with `2 ≤ q ≤ 12`, and recomputes the exact finite angle data.
+- a static 3/7 still,
+  [`wiki/images/wake-cycle-3-7.svg`](https://github.com/larsbx/math-vizops/blob/main/wiki/images/wake-cycle-3-7.svg),
+  whose printed angles vizops's estate test holds to `kernel/bulbford/wake.py`;
+- an interactive page, `python -m vizops page wake-to-mandelbrot`, which
+  renders a numerical Mandelbrot raster for `z² + c`, lets you choose any
+  reduced `p/q` with `2 ≤ q ≤ 12`, and shows the exact finite angle data
+  computed by `kernel/bulbford/wake.py` itself, embedded at build time.
 
 ## What maps to what
 
@@ -90,11 +95,11 @@ to promote any numerical observation to an exact claim.
 
 ## Evidence boundary
 
-The visual deliberately uses three visual grades:
+The visuals deliberately use three visual grades:
 
 | grade | shown in the visual | status |
 |---|---|---|
-| exact finite arithmetic | rotation word, doubling orbit, `θ₋`, `θ₊`, characteristic width | computed by the same integer/rational construction as `kernel/bulbford/wake.py` |
+| exact finite arithmetic | rotation word, doubling orbit, `θ₋`, `θ₊`, characteristic width | computed by `kernel/bulbford/wake.py` and embedded by vizops |
 | imported dynamics | the two rational parameter rays land together at the root of `B_{p/q}` | `[DH/Mil00]`, already named by the kernel |
 | visual aid only | Mandelbrot raster, displayed root coordinate, dashed ray traces, satellite outline | numerical or schematic; no certificate claim |
 
