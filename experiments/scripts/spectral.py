@@ -43,12 +43,17 @@ def ramanujan(qq: int, m: np.ndarray) -> np.ndarray:
 
 def ramanujan_fit(y: np.ndarray, lo: int, hi: int, qmax: int, g=lambda m: np.ones_like(m, float),
                   background=lambda m: 1.0 / m**2) -> tuple[np.ndarray, float]:
-    """Least squares y(m) = g(m) Σ_{q' ≤ qmax} A_{q'} c_{q'}(m) + b·background(m) on m ∈ [lo, hi]; (A, R²)."""
+    """Least squares y(m) = Σ_g g(m) Σ_{q' ≤ qmax} A^g_{q'} c_{q'}(m) + b·background(m) on m ∈ [lo, hi].
+
+    `g` is one profile or a tuple of profiles fitted jointly (one Ramanujan-column family each).
+    Returns (A, R²) with A of shape (qmax,) for one profile and (len(g), qmax) for a tuple."""
+    gs = g if isinstance(g, tuple) else (g,)
     m = np.arange(lo, hi + 1)
-    X = np.column_stack([g(m) * ramanujan(b, m) for b in range(1, qmax + 1)] + [background(m)])
+    X = np.column_stack([gg(m) * ramanujan(b, m) for gg in gs for b in range(1, qmax + 1)] + [background(m)])
     c, *_ = np.linalg.lstsq(X, y[lo - 1:hi], rcond=None)
     r = y[lo - 1:hi] - X @ c
-    return c[:qmax], float(1 - r.var() / y[lo - 1:hi].var())
+    A = c[:-1].reshape(len(gs), qmax)
+    return (A if isinstance(g, tuple) else A[0]), float(1 - r.var() / y[lo - 1:hi].var())
 
 
 def brjuno(x: Fraction, T: int) -> float:

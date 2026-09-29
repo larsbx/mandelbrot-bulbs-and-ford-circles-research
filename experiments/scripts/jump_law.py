@@ -4,7 +4,7 @@ For each q (kappa_q<q>.json must exist):
   1. Jump law.  π m S_m = Σ_{q'} J_{q'} c_{q'}(m) + b/m² on windows [lo, hi]; J·q'² for q' ≤ 10 and the
      log-log slope of |J_{q'}| on q' = 3 … 10 (−2 is the Ford weight; drift shows as a different slope).
   2. Profile of Re κ.  C_m = g(m) Σ D_{q'} c_{q'}(m) + b/m⁴, weighted by m, for the profiles g of
-     spectral.py. (A free Hölder-exponent scan is not used: at high m the flat sampling-noise floor
+     spectral.py, singly and jointly (|δ| log|δ| + V and log + V, equal parameter counts). (A free Hölder-exponent scan is not used: at high m the flat sampling-noise floor
      favours the flattest profile.) The same m-windows at every q: a q-independent log amplitude D means
      a true log singularity, D rising with q in the high windows means one smoothed at the scale 1/q.
   3. Hilbert pair.  If κ were the boundary value of a function holomorphic above the real line, each
@@ -29,15 +29,19 @@ from paths import DATA
 from spectral import brjuno, coefficients, kappa_table, ramanujan_fit
 
 QMAX = 10
-PROFILES = {"log |δ| (1/m)": lambda m: 1.0 / m, "V-cusp (1/m²)": lambda m: 1.0 / m**2,
-            "|δ| log|δ| (log m/m²)": lambda m: np.log(m) / m**2}
+LOG, V, XLOGX = (lambda m: 1.0 / m), (lambda m: 1.0 / m**2), (lambda m: np.log(m) / m**2)
+PROFILES = {"log |δ| (1/m)": LOG, "V-cusp (1/m²)": V, "|δ| log|δ| (log m/m²)": XLOGX,
+            # joint fits, one Ramanujan family per term: the general cusp A|δ|log|δ| + B|δ| has the tail
+            # (A log m + B')/m², so it is tested with its 1/m² companion; log gets the same companion.
+            "|δ| log|δ| + V (joint)": (XLOGX, V), "log |δ| + V (joint)": (LOG, V)}
 WINDOWS = ((4, 60), (8, 120), (12, 200), (20, 300))
 
 
 def weighted_fit(y, lo, hi, g, weight=lambda m: m * 1.0):
     """ramanujan_fit on w·y with basis w·g·c_{q'}, background w/m⁴ (same weights for every profile)."""
     m = np.arange(1, len(y) + 1)
-    return ramanujan_fit(weight(m) * y, lo, hi, QMAX, g=lambda mm: weight(mm) * g(mm),
+    weighted = lambda gg: (lambda mm: weight(mm) * gg(mm))
+    return ramanujan_fit(weight(m) * y, lo, hi, QMAX, g=tuple(map(weighted, g)) if isinstance(g, tuple) else weighted(g),
                          background=lambda mm: weight(mm) / mm**4)
 
 
@@ -81,7 +85,7 @@ def analyse(q: int) -> dict:
         out["jump"].append({"window": [lo, hi], "r2": r2, "J_q2": [float(J[b - 1] * b * b) for b in range(1, QMAX + 1)],
                             "loglog_slope_q3_10": slope})
         out["profiles"].append({"window": [lo, hi], **{name: weighted_fit(C, lo, hi, g)[1] for name, g in PROFILES.items()}})
-        D, _ = weighted_fit(C, lo, hi, PROFILES["log |δ| (1/m)"])
+        D, _ = weighted_fit(C, lo, hi, LOG)
         out["hilbert"].append({"window": [lo, hi], "D_q": [float(D[b - 1]) for b in range(1, QMAX + 1)],
                                "D_over_J_by_pi": [float(D[b - 1] / (J[b - 1] / np.pi)) for b in range(2, 8)],
                                "signal_at_hi": {"S": float(abs(S[hi - 1])), "C": float(abs(C[hi - 1]))}})
