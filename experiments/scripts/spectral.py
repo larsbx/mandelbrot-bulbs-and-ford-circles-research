@@ -8,7 +8,8 @@ sum. Profiles: a jump in a sine series (g = 1/(πm)), a log singularity (g = 1/m
 from __future__ import annotations
 
 import json
-from math import gcd
+from fractions import Fraction
+from math import gcd, log
 
 import numpy as np
 
@@ -48,3 +49,19 @@ def ramanujan_fit(y: np.ndarray, lo: int, hi: int, qmax: int, g=lambda m: np.one
     c, *_ = np.linalg.lstsq(X, y[lo - 1:hi], rcond=None)
     r = y[lo - 1:hi] - X @ c
     return c[:qmax], float(1 - r.var() / y[lo - 1:hi].var())
+
+
+def brjuno(x: Fraction, T: int) -> float:
+    """Yoccoz's Brjuno sum B(x) = Σ_{n≥0} β_{n−1} log(1/x_n) (Gauss map x_{n+1} = {1/x_n}, β_n = x_0 ⋯ x_n),
+    truncated once the convergent denominator exceeds T; a rational x also stops at its last partial quotient."""
+    x = x - x.numerator // x.denominator
+    b, beta, q_prev, q_cur = 0.0, 1.0, 0, 1
+    while x:
+        b += beta * log(x.denominator / x.numerator)
+        a = x.denominator // x.numerator
+        q_prev, q_cur = q_cur, a * q_cur + q_prev
+        if q_cur > T:
+            break
+        beta *= float(x)
+        x = 1 / x - a
+    return b
