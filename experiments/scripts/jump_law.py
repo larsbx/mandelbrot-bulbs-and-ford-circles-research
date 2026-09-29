@@ -124,4 +124,5 @@ if __name__ == "__main__":
     joint = [joint_brjuno_fit(qs, n, T) for n in (8, 16, 32) for T in (45, 300)]
     for r in results:
         report(r)
-    (DATA / "jump_law.json").write_text(json.dumps({"datasets": results, "joint_brjuno": joint}, indent=1))
+    (DATA / "jump_law.json").write_text(json.dumps(results, indent=1))
+    (DATA / "brjuno_joint.json").write_text(json.dumps(joint, indent=1))
