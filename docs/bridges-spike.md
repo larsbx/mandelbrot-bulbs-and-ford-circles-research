@@ -78,7 +78,7 @@ At composite `m` the terms with `q' | m` add up. That is the table above.
 coefficients are `∝ c_{q'}(m)/m²`, so a V-cusp has a slope jump `D_{q'}`. It fits poorly
 (R² = 0.53, 0.34, 0.32, 0.36), and `m²C_m` grows (`−0.41` at `m = 60`). So the
 rational singularities of `Re κ` are **not** V-cusps: they are softer than a jump and harder than a V.
-The profile `|δ| log|δ|`, the Hilbert partner of a jump, is the natural next candidate. C14″ currently says "V-cusps"; that wording
+~~The profile `|δ| log|δ|`, the Hilbert partner of a jump, is the natural next candidate.~~ *Update 2026-09-29:* the harmonic conjugate of a jump is `log|δ|`, and at `q = 2003` the profile is log type, with Brjuno-type organisation (register V33). C14″ currently says "V-cusps"; that wording
 is not supported at this resolution.
 
 **Why it matters.** Divisor and Ramanujan arithmetic in Fourier coefficients is the
@@ -169,4 +169,4 @@ residual is untouched.
 - **V31** (B1 and B2 at `q = 1009`: the `p̄`-spectrum, the Ramanujan-sum jump law, and the failure of the V-cusp model for `Re κ`).
 - **V32** (the `λ = −2` extension and the equality `v_ℓ = #zeros`, 27/27 for `q ≤ 20`).
 - **C14″:** replace "V-cusps" by "rational singularities of `Re κ` (profile open; not V-type at `q = 1009`)".
-- **Next move 2:** redo B2 at `q = 2003`, and test the `|δ| log|δ|` profile for `Re κ`.
+- **Next move 2:** redo B2 at `q = 2003`, and test the `|δ| log|δ|` profile for `Re κ`. *Done 2026-09-29 (V33): log type, not `|δ| log|δ|`.*
