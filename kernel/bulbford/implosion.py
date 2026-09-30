@@ -29,7 +29,13 @@ Along λ = λ₀e^{u/q²} the phase moves by end·u/2πi, so the fixed point lea
 the end has multiplier 1 − u + κ₀u² + … with κ₀ = end·a₂/(2πi a₁²) (`kappa0`).
 The ratio is invariant under translating either Fatou coordinate.
 
-Arithmetic is mpmath at `DPS` digits.
+At the root of B_{p/q}, z² + c is f(w) + δ with δ = c − c₀ (`root_offset`):
+iπ/q + … for `HALF`, π²/q² + … for `ONE`. The coordinates of f + δ are
+Φ + δΦ₁ + O(δ²) (`fatou_correction`), and `delta` threads f + δ through the
+coordinates, the horn map and `kappa0`. So κ₀ moves by δ·dκ₀/dδ (`kappa0_slope`),
+and q·δ·dκ₀/dδ is the part of the 1/q constant the phase leaves (`remainder`).
+
+Arithmetic is mpmath at `DPS` digits, or the ambient precision if higher.
 """
 from __future__ import annotations
 
@@ -114,55 +120,93 @@ def _log(u, n):
 
 
 def _solve(A, b):
-    n = len(b)
+    """The unique solution of the consistent system A x = b (rows ≥ columns), exact."""
+    rows, cols = len(A), len(A[0])
     M = [row[:] + [bi] for row, bi in zip(A, b)]
-    for col in range(n):
-        pivot = next(r for r in range(col, n) if M[r][col] != 0)
+    for col in range(cols):
+        pivot = next(r for r in range(col, rows) if M[r][col] != 0)
         M[col], M[pivot] = M[pivot], M[col]
-        for r in range(n):
+        for r in range(rows):
             if r != col and M[r][col] != 0:
                 factor = M[r][col] / M[col][col]
                 M[r] = [x - factor * y for x, y in zip(M[r], M[col])]
-    return [M[i][n] / M[i][i] for i in range(n)]
+    if any(M[r][cols] != 0 for r in range(cols, rows)):
+        raise ArithmeticError("the Abel system is inconsistent")
+    return [M[i][cols] / M[i][i] for i in range(cols)]
+
+
+def _abel(germ: Germ, rhs: dict[int, Fraction], depth: int) -> Expansion:
+    """Φ with Φ(f(w)) − Φ(w) = Σ rhs[o] w^o, order by order, exact.
+
+    Φ = Σ_{e=−depth}^{−1} a_e w^e + c·log(±w^m) + Σ_{k≤K} d_k w^k. With u = f(w)/w
+    each basis term changes by w^e(u^e − 1), m·log(u/u(0)), or w^k(u^k − 1).
+    """
+    K = germ.order
+    u = [2 * germ.z0, Fraction(1)]
+    n = K + depth + 3
+    columns = []
+    for e in list(range(-depth, 0)) + [None] + list(range(1, K + 1)):
+        if e is None:
+            columns.append((0, [germ.log_power * c for c in _log(u, n)]))
+        else:
+            columns.append((e, [c - (i == 0) for i, c in enumerate(_power(u, e, n))]))
+    lo = min(min(rhs), min(e + next(i for i, c in enumerate(series) if c != 0) for e, series in columns))
+    orders = range(lo, K + 2)
+    A = [[series[o - e] if 0 <= o - e < n else Fraction(0) for e, series in columns] for o in orders]
+    x = _solve(A, [rhs.get(o, Fraction(0)) for o in orders])
+    return Expansion(tuple(x[:depth]), x[depth], tuple(x[depth + 1:]))
 
 
 @lru_cache(maxsize=None)
 def fatou_coefficients(germ: Germ = ONE) -> Expansion:
-    """The expansion of Φ, exact: Φ(f(w)) − Φ(w) = step, order by order.
+    """The expansion of Φ, exact: Φ(f(w)) − Φ(w) = step."""
+    return _abel(germ, {0: germ.step}, germ.petals)
 
-    With u = f(w)/w, each basis term changes by w^e(u^e − 1), m·log(u/u(0)), or
-    w^k(u^k − 1). The equations at orders 1 − P … K + 1 are square in the
-    unknowns a_{−P} … a_{−1}, c, d_1 … d_K.
+
+@lru_cache(maxsize=None)
+def fatou_correction(germ: Germ = ONE) -> Expansion:
+    """Φ₁ in Φ_δ = Φ + δΦ₁ + O(δ²) for the perturbed map f + δ, exact.
+
+    Φ_δ(f(w) + δ) = Φ_δ(w) + step gives Φ₁(f(w)) − Φ₁(w) = −Φ'(f(w)), whose
+    right side is a Laurent series in w once Φ'(x) is expanded at x = w·u.
     """
-    P, K = germ.petals, germ.order
+    e, m, K = fatou_coefficients(germ), germ.log_power, germ.order
     u = [2 * germ.z0, Fraction(1)]
-    lo, hi = 1 - P, K + 1
-    n = hi - lo + 1 + P
-    columns = []
-    for e in list(range(-P, 0)) + [None] + list(range(1, K + 1)):
-        if e is None:
-            series, shift = [germ.log_power * c for c in _log(u, n)], 0
-        else:
-            series, shift = [c - (i == 0) for i, c in enumerate(_power(u, e, n))], e
-        columns.append([series[o - shift] if 0 <= o - shift < n else Fraction(0) for o in range(lo, hi + 1)])
-    A = [[col[r] for col in columns] for r in range(hi - lo + 1)]
-    b = [germ.step if o == 0 else Fraction(0) for o in range(lo, hi + 1)]
-    x = _solve(A, b)
-    return Expansion(tuple(x[:P]), x[P], tuple(x[P + 1:]))
+    depth = len(e.principal)
+    terms = ([(j - depth, (j - depth) * a) for j, a in enumerate(e.principal)] + [(0, e.log * m)]
+             + [(k + 1, (k + 1) * d) for k, d in enumerate(e.taylor)])
+    rhs: dict[int, Fraction] = {}
+    for power, coefficient in terms:  # coefficient · x^(power − 1), x = w·u
+        for i, c in enumerate(_power(u, power - 1, K + 2 * depth + 4)):
+            rhs[power - 1 + i] = rhs.get(power - 1 + i, Fraction(0)) - coefficient * c
+    return _abel(germ, {o: c for o, c in rhs.items() if o <= germ.order + 1}, 2 * germ.petals + 1)
+
+
+def _dps() -> int:
+    return max(DPS, mp.mp.dps)
 
 
 def num(c: Fraction):
     return mp.mpf(c.numerator) / c.denominator
 
 
-def _expansion(w, outgoing: bool, germ: Germ = ONE):
-    e = fatou_coefficients(germ)
-    P, m = germ.petals, germ.log_power
-    sign = germ.log_sign_out if outgoing else germ.log_sign_in
-    value = (sum(num(a) * w ** (j - P) for j, a in enumerate(e.principal)) + num(e.log) * mp.log(sign * w**m)
+def _series(w, e: Expansion, log):
+    depth = len(e.principal)
+    value = (sum(num(a) * w ** (j - depth) for j, a in enumerate(e.principal)) + num(e.log) * log[0]
              + sum(num(d) * w ** (k + 1) for k, d in enumerate(e.taylor)))
-    slope = (sum((j - P) * num(a) * w ** (j - P - 1) for j, a in enumerate(e.principal)) + num(e.log) * m / w
+    slope = (sum((j - depth) * num(a) * w ** (j - depth - 1) for j, a in enumerate(e.principal)) + num(e.log) * log[1]
              + sum((k + 1) * num(d) * w**k for k, d in enumerate(e.taylor)))
+    return value, slope
+
+
+def _expansion(w, outgoing: bool, germ: Germ = ONE, delta=0):
+    """(Φ, Φ') from the expansion, with the first-order correction δΦ₁ when δ ≠ 0."""
+    sign = germ.log_sign_out if outgoing else germ.log_sign_in
+    log = (mp.log(sign * w**germ.log_power), germ.log_power / w)
+    value, slope = _series(w, fatou_coefficients(germ), log)
+    if delta:
+        v1, s1 = _series(w, fatou_correction(germ), log)
+        value, slope = value + delta * v1, slope + delta * s1
     return value, slope
 
 
@@ -171,28 +215,28 @@ def _inside(w, direction, radius) -> bool:
     return abs(w) < radius and abs(v.imag) < v.real
 
 
-def phi_in(w, germ: Germ = ONE):
+def phi_in(w, germ: Germ = ONE, delta=0):
     """(Φ_in(w), Φ_in'(w), parity) for w in the parabolic basin; ValueError if the orbit escapes.
 
     The parity is the number of steps to the incoming petal, mod `petals`.
     """
-    with mp.workdps(DPS):
+    with mp.workdps(_dps()):
         radius = mp.mpf(germ.radius)
         w, dw, n = mp.mpc(w), mp.mpc(1), 0
         while not _inside(w, germ.incoming, radius):
-            dw, w, n = dw * (2 * w + 2 * germ.z0), germ.f(w), n + 1
+            dw, w, n = dw * (2 * w + 2 * germ.z0), germ.f(w) + delta, n + 1
             if abs(w) > ESCAPE or n > STEPS:
                 raise ValueError("the orbit escapes or lingers: not verified in the parabolic basin")
-        value, slope = _expansion(w, False, germ)
+        value, slope = _expansion(w, False, germ, delta)
         return value - n * num(germ.step), slope * dw, n % germ.petals
 
 
-def psi_out(Z, germ: Germ = ONE, parity: int = 0):
+def psi_out(Z, germ: Germ = ONE, parity: int = 0, delta=0):
     """(Ψ_out(Z), Ψ_out'(Z)): f^m of the outgoing-petal inverse at Z − m·step, m a multiple of `petals`.
 
     `parity` j gives f^j ∘ Ψ_out(Z − j·step), the coordinate of the j-th image petal.
     """
-    with mp.workdps(DPS):
+    with mp.workdps(_dps()):
         radius, step, P = mp.mpf(germ.radius), num(germ.step), germ.petals
         lead = num(fatou_coefficients(germ).principal[0])
         Z = mp.mpc(Z) - parity * step
@@ -202,34 +246,34 @@ def psi_out(Z, germ: Germ = ONE, parity: int = 0):
         root = mp.root(lead / target, P)
         w = max((root * mp.expjpi(2 * mp.mpf(j) / P) for j in range(P)), key=lambda r: (r / germ.outgoing).real)
         for _ in range(100):
-            value, slope = _expansion(w, True, germ)
-            delta = (value - target) / slope
-            w -= delta
-            if abs(delta) < mp.mpf(10) ** (5 - DPS):
+            value, slope = _expansion(w, True, germ, delta)
+            move = (value - target) / slope
+            w -= move
+            if abs(move) < mp.mpf(10) ** (5 - mp.mp.dps):
                 break
-        dw = 1 / _expansion(w, True, germ)[1]
+        dw = 1 / _expansion(w, True, germ, delta)[1]
         for _ in range(m + parity):
-            dw, w = dw * (2 * w + 2 * germ.z0), germ.f(w)
+            dw, w = dw * (2 * w + 2 * germ.z0), germ.f(w) + delta
         return w, dw
 
 
-def horn(Z, germ: Germ = ONE):
-    """(E(Z) − Z, E'(Z)) for the horn map E = Φ_in ∘ Ψ_out."""
-    with mp.workdps(DPS):
-        w, dw = psi_out(Z, germ)
-        value, slope, _ = phi_in(w, germ)
+def horn(Z, germ: Germ = ONE, delta=0):
+    """(E(Z) − Z, E'(Z)) for the horn map E = Φ_in ∘ Ψ_out of f + δ."""
+    with mp.workdps(_dps()):
+        w, dw = psi_out(Z, germ, delta=delta)
+        value, slope, _ = phi_in(w, germ, delta)
         return value - Z, slope * dw
 
 
 def phase(germ: Germ = ONE):
     """σ∞ = end·c·iπ: iπ for `ONE`, −11πi/16 for `HALF`."""
-    with mp.workdps(DPS):
+    with mp.workdps(_dps()):
         return germ.end * num(fatou_coefficients(germ).log) * 1j * mp.pi
 
 
 def lavaurs_phase(q: int):
     """σ_q = q − π/ε at the root of B_{1/q} (`ONE`): q − π cot(π/q) + iπ."""
-    with mp.workdps(DPS):
+    with mp.workdps(_dps()):
         return q - mp.pi * mp.cot(mp.pi / q) + 1j * mp.pi
 
 
@@ -260,26 +304,52 @@ def phase_curvature(q: int, germ: Germ = ONE):
         return -germ.end * 2j * mp.pi * q * second
 
 
-def horn_coefficients(kmax: int, height: float | None = None, nodes: int = 48, germ: Germ = ONE) -> list:
+def horn_coefficients(kmax: int, height: float | None = None, nodes: int = 48, germ: Germ = ONE,
+                      delta=0) -> list:
     """a_1 … a_kmax of E(Z) − Z + σ∞ = Σ a_k e^{2πi·end·kZ}, sampled on Im Z = height."""
-    with mp.workdps(DPS):
+    with mp.workdps(_dps()):
         y = mp.mpf(germ.height if height is None else height)
         s = phase(germ)
-        h = [horn(mp.mpc(mp.mpf(j) / nodes, y), germ)[0] + s for j in range(nodes)]
+        h = [horn(mp.mpc(mp.mpf(j) / nodes, y), germ, delta)[0] + s for j in range(nodes)]
         return [sum(h[j] * mp.expjpi(-2 * germ.end * k * mp.mpf(j) / nodes) for j in range(nodes)) / nodes
                 * mp.exp(2 * mp.pi * germ.end * k * y) for k in range(1, kmax + 1)]
 
 
-def kappa0(height: float | None = None, germ: Germ = ONE):
-    """end·a₂/(2πi a₁²)."""
-    with mp.workdps(DPS):
-        a1, a2 = horn_coefficients(2, height, germ=germ)
+def kappa0(height: float | None = None, germ: Germ = ONE, delta=0):
+    """end·a₂/(2πi a₁²), of the horn map of f + δ."""
+    with mp.workdps(_dps()):
+        a1, a2 = horn_coefficients(2, height, germ=germ, delta=delta)
         return germ.end * a2 / (2j * mp.pi * a1**2)
+
+
+@lru_cache
+def kappa0_slope(germ: Germ = ONE, h: str = "1e-13"):
+    """dκ₀/dδ at δ = 0, by a central difference along δ = ±ih at 1.5·`DPS` digits."""
+    with mp.workdps(3 * DPS // 2):
+        step = 1j * mp.mpf(h)
+        return (kappa0(germ=germ, delta=step) - kappa0(germ=germ, delta=-step)) / (2 * step)
+
+
+def root_offset(p: int, q: int):
+    """δ = c − c₀ at the root c = λ/2 − λ²/4, λ = e^{2πip/q}: f + δ is z² + c at w = z − z₀.
+
+    iπ/q + … for `HALF`, π²/q² + … for `ONE`.
+    """
+    with mp.workdps(_dps()):
+        z0 = num(germ_of(p, q).z0)
+        lam = mp.expjpi(2 * mp.mpf(p) / q)
+        return lam / 2 - lam**2 / 4 - (z0 - z0**2)
+
+
+def remainder(p: int, q: int):
+    """q·δ_root·dκ₀/dδ: the part of q(κ − κ₀) that moving the root off c₀ adds to the phase curvature."""
+    with mp.workdps(_dps()):
+        return q * root_offset(p, q) * kappa0_slope(germ_of(p, q))
 
 
 def lavaurs_map(w, sigma=None, germ: Germ = ONE):
     """(L_σ(w), L_σ'(w)) for L_σ = Ψ_out,parity ∘ (· + σ) ∘ Φ_in; default σ = σ∞."""
-    with mp.workdps(DPS):
+    with mp.workdps(_dps()):
         sigma = phase(germ) if sigma is None else mp.mpc(sigma)
         value, slope, parity = phi_in(w, germ)
         image, dimage = psi_out(value + sigma, germ, parity)
@@ -291,7 +361,7 @@ def lavaurs_fixed_point(w, sigma=None, germ: Germ = ONE, tol: float = 1e-25, cap
 
     L_σ'(w*) = E'(Z*) at Z* = Φ_in(w*) + σ, the matching fixed point of the horn map.
     """
-    with mp.workdps(DPS):
+    with mp.workdps(_dps()):
         w = mp.mpc(w)
         for _ in range(100):
             image, slope = lavaurs_map(w, sigma, germ)
@@ -309,7 +379,7 @@ def fixed_point_of_cycle(z, sigma=None, seeds: int = 4, germ: Germ = ONE, cap: f
     residual |L_σ(w) − w|; for a cycle that L_σ models they coincide, and the first
     is the one to use when a poor seed reaches a neighbouring fixed point.
     """
-    with mp.workdps(DPS):
+    with mp.workdps(_dps()):
         w = sorted((mp.mpc(complex(x)) - num(germ.z0) for x in z), key=abs, reverse=True)
         found = []
         for x in w[:seeds]:
