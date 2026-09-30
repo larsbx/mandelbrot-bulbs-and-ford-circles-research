@@ -1,4 +1,4 @@
-"""Next move 2: the jump law of Im κ and the singularity profile of Re κ at several q (V33).
+"""Next move 2: the jump law of Im κ and the singularity profile of Re κ at several q (V33/V35).
 
 For each q (kappa_q<q>.json must exist):
   1. Jump law.  π m S_m = Σ_{q'} J_{q'} c_{q'}(m) + b/m² on windows [lo, hi]; J·q'² for q' ≤ 10 and the
@@ -35,6 +35,12 @@ PROFILES = {"log |δ| (1/m)": LOG, "V-cusp (1/m²)": V, "|δ| log|δ| (log m/m²
             # (A log m + B')/m², so it is tested with its 1/m² companion; log gets the same companion.
             "|δ| log|δ| + V (joint)": (XLOGX, V), "log |δ| + V (joint)": (LOG, V)}
 WINDOWS = ((4, 60), (8, 120), (12, 200), (20, 300))
+
+
+def centered_r2(y: np.ndarray, residual: np.ndarray) -> float:
+    """Standard R² against the mean-only baseline, including residual bias in SSE."""
+    centered = y - y.mean()
+    return float(1 - np.sum(residual**2) / np.sum(centered**2))
 
 
 def weighted_fit(y, lo, hi, g, weight=lambda m: m * 1.0):
@@ -98,7 +104,7 @@ def analyse(q: int) -> dict:
             c = np.linalg.lstsq(A, C[lo - 1:hi], rcond=None)[0]
             residual = C[lo - 1:hi] - A @ c
             out["brjuno_spectral"].append({"window": [lo, hi], "T": T, "amplitude": float(c[0]),
-                                            "r2": float(1 - residual.var() / C[lo - 1:hi].var())})
+                                            "r2": centered_r2(C[lo - 1:hi], residual)})
     return out
 
 

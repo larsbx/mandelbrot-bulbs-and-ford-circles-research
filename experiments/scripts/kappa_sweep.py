@@ -16,6 +16,25 @@ def row(pq: tuple[int, int]) -> dict:
                 r3=[t.coeffs[3].real, t.coeffs[3].imag], G=abs(ua) / 2)
 
 
+def load_checkpoint(checkpoint) -> dict[int, dict]:
+    """Load complete JSONL rows, discarding only an interrupted trailing record."""
+    done = {}
+    lines = checkpoint.read_bytes().splitlines(keepends=True)
+    offset = 0
+    for index, line in enumerate(lines):
+        try:
+            record = json.loads(line)
+        except json.JSONDecodeError:
+            if index != len(lines) - 1:
+                raise
+            with checkpoint.open("r+b") as cp:
+                cp.truncate(offset)
+            break
+        done[record["p"]] = record
+        offset += len(line)
+    return done
+
+
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("qs", type=int, nargs="+")
@@ -25,10 +44,7 @@ if __name__ == "__main__":
         t0 = time.time()
         output = DATA / f"kappa_q{q}.json"
         checkpoint = DATA / f".kappa_q{q}.jsonl"
-        done = {}
-        if checkpoint.exists():
-            for line in checkpoint.read_text().splitlines():
-                r = json.loads(line); done[r["p"]] = r
+        done = load_checkpoint(checkpoint) if checkpoint.exists() else {}
         work = [(p, q) for p in coprime_numerators(q) if p <= q // 2 and p not in done]
         with Pool(args.jobs) as pool:
             with checkpoint.open("a") as cp:

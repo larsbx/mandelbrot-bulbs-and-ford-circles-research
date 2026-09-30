@@ -6,6 +6,7 @@ import numpy as np
 import pytest
 from sympy import mobius, totient
 
+from jump_law import centered_r2
 from spectral import brjuno, joint_brjuno_fit, ramanujan
 
 
@@ -53,3 +54,9 @@ def test_joint_brjuno_fit_uses_shared_kappa_smooth_series(tmp_path, monkeypatch)
     monkeypatch.setattr(spectral, "kappa_table", table)
     fit = joint_brjuno_fit(qs, 2, 45, bounded=0)
     assert all(v == pytest.approx(amplitude, abs=2e-10) for v in fit["amplitude"].values())
+
+
+def test_centered_r2_counts_residual_mean_bias():
+    y = np.array([1.0, 2.0, 3.0])
+    residual = np.array([1.0, 1.0, 1.0])
+    assert centered_r2(y, residual) == pytest.approx(-0.5)
