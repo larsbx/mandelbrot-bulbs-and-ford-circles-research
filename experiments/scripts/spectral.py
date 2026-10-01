@@ -70,3 +70,47 @@ def brjuno(x: Fraction, T: int) -> float:
         beta *= float(x)
         x = 1 / x - a
     return b
+
+
+def brjuno_spectrum(q: int, mmax: int, T: int, bounded: int = 4) -> np.ndarray:
+    """Cosine spectrum of the sampled truncated Brjuno function on the same units as κ.
+
+    This is the continued-fraction-organised spectral basis: unlike a denominator-only
+    Ramanujan family, each sample carries the weights of the convergent chain of x*.
+    """
+    p, x, _ = kappa_table(q)
+    keep = np.minimum(p, q - p) > bounded
+    xs = [Fraction(min(a, q - a), q) for a in np.rint(x[keep] * q).astype(int)]
+    values = np.array([brjuno(v, T) for v in xs])
+    values -= values.mean()
+    return fourier(x[keep], values, np.arange(1, mmax + 1), np.cos)
+
+
+def joint_brjuno_fit(qs: list[int], modes: int, T: int, bounded: int = 4) -> dict:
+    """Fit all q together with a shared smooth Fourier series and one Brjuno amplitude per q.
+
+    The shared cosine coefficients are estimated from κ itself, rather than from an
+    unrelated polynomial or a separately chosen smooth surrogate.  Separate intercepts
+    absorb finite-q means; separate Brjuno columns expose amplitude drift.
+    """
+    blocks, ys = [], []
+    for i, q in enumerate(qs):
+        p, x, k = kappa_table(q)
+        keep = np.minimum(p, q - p) > bounded
+        x, y = x[keep], k.real[keep]
+        xs = [Fraction(min(a, q - a), q) for a in np.rint(x * q).astype(int)]
+        bj = np.array([brjuno(v, T) for v in xs])
+        A = np.zeros((len(x), len(qs) + modes + len(qs)))
+        A[:, i] = 1.0
+        for m in range(1, modes + 1):
+            A[:, len(qs) + m - 1] = np.cos(2 * np.pi * m * x)
+        A[:, len(qs) + modes + i] = bj
+        blocks.append(A); ys.append(y)
+    X, y = np.vstack(blocks), np.concatenate(ys)
+    c = np.linalg.lstsq(X, y, rcond=None)[0]
+    residual = y - X @ c
+    offsets = np.cumsum([0] + [len(v) for v in ys])
+    return {"modes": modes, "T": T,
+            "amplitude": {str(q): float(c[len(qs) + modes + i]) for i, q in enumerate(qs)},
+            "residual_sd": {str(q): float(np.std(residual[offsets[i]:offsets[i + 1]])) for i, q in enumerate(qs)},
+            "smooth_cosine": [float(v) for v in c[len(qs):len(qs) + modes]]}
