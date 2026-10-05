@@ -32,8 +32,13 @@ def zeta_ball(q: int, prec: int) -> acb:
 
 
 def lambda_ball(p: int, q: int, prec: int) -> acb:
-    """λ₀ = ζ_q^p as an Arb ball."""
-    return zeta_ball(q, prec) ** (p % q)
+    """λ₀ = ζ_q^p as an Arb ball at `prec` bits."""
+    old = ctx.prec
+    try:
+        ctx.prec = prec
+        return zeta_ball(q, prec) ** (p % q)
+    finally:
+        ctx.prec = old
 
 
 def _series_fq(p: int, q: int, nterms: int) -> acb_series:

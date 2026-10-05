@@ -52,6 +52,40 @@ def test_zeta_ball_is_tight_and_primitive():
         ctx.prec = old
 
 
+@pytest.mark.parametrize("ambient_prec", [53, 97, 800])
+@pytest.mark.parametrize("cached_zeta", [False, True])
+def test_lambda_ball_uses_requested_precision_and_restores_context(ambient_prec, cached_zeta):
+    old = ctx.prec
+    try:
+        ctx.prec = ambient_prec
+        zeta_ball.cache_clear()
+        if cached_zeta:
+            zeta_ball(7, 400)
+        lam = lambda_ball(3, 7, 400)
+        assert ctx.prec == ambient_prec
+        assert lam.rad() < arb(2) ** -350
+        ctx.prec = 400
+        assert (lam**7 - 1).contains(acb(0))
+    finally:
+        ctx.prec = old
+        zeta_ball.cache_clear()
+
+
+def test_lambda_ball_restores_context_when_root_isolation_fails(monkeypatch):
+    def refuse_root(q, prec):
+        raise ValueError("root isolation failed")
+
+    monkeypatch.setattr("bulbford.index.zeta_ball", refuse_root)
+    old = ctx.prec
+    try:
+        ctx.prec = 53
+        with pytest.raises(ValueError, match="root isolation failed"):
+            lambda_ball(3, 7, 400)
+        assert ctx.prec == 53
+    finally:
+        ctx.prec = old
+
+
 @pytest.mark.parametrize("q", [3, 5, 8, 13, 31, 64])
 def test_unity_seeds_are_close_to_the_certified_roots(q):
     boxes = unity_boxes(q)
