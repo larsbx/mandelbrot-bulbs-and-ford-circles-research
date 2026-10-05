@@ -24,6 +24,8 @@ jobs:
           python3 /tmp/estate-audit.py --root .
       - name: Audit the no-limits rule of the finite register
         run: python tools/audit_limits.py
+      - name: Audit the no-angles rule of the kernel
+        run: python tools/audit_angles.py
       - name: Install dependencies
         run: python -m pip install numpy python-flint sympy pytest
       - name: Test

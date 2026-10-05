@@ -135,7 +135,8 @@ column of V14 becomes certified this way. The `|u_a|/2` column is certified
 separately by `experiments/scripts/v14_certified.py`: on each certified `c_ant` box,
 Arb encloses `λ_a = 1 − √(1 − 4c_ant)` (the branch `Re(1 − λ) > 0` is
 checked on the ball, else refused) and `u_a = q² log(λ_a/λ₀)`. Arb's
-square root, logarithm and `e^{2πip/q}` are rigorous balls, so both V14
+square root and logarithm are rigorous balls, and `λ₀` is the angle-free
+ball of the next section, so both V14
 columns and `Δ` are certified; `experiments/data/v14_certified.json` holds the
 brackets.
 
@@ -161,6 +162,46 @@ all of them, and CI recomputes `q <= 7`.
 
 This removes the antipode half of `SatelliteLabel`. The centre half, that
 the certified centre is the centre of `B_{p/q}`, is still a named import.
+
+## The angle-free lane
+
+No exact or certified computation in `kernel/` evaluates an angle, `π`, or a
+trigonometric function. Each root of unity is built from its polynomial and
+selected by order alone. There are three independent constructions, and the
+tests make each pair that overlaps meet.
+
+| Module | Field | Construction | What it gives |
+|---|---|---|---|
+| `kernel/bulbford/spread.py` | `Q` | `cos(πp/q)` is the `p`-th largest root of the integer Chebyshev polynomial `U_{q−1}` (since `sin qθ = sin θ · U_{q−1}(cos θ)`); a Sturm sequence over `Q` isolates it and bisection narrows it | rational brackets for `Qd(1 − λ₀) = 4(1 − c²)` and `pred² = Qd(1 − λ₀)/q⁴` |
+| `kernel/bulbford/antipode.py` | `Q(i)` | Krawczyk boxes on `X^q − 1`; the untrusted float seeds now come from the `spread.py` brackets | `ζ_q` boxes |
+| `kernel/bulbford/index.py` | Arb | Arb's certified roots of `Φ_q`, then the same order check | the `ζ_q` and `λ₀` balls behind the index and the `|u_a|/2` enclosures |
+
+Notes on the table:
+
+- **The rational route.** The spread polynomials of rational trigonometry
+  come from the same polynomials: `S_n(1 − c²) = (1 − c²) U_{n−1}(c)²` and
+  `S_n ∘ S_m = S_{nm}`. So the bulb–Ford first-order prediction is a
+  bracketed algebraic number with no complex numbers at all. It is
+  `Qd(1 − λ₀)` times the squared Ford diameter `(1/q²)²`.
+- **Cross-checks.** `tests/test_spread.py` checks the `spread.py` brackets
+  against the `Q(i)` boxes for `q <= 12`. `tests/test_angle_free_roots.py`
+  checks the Arb balls against the `Q(i)` boxes for `q <= 16`.
+
+`tools/audit_angles.py` enforces the rule on Python tokens, so prose in
+docstrings and comments stays free. The audit runs in CI.
+
+- **Exempt modules.** The modules of the numerical research lane above are
+  declared exempt, each with its reason: `dynamics.py`, `cycles.py`,
+  `taylor.py`, `norms.py`, and `implosion.py`, where `π` belongs to the
+  Fatou-coordinate statements themselves.
+- **Stale exemptions fail.** A declared module that no longer uses an angle
+  is a breach, so the list only shrinks deliberately.
+- **Certificates.** Regenerating the certificate files with the angle-free
+  seeds changed no verdict, field or certificate box. 76 rational brackets
+  changed their digits, all of them built through the `λ₀` box: 6 `G_ant`
+  brackets in `antipode_certificates.json`, 18 in
+  `antipode_certificates_v14.json`, and 52 in `v14_certified.json`. Each new
+  bracket overlaps the old one.
 
 ## Wake combinatorics
 
