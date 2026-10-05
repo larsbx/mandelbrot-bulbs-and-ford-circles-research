@@ -41,6 +41,12 @@ The main cardioid of the Mandelbrot set carries a ``bulb'' (a satellite componen
 \maketitle
 
 \section{Introduction}
+\subsection*{Motivation}
+Pictures of the Mandelbrot set show the bulbs: discs along the edge of the main cardioid, one for each fraction $p/q$, shrinking as $q$ grows. Their arrangement is arithmetic. Between two bulbs at Farey neighbours the largest sits at the mediant, and the sizes fall off like $1/q^2$, as do the radii of the Ford circles. This dictionary between the Mandelbrot set and number theory is well known, but it is a leading-order statement: the bulbs are discs of size about $1/q^2$. Looked at closely, the bulbs are not round, and each deviates from a disc in its own way. We ask whether that deviation is still arithmetic, and which arithmetic governs it. The answer is the continued fraction of $p/q$, read from its end by parabolic renormalization.
+
+This makes the correction a quantitative test of near-parabolic renormalization~\cite{IS}, a tool that has so far mostly settled qualitative questions~\cite{BuffCheritat,BC12}. Here it predicts one complex number per bulb, which the index formula computes exactly; for the bulbs at $1/q$ the two agree to $24$ digits. The process produces constants that resemble Feigenbaum's~\cite{Feigenbaum} in that they come from a renormalization operator, but they depend on the degree. Read as a function of the angle, the correction jumps at every rational tested, as some continued-fraction functions of number theory do.
+
+\subsection*{Setting}
 Let $c(\lambda)=\lambda/2-\lambda^2/4$ parametrize the main cardioid of the Mandelbrot set by the multiplier $\lambda\in\D$ of its attracting fixed point; equivalently we use $f_\lambda(z)=\lambda z+z^2$. At $\lambda_0=e^{2\pi ip/q}$ the satellite $W_{p/q}$ of period $q$ is attached~\cite{DH}. Its size is of order $q^{-2}$~\cite{GM}, and to first order it is a disc of diameter $2|c'(\lambda_0)|q^{-2}=2\sin(\pi p/q)\,q^{-2}$~\cite{FM}. Up to the factor $\sin(\pi p/q)$ these are the Ford circles~\cite{Ford}. We study the first correction to this law.
 
 Put $\lambda=\lambda_0e^\varepsilon$, let $\rho_{p/q}(\varepsilon)$ be the multiplier of the $q$-cycle that bifurcates from $0$, and write
@@ -222,6 +228,9 @@ For $z^3+c$, near the cusp of the main component, the germ is $v+v^2+\frac13v^3$
 {\raggedright\begin{thebibliography}{99}
 \bibitem{full} L.~Bendixen, \emph{Beyond the Ford-circle law: parabolic renormalization and the shape of Mandelbrot satellite bulbs}, full version, 2026; in~\cite{repo}, \texttt{paper/kappa0.pdf}.
 \bibitem{Arb} F.~Johansson, \emph{Arb: efficient arbitrary-precision midpoint-radius interval arithmetic}, IEEE Trans. Comput. \textbf{66} (2017), 1281--1292.
+\bibitem{BuffCheritat} X.~Buff and A.~Ch\'eritat, \emph{The Brjuno function continuously estimates the size of quadratic Siegel disks}, Ann. of Math. (2) \textbf{164} (2006), 265--312.
+\bibitem{BC12} X.~Buff and A.~Ch\'eritat, \emph{Quadratic Julia sets with positive area}, Ann. of Math. (2) \textbf{176} (2012), 673--746.
+\bibitem{Feigenbaum} M.~J.~Feigenbaum, \emph{Quantitative universality for a class of nonlinear transformations}, J. Stat. Phys. \textbf{19} (1978), 25--52.
 \bibitem{DH} A.~Douady and J.~H.~Hubbard, \emph{\'Etude dynamique des polyn\^omes complexes}, Parties I et II, Publ. Math. d'Orsay 84-02, 85-04, 1984--1985.
 \bibitem{Ecalle} J.~\'Ecalle, \emph{Les fonctions r\'esurgentes}, Tomes I--III, Publ. Math. d'Orsay, 1981--1985.
 \bibitem{FM} A.~C.~Fowler and M.~J.~McGuinness, \emph{The size of Mandelbrot bulbs}, Chaos Solitons Fractals X \textbf{3} (2019), 100019.

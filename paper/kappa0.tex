@@ -44,6 +44,19 @@ To first order, the satellite component of the Mandelbrot set attached to the ma
 
 \section{Introduction}\label{sec:intro}
 
+\subsection{Motivation}\label{sec:motivation}
+Anyone who has looked at a picture of the Mandelbrot set has seen the bulbs. They are the discs attached along the edge of the main cardioid, one for each fraction $p/q$ in lowest terms, and they shrink as $q$ grows. Their arrangement is arithmetic. Between two bulbs whose fractions are Farey neighbours, the largest bulb sits at the mediant $(p+p')/(q+q')$. The sizes fall off like $1/q^2$, as do the radii of the Ford circles, which stand on the real line at the rationals and touch exactly when their fractions are Farey neighbours. This dictionary between the Mandelbrot set and elementary number theory is one of the best-known facts about the set. It is, however, a statement about the leading order only: it says that the bulbs are discs of size about $1/q^2$, and nothing more.
+
+Looked at closely, the bulbs are not round, and the way each deviates from a disc differs from bulb to bulb. This paper asks whether that deviation is still arithmetic, and if so, which arithmetic governs it. It might depend only on the size of $q$, on the position of $p/q$ in the Farey tree, or on finer data such as the continued fraction of $p/q$. We find the last. The first correction is read off the continued fraction, from its end, by a process from complex dynamics called parabolic renormalization. Along the way the process produces numerical constants of its own.
+
+There are three further reasons to care.
+
+\emph{A quantitative test of renormalization.} Near-parabolic renormalization, developed by Inou and Shishikura~\cite{IS}, is a powerful but technical tool. It has settled qualitative questions, such as the size of Siegel discs~\cite{BuffCheritat} and the existence of quadratic Julia sets of positive area~\cite{BC12}. Its predictions can rarely be compared with a computation digit by digit. The first correction offers such a comparison. It is one complex number per bulb, computable exactly by the index formula below, and it is predicted by renormalization. For the bulbs at $1/q$ the two agree to $24$ digits.
+
+\emph{Universal constants.} In the period-doubling cascade, Feigenbaum found that the ratios of successive bifurcation intervals converge to a universal number, explained by the fixed point of a renormalization operator~\cite{Feigenbaum}. The constants found here play a similar role for the bifurcations along the cardioid. The constant $\kappa_0$ belongs to the parabolic map $z+z^2$ at the cusp, and $\kappa_*$ to a fixed point of renormalization combined with complex conjugation. A pair $\kappa^\pm_{p/q}$ belongs to every rational. Unlike Feigenbaum's constant, they depend on the degree: the family $z^3+c$ has constants of its own.
+
+\emph{A function that jumps at every rational.} Read as a function of the angle, the correction approaches different values from the two sides of each rational we tested, and we conjecture that it does so at every rational. Number theory knows functions of this kind, defined through continued fractions and discontinuous at the rationals. Here one arises from the geometry of the Mandelbrot set, and its jumps are computed by complex dynamics.
+
 \subsection{The Ford-circle law and its first correction}
 Let $\lambda\in\D$ parametrize the main cardioid of the Mandelbrot set $M$ by the multiplier of the attracting fixed point, $c(\lambda)=\lambda/2-\lambda^2/4$. Equivalently we work with
 \[
@@ -618,6 +631,8 @@ The computations and the drafting of this paper were carried out with the assist
 \bibitem{Ford} L.~R.~Ford, \emph{Fractions}, Amer. Math. Monthly \textbf{45} (1938), 586--601.
 \bibitem{GM} J.~Guckenheimer and R.~McGehee, \emph{A proof of the Mandelbrot $N^2$ conjecture}, Report No.~15, Institut Mittag-Leffler, 1984.
 \bibitem{IS} H.~Inou and M.~Shishikura, \emph{The renormalization for parabolic fixed points and their perturbation}, preprint; see \url{https://www.math.kyoto-u.ac.jp/~mitsu/pararenorm/}.
+\bibitem{BC12} X.~Buff and A.~Ch\'eritat, \emph{Quadratic Julia sets with positive area}, Ann. of Math. (2) \textbf{176} (2012), 673--746.
+\bibitem{Feigenbaum} M.~J.~Feigenbaum, \emph{Quantitative universality for a class of nonlinear transformations}, J. Stat. Phys. \textbf{19} (1978), 25--52.
 \bibitem{BuffCheritat} X.~Buff and A.~Ch\'eritat, \emph{The Brjuno function continuously estimates the size of quadratic Siegel disks}, Ann. of Math. (2) \textbf{164} (2006), 265--312.
 \bibitem{Cheritat} A.~Ch\'eritat, \emph{Near parabolic renormalization for unicritical holomorphic maps}, Arnold Math. J. \textbf{8} (2022), 169--270.
 \bibitem{Devaney} R.~L.~Devaney, \emph{The Mandelbrot set, the Farey tree, and the Fibonacci sequence}, Amer. Math. Monthly \textbf{106} (1999), 289--302.
