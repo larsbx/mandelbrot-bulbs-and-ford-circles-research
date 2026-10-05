@@ -29,12 +29,11 @@ VALIDATED by continuation only).
 """
 from __future__ import annotations
 
-import cmath
 import math
 from dataclasses import dataclass
 from fractions import Fraction
 from functools import lru_cache, reduce
-from math import isqrt, pi
+from math import isqrt
 
 from .certify import (
     ONE,
@@ -53,6 +52,7 @@ from .certify import (
     krawczyk,
     newton_refine,
 )
+from .spread import turn_cosine_bracket
 
 TWO = Box.point(2)
 
@@ -108,11 +108,20 @@ def _disjoint(a: Box, b: Box) -> bool:
     return a.re.hi < b.re.lo or b.re.hi < a.re.lo or a.im.hi < b.im.lo or b.im.hi < a.im.lo
 
 
+def _unity_seed(k: int, q: int) -> complex:
+    """An untrusted float seed for the k-th root of X^q − 1, with no angle: cos(π·2k/q) from the
+    exact Sturm bracket of `spread.py`, and the sine as ±√(1 − cos²), positive for 0 < 2k mod 2q < q."""
+    lo, hi = turn_cosine_bracket(2 * k, q, 60)
+    c = float((lo + hi) / 2)
+    s = math.sqrt(max(0.0, 1.0 - c * c))
+    return complex(c, s if 0 < (2 * k) % (2 * q) < q else -s)
+
+
 def unity_boxes(q: int, radius_bits: int = 100, prec: int = PREC) -> tuple[Box, ...]:
     """Krawczyk-certified, pairwise disjoint boxes for the q roots of X^q − 1 (seeds untrusted)."""
     boxes = []
     for k in range(q):
-        re, im = newton_refine(_unity(q), *_complex_dyadic(cmath.exp(2j * pi * k / q), prec), 4, prec)
+        re, im = newton_refine(_unity(q), *_complex_dyadic(_unity_seed(k, q), prec), 4, prec)
         beta = Box.around(re, im, Fraction(1, 2**radius_bits))
         if not krawczyk(_unity(q), beta, prec).strictly_inside(beta):
             raise ValueError(f"root-of-unity box {k}/{q} not certified")
@@ -300,10 +309,13 @@ def u_half_abs(p: int, q: int, c: Box, prec: int) -> I:
     """Enclosure of |u_a|/2 for every c_ant ∈ C, where λ₀e^{u_a/q²} is the main-cardioid parameter of c_ant.
 
     From c = λ/2 − λ²/4: 1 − 4c = (1 − λ)², and the branch near λ₀ has Re(1 − λ) > 0, i.e. λ = 1 − √(1 − 4c)
-    with the principal root, which is checked on the ball (refused otherwise). Then u = q²·log(λ/λ₀). Arb's
-    √, log and e^{2πip/q} are rigorous, so this is a certified enclosure; reading u_a as the root of
+    with the principal root, which is checked on the ball (refused otherwise). Then u = q²·log(λ/λ₀), with λ₀
+    the angle-free ball `index.lambda_ball` (a root of Φ_q selected by order). Arb's √ and log are rigorous,
+    so this is a certified enclosure; reading u_a as the root of
     R_q(u) = −1 near u = 2 uses [DH] (one ρ = −1 point on ∂B_{p/q}), as P10 does for c_ant."""
-    from flint import acb, arb, ctx
+    from flint import acb, ctx
+
+    from .index import lambda_ball
 
     old = ctx.prec
     try:
@@ -313,7 +325,7 @@ def u_half_abs(p: int, q: int, c: Box, prec: int) -> I:
         if not root.real > 0:
             raise ValueError("branch not separated: Re √(1 − 4c) does not exclude 0")
         lam = 1 - root
-        lam0 = acb(arb(2 * p) / q).exp_pi_i()
+        lam0 = lambda_ball(p, q, ctx.prec)
         half = abs(q * q * (lam / lam0).log()) / 2
         return I(_fraction(half.lower()), _fraction(half.upper()))
     finally:
