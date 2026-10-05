@@ -13,6 +13,10 @@ def test_the_kernel_passes():
     assert audit(KERNEL) == []
 
 
+def test_root_certification_has_no_numerical_lane_exemption():
+    assert "kernel/bulbford/root.py" not in NUMERICAL_LANE
+
+
 @pytest.mark.parametrize(
     ("source", "name"),
     [

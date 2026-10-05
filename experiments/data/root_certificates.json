@@ -1,0 +1,102 @@
+{
+ "schema": "bulbford-root-certificates/v1",
+ "claim": "the hyperbolic component of the certified centre has c_root(p/q) on its boundary",
+ "arithmetic": "Arb balls and algebraic-root contour means with certified Laurent error bounds",
+ "certificates": [
+  {
+   "p": 1,
+   "q": 2,
+   "accepted": true,
+   "disk_centre": [
+    "-1/2",
+    "0"
+   ],
+   "r": "879609302221/549755813888",
+   "r_inner": "494780232499/1099511627776",
+   "c1": [
+    "-7/8",
+    "0"
+   ],
+   "root_side_boxes": 128,
+   "root_side": "accepted",
+   "path_pieces": 16,
+   "path": "accepted"
+  },
+  {
+   "p": 1,
+   "q": 3,
+   "accepted": true,
+   "disk_centre": [
+    "-1/4",
+    "476102500705/1099511627776"
+   ],
+   "r": "867809216679/1099511627776",
+   "r_inner": "494780232499/1099511627776",
+   "c1": [
+    "-4481632571479453/36028797018963968",
+    "6065040233794709/9007199254740992"
+   ],
+   "root_side_boxes": 256,
+   "root_side": "accepted",
+   "path_pieces": 66,
+   "path": "accepted"
+  },
+  {
+   "p": 2,
+   "q": 3,
+   "accepted": true,
+   "disk_centre": [
+    "-1/4",
+    "-476102500705/1099511627776"
+   ],
+   "r": "867809216679/1099511627776",
+   "r_inner": "494780232499/1099511627776",
+   "c1": [
+    "-4481632571479453/36028797018963968",
+    "-6065040233794709/9007199254740992"
+   ],
+   "root_side_boxes": 256,
+   "root_side": "accepted",
+   "path_pieces": 66,
+   "path": "accepted"
+  },
+  {
+   "p": 1,
+   "q": 4,
+   "accepted": true,
+   "disk_centre": [
+    "0",
+    "1/2"
+   ],
+   "r": "547039253613/1099511627776",
+   "r_inner": "368699341839/1099511627776",
+   "c1": [
+    "1144067084771699/4503599627370496",
+    "4537444873901789/9007199254740992"
+   ],
+   "root_side_boxes": 512,
+   "root_side": "accepted",
+   "path_pieces": 168,
+   "path": "accepted"
+  },
+  {
+   "p": 3,
+   "q": 4,
+   "accepted": true,
+   "disk_centre": [
+    "0",
+    "-1/2"
+   ],
+   "r": "547039253613/1099511627776",
+   "r_inner": "368699341839/1099511627776",
+   "c1": [
+    "1144067084771699/4503599627370496",
+    "-4537444873901789/9007199254740992"
+   ],
+   "root_side_boxes": 512,
+   "root_side": "accepted",
+   "path_pieces": 168,
+   "path": "accepted"
+  }
+ ]
+}

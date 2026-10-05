@@ -161,7 +161,49 @@ holds the verdicts, `experiments/scripts/certify_continuation.py --check` recomp
 all of them, and CI recomputes `q <= 7`.
 
 This removes the antipode half of `SatelliteLabel`. The centre half, that
-the certified centre is the centre of `B_{p/q}`, is still a named import.
+the certified centre is the centre of `B_{p/q}`, remains a named import
+outside the P14 range below.
+
+## The centre's component touches the root
+
+`kernel/bulbford/root.py` certifies, for every bulb with `q <= 4`, that the
+hyperbolic component of the P3 centre has `c_root(p/q)` on its boundary.
+`lambda0` comes from the polynomial/order interface `index.lambda_ball`.
+Certified contour means evaluate argument-principle integrals around
+`z0 = lambda0/2`. They count `q + 1` fixed points of `f_c^q` (and only
+`alpha` for each proper divisor) in two nested disks, which isolates one
+`q`-cycle `C(c)`. They also give its multiplier as a contour integral
+that stays defined at the root, where `C` collides with `alpha`. Certified
+signs of `d|rho|^2` and `d|lambda|^2` along the segment from the root to a
+point `c1` show the segment lies in one hyperbolic component with the root
+on its boundary. A continuation from the centre then reaches `C(c1)`.
+
+The contour calculation also uses only algebraic roots. Write
+`H(u) = u h(m + u)` for an integrand `h`. Boxes obtained by rotating a
+rational rectangle with certified roots of unity cover the annulus
+`r/a <= |u| <= r*a`, with rational `a > 1`. Finite ball evaluations there
+exclude every denominator zero and principal-log cut and bound `|H|` by
+`M`. Cauchy's Laurent coefficient bounds imply that the mean of `H` at
+`r*zeta_N^k` differs from its constant coefficient, the normalized contour
+integral, by at most `2M/(a^N - 1)`. That error is added to both coordinates
+of the returned ball. Polynomial Taylor shifts reduce interval widening
+near the multiple root. No angle, trigonometric function, or value of pi
+is evaluated, including in the contour normalization. An uncertified
+annulus or error bound is refused.
+
+The log in the multiplier integral must be holomorphic on the whole inner
+disk, not only on this annulus. The code verifies
+`|2m/lambda0 - 1| + 2r' < 1` before any contour calculation and refuses otherwise.
+
+What stays imported is one [DH] fact: only the main cardioid and `B_{p/q}`
+have `c_root(p/q)` in their closure. The recertified coverage remains the
+five fractions `1/2, 1/3, 2/3, 1/4, 3/4`. Each stored disk and endpoint is
+replayed with its centre-to-endpoint continuation in the canonical tests;
+`experiments/scripts/certify_root.py --check` also regenerates the corpus.
+No `q >= 5` conclusion follows from this recertification. The previous
+angle-based integration reported success at `2/5, 3/5` and refusals at
+`1/5, 4/5` and `q >= 6`; those are historical observations about that
+integrator, not results or limitations of the replacement method.
 
 ## The angle-free lane
 
@@ -186,6 +228,10 @@ Notes on the table:
 - **Cross-checks.** `tests/test_spread.py` checks the `spread.py` brackets
   against the `Q(i)` boxes for `q <= 12`. `tests/test_angle_free_roots.py`
   checks the Arb balls against the `Q(i)` boxes for `q <= 16`.
+- **P14.** `root.py` uses this same Arb root interface for `lambda0` and
+  every contour node. It has no numerical-lane exemption. Its logarithm
+  and exponential enclosures remain rigorous Arb computations; the
+  no-angles rule does not turn these into exact rational values.
 
 `tools/audit_angles.py` enforces the rule on Python tokens, so prose in
 docstrings and comments stays free. The audit runs in CI.
@@ -196,7 +242,7 @@ docstrings and comments stays free. The audit runs in CI.
   Fatou-coordinate statements themselves.
 - **Stale exemptions fail.** A declared module that no longer uses an angle
   is a breach, so the list only shrinks deliberately.
-- **Certificates.** Regenerating the certificate files with the angle-free
+- **P10/V14 certificates.** Regenerating these certificate files with the angle-free
   seeds changed no verdict, field or certificate box. 76 rational brackets
   changed their digits, all of them built through the `λ₀` box: 6 `G_ant`
   brackets in `antipode_certificates.json`, 18 in
