@@ -1,0 +1,116 @@
+"""Spectral tools for κ(p̄/q): Fourier coefficients in x̃ = p̄/q and Ramanujan-sum fits (V31, next move 2).
+
+A singularity at every reduced p'/q' with amplitude A_{q'} (depending on q' only) and profile with
+Fourier decay g(m) contributes Σ_{q'} A_{q'} c_{q'}(m) g(m) to the m-th coefficient, c_{q'} the Ramanujan
+sum. Profiles: a jump in a sine series (g = 1/(πm)), a log singularity (g = 1/m), a V-cusp (g = 1/m²),
+|δ| log|δ| (g = log m / m²), and the Hölder cusp |δ|^{s−1} (g = m^{-s}).
+"""
+from __future__ import annotations
+
+import json
+from fractions import Fraction
+from math import gcd, log
+
+import numpy as np
+
+from paths import DATA
+
+
+def kappa_table(q: int) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """(p, p̄/q, κ) over all units p mod q, from kappa_q<q>.json (p ≤ q/2) and κ(q − p) = conj κ(p)."""
+    half = {r["p"]: complex(*r["kappa"]) for r in json.loads((DATA / f"kappa_q{q}.json").read_text())}
+    full = {**half, **{q - p: k.conjugate() for p, k in half.items()}}
+    p = np.array(sorted(full))
+    return p, np.array([pow(int(a), -1, q) for a in p]) / q, np.array([full[a] for a in p])
+
+
+def fourier(x: np.ndarray, y: np.ndarray, m: np.ndarray, trig) -> np.ndarray:
+    return np.array([2 * np.mean(y * trig(2 * np.pi * k * x)) for k in m])
+
+
+def coefficients(q: int, mmax: int, bounded: int = 4) -> dict:
+    """Sine coefficients S_m of Im κ and cosine coefficients C_m of Re κ, bulbs with p ≤ bounded excluded."""
+    p, x, k = kappa_table(q)
+    keep = np.minimum(p, q - p) > bounded
+    m = np.arange(1, mmax + 1)
+    return {"m": m, "S": fourier(x[keep], k[keep].imag, m, np.sin),
+            "C": fourier(x[keep], k[keep].real - k[keep].real.mean(), m, np.cos)}
+
+
+def ramanujan(qq: int, m: np.ndarray) -> np.ndarray:
+    return sum(np.cos(2 * np.pi * a * m / qq) for a in range(qq) if gcd(a, qq) == 1)
+
+
+def ramanujan_fit(y: np.ndarray, lo: int, hi: int, qmax: int, g=lambda m: np.ones_like(m, float),
+                  background=lambda m: 1.0 / m**2) -> tuple[np.ndarray, float]:
+    """Least squares y(m) = Σ_g g(m) Σ_{q' ≤ qmax} A^g_{q'} c_{q'}(m) + b·background(m) on m ∈ [lo, hi].
+
+    `g` is one profile or a tuple of profiles fitted jointly (one Ramanujan-column family each).
+    Returns (A, R²) with A of shape (qmax,) for one profile and (len(g), qmax) for a tuple."""
+    gs = g if isinstance(g, tuple) else (g,)
+    m = np.arange(lo, hi + 1)
+    X = np.column_stack([gg(m) * ramanujan(b, m) for gg in gs for b in range(1, qmax + 1)] + [background(m)])
+    c, *_ = np.linalg.lstsq(X, y[lo - 1:hi], rcond=None)
+    r = y[lo - 1:hi] - X @ c
+    A = c[:-1].reshape(len(gs), qmax)
+    return (A if isinstance(g, tuple) else A[0]), float(1 - r.var() / y[lo - 1:hi].var())
+
+
+def brjuno(x: Fraction, T: int) -> float:
+    """Yoccoz's Brjuno sum B(x) = Σ_{n≥0} β_{n−1} log(1/x_n) (Gauss map x_{n+1} = {1/x_n}, β_n = x_0 ⋯ x_n),
+    truncated once the convergent denominator exceeds T; a rational x also stops at its last partial quotient."""
+    x = x - x.numerator // x.denominator
+    b, beta, q_prev, q_cur = 0.0, 1.0, 0, 1
+    while x:
+        b += beta * log(x.denominator / x.numerator)
+        a = x.denominator // x.numerator
+        q_prev, q_cur = q_cur, a * q_cur + q_prev
+        if q_cur > T:
+            break
+        beta *= float(x)
+        x = 1 / x - a
+    return b
+
+
+def brjuno_spectrum(q: int, mmax: int, T: int, bounded: int = 4) -> np.ndarray:
+    """Cosine spectrum of the sampled truncated Brjuno function on the same units as κ.
+
+    This is the continued-fraction-organised spectral basis: unlike a denominator-only
+    Ramanujan family, each sample carries the weights of the convergent chain of x*.
+    """
+    p, x, _ = kappa_table(q)
+    keep = np.minimum(p, q - p) > bounded
+    xs = [Fraction(min(a, q - a), q) for a in np.rint(x[keep] * q).astype(int)]
+    values = np.array([brjuno(v, T) for v in xs])
+    values -= values.mean()
+    return fourier(x[keep], values, np.arange(1, mmax + 1), np.cos)
+
+
+def joint_brjuno_fit(qs: list[int], modes: int, T: int, bounded: int = 4) -> dict:
+    """Fit all q together with a shared smooth Fourier series and one Brjuno amplitude per q.
+
+    The shared cosine coefficients are estimated from κ itself, rather than from an
+    unrelated polynomial or a separately chosen smooth surrogate.  Separate intercepts
+    absorb finite-q means; separate Brjuno columns expose amplitude drift.
+    """
+    blocks, ys = [], []
+    for i, q in enumerate(qs):
+        p, x, k = kappa_table(q)
+        keep = np.minimum(p, q - p) > bounded
+        x, y = x[keep], k.real[keep]
+        xs = [Fraction(min(a, q - a), q) for a in np.rint(x * q).astype(int)]
+        bj = np.array([brjuno(v, T) for v in xs])
+        A = np.zeros((len(x), len(qs) + modes + len(qs)))
+        A[:, i] = 1.0
+        for m in range(1, modes + 1):
+            A[:, len(qs) + m - 1] = np.cos(2 * np.pi * m * x)
+        A[:, len(qs) + modes + i] = bj
+        blocks.append(A); ys.append(y)
+    X, y = np.vstack(blocks), np.concatenate(ys)
+    c = np.linalg.lstsq(X, y, rcond=None)[0]
+    residual = y - X @ c
+    offsets = np.cumsum([0] + [len(v) for v in ys])
+    return {"modes": modes, "T": T,
+            "amplitude": {str(q): float(c[len(qs) + modes + i]) for i, q in enumerate(qs)},
+            "residual_sd": {str(q): float(np.std(residual[offsets[i]:offsets[i + 1]])) for i, q in enumerate(qs)},
+            "smooth_cosine": [float(v) for v in c[len(qs):len(qs) + modes]]}
