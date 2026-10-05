@@ -114,13 +114,29 @@ def continue_centre_to_antipode(p: int, q: int, centre: Box, ant_c: Box, ant_z: 
         ctx.prec = old
 
 
-def _continue(p: int, q: int, centre: Box, ant_c: Box, ant_z: Box, min_ds: Fraction) -> Continuation:
+def continue_centre_to_point(p: int, q: int, centre: Box, target: tuple[Fraction, Fraction], disk: tuple[acb, arb],
+                             min_ds: Fraction = Fraction(1, 2**26)) -> Continuation:
+    """Interior pieces only, from the P3 centre box to the exact point `target`, accepted when the cycle box at
+    `target` lies in the disk (m, r): the continued cycle then has a point there (bulbford.root uses D′)."""
+    old = ctx.prec
+    ctx.prec = WORK_PREC
+    try:
+        end = Box.around(target[0], target[1], Fraction(0))
+        return _continue(p, q, centre, end, None, min_ds, disk)
+    finally:
+        ctx.prec = old
+
+
+def _continue(p: int, q: int, centre: Box, ant_c: Box, ant_z: Box | None, min_ds: Fraction,
+              disk: tuple[acb, arb] | None = None) -> Continuation:
     c0, c1 = centre.mid, ant_c.mid
     v = (c1[0] - c0[0], c1[1] - c0[1])
     vmax = max(abs(v[0]), abs(v[1]))
     at = lambda s: (c0[0] + s * v[0], c0[1] + s * v[1])
     fc = lambda s: complex(float(at(s)[0]), float(at(s)[1]))
-    centre_b, ant_cb, ant_zb, v_b = _acb(centre), _acb(ant_c), _acb(ant_z), _point(v)
+    centre_b, ant_cb, v_b = _acb(centre), _acb(ant_c), _point(v)
+    ant_zb = None if ant_z is None else _acb(ant_z)
+    to_point = ant_z is None
 
     def cbox(s0: Fraction, s1: Fraction) -> acb:
         a, b = at(s0), at(s1)
@@ -167,13 +183,17 @@ def _continue(p: int, q: int, centre: Box, ant_c: Box, ant_z: Box, min_ds: Fract
         c_k = cbox(s, s1)
         zc = _float_cycle_point(q, fc((s + s1) / 2), zf)
         z_k = None
-        if s1 < 1 and (pieces or c_k.contains(centre_b)):
+        if (s1 < 1 or to_point) and (pieces or c_k.contains(centre_b)):
             z_k = inflate(_widen(acb(zc), _arb_exact(MARGIN), _arb_exact(MARGIN)), c_k)
         if z_k is not None and attracting(z_k, c_k) and (z_prev is None or joins(z_prev, z_k, s)):
             pieces, s, zf, z_prev, ds = pieces + 1, s1, zc, z_k, min(ds * 2, Fraction(1, 8))
+            if to_point and s == 1:
+                m, r = disk
+                inside = bool(abs(z_prev - m).upper() < r)
+                return Continuation(p, q, pieces, s, inside, "accepted" if inside else "cycle box not inside the disk")
             continue
         # stuck (or at the end): try to close the path at the antipode from here
-        if z_prev is not None and finish(s, zf, z_prev):
+        if not to_point and z_prev is not None and finish(s, zf, z_prev):
             return Continuation(p, q, pieces + 1, s, True, "accepted")
         ds /= 2
         if ds < min_ds:
