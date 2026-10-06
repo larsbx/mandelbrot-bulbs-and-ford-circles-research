@@ -9,7 +9,7 @@ audits this package replaces:
 ``ClauseRule``
     a banned pattern in a clause of prose, unless a denial word precedes it
     within reach in the same clause, an allowed phrase covers it, or it lies
-    in an exempt section or a marked paragraph;
+    in an exempt section or the one block after a marker;
 ``ContextRule``
     every occurrence of a term needs a context marker within a radius of its
     start, unless the file carries a complete declaration or a pointer;
@@ -43,6 +43,10 @@ the stricter one unless that was an artefact:
 - a block of prose is a paragraph joined across its line breaks (Julia);
   bulbs read line by line, so a denial ending one line now reaches into the
   next line of the same clause;
+- a source file (any suffix but ``.md``) is read line by line, each line a
+  block of its own; Julia joined contiguous source lines like a paragraph,
+  so a denial on one comment line (``# no estimate``) reached a term on the
+  next (``# circle exists``);
 - a finding names the line of its match; Julia named the paragraph's first;
 - a denial is a whole word ending within reach before the term (Julia);
   bulbs searched a window cut at ``reach``, where a cut word could count;
@@ -52,10 +56,15 @@ the stricter one unless that was an artefact:
   higher; Julia ended a section at any heading, bulbs only at level 2;
 - every heading outside an exempt section is audited; Julia audited none,
   bulbs skipped level-2 headings and the title line;
-- a marker exempts the paragraph directly after it, whatever its reason
-  says; a blank line disarms it (Julia; bulbs kept it armed across blank
-  lines); Julia ignored a marker whose reason starts with ``#`` and let a
-  marker on a heading line exempt that heading's section (both unused);
+- a marker exempts the one block directly after it, whatever its reason
+  says: a paragraph, or one list item or one table row, never the rest of
+  the list or table; a blank line disarms it (Julia; bulbs kept it armed
+  across blank lines). Both audits exempted every line up to the next blank
+  line, so a marker before a list or table exempted all of it; no consumer
+  marker preceded one, and the stricter reading is kept (a classical table
+  belongs in an exempt section). Julia ignored a marker whose reason starts
+  with ``#`` and let a marker on a heading line exempt that heading's
+  section (both unused);
 - an exempt-section pattern that matches no heading is a finding (bulbs
   refused to run; Julia had no such check);
 - every occurrence of a term is read; Mandelbrot read only the first of a
@@ -68,7 +77,10 @@ the stricter one unless that was an artefact:
   each, on standard output.
 
 On the three consumers' trees at the commit they adopted this package, each
-policy reports nothing, as each local audit did.
+policy reported nothing, as each local audit did. Reading a source file line
+by line, which came later, reports one place in Julia's tree: a comment in
+its kernel orbit module where the denial of an enumeration ("No circle, /
+disk, arc, or polar angle") is wrapped across two comment lines.
 
 Dependencies: the standard library, ``claim_governance`` (for ``lexing``)
 and ``vendoring`` (for ``vendored_directories``); a consumer vendors the three

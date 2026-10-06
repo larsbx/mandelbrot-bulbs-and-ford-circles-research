@@ -4,7 +4,7 @@
 [[package]]
 name = "rational_dynamics_py"
 repository = "larsbx/finite-math-kernels"
-commit = "1c42ed531d7c296bdb6be3c65bdafcde397f3112"
+commit = "bba47b61b1349d2029aed359aeb6c48fbab68403"
 root = "vendor/python"
 
 [package.files]
@@ -26,7 +26,7 @@ root = "vendor/python"
 [[package]]
 name = "vendoring"
 repository = "larsbx/finite-math-kernels"
-commit = "1c42ed531d7c296bdb6be3c65bdafcde397f3112"
+commit = "bba47b61b1349d2029aed359aeb6c48fbab68403"
 root = "vendor/python"
 
 [package.files]
@@ -36,7 +36,7 @@ root = "vendor/python"
 [[package]]
 name = "claim_governance"
 repository = "larsbx/finite-math-kernels"
-commit = "1c42ed531d7c296bdb6be3c65bdafcde397f3112"
+commit = "bba47b61b1349d2029aed359aeb6c48fbab68403"
 root = "vendor/python"
 
 [package.files]
@@ -58,17 +58,17 @@ root = "vendor/python"
 [[package]]
 name = "lexical_audit"
 repository = "larsbx/finite-math-kernels"
-commit = "1c42ed531d7c296bdb6be3c65bdafcde397f3112"
+commit = "bba47b61b1349d2029aed359aeb6c48fbab68403"
 root = "vendor/python"
 
 [package.files]
-"lexical_audit/__init__.py" = "ad206b6b719a55abad97f933fed25d603de26845c537509e6af9a18faefd7fc2"
-"lexical_audit/audit.py" = "475195c469cf2851fa34b93b658a55dd7bbe667400082eb1fdc7e81a1f3af3f0"
+"lexical_audit/__init__.py" = "9033132cbc90c8b899712d5b47dd29b686dd05440c0f8cdea2f57bdb9be1a727"
+"lexical_audit/audit.py" = "0b094f679a9195e41701380be28459c2358499bdb7bb433c4aa45c7bb3bd20e4"
 
 [[package]]
 name = "closed_interval"
 repository = "larsbx/finite-math-kernels"
-commit = "1c42ed531d7c296bdb6be3c65bdafcde397f3112"
+commit = "bba47b61b1349d2029aed359aeb6c48fbab68403"
 root = "vendor/python"
 
 [package.files]
@@ -79,11 +79,11 @@ root = "vendor/python"
 [[package]]
 name = "root_isolation_py"
 repository = "larsbx/finite-math-kernels"
-commit = "1c42ed531d7c296bdb6be3c65bdafcde397f3112"
+commit = "bba47b61b1349d2029aed359aeb6c48fbab68403"
 root = "vendor/python"
 
 [package.files]
 "root_isolation_py/__init__.py" = "44307370e4e2308dc6ea550696854321211817c4be05ba0080452c6c56812539"
 "root_isolation_py/boxes.py" = "823d46d77d112ad197fdbb2fb3d3761246e695043df34272f23ab91cbcb0c7c9"
 "root_isolation_py/krawczyk.py" = "e3bf9b11db8abb2d1f54c10ba20cfc4d6be9682b223cfd2eeeaef4dc818500a2"
-"root_isolation_py/krawczyk_moore.py" = "e1808e9ca1481b7e8da5ed08588621ef1d862e304db7b42f5e3a0ce966691792"
+"root_isolation_py/krawczyk_moore.py" = "47fe2131f4aa750755223bdb8a5c9256133ca8528160bc1db7a8fece541df98f"
