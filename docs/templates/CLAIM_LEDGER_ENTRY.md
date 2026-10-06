@@ -15,7 +15,7 @@ this claim's status is generated from the source, or it is already drift.
 -->
 
 - **Name:** `<Name>`            <!-- the identifier tests declare against -->
-- **Status:** proved | imported | scaffolded | open
+- **Status:** PROVEN | VALIDATED | CONJECTURED | FALSIFIED
 - **Statement:** `<the claim, stated exactly, with its quantifiers and its domain>`
 - **Domain:** `<the finite domain surveyed, or the hypotheses assumed>`
 
@@ -23,11 +23,15 @@ this claim's status is generated from the source, or it is already drift.
 
 <!--
 What makes this true. Exactly one of:
- - proved       — a deductive proof; cite it (file, theorem name)
- - imported     — a result from the literature; cite it, and state which
-                  hypotheses transfer and which were re-derived here
- - scaffolded   — machinery is in place, the claim is not yet established
- - open         — stated, not established
+ - PROVEN        — a theorem of this branch (register §2), by proof or by a
+                   finite certificate replayed from its stored endpoints; cite
+                   it, and tag every analytic import
+ - VALIDATED     — numerical, at a stated precision (register §3); name the
+                   instrument and its precision
+ - CONJECTURED   — the open register (§5); in the finite register a classical
+                   referent, never asserted
+ - FALSIFIED     — refuted in this branch (register §4); name what it was and
+                   the evidence. Superseded items are struck, never deleted
 Authority is preserved or lowered in translation. It is never raised.
 -->
 
