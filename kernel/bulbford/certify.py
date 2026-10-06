@@ -13,7 +13,11 @@ say the critical orbit has exact period q.  Krawczyk inclusion already proves
 the root in β is simple, so no separate squarefree step is needed.
 
 All numbers are rationals with dyadic denominators; every operation rounds
-outward to `prec` bits, so each box encloses the exact value.  Seeds may come
+outward to `prec` bits, so each box encloses the exact value.  The Krawczyk
+operator and its preconditioner are the vendored `root_isolation_py`
+(larsbx/finite-math-kernels, docs/root-isolation-spec.md), on `closed_interval`
+boxes converted at the boundary; this module supplies the maps, the fixed-point
+rounding to the 2^-prec grid, and the zero preconditioner for a singular centre.  Seeds may come
 from anywhere (floating-point Newton, continuation): they are untrusted, and
 only the inclusion checks decide.  An unmet check is INCONCLUSIVE, never a
 disproof.  Which bulb a certified centre belongs to is not a finite fact here;
@@ -28,6 +32,10 @@ from functools import reduce
 from itertools import combinations
 from math import ceil, floor
 from typing import Callable
+
+from closed_interval import IQ, ComplexIQ
+from root_isolation_py import krawczyk as _krawczyk
+from root_isolation_py import midpoint_inverse, strictly_inside
 
 PREC = 160  # bits after the binary point kept by outward rounding
 
@@ -72,9 +80,6 @@ class I:
     def contains_zero(self) -> bool:
         return self.lo <= 0 <= self.hi
 
-    def strictly_inside(self, o: "I") -> bool:
-        return o.lo < self.lo and self.hi < o.hi
-
 
 @dataclass(frozen=True, slots=True)
 class Box:
@@ -107,7 +112,8 @@ class Box:
         return not (self.re.contains_zero() and self.im.contains_zero())
 
     def strictly_inside(self, o: "Box") -> bool:
-        return self.re.strictly_inside(o.re) and self.im.strictly_inside(o.im)
+        """The Krawczyk-Moore test of the vendored root_isolation_py."""
+        return strictly_inside((_ciq(self),), (_ciq(o),))
 
     @property
     def mid(self) -> tuple[Fraction, Fraction]:
@@ -115,6 +121,15 @@ class Box:
 
 
 ZERO, ONE = Box.point(0), Box.point(1)
+
+
+def _ciq(b: Box) -> ComplexIQ:
+    return ComplexIQ(IQ(b.re.lo, b.re.hi), IQ(b.im.lo, b.im.hi))
+
+
+def _box(z: ComplexIQ) -> Box:
+    """Back from `closed_interval`; a rejected box has lo > hi, which `I` refuses."""
+    return Box(I(z.re.lo, z.re.hi), I(z.im.lo, z.im.hi))
 
 
 # --- critical-orbit polynomials on boxes -------------------------------------------------------
@@ -165,22 +180,46 @@ def _complex_dyadic(z: complex, prec: int) -> tuple[Fraction, Fraction]:
     return _down(Fraction(z.real), prec), _down(Fraction(z.imag), prec)
 
 
+def _preconditioner(prec: int) -> Callable:
+    """`root_isolation_py.midpoint_inverse` rounded down to the 2^-prec grid, or the zero matrix where the
+    centre is singular (then K(β) ⊇ β and the inclusion fails: INCONCLUSIVE, not an exception).  Any point
+    matrix is admissible (docs/root-isolation-spec.md, section 4); its accuracy affects only acceptance."""
+
+    def invert(j):
+        inverse = midpoint_inverse(j, lambda x: _down(x, prec))
+        if all(e.accepted() for row in inverse for e in row):
+            return inverse
+        return tuple(tuple(_ciq(ZERO) for _ in row) for row in j)
+
+    return invert
+
+
 def _approx_inverse(d: Box, prec: int) -> Box:
-    """A dyadic point near 1/d; its accuracy affects only whether K ⊂ int β, never soundness."""
-    x, y = d.mid
-    n = x * x + y * y
-    if n == 0:
-        return ZERO  # K(β) = β then, so the inclusion fails: INCONCLUSIVE, not an exception
-    return Box.point(_down(x / n, prec), _down(-y / n, prec))
+    """A dyadic point near 1/d (ZERO when mid d = 0)."""
+    return _box(_preconditioner(prec)(((_ciq(d),),))[0][0])
+
+
+def krawczyk_boxes(f, x: tuple[Box, ...], prec: int = PREC) -> tuple[Box, ...]:
+    """K(X) = m − A F(m) + (I − A J(X))(X − m), m = mid X, A ≈ J(m)⁻¹, rounded outward to `prec` bits:
+    the vendored `root_isolation_py.krawczyk` with f(boxes, prec) -> (values, Jacobian) on bulbford boxes."""
+
+    def at(v):
+        values, jacobian = f(tuple(map(_box, v)), prec)
+        return tuple(map(_ciq, values)), tuple(tuple(map(_ciq, row)) for row in jacobian)
+
+    image = _krawczyk(tuple(map(_ciq, x)), at, lambda v: at(v)[1], _preconditioner(prec),
+                      lambda z: _ciq(_box(z).rounded(prec)))
+    return tuple(map(_box, image))
 
 
 def krawczyk(r, beta: Box, prec: int = PREC) -> Box:
     """K(β) = m − A R(m) + (1 − A R'(β))(β − m), m = mid β, A ≈ 1/R'(m)."""
-    m = Box.point(*beta.mid)
-    value, deriv_m = r(m, prec)
-    a = _approx_inverse(deriv_m, prec)
-    _, deriv_beta = r(beta, prec)
-    return (m - a * value + (ONE - a * deriv_beta) * (beta - m)).rounded(prec)
+
+    def f(v, p):
+        value, deriv = r(v[0], p)
+        return (value,), ((deriv,),)
+
+    return krawczyk_boxes(f, (beta,), prec)[0]
 
 
 def newton_refine(r, re: Fraction, im: Fraction, steps: int, prec: int = PREC) -> tuple[Fraction, Fraction]:

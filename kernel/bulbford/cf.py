@@ -21,7 +21,7 @@ from rational_dynamics_py import (
     signed_mod_inverse,
     units,
 )
-from rational_dynamics_py.farey import require_int
+from rational_dynamics_py.addresses import require_int
 
 
 def _unit(p: int, q: int):

@@ -1,8 +1,10 @@
 """The vendored finite-math-kernels packages: pinned, used, and not duplicated.
 
-`rational_dynamics_py` and `vendoring` (and, for tools/audit_limits.py, `lexical_audit` and
-the `claim_governance` lexer it reads) are copied byte-for-byte into vendor/python and
-pinned in vendored.toml. The generic exact arithmetic of p/q and of angle doubling lives
+`rational_dynamics_py`, `closed_interval`, `root_isolation_py` and `vendoring` (and, for
+tools/audit_limits.py, `lexical_audit` and the `claim_governance` lexer it reads) are copied
+byte-for-byte into vendor/python and pinned in vendored.toml. The Krawczyk operator, its
+preconditioner and the box tests of `bulbford.certify` and `bulbford.antipode` are
+`root_isolation_py`'s. The generic exact arithmetic of p/q and of angle doubling lives
 there only: `bulbford.cf`, `bulbford.wake` and `bulbford.cycles` keep their names as thin
 adapters that call it, and no other module of kernel/ or experiments/scripts defines one
 of its functions again. reference/legacy holds the unmodified original instruments and is
@@ -11,9 +13,11 @@ not scanned.
 from __future__ import annotations
 
 import ast
+import re
 import shutil
 import subprocess
 import sys
+import tomllib
 import zipfile
 from fractions import Fraction
 from pathlib import Path
@@ -58,13 +62,30 @@ def test_vendored_packages_match_their_pins():
     assert sync.repo_root() == ROOT
     assert sync.check() == []
     assert sync.vendored_directories() == (
-        "vendor/python/claim_governance", "vendor/python/lexical_audit",
-        "vendor/python/rational_dynamics_py", "vendor/python/vendoring",
+        "vendor/python/claim_governance", "vendor/python/closed_interval",
+        "vendor/python/lexical_audit", "vendor/python/rational_dynamics_py",
+        "vendor/python/root_isolation_py", "vendor/python/vendoring",
     )
 
 
 def test_the_vendored_package_is_the_one_imported():
-    assert Path(rd.__file__).resolve().parent == ROOT / "vendor" / "python" / "rational_dynamics_py"
+    import closed_interval
+    import root_isolation_py
+
+    for module in (rd, closed_interval, root_isolation_py):
+        assert Path(module.__file__).resolve().parent == ROOT / "vendor" / "python" / module.__name__
+
+
+#: The root_isolation_py names no module here may define again (docs/root-isolation-spec.md upstream).
+KRAWCZYK_NAMES = frozenset({"centre", "exact_inverse", "midpoint_inverse", "krawczyk_image", "strictly_inside",
+                            "excludes_zero", "disjoint", "_matmul", "_invert"})
+
+
+def test_no_module_redefines_the_krawczyk_operator():
+    for path in SCANNED:
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+        defined = {n.name for n in tree.body if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))}
+        assert not defined & KRAWCZYK_NAMES, f"{path.relative_to(ROOT)}: {sorted(defined & KRAWCZYK_NAMES)}"
 
 
 def test_no_module_redefines_a_vendored_function():
@@ -190,6 +211,30 @@ def test_importing_bulbford_refuses_a_copy_that_shadows_the_pinned_one(decoy):
     assert "not the pinned copy" in run.stderr
 
 
+@pytest.mark.parametrize("name", ["closed_interval", "root_isolation_py"])
+def test_importing_bulbford_refuses_a_shadowing_copy_of_any_vendored_package(tmp_path, name):
+    (tmp_path / name).mkdir()
+    (tmp_path / name / "__init__.py").write_text("DECOY = True\n", encoding="utf-8")
+    run = _import_bulbford(tmp_path, ROOT / "vendor" / "python", ROOT / "kernel")
+    assert run.returncode != 0
+    assert f"{name} resolved to" in run.stderr and "not the pinned copy" in run.stderr
+
+
+#: Vendored packages only the checkout's tools read (the checker; tools/audit_limits.py's engine
+#: and the lexer it reads). bulbford imports none of them, so the wheel does not carry them.
+CHECKOUT_ONLY = frozenset({"vendoring", "lexical_audit", "claim_governance"})
+
+
+def test_bulbford_guards_every_vendored_package_it_ships():
+    text = (ROOT / "kernel" / "bulbford" / "__init__.py").read_text(encoding="utf-8")
+    shipped = {p["name"] for p in sync.load()} - CHECKOUT_ONLY
+    guarded = set(ast.literal_eval(re.search(r"for _name in (\([^)]*\)):", text)[1]))
+    assert guarded == shipped
+    include = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+    include = set(include["tool"]["setuptools"]["packages"]["find"]["include"])
+    assert include == {"bulbford*"} | {f"{name}*" for name in shipped}
+
+
 def test_a_built_wheel_carries_the_vendored_package(tmp_path):
     tree = tmp_path / "tree"  # a copy of what the build reads, so the checkout stays clean
     tree.mkdir()
@@ -201,8 +246,9 @@ def test_a_built_wheel_carries_the_vendored_package(tmp_path):
     assert build.returncode == 0, build.stderr
     (wheel,) = tmp_path.glob("bulbford-*.whl")
     names = set(zipfile.ZipFile(wheel).namelist())
-    pinned = next(p["files"] for p in sync.load() if p["name"] == "rational_dynamics_py")
-    assert set(pinned) <= names
+    for package in sync.load():
+        if package["name"] not in CHECKOUT_ONLY:
+            assert set(package["files"]) <= names, package["name"]
     assert "bulbford/__init__.py" in names
 
 

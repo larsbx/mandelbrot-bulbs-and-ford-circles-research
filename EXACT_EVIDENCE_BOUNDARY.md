@@ -285,3 +285,12 @@ copy checked against it: `kernel/bulbford/{cf,wake,cycles}.py` are adapters
 over the vendored `rational_dynamics_py` (`vendor/python`, pinned in
 `vendored.toml`). The R1 vector replay above still runs, now through those
 adapters; the exact/imported boundary of the wake combinatorics is unchanged.
+
+Likewise the Krawczyk operator (Krawczyk 1969), its rounded-midpoint
+preconditioner, the strict-interior Krawczyk-Moore test (Moore 1977) and box
+disjointness are the vendored `root_isolation_py` over `closed_interval`
+(finite-math-kernels `docs/root-isolation-spec.md`), run by
+`kernel/bulbford/{certify,antipode}.py` on their own boxes, maps and
+`2^-prec` outward rounding. Every stored certificate and every replayed
+verdict is byte-identical to the local operator it replaced; what a passing
+inclusion means, and the imports it needs, are unchanged.

@@ -4,19 +4,29 @@
 [[package]]
 name = "rational_dynamics_py"
 repository = "larsbx/finite-math-kernels"
-commit = "9019c641521f903f5076223b921abbee6703c2e9"
+commit = "dc9a569bd251f55da8b0d9baddb9b75cde23fd09"
 root = "vendor/python"
 
 [package.files]
-"rational_dynamics_py/__init__.py" = "f1625e444a53ea6916a915b4246d43294c94febb7717f8eb7409d75215980f25"
-"rational_dynamics_py/arithmetic.py" = "055bd745b758316adcdb63d6a36e58f14c23922bf5eb3e35235152aaaf49b93a"
-"rational_dynamics_py/doubling.py" = "5dc5cdd4bd93da7496473ee382e2e5608b82fa1f59c23363c6ff67c2a788ec71"
-"rational_dynamics_py/farey.py" = "ec7c1f004eba1c74ec0f6bc5601efef35e81ed789323580840746aaebaed3528"
+"rational_dynamics_py/__init__.py" = "27c6fce96e6589b0c0dc96cbcf095092864075c57aa3faea833d75e296864e74"
+"rational_dynamics_py/addresses.py" = "896a78b56866e464ab49ef1ac071215032b5c5569df104725fbff60591106fea"
+"rational_dynamics_py/arithmetic.py" = "683ba76325fc32d31f787ac13ba445a5ba44b441c564924d453ef26bc32fd6a3"
+"rational_dynamics_py/carmichael.py" = "b6c5fb70165f8ab843ffb1d1b9dc0285cdb5bcd85a07bbaa5dd16f03ea15de10"
+"rational_dynamics_py/continued_fractions.py" = "fc65a3743c5b687ba99cb66bbebd3374a42ac5992da79c5f0a22828156fce9e2"
+"rational_dynamics_py/dedekind_sums.py" = "6b4c97239320163b735f190d3f548accfe440b4ce6595555516a673e6ce20ba9"
+"rational_dynamics_py/doubling.py" = "b71c4014ff743aa4bfb332b9c67c11866aec1c738fb81b0204efbfec8c6b455f"
+"rational_dynamics_py/farey.py" = "cdad1472452b514369a08303d82cac251e1930cbb1b8f99aa51ef514a1c75922"
+"rational_dynamics_py/mechanical_words.py" = "236d2ca75615e1575476c7e563a91592e3d7d33e1f92ad12b7d5e32cb4976a0a"
+"rational_dynamics_py/moebius_function.py" = "e375f11d1293561810b615a5fe34303dc58b5318622e62381fce7b371683de16"
+"rational_dynamics_py/multiplicative_order.py" = "752a463c85bf1304a7a7297753d94e036de9335f1480451fe4267ef7006cd8a9"
+"rational_dynamics_py/ramanujan_sums.py" = "6efe14a9152fc44482496816a22eaafe97806b9b1dbb8b334fa9a9cdf04057e9"
+"rational_dynamics_py/rotation_sets.py" = "dad9f0e9035c362200a9deda3bb1786efe0c0abf55e50676621eb745582173dd"
+"rational_dynamics_py/wakes.py" = "bef5cc10db94916f4fbffdbf8dd308021a7bef364b82ca46ed019ff329aa9e0c"
 
 [[package]]
 name = "vendoring"
 repository = "larsbx/finite-math-kernels"
-commit = "9019c641521f903f5076223b921abbee6703c2e9"
+commit = "dc9a569bd251f55da8b0d9baddb9b75cde23fd09"
 root = "vendor/python"
 
 [package.files]
@@ -26,7 +36,7 @@ root = "vendor/python"
 [[package]]
 name = "claim_governance"
 repository = "larsbx/finite-math-kernels"
-commit = "9019c641521f903f5076223b921abbee6703c2e9"
+commit = "dc9a569bd251f55da8b0d9baddb9b75cde23fd09"
 root = "vendor/python"
 
 [package.files]
@@ -48,9 +58,32 @@ root = "vendor/python"
 [[package]]
 name = "lexical_audit"
 repository = "larsbx/finite-math-kernels"
-commit = "9019c641521f903f5076223b921abbee6703c2e9"
+commit = "dc9a569bd251f55da8b0d9baddb9b75cde23fd09"
 root = "vendor/python"
 
 [package.files]
 "lexical_audit/__init__.py" = "ad206b6b719a55abad97f933fed25d603de26845c537509e6af9a18faefd7fc2"
 "lexical_audit/audit.py" = "475195c469cf2851fa34b93b658a55dd7bbe667400082eb1fdc7e81a1f3af3f0"
+
+[[package]]
+name = "closed_interval"
+repository = "larsbx/finite-math-kernels"
+commit = "dc9a569bd251f55da8b0d9baddb9b75cde23fd09"
+root = "vendor/python"
+
+[package.files]
+"closed_interval/__init__.py" = "25f2f2555bc5ce24bb9df5d7e20389ba3213d99f432751fb19288381ff6c2a83"
+"closed_interval/dyadic.py" = "c1be682fa4551a3c66122d090fb62005ef8c53300a73f0ba7a451d09f110d97c"
+"closed_interval/interval.py" = "17e04b6021a0df801d41a2be867f87850356aa2e2ecff20db06a77b73e2992c4"
+
+[[package]]
+name = "root_isolation_py"
+repository = "larsbx/finite-math-kernels"
+commit = "dc9a569bd251f55da8b0d9baddb9b75cde23fd09"
+root = "vendor/python"
+
+[package.files]
+"root_isolation_py/__init__.py" = "44307370e4e2308dc6ea550696854321211817c4be05ba0080452c6c56812539"
+"root_isolation_py/boxes.py" = "823d46d77d112ad197fdbb2fb3d3761246e695043df34272f23ab91cbcb0c7c9"
+"root_isolation_py/krawczyk.py" = "e3bf9b11db8abb2d1f54c10ba20cfc4d6be9682b223cfd2eeeaef4dc818500a2"
+"root_isolation_py/krawczyk_moore.py" = "e1808e9ca1481b7e8da5ed08588621ef1d862e304db7b42f5e3a0ce966691792"
