@@ -28,6 +28,8 @@ from functools import lru_cache
 
 import numpy as np
 
+from rational_dynamics_py import doubling_orbit, rotation_number
+
 from bulbford.wake import rotation_cycle, wake
 
 TAGS = ("DH-Mil00-rational-ray-landing", "Gol92-rotation-cycle-uniqueness", "Mil-12-holomorphic-index-formula")
@@ -133,20 +135,8 @@ def flank_angles(p: int, q: int) -> tuple[int, int]:
     return (alpha[(w - 1) % q] + 1) % M, (alpha[(w + 2) % q] - 1) % M
 
 
-def rotation_number(angles: tuple[int, ...], M: int) -> Fraction | None:
-    """p'/k if doubling shifts the sorted angles cyclically by p' places, else None."""
-    ordered = sorted(angles)
-    k = len(ordered)
-    position = {a: i for i, a in enumerate(ordered)}
-    shifts = {(position[(2 * a) % M] - i) % k for i, a in enumerate(ordered)}
-    return Fraction(shifts.pop(), k) if len(shifts) == 1 else None
-
-
-def _orbit(j: int, M: int) -> tuple[int, ...]:
-    orbit = [j]
-    while (nxt := (2 * orbit[-1]) % M) != j:
-        orbit.append(nxt)
-    return tuple(orbit)
+#: The doubling orbit of j mod M (M odd), starting at j mod M; the research scripts import this name.
+_orbit = doubling_orbit
 
 
 def _term(orbit: tuple[int, ...], z: np.ndarray, q: int, M: int) -> CycleTerm:

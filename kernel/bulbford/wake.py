@@ -13,33 +13,38 @@ consequences:
   [Gol92]  the rotation cycle with rotation number p/q is unique;
   [DH/Mil00] the parameter rays at θ₋, θ₊ land at the root of B_{p/q}, so the
              characteristic arc is the angular width of the p/q-wake.
+
+The generic finite arithmetic — `rotation_cycle`, `mechanical`, `wake`, `farey` —
+is the vendored `rational_dynamics_py` (larsbx/finite-math-kernels, vendor/python,
+pinned in vendored.toml); the names here are its adapters, kept because
+larsbx/math-vizops loads this file on its own from a sibling checkout and reads
+`wake`, `mechanical`, `rotation_cycle` and `double`. This repository keeps the
+TAGS, `heights` (P8) and the finite check `acts_as_rotation`.
 """
 from __future__ import annotations
 
+import sys
 from fractions import Fraction
-from math import gcd
+from pathlib import Path
+
+try:
+    import rational_dynamics_py as _rd
+except ModuleNotFoundError:  # loaded as a bare file (math-vizops): find this checkout's vendor/python
+    sys.path.append(str(Path(__file__).resolve().parents[2] / "vendor" / "python"))
+    import rational_dynamics_py as _rd
 
 TAGS = ("Gol92-rotation-cycle-uniqueness", "DH-Mil00-rational-ray-landing")
 
 
 def double(theta: Fraction) -> Fraction:
+    """2θ mod 1 on any Fraction (kept local: the vendored `double_mod_one` takes a
+    non-negative reduced `Address`, and math-vizops calls this on Fractions)."""
     return 2 * theta % 1
 
 
-def _reduced(p: int, q: int) -> None:
-    if not (0 < p < q and gcd(p, q) == 1):
-        raise ValueError("need 0 < p < q with gcd(p, q) = 1")
-
-
 def rotation_cycle(p: int, q: int) -> tuple[Fraction, ...]:
-    """The doubling cycle x₀ < … < x_{q−1} of rotation number p/q."""
-    _reduced(p, q)
-    bits = "".join("1" if k * p % q >= q - p else "0" for k in range(q))
-    x0 = Fraction(int(bits, 2), 2**q - 1)
-    orbit = [x0]
-    for _ in range(q - 1):
-        orbit.append(double(orbit[-1]))
-    return tuple(sorted(orbit))
+    """The doubling cycle x₀ < … < x_{q−1} of rotation number p/q (refuses p/q not reduced in (0, 1))."""
+    return _rd.rotation_cycle(p, q)
 
 
 def mechanical(p: int, q: int, r: int) -> int:
@@ -47,9 +52,9 @@ def mechanical(p: int, q: int, r: int) -> int:
 
     Bit k (most significant first) is [(r + k·p) mod q ≥ q − p]. c(0) is the word
     `rotation_cycle` starts from, doubling sends c(r) to c(r + p), and the sorted
-    cycle is c(0) < c(1) < … < c(q − 1).
+    cycle is c(0) < c(1) < … < c(q − 1). Refuses p/q not reduced in (0, 1).
     """
-    return int("".join("1" if (r + k * p) % q >= q - p else "0" for k in range(q)), 2)
+    return _rd.mechanical_word(p, q, r)
 
 
 def heights(word: int, q: int) -> list[int]:
@@ -73,11 +78,10 @@ def acts_as_rotation(p: int, q: int, cycle: tuple[Fraction, ...]) -> bool:
 
 
 def wake(p: int, q: int) -> tuple[Fraction, Fraction]:
-    """(θ₋, θ₊): the consecutive cycle points bounding the shortest arc."""
-    cycle = rotation_cycle(p, q)
-    return min(zip(cycle, cycle[1:]), key=lambda pair: pair[1] - pair[0])
+    """(θ₋, θ₊): the consecutive cycle points bounding the shortest arc, (x_{p−1}, x_p)."""
+    return _rd.wake(p, q)
 
 
 def farey(n: int) -> tuple[Fraction, ...]:
-    """Interior Farey fractions of order n, increasing."""
-    return tuple(sorted({Fraction(p, q) for q in range(2, n + 1) for p in range(1, q)}))
+    """Interior Farey fractions of order n, increasing (the interior of F_n; n < 1 is refused)."""
+    return _rd.farey_sequence(n, interior=True)
