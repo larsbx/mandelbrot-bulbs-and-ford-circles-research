@@ -212,3 +212,15 @@ def test_wake_loaded_as_a_bare_file_uses_the_pinned_copy_over_an_ambient_one(dec
     found, result = run.stdout.splitlines()
     assert Path(found).resolve().parent == ROOT / "vendor" / "python" / "rational_dynamics_py"
     assert result == "(Fraction(1, 7), Fraction(2, 7))"
+
+
+def test_wake_loaded_as_a_bare_file_refuses_a_preloaded_foreign_bulbford(decoy):
+    (decoy / "bulbford").mkdir()
+    (decoy / "bulbford" / "__init__.py").write_text("", encoding="utf-8")
+    code = (f"import sys, importlib.util; sys.path[:0] = [{str(decoy)!r}]; "
+            "import bulbford, rational_dynamics_py; "
+            f"spec = importlib.util.spec_from_file_location('bare_wake', {str(ROOT / 'kernel' / 'bulbford' / 'wake.py')!r}); "
+            "spec.loader.exec_module(importlib.util.module_from_spec(spec))")
+    run = subprocess.run([sys.executable, "-I", "-c", code], capture_output=True, text=True, cwd=decoy)
+    assert run.returncode != 0
+    assert "ImportError" in run.stderr and "not this checkout's" in run.stderr

@@ -29,7 +29,11 @@ from pathlib import Path
 
 if __package__ != "bulbford":  # loaded as a bare file (math-vizops): use this checkout's bulbford
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-import bulbford  # noqa: E402,F401  (puts the pinned vendor/python first and refuses any other copy)
+import bulbford  # noqa: E402  (puts the pinned vendor/python first and refuses any other copy)
+
+if Path(bulbford.__file__).resolve().parent != Path(__file__).resolve().parent:
+    # A host may have imported another bulbford already; its guard says nothing about this checkout.
+    raise ImportError(f"bulbford resolved to {bulbford.__file__}, not this checkout's {Path(__file__).parent}")
 import rational_dynamics_py as _rd  # noqa: E402
 
 TAGS = ("Gol92-rotation-cycle-uniqueness", "DH-Mil00-rational-ray-landing")
