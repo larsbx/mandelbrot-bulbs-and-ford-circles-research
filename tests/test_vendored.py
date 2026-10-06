@@ -1,6 +1,7 @@
 """The vendored finite-math-kernels packages: pinned, used, and not duplicated.
 
-`rational_dynamics_py` and `vendoring` are copied byte-for-byte into vendor/python and
+`rational_dynamics_py` and `vendoring` (and, for tools/audit_limits.py, `lexical_audit` and
+the `claim_governance` lexer it reads) are copied byte-for-byte into vendor/python and
 pinned in vendored.toml. The generic exact arithmetic of p/q and of angle doubling lives
 there only: `bulbford.cf`, `bulbford.wake` and `bulbford.cycles` keep their names as thin
 adapters that call it, and no other module of kernel/ or experiments/scripts defines one
@@ -56,7 +57,10 @@ def _vendored_aliases(tree: ast.Module) -> set[str]:
 def test_vendored_packages_match_their_pins():
     assert sync.repo_root() == ROOT
     assert sync.check() == []
-    assert sync.vendored_directories() == ("vendor/python/rational_dynamics_py", "vendor/python/vendoring")
+    assert sync.vendored_directories() == (
+        "vendor/python/claim_governance", "vendor/python/lexical_audit",
+        "vendor/python/rational_dynamics_py", "vendor/python/vendoring",
+    )
 
 
 def test_the_vendored_package_is_the_one_imported():
