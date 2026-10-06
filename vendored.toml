@@ -4,21 +4,86 @@
 [[package]]
 name = "rational_dynamics_py"
 repository = "larsbx/finite-math-kernels"
-commit = "65038cf1b6e8b038f1efc85e802d08b8c22fe4e1"
+commit = "d61bcf82d621b192a918ae90a031413bb2d30875"
 root = "vendor/python"
 
 [package.files]
-"rational_dynamics_py/__init__.py" = "f1625e444a53ea6916a915b4246d43294c94febb7717f8eb7409d75215980f25"
-"rational_dynamics_py/arithmetic.py" = "055bd745b758316adcdb63d6a36e58f14c23922bf5eb3e35235152aaaf49b93a"
-"rational_dynamics_py/doubling.py" = "5dc5cdd4bd93da7496473ee382e2e5608b82fa1f59c23363c6ff67c2a788ec71"
-"rational_dynamics_py/farey.py" = "ec7c1f004eba1c74ec0f6bc5601efef35e81ed789323580840746aaebaed3528"
+"rational_dynamics_py/__init__.py" = "27c6fce96e6589b0c0dc96cbcf095092864075c57aa3faea833d75e296864e74"
+"rational_dynamics_py/addresses.py" = "896a78b56866e464ab49ef1ac071215032b5c5569df104725fbff60591106fea"
+"rational_dynamics_py/arithmetic.py" = "683ba76325fc32d31f787ac13ba445a5ba44b441c564924d453ef26bc32fd6a3"
+"rational_dynamics_py/carmichael.py" = "b6c5fb70165f8ab843ffb1d1b9dc0285cdb5bcd85a07bbaa5dd16f03ea15de10"
+"rational_dynamics_py/continued_fractions.py" = "fc65a3743c5b687ba99cb66bbebd3374a42ac5992da79c5f0a22828156fce9e2"
+"rational_dynamics_py/dedekind_sums.py" = "6b4c97239320163b735f190d3f548accfe440b4ce6595555516a673e6ce20ba9"
+"rational_dynamics_py/doubling.py" = "b71c4014ff743aa4bfb332b9c67c11866aec1c738fb81b0204efbfec8c6b455f"
+"rational_dynamics_py/farey.py" = "cdad1472452b514369a08303d82cac251e1930cbb1b8f99aa51ef514a1c75922"
+"rational_dynamics_py/mechanical_words.py" = "236d2ca75615e1575476c7e563a91592e3d7d33e1f92ad12b7d5e32cb4976a0a"
+"rational_dynamics_py/moebius_function.py" = "e375f11d1293561810b615a5fe34303dc58b5318622e62381fce7b371683de16"
+"rational_dynamics_py/multiplicative_order.py" = "752a463c85bf1304a7a7297753d94e036de9335f1480451fe4267ef7006cd8a9"
+"rational_dynamics_py/ramanujan_sums.py" = "6efe14a9152fc44482496816a22eaafe97806b9b1dbb8b334fa9a9cdf04057e9"
+"rational_dynamics_py/rotation_sets.py" = "dad9f0e9035c362200a9deda3bb1786efe0c0abf55e50676621eb745582173dd"
+"rational_dynamics_py/wakes.py" = "bef5cc10db94916f4fbffdbf8dd308021a7bef364b82ca46ed019ff329aa9e0c"
 
 [[package]]
 name = "vendoring"
 repository = "larsbx/finite-math-kernels"
-commit = "65038cf1b6e8b038f1efc85e802d08b8c22fe4e1"
+commit = "d61bcf82d621b192a918ae90a031413bb2d30875"
 root = "vendor/python"
 
 [package.files]
 "vendoring/__init__.py" = "959cdf7a89536784da18659db7cfe4099c885f5370249eccc71ce73775f8a584"
-"vendoring/check_vendored_sync.py" = "7e7464a20adb333bb7a6a72e35a0eff45944e8b7243d1e20b202fe9c6aacf15c"
+"vendoring/check_vendored_sync.py" = "e91c20fdc6a6cc67a6378bc1eebbe87bdc637a953561ad0954eb63a2a799c71e"
+
+[[package]]
+name = "claim_governance"
+repository = "larsbx/finite-math-kernels"
+commit = "d61bcf82d621b192a918ae90a031413bb2d30875"
+root = "vendor/python"
+
+[package.files]
+"claim_governance/__init__.py" = "64883fe16bdb5ad85b150b6625c8015de1de06a2dde2cae9e99d275b00750378"
+"claim_governance/checks/__init__.py" = "aeb4d89c1eeee260ab01df84e6576e954342c1a3a76ab126408e52bf44d7fe07"
+"claim_governance/checks/claims.py" = "35580a55a2f62e97ebeebf7128c8a255ccf5f3a12144c74dff6514ec15ef17ab"
+"claim_governance/checks/consistency.py" = "79ff0709ea01a044ddbd3941190765281b05c59c93ee91ee57dfbba484836947"
+"claim_governance/checks/coverage.py" = "78dc02b66132a562e741978654fd7fd41256558072b94233c1db619920fc13cc"
+"claim_governance/checks/numerics.py" = "5af0bba117d7503a2ea81d1aaeb4ef6fdd83504345925779224749ddd5666598"
+"claim_governance/checks/promotion.py" = "297aced859ea014d6cbb37166b9787bcda8f74ad52bba52fef83df7be04c1840"
+"claim_governance/checks/terminology.py" = "adfa2be8c2f49e6c81aa4f661293c6a088af3624f006a901a8d1d747924baef1"
+"claim_governance/cli.py" = "122f6b5acf8d5910ded64d93b83390c64aa8ee702179b5e71d0138b988855257"
+"claim_governance/findings.py" = "a8dafbaacc963b725d3b4fa32c8ac04ba10f4d69606362f52e5858af775bf3b4"
+"claim_governance/lexing.py" = "2a7c163bedf51f86c6074c887d2ba0d3cf9116c0955dc62e71c4b7bedfcb1499"
+"claim_governance/policy.py" = "7b7f34419d9436ecf818c7e64093a504de7d924d8abe80de047c54e50c236095"
+"claim_governance/repo.py" = "11a603c0288f9030ec0c5990d260f2c3f593b7e44a2b86d49f13920f84348dd3"
+"claim_governance/runner.py" = "86c48c3dc677e3cacf515b852382dfc459c30bc12d8220d6171efa22a84bef89"
+
+[[package]]
+name = "lexical_audit"
+repository = "larsbx/finite-math-kernels"
+commit = "d61bcf82d621b192a918ae90a031413bb2d30875"
+root = "vendor/python"
+
+[package.files]
+"lexical_audit/__init__.py" = "9033132cbc90c8b899712d5b47dd29b686dd05440c0f8cdea2f57bdb9be1a727"
+"lexical_audit/audit.py" = "0b094f679a9195e41701380be28459c2358499bdb7bb433c4aa45c7bb3bd20e4"
+
+[[package]]
+name = "closed_interval"
+repository = "larsbx/finite-math-kernels"
+commit = "d61bcf82d621b192a918ae90a031413bb2d30875"
+root = "vendor/python"
+
+[package.files]
+"closed_interval/__init__.py" = "25f2f2555bc5ce24bb9df5d7e20389ba3213d99f432751fb19288381ff6c2a83"
+"closed_interval/dyadic.py" = "c1be682fa4551a3c66122d090fb62005ef8c53300a73f0ba7a451d09f110d97c"
+"closed_interval/interval.py" = "17e04b6021a0df801d41a2be867f87850356aa2e2ecff20db06a77b73e2992c4"
+
+[[package]]
+name = "root_isolation_py"
+repository = "larsbx/finite-math-kernels"
+commit = "d61bcf82d621b192a918ae90a031413bb2d30875"
+root = "vendor/python"
+
+[package.files]
+"root_isolation_py/__init__.py" = "44307370e4e2308dc6ea550696854321211817c4be05ba0080452c6c56812539"
+"root_isolation_py/boxes.py" = "823d46d77d112ad197fdbb2fb3d3761246e695043df34272f23ab91cbcb0c7c9"
+"root_isolation_py/krawczyk.py" = "e3bf9b11db8abb2d1f54c10ba20cfc4d6be9682b223cfd2eeeaef4dc818500a2"
+"root_isolation_py/krawczyk_moore.py" = "47fe2131f4aa750755223bdb8a5c9256133ca8528160bc1db7a8fece541df98f"
