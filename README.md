@@ -11,7 +11,7 @@ Research branch `bulb-ford-correction`: the size of the satellite bulbs of the M
 - **Wake visual guide:** [`docs/wake-cycle-to-mandelbrot.md`](docs/wake-cycle-to-mandelbrot.md) shows how the exact doubling cycle selects `θ₋, θ₊`, how the imported rational parameter-ray landing identifies their common bulb root, and where the exact/imported/numerical boundaries lie. The `3/7` still and the interactive browser visual are drawn in [`larsbx/math-vizops`](https://github.com/larsbx/math-vizops) from `kernel/bulbford/wake.py`.
 - **Contributions audit:** [`docs/contributions-audit.md`](docs/contributions-audit.md) — what is new, at which tier, against which prior art, and eight consistency findings with the register edits they led to; P2 re-derived independently in `experiments/scripts/audit_p2_independent.py`.
 - **Bridges spike:** [`docs/bridges-spike.md`](docs/bridges-spike.md) — four bridges tested on data: the `p̄/q` spectrum (B1), Ramanujan sums and the jump law at every denominator (B2), `2^q − 1` dividing the norm of the parabolic coefficient (B3, `kernel/bulbford/norms.py`), and Dedekind sums (B4, negative).
-- **Vendored kernels:** `vendor/python/` holds two packages of [`larsbx/finite-math-kernels`](https://github.com/larsbx/finite-math-kernels), copied byte-for-byte and pinned by SHA-256 in [`vendored.toml`](vendored.toml) (see [Vendoring](#vendoring)): `rational_dynamics_py` (continued fractions, units, Farey sequences, rotation cycles, wakes, rotation numbers, doubling orbits, Dedekind and Ramanujan sums) and `vendoring` (the checker). `kernel/bulbford/{cf,wake,cycles}.py` are thin adapters over the first.
+- **Vendored kernels:** `vendor/python/` holds four packages of [`larsbx/finite-math-kernels`](https://github.com/larsbx/finite-math-kernels), copied byte-for-byte and pinned by SHA-256 in [`vendored.toml`](vendored.toml) (see [Vendoring](#vendoring)): `rational_dynamics_py` (continued fractions, units, Farey sequences, rotation cycles, wakes, rotation numbers, doubling orbits, Dedekind and Ramanujan sums), `root_isolation_py` over `closed_interval` (the Krawczyk operator, its preconditioners and the Krawczyk-Moore box test that `kernel/bulbford/{certify,antipode}.py` run on their boxes) and `vendoring` (the checker). `kernel/bulbford/{cf,wake,cycles}.py` are thin adapters over the first.
 - **Evidence boundary:** [`EXACT_EVIDENCE_BOUNDARY.md`](EXACT_EVIDENCE_BOUNDARY.md) separates exact low-q coefficient fixtures from ball/FFT/continuation evidence. The canonical low-q corpus is `tests/vectors/parabolic_index_exact_vectors.json`.
 
 ```
@@ -35,17 +35,18 @@ vendored function). `ESTATE.toml`'s `[[dep]] finite-math-kernels` pin is derived
 
 ```
 SHA=<40-hex commit of finite-math-kernels>
-rm -rf /tmp/fmk vendor/python/rational_dynamics_py vendor/python/vendoring   # a clean copy: no stale file survives
-mkdir -p /tmp/fmk && git -C ../finite-math-kernels archive $SHA oracles/rational_dynamics_py tools/vendoring | tar -x -C /tmp/fmk
-cp -r /tmp/fmk/oracles/rational_dynamics_py /tmp/fmk/tools/vendoring vendor/python/
-python vendor/python/vendoring/check_vendored_sync.py pin rational_dynamics_py $SHA
+rm -rf /tmp/fmk vendor/python/{rational_dynamics_py,closed_interval,root_isolation_py,vendoring}   # a clean copy: no stale file survives
+mkdir -p /tmp/fmk && git -C ../finite-math-kernels archive $SHA oracles/rational_dynamics_py oracles/closed_interval oracles/root_isolation_py tools/vendoring | tar -x -C /tmp/fmk
+cp -r /tmp/fmk/oracles/rational_dynamics_py /tmp/fmk/oracles/closed_interval /tmp/fmk/oracles/root_isolation_py /tmp/fmk/tools/vendoring vendor/python/
+for p in rational_dynamics_py closed_interval root_isolation_py; do python vendor/python/vendoring/check_vendored_sync.py pin $p $SHA; done
 python vendor/python/vendoring/check_vendored_sync.py pin vendoring $SHA   # also re-derives the ESTATE.toml pin
 python vendor/python/vendoring/check_vendored_sync.py                       # verify
 ```
 
 `import bulbford` (which `experiments/scripts/paths.py` does) puts `vendor/python` first on
-`sys.path`, so `PYTHONPATH=kernel` still suffices, and refuses any other `rational_dynamics_py`
-that would shadow the pinned copy. A built wheel carries the vendored package beside `bulbford`.
+`sys.path`, so `PYTHONPATH=kernel` still suffices, and refuses any other `rational_dynamics_py`,
+`closed_interval` or `root_isolation_py` that would shadow a pinned copy. A built wheel carries the
+vendored packages beside `bulbford`.
 `wake.py` loaded alone as a file, as `larsbx/math-vizops` does from a sibling checkout, imports
 this checkout's `bulbford` first, so the same guard applies.
 

@@ -35,6 +35,8 @@ from fractions import Fraction
 from functools import lru_cache, reduce
 from math import isqrt
 
+from root_isolation_py import disjoint
+
 from .certify import (
     ONE,
     PREC,
@@ -43,13 +45,16 @@ from .certify import (
     I,
     TAGS,
     Verdict,
-    _approx_inverse,
+    _box,
+    _ciq,
     _complex_dyadic,
     _down,
+    _preconditioner,
     box_from_numerators,
     box_numerators,
     forbidden_pairs,
     krawczyk,
+    krawczyk_boxes,
     newton_refine,
 )
 from .spread import turn_cosine_bracket
@@ -105,7 +110,7 @@ def _unity(q: int):
 
 
 def _disjoint(a: Box, b: Box) -> bool:
-    return a.re.hi < b.re.lo or b.re.hi < a.re.lo or a.im.hi < b.im.lo or b.im.hi < a.im.lo
+    return disjoint((_ciq(a),), (_ciq(b),))
 
 
 def _unity_seed(k: int, q: int) -> complex:
@@ -209,35 +214,21 @@ def _matvec(m: Mat, v: Vec) -> Vec:
     return tuple(m[i][0] * v[0] + m[i][1] * v[1] for i in range(2))
 
 
-def _matmul(m: Mat, n: Mat) -> Mat:
-    return tuple(tuple(m[i][0] * n[0][j] + m[i][1] * n[1][j] for j in range(2)) for i in range(2))
-
-
 def _dyadic_point(b: Box, prec: int) -> Box:
     re, im = b.mid
     return Box.point(_down(re, prec), _down(im, prec))
 
 
 def _inverse_point(m: Mat, prec: int) -> Mat:
-    """Dyadic point matrix near the inverse of mid(m); affects acceptance only, never soundness."""
-    mid = lambda b: Box.point(*b.mid)
-    (a, b), (c, d) = ((mid(m[0][0]), mid(m[0][1])), (mid(m[1][0]), mid(m[1][1])))
-    inv_det = _approx_inverse(a * d - b * c, prec)
-    neg = Box.point(-1)
-    return tuple(tuple(_dyadic_point(inv_det * e, prec) for e in row) for row in ((d, neg * b), (neg * c, a)))
+    """Dyadic point matrix near the inverse of mid(m) (zero where mid(m) is singular); affects acceptance
+    only, never soundness."""
+    inverse = _preconditioner(prec)(tuple(tuple(map(_ciq, row)) for row in m))
+    return tuple(tuple(map(_box, row)) for row in inverse)
 
 
 def krawczyk2(f, x: Vec, prec: int = PREC) -> Vec:
     """K(X) = m − A F(m) + (I − A J(X))(X − m)."""
-    m = tuple(Box.point(*b.mid) for b in x)
-    value, jac_m = f(m, prec)
-    _, jac_x = f(x, prec)
-    a = _inverse_point(jac_m, prec)
-    aj = _matmul(a, jac_x)
-    ident_minus = tuple(tuple((ONE if i == j else ZERO) - aj[i][j] for j in range(2)) for i in range(2))
-    av = _matvec(a, value)
-    corr = _matvec(ident_minus, tuple(x[i] - m[i] for i in range(2)))
-    return tuple((m[i] - av[i] + corr[i]).rounded(prec) for i in range(2))
+    return krawczyk_boxes(f, x, prec)
 
 
 def failed_cycle_exclusions(z: Box, c: Box, q: int, prec: int = PREC) -> tuple[tuple[int, int], ...]:
