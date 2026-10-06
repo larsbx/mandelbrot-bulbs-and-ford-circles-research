@@ -25,7 +25,7 @@ pin = "sha256:7dff31575b2834b937395f3ff6f7ce2e2d1d7927b893cf8229c682ad7f3a99d2"
 
 [[dep]]                       # vendored packages, pinned by digest in vendored.toml
 id = "finite-math-kernels"
-pin = "sha256:a2e8714ecbefbba2178b3e224d780eacee94452d00c453bdd3f1030f40d44cc6"
+pin = "sha256:1fb2f9358c9401a77433aaa24078863c2a905ab31d14d5bfa92c5e3c8337fbac"
 
 [[conform]]
 id = "finite-math-kernels"
