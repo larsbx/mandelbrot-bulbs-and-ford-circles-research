@@ -9,11 +9,12 @@ from __future__ import annotations
 
 import json
 from fractions import Fraction
-from math import gcd, log
+from math import log
 
 import numpy as np
 
 from paths import DATA
+from rational_dynamics_py import ramanujan_sum
 
 
 def kappa_table(q: int) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
@@ -38,7 +39,11 @@ def coefficients(q: int, mmax: int, bounded: int = 4) -> dict:
 
 
 def ramanujan(qq: int, m: np.ndarray) -> np.ndarray:
-    return sum(np.cos(2 * np.pi * a * m / qq) for a in range(qq) if gcd(a, qq) == 1)
+    """c_{qq}(m) for each m, as floats for the least-squares design matrix.
+
+    The values are the exact integers of the vendored `ramanujan_sum` (a divisor sum);
+    it replaces a float sum of cosines over the units, which agreed with it to rounding."""
+    return np.array([ramanujan_sum(qq, int(k)) for k in np.ravel(m)], dtype=float).reshape(np.shape(m))
 
 
 def ramanujan_fit(y: np.ndarray, lo: int, hi: int, qmax: int, g=lambda m: np.ones_like(m, float),
