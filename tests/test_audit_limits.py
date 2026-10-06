@@ -6,7 +6,9 @@ from pathlib import Path
 
 import pytest
 
-from tools.audit_limits import EXEMPT_SECTIONS, REGISTER, audit
+from tools.audit_limits import EXEMPT_SECTIONS, POLICY, REGISTER, RULE
+
+from lexical_audit import audit
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -20,16 +22,16 @@ def document(claims: str, exempt: str = "") -> str:
 
 
 def terms(claims: str, exempt: str = "") -> list[str]:
-    return [breach.term for breach in audit(document(claims, exempt))]
+    return [hit.match for hit in RULE.hits(REGISTER, document(claims, exempt))]
 
 
 def test_the_finite_register_passes():
-    assert audit(REGISTER.read_text(encoding="utf-8")) == []
+    assert audit(ROOT, POLICY) == []
 
 
 def test_the_original_register_would_fail():
     original = (ROOT / "RESEARCH_bulb-ford-correction.md").read_text(encoding="utf-8")
-    assert len(audit(document(original))) > 50
+    assert len(RULE.hits(REGISTER, document(original))) > 50
 
 
 @pytest.mark.parametrize(
@@ -72,7 +74,14 @@ def test_exempt_sections_exempt_and_only_they_do():
     assert terms("A table at q = 59.", exempt="Replaces `lim` and `O(q⁻²)`.") == []
 
 
-def test_a_missing_exempt_section_refuses_to_run():
+def test_a_finding_names_the_line_and_quotes_it(tmp_path):
+    (tmp_path / REGISTER).write_text(document("A table.\n\nG converges."), encoding="utf-8")
+    assert audit(tmp_path, POLICY) == [f"{REGISTER}:11: limit idiom 'converges' outside an exemption: G converges."]
+
+
+def test_a_missing_exempt_section_fails_closed(tmp_path):
     text = document("A table.").replace(f"## {EXEMPT_SECTIONS[-1]}", "## 8. Renamed")
-    with pytest.raises(SystemExit):
-        audit(text)
+    (tmp_path / REGISTER).write_text(text, encoding="utf-8")
+    assert audit(tmp_path, POLICY) == [
+        "exempt section pattern '^8\\\\.\\\\ Map\\\\ from\\\\ the\\\\ original\\\\ register$' matches no heading in scope"
+    ]
