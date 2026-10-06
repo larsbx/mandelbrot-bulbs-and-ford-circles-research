@@ -119,14 +119,22 @@ lines += [r"\bottomrule", r"\end{tabular}"]
 write("rational", "\n".join(lines) + "\n")
 
 # Table (tab:period3): satellites of the period-3 component W_{1/3} against the germs at its root (V51)
-names = {"kappa 1/q": (r"$\kappa$, $1/q$", "upper"), "kappa (q-1)/q": (r"$\kappa$, $(q-1)/q$", "lower"),
-         "kappa 2/(2N+1)": (r"$\kappa$, $2/(2N+1)$", "upper, $\\tau=2$"), "G 1/q": (r"$G$, $1/q$", "upper"),
-         "G (q-1)/q": (r"$G$, $(q-1)/q$", "lower")}
-lines = [r"\begin{tabular}{@{}lllll@{}}", r"\toprule", r"satellites of $W_{1/3}$ & germ & prediction & bulbs, extrapolated & $|\Delta|$ \\", r"\midrule"]
-for l in open("data/period3_root.txt"):
+TAILS = {"2N+1": "2", "3N+1": "3", "3N+2": "(1,2)"}                 # denominator pN + r of the angle → tail τ
+
+
+def p3_row(lab):
+    """Row label and germ column from a case label of scripts/period3_root.py, e.g. 'kappa (3N-2)/(3N+1)'."""
+    qty, ang = lab.split(" ", 1)
+    tau = next((t for den, t in TAILS.items() if den in ang), None)
+    side = "lower" if ("q-1" in ang or "N-" in ang) else "upper"
+    return (("$\\kappa$" if qty == "kappa" else "$G$") + f", ${ang}$", side + (f", $\\tau={tau}$" if tau else ""))
+
+
+lines = [r"\setlength{\tabcolsep}{4pt}", r"\begin{tabular}{@{}lllll@{}}", r"\toprule", r"satellites of $W_{1/3}$ & germ & prediction & bulbs, extrapolated & $|\Delta|$ \\", r"\midrule"]
+for l in sorted(open("data/period3_root.txt"), key=lambda l: l.startswith("G")):   # κ rows, then G
     lab, pred, bulb, dlt, _ = l.rstrip("\n").split("\t")
-    fmt = (lambda s: f"${cplx(z(s), 10)}$") if lab.startswith("kappa") else (lambda s: f"${mp.nstr(mp.re(z(s) if '(' in s else mp.mpf(s)), 10)}$")
-    lines.append(f"{names[lab][0]} & {names[lab][1]} & {fmt(pred)} & {fmt(bulb)} & {sci_tex(float(dlt))} \\\\")
+    fmt = (lambda s: f"${cfix(z(s), 10)}$") if lab.startswith("kappa") else (lambda s: f"${mp.nstr(mp.re(z(s) if '(' in s else mp.mpf(s)), 10)}$")
+    lines.append(f"{' & '.join(p3_row(lab))} & {fmt(pred)} & {fmt(bulb)} & {sci_tex(float(dlt))} \\\\")
 lines += [r"\bottomrule", r"\end{tabular}"]
 write("period3", "\n".join(lines) + "\n")
 

@@ -57,3 +57,16 @@ def test_deep_lower_cusp_germ_is_conjugate_of_cusp():
     from bulbford.horn_rational import root
     lo = complex(bounded_p_limit(3, 1, dps=60, M=20, germ=root(1, 1, False)))
     assert abs(lo - complex(bounded_p_limit(3, 1, dps=60, M=20)).conjugate()) < 1e-15
+
+
+def test_period3_component_lower_tail_conjugate_phase():
+    """V56: the satellite of W_{1/3} at 1 − [0;N,3] = (3N−2)/(3N+1) follows 𝒫⁻_{1/3} with μ̄_τ.  At N = 512 the bulb is
+    O(1/q) ≈ 1e-4 from the limit, while the unconjugated phase (≡ the rule with r ↦ p − r) misses by 1.8e-2."""
+    from bulbford.dynamics import component
+    from bulbford.taylor import taylor
+    from bulbford.renorm import bounded_p_limit
+    from bulbford.horn_rational import root
+    W3 = component("W1/3", 3, -0.1225611668766536 + 0.7448617666197442j)
+    k = complex(taylor(3 * 512 - 2, 3 * 512 + 1, W3, r=1.5, N=64).coeffs[2])
+    right, wrong = (complex(bounded_p_limit(3, r, dps=60, M=20, germ=root(1, 3, False))) for r in (1, 2))
+    assert abs(k - right) < 1e-3 < 1e-2 < abs(k - wrong)
