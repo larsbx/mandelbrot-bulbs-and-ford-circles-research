@@ -53,3 +53,25 @@ def test_integrality_and_denominator_law(q):
     e = exact_invariants(q)
     assert all(x.denominator == 1 for x in e.X)
     assert lcm(*(Fraction(x, q).denominator for x in e.X)) == _rad_odd(q) * (2 if q in (2, 4) else 1)
+
+
+def test_pi_adic_valuation_and_residue():
+    """π = 1 − ζ at q = ℓ^v: ℓ itself has valuation φ(q) and residue (−1)·… : ℓ = ∏_j (1 − ζ^j), residue ∏ j ≡ −1 (Wilson);
+    ι_{1/3}·441 = 92 − 16ζ is a π-unit with residue 76 ≡ 1 (mod 3)."""
+    from bulbford.modular import pi_adic
+    assert pi_adic((3, 0), 3) == (2, 2)                     # 3 = −ζ²(1 − ζ)², residue −1 ≡ 2
+    assert pi_adic((92, -16), 3) == (0, 1)
+    assert pi_adic((7,) + (0,) * 5, 7) == (6, 6)
+    assert pi_adic((1, -1), 3) == (1, 1)                    # π itself
+
+
+@pytest.mark.parametrize("l,v", [(3, 1), (3, 2), (3, 3), (5, 1), (5, 2), (7, 1), (7, 2), (11, 1), (13, 1)])
+def test_pi_adic_law_at_odd_prime_powers(l, v):
+    """V58: at q = ℓ^v, ℓ odd, π = 1 − ζ:  a ≡ −π^{q/ℓ} and ι_{1/q} ≡ π^{−(q+q/ℓ)} to leading π-adic order."""
+    from bulbford.modular import pi_adic
+    q = l ** v
+    e = exact_invariants(q)
+    (va, ra), (vx, rx) = pi_adic(e.a, q), pi_adic(e.X, q)
+    assert (va, ra) == (q // l, l - 1)
+    assert vx - v * len(e.a) - 2 * va == -(q + q // l)
+    assert rx * pow((-1) ** v % l, -1, l) * pow(ra, -2, l) % l == 1

@@ -137,3 +137,23 @@ def embed(coords, q: int, j: int = 1):
     z = mp.expjpi(mp.mpf(2 * j) / q)
     return mp.fsum(mp.mpf(c.numerator) / c.denominator * z ** i if isinstance(c, Fraction) else c * z ** i
                    for i, c in enumerate(coords))
+
+
+def pi_adic(coords, q: int):
+    """(v, r): the valuation of the cyclotomic integer with these power-basis coordinates at π = 1 − ζ (q = ℓ^v a prime
+    power, so (π) is the only prime above ℓ, totally ramified, ℤ[ζ]/(π) = 𝔽_ℓ by ζ ↦ 1) and the residue r ∈ 𝔽_ℓ^× of
+    x/π^v.  Division by π is exact: 1/π = ∏_{j ≠ 1, j ⟂ q} (1 − ζ^j) / ℓ, since ∏_j (1 − ζ^j) = Φ_q(1) = ℓ."""
+    l = int(flint.fmpz(q).factor()[0][0])
+    phi = flint.fmpz_poly.cyclotomic(q)
+    inv_pi = flint.fmpz_poly([1])
+    for j in range(2, q):
+        if gcd(j, q) == 1:
+            inv_pi = inv_pi * flint.fmpz_poly([1] + [0] * (j - 1) + [-1]) % phi
+    y, v = flint.fmpz_poly([int(c) for c in coords]), 0
+    if y == 0:
+        raise ValueError("zero has no valuation")
+    while int(y(1)) % l == 0:
+        y, v = y * inv_pi % phi, v + 1
+        assert all(int(c) % l == 0 for c in y.coeffs()), "inexact division by π"
+        y = flint.fmpz_poly([int(c) // l for c in y.coeffs()])
+    return v, int(y(1)) % l
