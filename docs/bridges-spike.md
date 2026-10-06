@@ -152,6 +152,10 @@ the obvious candidate for C16′'s "two resonance ends". It fails. The residual 
 So `s(p, q)` does better than `1/p`, but most of its signal is the bounded-`p` bulbs, and over 95% of the
 residual is untouched.
 
+`s(p, q)` is the vendored `rational_dynamics_py.dedekind_sum`. The local `dedekind` this spike first used
+skipped dividing out `gcd(h, k)` and was wrong whenever `gcd(h, k) > 1` (`s(2, 4) = −1/32`, not `0`); with the
+prime `q = 1009` every `gcd(p, q) = 1`, so the numbers above are unaffected.
+
 ---
 
 ## 5. Ranking
