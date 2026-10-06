@@ -10,19 +10,13 @@ writes experiments/data/flank_vs_kappa.json.
 from __future__ import annotations
 
 import json
-from fractions import Fraction
 from pathlib import Path
 
 import numpy as np
 
+from bulbford.cf import xstar
 from bulbford.dynamics import MAIN2, bulb
 from paths import DATA
-
-
-
-def xstar(p: int, q: int) -> Fraction:
-    inverse = Fraction(pow(p, -1, q), q)
-    return min(inverse, 1 - inverse)
 
 
 def spearman(a: list[float], b: list[float]) -> float:

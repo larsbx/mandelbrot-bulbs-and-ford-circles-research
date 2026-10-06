@@ -3,6 +3,12 @@
 This note makes the parameter-plane interpretation of `kernel/bulbford/wake.py`
 visual without changing the repository's evidence boundary.
 
+`wake.py` is a thin adapter over the vendored `rational_dynamics_py`
+(`vendor/python`, from `larsbx/finite-math-kernels`, pinned in `vendored.toml`);
+it keeps the names `wake`, `mechanical`, `rotation_cycle` and `double` that
+vizops reads, and puts this checkout's `vendor/python` on `sys.path` when it is
+executed on its own.
+
 The visuals are drawn in
 [`larsbx/math-vizops`](https://github.com/larsbx/math-vizops), which reads this
 repository and writes nothing back:

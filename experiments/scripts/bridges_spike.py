@@ -15,13 +15,13 @@ Reads experiments/data/kappa_q1009.json; writes experiments/data/bridges_spike.j
 from __future__ import annotations
 
 import json
-from fractions import Fraction
 
 import numpy as np
 from sympy import cyclotomic_poly, factorint, n_order
 
 from bulbford.norms import norm_a
 from paths import DATA
+from rational_dynamics_py import dedekind_sum
 from spectral import coefficients, kappa_table, ramanujan_fit
 
 Q = 1009
@@ -68,22 +68,13 @@ def b3(qs=range(3, 21)) -> dict:
             "all_equal": all(r["valuation"] == r["predicted"] for r in rows)}
 
 
-def dedekind(h: int, k: int) -> Fraction:
-    """s(h, k) by the reciprocity algorithm."""
-    s, sign, h = Fraction(0), 1, h % k
-    while k > 1 and h:
-        s += sign * (Fraction(h * h + k * k + 1, 12 * h * k) - Fraction(1, 4))
-        h, k, sign = k % h, h, -sign
-    return s
-
-
 def b4() -> dict:
     rows = json.loads((DATA / "kappa_q1009.json").read_text())
     p = np.array([r["p"] for r in rows]); G = np.array([r["G"] for r in rows])
     xs = np.array([min(pow(int(a), -1, Q), Q - pow(int(a), -1, Q)) for a in p]) / Q
     bins = np.minimum((xs * 200).astype(int), 99)
     res = G - np.array([G[bins == b].mean() for b in bins])
-    s = np.array([float(dedekind(int(a), Q)) for a in p])
+    s = np.array([float(dedekind_sum(int(a), Q)) for a in p])
     sd_after = lambda *cols: float(np.std(res - np.column_stack(cols + (np.ones_like(G),)) @
                                           np.linalg.lstsq(np.column_stack(cols + (np.ones_like(G),)), res, rcond=None)[0]))
     return {"residual_sd": float(res.std()), "corr_s": float(np.corrcoef(res, s)[0, 1]),

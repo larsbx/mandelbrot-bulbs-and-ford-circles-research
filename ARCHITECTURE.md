@@ -20,6 +20,12 @@ Python under `kernel/bulbford/` is the canonical executable. The claim register
 separates exact conformance vectors from ball/FFT/continuation evidence;
 `reference/legacy/` and `experiments/scripts/` are non-authoritative.
 
+`vendor/python/` is the `pinned_external` plane: `rational_dynamics_py` and
+`vendoring` from `larsbx/finite-math-kernels`, copied byte-for-byte and pinned
+per file in `vendored.toml`, whose digest the `finite-math-kernels` `[[dep]]` of
+`ESTATE.toml` carries. The kernel's generic `p/q` and doubling arithmetic calls
+it; nothing in `vendor/` is edited here (README, "Vendoring").
+
 The layout is canonical: every plane in `ESTATE.toml` maps exactly its `target`
 (root-level files aside) and no migration step is pending; the audit enforces
 both. Directory renames alone must not change claim status, acceptance, or

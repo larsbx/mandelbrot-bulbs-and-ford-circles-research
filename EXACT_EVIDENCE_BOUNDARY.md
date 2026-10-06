@@ -279,3 +279,9 @@ previous convergent denominator = 2.
 This does not move the interpretation of `x*` or any bulb claim into the
 shared kernel. The kernel owns only the finite rational arithmetic; this
 repository owns the use of that arithmetic in its research register.
+
+Since 2026-10 the finite arithmetic itself is the shared code, not a local
+copy checked against it: `kernel/bulbford/{cf,wake,cycles}.py` are adapters
+over the vendored `rational_dynamics_py` (`vendor/python`, pinned in
+`vendored.toml`). The R1 vector replay above still runs, now through those
+adapters; the exact/imported boundary of the wake combinatorics is unchanged.
