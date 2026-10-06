@@ -29,7 +29,7 @@ jobs:
       - name: Audit the no-angles rule of the kernel
         run: python tools/audit_angles.py
       - name: Install dependencies
-        run: python -m pip install numpy python-flint sympy pytest
+        run: python -m pip install numpy python-flint sympy pytest setuptools wheel
       - name: Test
         run: python -m pytest -q tests/
       - name: Recheck vendored package digests after tests

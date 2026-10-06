@@ -30,7 +30,7 @@ from pathlib import Path
 try:
     import rational_dynamics_py as _rd
 except ModuleNotFoundError:  # loaded as a bare file (math-vizops): find this checkout's vendor/python
-    sys.path.append(str(Path(__file__).resolve().parents[2] / "vendor" / "python"))
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "vendor" / "python"))
     import rational_dynamics_py as _rd
 
 TAGS = ("Gol92-rotation-cycle-uniqueness", "DH-Mil00-rational-ray-landing")

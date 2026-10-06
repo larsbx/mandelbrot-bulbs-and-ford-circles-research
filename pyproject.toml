@@ -6,7 +6,9 @@ requires-python = ">=3.11"
 dependencies = ["numpy", "python-flint", "sympy", "pytest"]
 
 [tool.setuptools.packages.find]
-where = ["kernel"]
+# The vendored rational_dynamics_py ships beside bulbford, which imports it.
+where = ["kernel", "vendor/python"]
+include = ["bulbford*", "rational_dynamics_py*"]
 
 [tool.pytest.ini_options]
 pythonpath = ["kernel", "experiments/scripts", "vendor/python"]

@@ -35,6 +35,7 @@ vendored function). `ESTATE.toml`'s `[[dep]] finite-math-kernels` pin is derived
 
 ```
 SHA=<40-hex commit of finite-math-kernels>
+rm -rf /tmp/fmk vendor/python/rational_dynamics_py vendor/python/vendoring   # a clean copy: no stale file survives
 mkdir -p /tmp/fmk && git -C ../finite-math-kernels archive $SHA oracles/rational_dynamics_py tools/vendoring | tar -x -C /tmp/fmk
 cp -r /tmp/fmk/oracles/rational_dynamics_py /tmp/fmk/tools/vendoring vendor/python/
 python vendor/python/vendoring/check_vendored_sync.py pin rational_dynamics_py $SHA
@@ -42,9 +43,11 @@ python vendor/python/vendoring/check_vendored_sync.py pin vendoring $SHA   # als
 python vendor/python/vendoring/check_vendored_sync.py                       # verify
 ```
 
-`import bulbford` and `experiments/scripts/paths.py` put `vendor/python` on `sys.path`, so
-`PYTHONPATH=kernel` still suffices; pytest adds it through `pyproject.toml`. `wake.py` finds it
-on its own as well, because `larsbx/math-vizops` executes that file alone from a sibling checkout.
+`import bulbford` (which `experiments/scripts/paths.py` does) puts `vendor/python` first on
+`sys.path`, so `PYTHONPATH=kernel` still suffices, and refuses any other `rational_dynamics_py`
+that would shadow the pinned copy. A built wheel carries the vendored package beside `bulbford`.
+`wake.py` finds `vendor/python` on its own as well, because `larsbx/math-vizops` executes that
+file alone from a sibling checkout.
 
 The adapters keep this repository's contracts where the vendored function differs:
 `coprime_numerators(1) == ()` (`units(1) == (0,)`); `farey(n)` is the interior of `F_n`

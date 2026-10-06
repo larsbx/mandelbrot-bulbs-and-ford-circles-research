@@ -10,6 +10,10 @@ not scanned.
 from __future__ import annotations
 
 import ast
+import shutil
+import subprocess
+import sys
+import zipfile
 from fractions import Fraction
 from pathlib import Path
 
@@ -147,3 +151,52 @@ def test_adapters_refuse_floats_and_bools_rather_than_coerce():
                  lambda: wake.mechanical(1, 3, 0.0), lambda: cycles._orbit(1.0, 7)):
         with pytest.raises(TypeError):
             call()
+
+
+@pytest.mark.parametrize("q", [1.0, 0.5, True, Fraction(1)])
+def test_coprime_numerators_refuses_a_non_integer_even_at_or_below_one(q):
+    with pytest.raises(TypeError):
+        cf.coprime_numerators(q)
+
+
+def _import_bulbford(*path: Path) -> subprocess.CompletedProcess:
+    """`import bulbford` in a fresh, isolated interpreter whose sys.path starts with `path`."""
+    code = (f"import sys; sys.path[:0] = {[str(p) for p in path]!r}; "
+            "import bulbford, rational_dynamics_py as rd; print(rd.__file__)")
+    return subprocess.run([sys.executable, "-I", "-c", code], capture_output=True, text=True, cwd=ROOT)
+
+
+@pytest.fixture
+def decoy(tmp_path: Path) -> Path:
+    """A directory holding another `rational_dynamics_py`."""
+    (tmp_path / "rational_dynamics_py").mkdir()
+    (tmp_path / "rational_dynamics_py" / "__init__.py").write_text("DECOY = True\n", encoding="utf-8")
+    return tmp_path
+
+
+def test_importing_bulbford_puts_the_pinned_copy_ahead_of_any_other(decoy):
+    run = _import_bulbford(decoy, ROOT / "kernel")
+    assert run.returncode == 0, run.stderr
+    assert Path(run.stdout.strip()).resolve().parent == ROOT / "vendor" / "python" / "rational_dynamics_py"
+
+
+def test_importing_bulbford_refuses_a_copy_that_shadows_the_pinned_one(decoy):
+    run = _import_bulbford(decoy, ROOT / "vendor" / "python", ROOT / "kernel")
+    assert run.returncode != 0
+    assert "not the pinned copy" in run.stderr
+
+
+def test_a_built_wheel_carries_the_vendored_package(tmp_path):
+    tree = tmp_path / "tree"  # a copy of what the build reads, so the checkout stays clean
+    tree.mkdir()
+    shutil.copy(ROOT / "pyproject.toml", tree)
+    for part in ("kernel", "vendor"):
+        shutil.copytree(ROOT / part, tree / part, ignore=shutil.ignore_patterns("__pycache__"))
+    build = subprocess.run([sys.executable, "-m", "pip", "wheel", "--no-deps", "--no-build-isolation",
+                            "-q", "-w", str(tmp_path), str(tree)], capture_output=True, text=True)
+    assert build.returncode == 0, build.stderr
+    (wheel,) = tmp_path.glob("bulbford-*.whl")
+    names = set(zipfile.ZipFile(wheel).namelist())
+    pinned = next(p["files"] for p in sync.load() if p["name"] == "rational_dynamics_py")
+    assert set(pinned) <= names
+    assert "bulbford/__init__.py" in names

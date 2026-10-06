@@ -1,14 +1,13 @@
 """Where the sweeps read and write: experiments/data, independent of the working directory.
 
-Importing this also puts vendor/python (the vendored finite-math-kernels packages,
-pinned in vendored.toml) on sys.path, so a script run with PYTHONPATH=kernel can
-import `rational_dynamics_py`.
+Importing this also imports `bulbford`, which puts vendor/python (the vendored
+finite-math-kernels packages, pinned in vendored.toml) first on sys.path and refuses
+any other `rational_dynamics_py`, so a script run with PYTHONPATH=kernel imports the
+pinned copy.
 """
-import sys
 from pathlib import Path
+
+import bulbford  # noqa: F401  (puts the pinned vendor/python first)
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "experiments" / "data"
-VENDOR = ROOT / "vendor" / "python"
-if str(VENDOR) not in sys.path:
-    sys.path.append(str(VENDOR))

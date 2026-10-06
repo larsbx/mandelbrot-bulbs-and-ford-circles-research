@@ -64,4 +64,5 @@ def convergent_denominators(a: tuple[int, ...]) -> tuple[int, ...]:
 
 def coprime_numerators(q: int) -> tuple[int, ...]:
     """The units 1 ≤ p < q of ℤ/qℤ, increasing; empty for q = 1 (no bulb has denominator 1)."""
+    require_int(q)
     return units(q) if q > 1 else ()
