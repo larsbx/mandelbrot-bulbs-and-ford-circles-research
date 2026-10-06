@@ -46,8 +46,9 @@ python vendor/python/vendoring/check_vendored_sync.py                       # ve
 
 `import bulbford` (which `experiments/scripts/paths.py` does) puts `vendor/python` first on
 `sys.path`, so `PYTHONPATH=kernel` still suffices, and refuses any other `rational_dynamics_py`,
-`closed_interval` or `root_isolation_py` that would shadow a pinned copy. A built wheel carries the
-vendored packages beside `bulbford`.
+`closed_interval` or `root_isolation_py` that would shadow a pinned copy. A built wheel carries
+those three beside `bulbford`; `vendoring`, `lexical_audit` and `claim_governance` serve only the
+checkout's tools and stay out of it.
 `wake.py` loaded alone as a file, as `larsbx/math-vizops` does from a sibling checkout, imports
 this checkout's `bulbford` first, so the same guard applies.
 
