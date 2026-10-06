@@ -27,11 +27,10 @@ import sys
 from fractions import Fraction
 from pathlib import Path
 
-try:
-    import rational_dynamics_py as _rd
-except ModuleNotFoundError:  # loaded as a bare file (math-vizops): find this checkout's vendor/python
-    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "vendor" / "python"))
-    import rational_dynamics_py as _rd
+if __package__ != "bulbford":  # loaded as a bare file (math-vizops): use this checkout's bulbford
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import bulbford  # noqa: E402,F401  (puts the pinned vendor/python first and refuses any other copy)
+import rational_dynamics_py as _rd  # noqa: E402
 
 TAGS = ("Gol92-rotation-cycle-uniqueness", "DH-Mil00-rational-ray-landing")
 

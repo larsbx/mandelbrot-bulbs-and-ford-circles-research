@@ -46,8 +46,8 @@ python vendor/python/vendoring/check_vendored_sync.py                       # ve
 `import bulbford` (which `experiments/scripts/paths.py` does) puts `vendor/python` first on
 `sys.path`, so `PYTHONPATH=kernel` still suffices, and refuses any other `rational_dynamics_py`
 that would shadow the pinned copy. A built wheel carries the vendored package beside `bulbford`.
-`wake.py` finds `vendor/python` on its own as well, because `larsbx/math-vizops` executes that
-file alone from a sibling checkout.
+`wake.py` loaded alone as a file, as `larsbx/math-vizops` does from a sibling checkout, imports
+this checkout's `bulbford` first, so the same guard applies.
 
 The adapters keep this repository's contracts where the vendored function differs:
 `coprime_numerators(1) == ()` (`units(1) == (0,)`); `farey(n)` is the interior of `F_n`

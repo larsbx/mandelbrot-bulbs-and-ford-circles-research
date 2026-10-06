@@ -200,3 +200,15 @@ def test_a_built_wheel_carries_the_vendored_package(tmp_path):
     pinned = next(p["files"] for p in sync.load() if p["name"] == "rational_dynamics_py")
     assert set(pinned) <= names
     assert "bulbford/__init__.py" in names
+
+
+def test_wake_loaded_as_a_bare_file_uses_the_pinned_copy_over_an_ambient_one(decoy):
+    code = (f"import sys, importlib.util; sys.path[:0] = [{str(decoy)!r}]; "
+            f"spec = importlib.util.spec_from_file_location('bare_wake', {str(ROOT / 'kernel' / 'bulbford' / 'wake.py')!r}); "
+            "mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod); "
+            "import rational_dynamics_py as rd; print(rd.__file__); print(mod.wake(1, 3))")
+    run = subprocess.run([sys.executable, "-I", "-c", code], capture_output=True, text=True, cwd=decoy)
+    assert run.returncode == 0, run.stderr
+    found, result = run.stdout.splitlines()
+    assert Path(found).resolve().parent == ROOT / "vendor" / "python" / "rational_dynamics_py"
+    assert result == "(Fraction(1, 7), Fraction(2, 7))"
