@@ -140,3 +140,10 @@ def test_rotation_number_and_orbit_refuse_instead_of_failing():
         cycles.rotation_number((1, 2), 7)   # not closed under doubling: was KeyError
     with pytest.raises(ValueError):
         cycles._orbit(1, 8)                 # even modulus: looped forever
+
+
+def test_adapters_refuse_floats_and_bools_rather_than_coerce():
+    for call in (lambda: cf.cf(1.0, 3), lambda: cf.modinv(True, 3), lambda: wake.wake(1, 3.0),
+                 lambda: wake.mechanical(1, 3, 0.0), lambda: cycles._orbit(1.0, 7)):
+        with pytest.raises(TypeError):
+            call()

@@ -21,10 +21,12 @@ from rational_dynamics_py import (
     signed_mod_inverse,
     units,
 )
+from rational_dynamics_py.farey import require_int
 
 
 def _unit(p: int, q: int):
-    """The address of p mod q, refusing a p that is not a unit mod q (q ≥ 2)."""
+    """The address of p mod q, refusing a p that is not a unit mod q (q ≥ 2) and any non-int."""
+    require_int(p, q)
     if q < 2 or gcd(p, q) != 1:
         raise ValueError(f"{p} is not a unit modulo {q}")
     return address(p % q, q)
