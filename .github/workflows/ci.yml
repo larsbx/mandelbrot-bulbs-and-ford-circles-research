@@ -22,6 +22,8 @@ jobs:
           curl --fail --location --proto '=https' --tlsv1.2 --output /tmp/estate-audit.py "https://raw.githubusercontent.com/larsbx/finite-math-kernels/4485675c1ed5da52beafad98c5118dc0ffc22456/policy/estate-audits/$rev.py"
           printf '%s  %s\n' "${pin#sha256:}" /tmp/estate-audit.py | sha256sum --check --strict -
           python3 /tmp/estate-audit.py --root .
+      - name: Verify vendored package digests
+        run: python vendor/python/vendoring/check_vendored_sync.py
       - name: Audit the no-limits rule of the finite register
         run: python tools/audit_limits.py
       - name: Audit the no-angles rule of the kernel
@@ -30,3 +32,5 @@ jobs:
         run: python -m pip install numpy python-flint sympy pytest
       - name: Test
         run: python -m pytest -q tests/
+      - name: Recheck vendored package digests after tests
+        run: python vendor/python/vendoring/check_vendored_sync.py

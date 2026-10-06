@@ -1,0 +1,24 @@
+# Vendored packages, checked by check_vendored_sync.py; re-pin with
+# `check_vendored_sync.py pin NAME COMMIT` after copying from upstream.
+
+[[package]]
+name = "rational_dynamics_py"
+repository = "larsbx/finite-math-kernels"
+commit = "5ecbd7570babf775d05d5754401ca2b8f1b94adb"
+root = "vendor/python"
+
+[package.files]
+"rational_dynamics_py/__init__.py" = "a5d0411ff41adc95f85d9a213fba4a50771e1def768d9c5c81597a25a92474d1"
+"rational_dynamics_py/arithmetic.py" = "b0bccc86003d5c72f7401306214cc9cf108e14791e677ba50cb2f1169cf0d9c6"
+"rational_dynamics_py/doubling.py" = "4033327ffcb74ea71da233b5737ea5eb4ab07416cdadb293c13be4674ca45fc7"
+"rational_dynamics_py/farey.py" = "b4163ed1ae28bf0068eb9bbea06d7350ccd9ba959726942a97fc1e6c715162ea"
+
+[[package]]
+name = "vendoring"
+repository = "larsbx/finite-math-kernels"
+commit = "5ecbd7570babf775d05d5754401ca2b8f1b94adb"
+root = "vendor/python"
+
+[package.files]
+"vendoring/__init__.py" = "959cdf7a89536784da18659db7cfe4099c885f5370249eccc71ce73775f8a584"
+"vendoring/check_vendored_sync.py" = "561243777ce545bc19bc48ebe7cd47e4ba59dcb0dfb34d6de72218b436cf03b4"
